@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/jinja2/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Jinja2 on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;これも公式に詳しく書いてなくて出来るのを分かってなかったので\n僕と同じようなところで困っている人のためにメモっておきます。&lt;/p&gt;\n&lt;h2 id=\"jinja2\"&gt;jinja2&lt;/h2&gt;\n&lt;p&gt;Ansible では jinja2 というテンプレートエンジンが利用されています。&lt;/p&gt;\n&lt;p&gt;playbook 内で &lt;code&gt;{{ ssh_port }}&lt;/code&gt; などの記述を埋め込むことで\n外部の設定ファイルから ssh_port の値を環境に応じて出し分けることが可能です。&lt;/p&gt;\n&lt;p&gt;僕の場合は、ローカル（VirtualBox + Vagrant）環境と本番環境とで\n設定値が異なるところを括り出して、Ansible の group_vars ディレクトリ以下に\n環境ごとのファイル名をつけて保存しています。&lt;/p&gt;\n&lt;p&gt;Ansible 関係なく、jinja2 のテンプレートエンジンの解説ページが\n以下にあります。&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"http://jinja.pocoo.org/docs/dev/templates/\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;Template Designer Documentation &amp;amp;#8212; Jinja Documentation (3.2.x)&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=http://jinja.pocoo.org/docs/dev/templates/\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n jinja.pocoo.org\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image link-card__image--no-image\"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;\n&lt;p&gt;こちらを見ると分かるように、Ansible の playbook 以外にも\nHTML や XML などにも幅広く利用されているようです。&lt;/p&gt;\n&lt;p&gt;デリミタ（delimiter、区切り文字のこと）の種類として、以下の4つが使えるものとして挙げられています。&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;{% &amp;hellip; %} for Statements&lt;/li&gt;\n&lt;li&gt;{{ &amp;hellip; }} for Expressions to print to the template output&lt;/li&gt;\n&lt;li&gt;{# &amp;hellip; #} for Comments not included in the template output&lt;/li&gt;\n&lt;li&gt;\n&lt;h1 id=\"--for-line-statements\"&gt;&amp;hellip; ## for Line Statements&lt;/h1&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;このうち、Ansible の playbook でよく使われるのが &lt;code&gt;{{ ... }}&lt;/code&gt; の式の実行結果が出力できるやつで、\nそれ以外のものは公式のドキュメントにはほぼ見かけません。&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20160912/",
+        "link": "https://girigiribauer.com/tech/20160912/",
+        "pubDate": "Mon, 12 Sep 2016 11:42:17 +0900",
+        "title": "Ansible の playbook 内で条件分岐を行う方法"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Mon, 12 Sep 2016 11:42:17 +0900",
+      "link": "https://girigiribauer.com/tags/jinja2/",
+      "title": "Jinja2 on ばうあーろぐ"
+    }
+  }
+}

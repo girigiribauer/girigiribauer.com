@@ -1,0 +1,47 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/linux/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Linux on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": [
+        {
+          "description": "&lt;p&gt;今でこそ iTerm2 を全面に表示して、\ntmux でセッション、ウィンドウ、ペインごとに分けて、\nターミナル内の Vim であれこれやってるわけですが、\n始めたての頃はコマンドラインに慣れるまで大変でした。&lt;/p&gt;\n&lt;p&gt;今振り返って、これを知ってから or 使うようになってから、\n劇的に変わったなあと思うようなものがあるので、\nそれらをメモ代わりに残しておきます。&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;今年からターミナルを使いこなしたい！&lt;/strong&gt; と思っている方におすすめします。&lt;/p&gt;\n&lt;h2 id=\"emacs-vi-両方のキーバインドを最低限知っておく\"&gt;Emacs, Vi 両方のキーバインドを最低限知っておく&lt;/h2&gt;\n&lt;p&gt;これはエディタの話ではなく、コマンドラインであれこれやるにあたって\n&lt;strong&gt;両方のキーバインドを最低限知っておく必要があった&lt;/strong&gt; という意味です。&lt;/p&gt;\n&lt;p&gt;僕の環境設定の考え方の話になるのですが、\nなんでもかんでも自分の使いやすいように変えていくのではなく、\n&lt;strong&gt;よくある標準の設定をベースにしつつ、より良い設定を邪魔せず上乗せしていく形&lt;/strong&gt;\nを取りたいといつも思っています。&lt;/p&gt;\n&lt;p&gt;コマンドラインを使っていくに従って、\n&lt;strong&gt;標準の設定というのがとても良く考えられていることに段々気づいていく&lt;/strong&gt; と思います。&lt;/p&gt;\n&lt;p&gt;当然なのですが、その標準の設定を考えた人というのがいるわけで、\nすべてのことには理由があるので、\n仮にその理由を知らなかったとしても\nその標準の設定に合わせることで\n&lt;strong&gt;自然とそのメリットを享受できる&lt;/strong&gt; ことも出てきます。&lt;/p&gt;\n&lt;h3 id=\"シェルスクリプトはもともと-emacs-風\"&gt;シェルスクリプトはもともと Emacs 風&lt;/h3&gt;\n&lt;p&gt;bash や zsh などのシェルでは、キーバインドのモードを切り替える設定が用意されています。&lt;/p&gt;\n&lt;pre&gt;&lt;code&gt;# bash\nset -o vi\n\n# zsh\nbindkey -v\n&lt;/code&gt;&lt;/pre&gt;\n&lt;p&gt;上記はともに Vi モードに切り替える設定なのですが、\n設定を変更しない場合、 &lt;strong&gt;標準で Emacs 風&lt;/strong&gt; になっています。&lt;/p&gt;\n&lt;p&gt;ここで仮に Ctrl-a で行頭に移動、 Ctrl-e で行末に移動、 Ctrl-w で1単語分の削除、\nなどの Emacs 上での操作を知っていると、\n&lt;strong&gt;何も設定していないターミナル上で Emacs 風キーバインドで操作できる&lt;/strong&gt; ことになります。&lt;/p&gt;",
+          "guid": "https://girigiribauer.com/tech/20170114/",
+          "link": "https://girigiribauer.com/tech/20170114/",
+          "pubDate": "Sat, 14 Jan 2017 17:57:40 +0900",
+          "title": "今思えば知らずに損してたコマンドラインのあれこれ"
+        },
+        {
+          "description": "&lt;p&gt;大学で初めて Linux を触りつつも、 その後働き始めてほぼ GUI オンリーの生活を送り、 iTerm, tmux, Vim 達とのと出会いを経て、 コマンドライン中心の生活を送っている girigiribauer ですこんにちは。&lt;/p&gt;\n&lt;p&gt;大学で初めて触り始めた頃は、コマンドの補完をタブキーで出来るだとか、上下キーで自分の打ったコマンド履歴を移動できたりと、単にコマンド名だけでなく、ショートカットキーも大事だなあと思いながら色々覚えていきました。 近年では VM 立ち上げたりタスクランナー走らせたりと、コマンドラインなしでは生きていけないくらいには使わせてもらってます。&lt;/p&gt;\n&lt;p&gt;ですが、過去のコマンドラインの履歴を入力するのに、後方からの&lt;strong&gt;履歴のインクリメンタルサーチ&lt;/strong&gt;のショートカットが用意されていることを、僕は恥ずかしながらつい先日まで知りませんでした。（！）&lt;/p&gt;\n&lt;p&gt;同じ記事は溢れているかもしれませんが、まだ見ぬ『知らんかったー』って人のために、恥を忍んでメモっておこうと思います。&lt;/p&gt;\n&lt;h2 id=\"コマンド履歴の後方からのインクリメンタルサーチ\"&gt;コマンド履歴の後方からのインクリメンタルサーチ&lt;/h2&gt;\n&lt;p&gt;bash にも最初から入ってるんですねー。なんで知らなかったんでしょうねー。&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Ctrl-R&lt;/strong&gt; を押すと、&lt;/p&gt;\n&lt;pre&gt;&lt;code&gt;(reverse-i-search)`':\n&lt;/code&gt;&lt;/pre&gt;\n&lt;p&gt;のような感じで表示され、そのまま過去に入力したコマンドを数文字打つと、インクリメンタルサーチの要領で候補が絞られていきます。&lt;/p&gt;\n&lt;p&gt;後方検索なので、複数の候補があれば新しいものが優先して表示されます。 ちなみに、前方検索もあって &lt;strong&gt;Ctrl-S&lt;/strong&gt; らしいのですが、他のショートカットキーに割り当てられてあるケースも多いようなので、.bashrc なり .zshrc なりに書いてやる必要があります。&lt;/p&gt;\n&lt;p&gt;1時間前くらいに入力したけどもう一度同じコマンド打ちたいとか、そういったケースなどに重宝するかと思います。これは知ってて当たり前のショートカットですねサーセン・・・&lt;/p&gt;\n&lt;h2 id=\"まとめ\"&gt;まとめ&lt;/h2&gt;\n&lt;p&gt;マニュアルをちゃんと読もう。&lt;/p&gt;",
+          "guid": "https://girigiribauer.com/tech/20150623/",
+          "link": "https://girigiribauer.com/tech/20150623/",
+          "pubDate": "Tue, 23 Jun 2015 11:01:36 +0000",
+          "title": "コマンド履歴の Ctrl-R 使ってますか？"
+        },
+        {
+          "description": "&lt;p&gt;&lt;img src=\"resource01.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;先週末の 1/19（土）に、株式会社 音生（ねお）さんにお邪魔してきました。 その時の勉強会のレポートなどを軽くまとめてみようと思います。&lt;/p&gt;\n&lt;h2 id=\"概要\"&gt;概要&lt;/h2&gt;\n&lt;p&gt;勉強会の内容としては、前半が『Web作成者のためのLinuxサーバー入門』で、 後半が『PHPで作る簡易電卓』でした。 音生さんにてお勉強会が開催されるとのことだったので、これはぜひともお邪魔してみなければ！という思いで 参加させていただきました。&lt;/p&gt;\n&lt;p&gt;また、最近話題の &lt;strong&gt;黒い画面の勉強会&lt;/strong&gt; に相当するということもあり、 どんな感じの勉強会になるのかなーという興味もかなりありました。&lt;/p&gt;\n&lt;h2 id=\"web作成者のためのlinuxサーバー入門前半\"&gt;Web作成者のためのLinuxサーバー入門（前半）&lt;/h2&gt;\n&lt;p&gt;講師は音生の深谷さんで、だいたい以下のことをやりました。&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;VirtualBoxのインストール&lt;/li&gt;\n&lt;li&gt;CentOSのインストール&lt;/li&gt;\n&lt;li&gt;ネットワークの設定（viを使って）&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;CentOSは、WebサービスやWebサイトのサーバOSとしてよく使われるLinuxディストリビューションですね。それぞれ持って来たPCにVirtualBoxをインストールして、その仮想環境上にCentOSをインストールしました。&lt;/p&gt;\n&lt;p&gt;さらに、黒い画面上で簡単なコマンドの解説をしてもらいつつ、実際にネットワークの設定を vi を使って行いました。&lt;/p&gt;\n&lt;h2 id=\"phpで作る簡易電卓後半\"&gt;PHPで作る簡易電卓（後半）&lt;/h2&gt;\n&lt;p&gt;講師は同じく音生の吉川さんで、後半は杉本さんのわかりやすーい説明のターンでした。 だいたい以下のような内容です。&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;電卓アプリのサンプルコードを写経&lt;/li&gt;\n&lt;li&gt;簡単な文法の解説、と同時に概念の説明&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;あまり時間もなかったので、まず一通りの解説どころの詰まったサンプルコードを写経して、自分で書いたサンプルコードに対して、これはこういう意味ですよ、といった形で理解を深めるような形式でした。&lt;/p&gt;\n&lt;h2 id=\"良かったところ気になったところ\"&gt;良かったところ、気になったところ&lt;/h2&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;strong&gt;セキュリティ周りはやはり削らないところにこの勉強会の意義を感じた&lt;/strong&gt;&lt;/li&gt;\n&lt;li&gt;教え方が分かりやすかった\n&lt;ul&gt;\n&lt;li&gt;ゆるい比較と厳密な比較を定義だけ教えるのではなく、ゆるい比較であれば「trueっぽいよねー」「falseっぽいよねー」という概念含めて教えてくれてるのはすごくいいなと思った&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;止まっちゃった人に対してマンツーマンでちゃんと付く体制が完璧で、ところどころ遅れた人が出ても問題なく進行して、 &lt;strong&gt;みんなの理解度も一定を保ちつつ進行&lt;/strong&gt; しててすごかった&lt;/li&gt;\n&lt;li&gt;これだけの内容を1日で（ゼロから説明して）やろうとすると、やっぱりところどころ駆け足になっちゃうのは仕方なさそう&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;最後の、やりたい内容と最低限触れなきゃいけないところとのバランスですが、これは他のどの勉強会であっても、課題になりそうなところだと思います。&lt;/p&gt;\n&lt;p&gt;逆に削れるところあるのかなーとか考えてみたのですが、ひょっとしたら今は環境を丸々借りることができるので、その辺（インストール周り）を大胆に端折ってアプリケーション寄りの話を厚めにするのもありなのかなーとも思いました。&lt;/p&gt;\n&lt;p&gt;そういう意味で良い時代ですね。&lt;/p&gt;\n&lt;h2 id=\"まとめ\"&gt;まとめ&lt;/h2&gt;\n&lt;ul&gt;\n&lt;li&gt;杉本さんの、押さえるところは押さえつつも崩して分かりやすく説明する、あのバランス感覚がすごかった&lt;/li&gt;\n&lt;li&gt;無料にも関わらず、参加者の意識が総じて高くて、そういった意味でも質の高い勉強会だった&lt;/li&gt;\n&lt;li&gt;懇親会が本番だ！&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;今年の自分の目標でもある、自分が知っているものを、まだ知らない人に対して、分かりやすく伝える、というのを、まさに体現していた勉強会で、とても参考になりました。また参加したいですね！&lt;/p&gt;\n&lt;h2 id=\"reference\"&gt;参考URL&lt;/h2&gt;\n&lt;ul&gt;\n&lt;li&gt;\n\n\n&lt;a href=\"http://atnd.org/event/E0011899?vos=cpatnsoccap0111026001\" target=\"_blank\"\n rel=\"noopener noreferrer\" &gt;Web作成者のためのLinuxサーバー入門とPHPで作る簡易電卓 | 集客ならイベントアテンド&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;\n\n\n&lt;a href=\"http://blog.wnotes.net/blog/article/study-sessions-held\" target=\"_blank\"\n rel=\"noopener noreferrer\" &gt;弊社主催の勉強会を開催しました | ブログ :: Web notes.log&lt;/a&gt;&lt;/li&gt;\n&lt;/ul&gt;",
+          "guid": "https://girigiribauer.com/tech/20130123/",
+          "link": "https://girigiribauer.com/tech/20130123/",
+          "pubDate": "Tue, 22 Jan 2013 15:49:43 +0000",
+          "title": "LinuxサーバとPHPの初心者向け勉強会に参加してみた"
+        }
+      ],
+      "language": "ja-jp",
+      "lastBuildDate": "Sat, 14 Jan 2017 17:57:40 +0900",
+      "link": "https://girigiribauer.com/tags/linux/",
+      "title": "Linux on ばうあーろぐ"
+    }
+  }
+}

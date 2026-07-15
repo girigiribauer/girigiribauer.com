@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>WordPress を捨てて Hugo に移行した | ばうあーろぐ</title>
+    <meta content="RSS の URL が変わってしまったので、一時的に元の URL に静的な RSS の XML ファイルをおいてますが、 => 置いたけどダメでした・・・ この記事以降の更新は反映されないので、以下より再取得していただければと思います。
+
+
+
+
+            
+                ばうあーろぐ
+                
+                
+                    
+                    girigiribauer.com
+                
+            
+
+例によって書いてない期間がどんどん開いていきますが、今は管理画面からではなく、Vim から記事を書いているのでだいぶ気分的にラクです。
+さて、決して WordPress をディスるわけではないのですが、以下の点を何とかしたいなーと思ってました。
+
+（たいして書かないのに）管理画面を晒し続けるセキュリティ面でのリスク
+投稿するまでの心理的障壁
+設置元サーバの整理
+
+1.は巷でよく言われているのですが、個人ブログで表から見えるところに管理画面を置く必要性がどこまであるのか、最近かなり疑問に思えてきました。
+しかも、たいして書かないのにずっとメンテナンスコストはかかるわけですよ。
+2.もそれに付随するといえばそうなんですが、当然管理画面が表にあれば、ログインしてから記事を書くことになるわけです。もうなんだかブラウザ開いてログインして記事書いて・・・それすらも面倒になってきたんです。
+3.が最後の決定打でした。
+設置元のサーバを掃除して CentOS7 に変えつつ、プロビジョニングツールも併せて導入したかったのですが、
+この個人ブログの整理をしてどこか別のサーバに退避する必要があり、
+一応空きサーバはあったのでそちらにそのまま持って行っても良かったものの、
+どうせ整理するなら Github Pages を利用してそっちで公開してもらおう、と思い立ったのでした。
+もちろん Github Pages を利用すれば、そちらが落ちれば閲覧できなくなるリスクはあるものの、
+めったにないし、あっても別に構わないので Github Pages を利用することに決めました。
+上記の1～2から、もう**静的サイトジェネレータ（Static Site Generator）**の何らかを使うことはほぼ決まっていたのですが、
+どうせ使うなら Hugo がいいなー Golang がいいなーと思い、WordPress から Hugo への移設を検討し始めました。
+移設の条件
+あれこれついでにやり始めると、例のごとく終わらずにほったらかしになってしまうので、移設の条件を定めました。
+
+URL は可能な限りそのまま
+HTML/CSS/JavaSCript は極力いじらない（沼）
+Github ですべて管理
+
+見た目いじらない、重要ですね。
+気になるところは色々あれど、見た目やら構造やらをいじり始めるとキリが無いので今回は触りません。
+あと必要最低限として URL は変えたくはないので、極力そのままで。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20160705/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20160705" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="WordPress を捨てて Hugo に移行した" itemprop="name">
+    <meta content="RSS の URL が変わってしまったので、一時的に元の URL に静的な RSS の XML ファイルをおいてますが、 => 置いたけどダメでした・・・ この記事以降の更新は反映されないので、以下より再取得していただければと思います。
+
+
+
+
+            
+                ばうあーろぐ
+                
+                
+                    
+                    girigiribauer.com
+                
+            
+
+例によって書いてない期間がどんどん開いていきますが、今は管理画面からではなく、Vim から記事を書いているのでだいぶ気分的にラクです。
+さて、決して WordPress をディスるわけではないのですが、以下の点を何とかしたいなーと思ってました。
+
+（たいして書かないのに）管理画面を晒し続けるセキュリティ面でのリスク
+投稿するまでの心理的障壁
+設置元サーバの整理
+
+1.は巷でよく言われているのですが、個人ブログで表から見えるところに管理画面を置く必要性がどこまであるのか、最近かなり疑問に思えてきました。
+しかも、たいして書かないのにずっとメンテナンスコストはかかるわけですよ。
+2.もそれに付随するといえばそうなんですが、当然管理画面が表にあれば、ログインしてから記事を書くことになるわけです。もうなんだかブラウザ開いてログインして記事書いて・・・それすらも面倒になってきたんです。
+3.が最後の決定打でした。
+設置元のサーバを掃除して CentOS7 に変えつつ、プロビジョニングツールも併せて導入したかったのですが、
+この個人ブログの整理をしてどこか別のサーバに退避する必要があり、
+一応空きサーバはあったのでそちらにそのまま持って行っても良かったものの、
+どうせ整理するなら Github Pages を利用してそっちで公開してもらおう、と思い立ったのでした。
+もちろん Github Pages を利用すれば、そちらが落ちれば閲覧できなくなるリスクはあるものの、
+めったにないし、あっても別に構わないので Github Pages を利用することに決めました。
+上記の1～2から、もう**静的サイトジェネレータ（Static Site Generator）**の何らかを使うことはほぼ決まっていたのですが、
+どうせ使うなら Hugo がいいなー Golang がいいなーと思い、WordPress から Hugo への移設を検討し始めました。
+移設の条件
+あれこれついでにやり始めると、例のごとく終わらずにほったらかしになってしまうので、移設の条件を定めました。
+
+URL は可能な限りそのまま
+HTML/CSS/JavaSCript は極力いじらない（沼）
+Github ですべて管理
+
+見た目いじらない、重要ですね。
+気になるところは色々あれど、見た目やら構造やらをいじり始めるとキリが無いので今回は触りません。
+あと必要最低限として URL は変えたくはないので、極力そのままで。" itemprop="description">
+    <meta content="WordPress を捨てて Hugo に移行した" property="og:title">
+    <meta content="RSS の URL が変わってしまったので、一時的に元の URL に静的な RSS の XML ファイルをおいてますが、 => 置いたけどダメでした・・・ この記事以降の更新は反映されないので、以下より再取得していただければと思います。
+
+
+
+
+            
+                ばうあーろぐ
+                
+                
+                    
+                    girigiribauer.com
+                
+            
+
+例によって書いてない期間がどんどん開いていきますが、今は管理画面からではなく、Vim から記事を書いているのでだいぶ気分的にラクです。
+さて、決して WordPress をディスるわけではないのですが、以下の点を何とかしたいなーと思ってました。
+
+（たいして書かないのに）管理画面を晒し続けるセキュリティ面でのリスク
+投稿するまでの心理的障壁
+設置元サーバの整理
+
+1.は巷でよく言われているのですが、個人ブログで表から見えるところに管理画面を置く必要性がどこまであるのか、最近かなり疑問に思えてきました。
+しかも、たいして書かないのにずっとメンテナンスコストはかかるわけですよ。
+2.もそれに付随するといえばそうなんですが、当然管理画面が表にあれば、ログインしてから記事を書くことになるわけです。もうなんだかブラウザ開いてログインして記事書いて・・・それすらも面倒になってきたんです。
+3.が最後の決定打でした。
+設置元のサーバを掃除して CentOS7 に変えつつ、プロビジョニングツールも併せて導入したかったのですが、
+この個人ブログの整理をしてどこか別のサーバに退避する必要があり、
+一応空きサーバはあったのでそちらにそのまま持って行っても良かったものの、
+どうせ整理するなら Github Pages を利用してそっちで公開してもらおう、と思い立ったのでした。
+もちろん Github Pages を利用すれば、そちらが落ちれば閲覧できなくなるリスクはあるものの、
+めったにないし、あっても別に構わないので Github Pages を利用することに決めました。
+上記の1～2から、もう**静的サイトジェネレータ（Static Site Generator）**の何らかを使うことはほぼ決まっていたのですが、
+どうせ使うなら Hugo がいいなー Golang がいいなーと思い、WordPress から Hugo への移設を検討し始めました。
+移設の条件
+あれこれついでにやり始めると、例のごとく終わらずにほったらかしになってしまうので、移設の条件を定めました。
+
+URL は可能な限りそのまま
+HTML/CSS/JavaSCript は極力いじらない（沼）
+Github ですべて管理
+
+見た目いじらない、重要ですね。
+気になるところは色々あれど、見た目やら構造やらをいじり始めるとキリが無いので今回は触りません。
+あと必要最低限として URL は変えたくはないので、極力そのままで。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20160705/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="WordPress を捨てて Hugo に移行した" name="twitter:title">
+    <meta content="RSS の URL が変わってしまったので、一時的に元の URL に静的な RSS の XML ファイルをおいてますが、 => 置いたけどダメでした・・・ この記事以降の更新は反映されないので、以下より再取得していただければと思います。
+
+
+
+
+            
+                ばうあーろぐ
+                
+                
+                    
+                    girigiribauer.com
+                
+            
+
+例によって書いてない期間がどんどん開いていきますが、今は管理画面からではなく、Vim から記事を書いているのでだいぶ気分的にラクです。
+さて、決して WordPress をディスるわけではないのですが、以下の点を何とかしたいなーと思ってました。
+
+（たいして書かないのに）管理画面を晒し続けるセキュリティ面でのリスク
+投稿するまでの心理的障壁
+設置元サーバの整理
+
+1.は巷でよく言われているのですが、個人ブログで表から見えるところに管理画面を置く必要性がどこまであるのか、最近かなり疑問に思えてきました。
+しかも、たいして書かないのにずっとメンテナンスコストはかかるわけですよ。
+2.もそれに付随するといえばそうなんですが、当然管理画面が表にあれば、ログインしてから記事を書くことになるわけです。もうなんだかブラウザ開いてログインして記事書いて・・・それすらも面倒になってきたんです。
+3.が最後の決定打でした。
+設置元のサーバを掃除して CentOS7 に変えつつ、プロビジョニングツールも併せて導入したかったのですが、
+この個人ブログの整理をしてどこか別のサーバに退避する必要があり、
+一応空きサーバはあったのでそちらにそのまま持って行っても良かったものの、
+どうせ整理するなら Github Pages を利用してそっちで公開してもらおう、と思い立ったのでした。
+もちろん Github Pages を利用すれば、そちらが落ちれば閲覧できなくなるリスクはあるものの、
+めったにないし、あっても別に構わないので Github Pages を利用することに決めました。
+上記の1～2から、もう**静的サイトジェネレータ（Static Site Generator）**の何らかを使うことはほぼ決まっていたのですが、
+どうせ使うなら Hugo がいいなー Golang がいいなーと思い、WordPress から Hugo への移設を検討し始めました。
+移設の条件
+あれこれついでにやり始めると、例のごとく終わらずにほったらかしになってしまうので、移設の条件を定めました。
+
+URL は可能な限りそのまま
+HTML/CSS/JavaSCript は極力いじらない（沼）
+Github ですべて管理
+
+見た目いじらない、重要ですね。
+気になるところは色々あれど、見た目やら構造やらをいじり始めるとキリが無いので今回は触りません。
+あと必要最低限として URL は変えたくはないので、極力そのままで。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">WordPress を捨てて Hugo に移行した</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2016-07-05 11:10:37 +0900 JST">2016/07/05</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p><strong>
+  RSS の URL が変わってしまったので、
+  <del>一時的に元の URL に静的な RSS の XML ファイルをおいてますが、</del>
+  =&gt; 置いたけどダメでした・・・ この記事以降の更新は反映されないので、以下より再取得していただければと思います。
+</strong></p>
+          <p><a class="link-card" href="http://girigiribauer.com/index.xml" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">ばうあーろぐ</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://girigiribauer.com/index.xml"> girigiribauer.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <hr>
+          <p>例によって書いてない期間がどんどん開いていきますが、今は管理画面からではなく、Vim から記事を書いているのでだいぶ気分的にラクです。</p>
+          <p>さて、決して WordPress をディスるわけではないのですが、以下の点を何とかしたいなーと思ってました。</p>
+          <ol>
+            <li>（たいして書かないのに）管理画面を晒し続けるセキュリティ面でのリスク</li>
+            <li>投稿するまでの心理的障壁</li>
+            <li>設置元サーバの整理</li>
+          </ol>
+          <p>1.は巷でよく言われているのですが、個人ブログで表から見えるところに管理画面を置く必要性がどこまであるのか、最近かなり疑問に思えてきました。 しかも、たいして書かないのにずっとメンテナンスコストはかかるわけですよ。</p>
+          <p>2.もそれに付随するといえばそうなんですが、当然管理画面が表にあれば、ログインしてから記事を書くことになるわけです。もうなんだかブラウザ開いてログインして記事書いて・・・それすらも面倒になってきたんです。</p>
+          <p>3.が最後の決定打でした。 設置元のサーバを掃除して CentOS7 に変えつつ、プロビジョニングツールも併せて導入したかったのですが、 この個人ブログの整理をしてどこか別のサーバに退避する必要があり、 一応空きサーバはあったのでそちらにそのまま持って行っても良かったものの、 どうせ整理するなら Github Pages を利用してそっちで公開してもらおう、と思い立ったのでした。</p>
+          <p>もちろん Github Pages を利用すれば、そちらが落ちれば閲覧できなくなるリスクはあるものの、 めったにないし、あっても別に構わないので Github Pages を利用することに決めました。</p>
+          <p>上記の1～2から、もう**静的サイトジェネレータ（Static Site Generator）**の何らかを使うことはほぼ決まっていたのですが、 どうせ使うなら Hugo がいいなー Golang がいいなーと思い、WordPress から Hugo への移設を検討し始めました。</p>
+          <h3 id="移設の条件">移設の条件</h3>
+          <p>あれこれついでにやり始めると、例のごとく終わらずにほったらかしになってしまうので、移設の条件を定めました。</p>
+          <ul>
+            <li>URL は可能な限りそのまま</li>
+            <li><strong>HTML/CSS/JavaSCript は極力いじらない（沼）</strong></li>
+            <li>Github ですべて管理</li>
+          </ul>
+          <p>見た目いじらない、重要ですね。 気になるところは色々あれど、見た目やら構造やらをいじり始めるとキリが無いので今回は触りません。</p>
+          <p>あと必要最低限として URL は変えたくはないので、極力そのままで。</p>
+          <h2 id="データのエクスポートからローカルでの-hugo-まで">データのエクスポートからローカルでの Hugo まで</h2>
+          <p>こちらの記事がだいぶ参考になりました。</p>
+          <p><a class="link-card" href="https://mano.xyz/post/2015-09-25-migration-to-hugo-from-wordpress/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">ブログを Wordpress から Hugo に移行した</span> <span class="link-card__desc">投稿数約900の Wordpress ブログを Hugo に移行した際のメモ</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://mano.xyz/post/2015-09-25-migration-to-hugo-from-wordpress/"> mano.xyz</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p><a href="https://github.com/SchumacherFM/wordpress-to-hugo-exporter" rel="noopener noreferrer" target="_blank">エクスポートツール</a>を使うとかなり楽ですね。画像までひっくるめて zip ファイルにまとめてくれます。 URL も基本今までのものを <a href="https://gohugo.io/content/front-matter/" rel="noopener noreferrer" target="_blank">Front Matter</a> に出力してくれるので楽です。</p>
+          <p>元々 WordPress 時代でも Markdown で大部分の記事を書いていたので、 記事の中身に関してはそれほど困りませんでした。</p>
+          <p>それとは別に、 Hugo をインストールしてローカル（Mac）で閲覧できるようにします。</p>
+          <pre><code>brew install hugo
+
+hugo new site bauerlog
+cd bauerlog
+</code></pre>
+          <p>初期でできるファイル群から必要なものを差し引きして、 大まかに以下のようなファイル構成になっています。</p>
+          <pre><code>config.toml
+content/
+static/
+themes/
+	bauerlog/
+		archetypes/
+		layouts/
+		static/
+		theme.toml
+</code></pre>
+          <p>まず全体設定を config.toml に記載しつつ、 記事内容を content/post/ 以下に Markdown で書きつつ、 記事のリソースを static/ 以下に入れ、 それ以外のいわゆる WordPress のテーマに書かれていたような内容は themes/ 以下に 同じくテーマを作って配置しています。</p>
+          <p>詳しくはこちら <a class="link-card" href="https://github.com/girigiribauer/girigiribauer.github.io" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - girigiribauer/girigiribauer.com: ばうあーろぐの GitHub ホスティングです</span> <span class="link-card__desc">ばうあーろぐの GitHub ホスティングです. Contribute to girigiribauer/girigiribauer.com development by creating an …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/girigiribauer.github.io"> github.com</span></span><span class="link-card__image"><img alt="GitHub - girigiribauer/girigiribauer.com: ばうあーろぐの GitHub ホスティングです" loading="lazy" src="https://opengraph.githubassets.com/c706a1ed6b22c87ba0705a49f2f994208d1613d823bf2a1fe41b7c3e89969f0a/girigiribauer/girigiribauer.com"></span></a></p>
+          <h3 id="自分がよく使うコマンド">自分がよく使うコマンド</h3>
+          <p>新規記事の作成（僕の場合は1日に2件も書かないので日付で）</p>
+          <pre><code>hugo new post/yyyymmdd.md
+</code></pre>
+          <p>全体設定</p>
+          <pre><code>vi config.toml
+</code></pre>
+          <p>記事の編集</p>
+          <pre><code>vi content/post/yyyymmdd.md
+</code></pre>
+          <p>一時的にレンダリング結果を確認（config.toml 内に theme = “bauerlog” などと書いておく）</p>
+          <pre><code>hugo server
+</code></pre>
+          <p>とりあえずここまででローカルで表示確認できるようになりました。 <code>hugo server</code> でローカルで Web サーバが立ち上がるので、 localhost:1313/archives/20160705/ などにアクセスすれば表示確認が可能です。</p>
+          <p>その他細かい使い方などは、公式を参照するなどしてみてください（ <a class="link-card" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">The world</span> <span class="link-card__desc">Hugo is one of the most popular open-source static site generators. With its amazing speed and …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://gohugo.io/"> gohugo.io</span></span><span class="link-card__image"><img alt="The world" loading="lazy" src="https://gohugo.io/featured.png"></span></a>）。</p>
+          <h2 id="github-pages-を用いて公開する">Github Pages を用いて公開する</h2>
+          <p>Github Pages を用いて公開する方法は大きく2つあって（これよく間違える）、 1つはユーザー、あるいは組織に紐付いた公開用リポジトリに push する方法で、 もう1つはプロジェクトごとに公開用ブランチを作れる方法です。</p>
+          <p>前者は、例えばユーザー名が girigiribauer だったとして、 <strong>girigiribauer.github.io</strong> という Git リポジトリを作り、 <strong>master ブランチ</strong> に push することでそれがそのまま公開される仕組みになっています。</p>
+          <p>後者は、Git リポジトリ名は任意なのですが、その中に <strong>gh-pages ブランチ</strong> を作り、そこにドキュメント類を push することで girigiribauer.github.io/projectname に公開される仕組みになっています。</p>
+          <p><a href="https://help.github.com/articles/custom-domain-redirects-for-github-pages-sites/" rel="noopener noreferrer" target="_blank">https://help.github.com/articles/custom-domain-redirects-for-github-pages-sites/</a></p>
+          <p>今回は個人用ブログであり、前者の仕組みで問題無いため、 Hugo 関連の設定ファイルやテーマファイルなどを <strong>develop ブランチ</strong> で管理し、 public ディレクトリにパブリッシュされたものをそのまま <strong>master ブランチ</strong> に送ることにします。 （最初、勘違いして gh-pages ブランチを作ってしまった・・・）</p>
+          <h3 id="git-subtree-を利用したパブリッシュの仕組み">git subtree を利用したパブリッシュの仕組み</h3>
+          <p>引用多めですがこちらが綺麗にまとまってますので、参考にさせてもらいました。</p>
+          <p><a href="http://www.kotazi.com/blog/post/2015111301/" rel="noopener noreferrer" target="_blank">http://www.kotazi.com/blog/post/2015111301/</a></p>
+          <p>まず girigiribauer.github.io の develop ブランチに Hugo 関連のファイル一式を git add します。</p>
+          <p>一方で master ブランチに何も入ってないと <code>git subtree add</code> できないので、.gitkeep あたりでも突っ込んでおきます。</p>
+          <pre><code>git checkout master
+touch .gitkeep
+git add .gitkeep
+git commit
+git push origin master
+</code></pre>
+          <p>develop ブランチ上に public ディレクトリがもしあれば削除したうえで、 <code>git subtree add</code> します。</p>
+          <pre><code>git checkout develop
+rm -rf public
+git subtree add --prefix=public git@github.com:girigiribauer/girigiribauer.github.io.git master --squash
+git subtree pull --prefix=public git@github.com:girigiribauer/girigiribauer.github.io.git master
+</code></pre>
+          <p><code>hugo</code> コマンドで実際に配置するファイルを生成して commit します。</p>
+          <pre><code>hugo
+git add public/
+git commit
+</code></pre>
+          <p>あとは <code>git subtree push</code> で master ブランチへ反映します。</p>
+          <pre><code>git subtree push --prefix=public git@github.com:girigiribauer/girigiribauer.github.io.git master
+</code></pre>
+          <p>一応ここまでやれば、 girigiribauer.github.io には反映がされてるはずです。</p>
+          <h3 id="独自ドメインの設定">独自ドメインの設定</h3>
+          <p>URL を変えたくなかったので、 static/CNAME にドメイン（girigiribauer.com）だけ書かれたファイルを追加し、 外から DNS の設定をしています。</p>
+          <p>Github Pages の IP アドレスはどうやら 192.30.252.153 と 192.30.252.154 のようですね。 （ <a class="link-card" href="https://help.github.com/articles/troubleshooting-custom-domains/#dns-record-doesnt-point-to-githubs-server" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Troubleshooting custom domains and GitHub Pages - GitHub Docs</span> <span class="link-card__desc">You can check for common errors to resolve issues with custom domains or HTTPS for your GitHub Pages …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://help.github.com/articles/troubleshooting-custom-domains/#dns-record-doesnt-point-to-githubs-server"> help.github.com</span></span><span class="link-card__image"><img alt="Troubleshooting custom domains and GitHub Pages - GitHub Docs" loading="lazy" src="https://docs.github.com/assets/cb-345/images/social-cards/pages.png"></span></a>） なので、元々のさくらVPSの IP アドレスから 192.30.252.153 に変更して、Github Pages の方に向いたことを確認できました。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>元の条件としては、だいたいクリアできました。</p>
+          <ul>
+            <li>URL は可能な限りそのまま</li>
+            <li>HTML/CSS/JavaSCript は極力いじらない</li>
+            <li>Github ですべて管理</li>
+          </ul>
+          <p>ただ、いくつか課題も残っています。</p>
+          <ul>
+            <li>RSS の URL</li>
+            <li>画像のリサイズ</li>
+            <li>（タグ一覧ページが想定されてない、移設前の問題）</li>
+          </ul>
+          <p>大抵のものは、割り切ってしまえばなんとかなるんですが（というか気にしないことにしてしまえばOK）、 画像のリサイズとかは管理画面がない分、なんとかしないといけなさそうです。</p>
+          <p>RSS の URL は、Hugo 側で一覧ページごとに生成されるらしく、 ファイル名は変更できるものの、細かいカスタマイズは難しいようです。（詳しく調べてない） とはいえ定期購読してる人なんて皆無だろうし、 ここも割り切ってしまえばいいかという感じで済ませてしまおうかと考えてます。 （Github Pages だけでリダイレクトの仕組みは提供されてないっぽいですかね・・・？）</p>
+          <p>RSS 登録してる稀有な方、URL 変わっちゃってすみません・・・。メタタグの URL 変えとけばいいんでしたっけ？</p>
+          <h2 id="ref">参考 URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://mano.xyz/post/2015-09-25-migration-to-hugo-from-wordpress/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">ブログを Wordpress から Hugo に移行した</span> <span class="link-card__desc">投稿数約900の Wordpress ブログを Hugo に移行した際のメモ</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://mano.xyz/post/2015-09-25-migration-to-hugo-from-wordpress/"> mano.xyz</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a href="http://www.kotazi.com/blog/post/2015111301/" rel="noopener noreferrer" target="_blank">http://www.kotazi.com/blog/post/2015111301/</a></li>
+            <li><a class="link-card" href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Configuring a custom domain for your GitHub Pages site - GitHub Docs</span> <span class="link-card__desc">You can customize the domain name of your GitHub Pages site.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://help.github.com/articles/using-a-custom-domain-with-github-pages/"> help.github.com</span></span><span class="link-card__image"><img alt="Configuring a custom domain for your GitHub Pages site - GitHub Docs" loading="lazy" src="https://docs.github.com/assets/cb-345/images/social-cards/pages.png"></span></a></li>
+            <li><a class="link-card" href="http://hamasyou.com/blog/2014/03/05/github-pages-custom-domain/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">ムームードメイン+GitHub Pagesで独自ドメインを使う方法 - それはBooks</span> <span class="link-card__desc">GitHub Pages を Naked Domain（サブドメインをつけない hamasyou.com みたいなやつ）で運用する場合の手順です。 GitHub Pages をサブドメイン …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://hamasyou.com/blog/2014/03/05/github-pages-custom-domain/"> hamasyou.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/static-site-generator/">#Static Site Generator</a> <a class="tag-link" href="/tags/hugo/">#Hugo</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=WordPress%20%e3%82%92%e6%8d%a8%e3%81%a6%e3%81%a6%20Hugo%20%e3%81%ab%e7%a7%bb%e8%a1%8c%e3%81%97%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20160705/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20160705%2f&amp;text=WordPress%20%e3%82%92%e6%8d%a8%e3%81%a6%e3%81%a6%20Hugo%20%e3%81%ab%e7%a7%bb%e8%a1%8c%e3%81%97%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20160705/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

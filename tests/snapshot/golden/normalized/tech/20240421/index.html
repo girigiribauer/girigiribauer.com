@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Infinity Table を作ろう！ | ばうあーろぐ</title>
+    <meta content="Infinity Table を作るとともに、3Dプリンターのテスト印刷をしてみるの巻" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20240421/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20240421" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Infinity Table を作ろう！" itemprop="name">
+    <meta content="Infinity Table を作るとともに、3Dプリンターのテスト印刷をしてみるの巻" itemprop="description">
+    <meta content="Infinity Table を作ろう！" property="og:title">
+    <meta content="Infinity Table を作るとともに、3Dプリンターのテスト印刷をしてみるの巻" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20240421/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/tech/20240421/feature.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Infinity Table を作ろう！" name="twitter:title">
+    <meta content="Infinity Table を作るとともに、3Dプリンターのテスト印刷をしてみるの巻" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/tech/20240421/feature.jpg" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Infinity Table を作ろう！</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2024-04-21 09:00:00 +0900 JST">2024/04/21</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>前に検証ついでに作った、『突っ張り棒の設置台』と『音楽プレーヤーのスイッチカバー』は、未熟なりによくできていて、今でも普通に活用できています。</p>
+          <p>期間がだいぶ空いてしまいましたが、 3D プリンター環境が（周りの変化により）だいぶ改善してきたので、 今回はその施設にある 3D プリンターを試し刷りしてみようと思います！</p>
+          <h2 id="施設を借りるには初回講習を受けなくてはいけない">施設を借りるには初回講習を受けなくてはいけない</h2>
+          <p>そして、初回講習を受けるのに、なんと半年以上もかかってしまいました 🥺 🥺 🥺</p>
+          <p>いやあ、なかなかタイミング合わずで・・・。</p>
+          <p>1 か月に 1 回しか講習が開かれず、しかも常にその施設の近くにいるわけではないため、 かなり参加難易度が高かったです。 途中 1 回参加できるチャンスがあったんですが、フォームから申し込むのが一足遅かったらしく、 定員オーバーで残念ながら参加できず 🥺</p>
+          <p>その割に、いざ講習受けて施設予約してみようとカレンダーを見たら、 なぜかほとんど誰も使ってないんですよねえ。 どゆことなの？？ 🤔</p>
+          <h2 id="検証α-で止まってた前回のリハビリついでに何か作る">検証+α で止まってた前回のリハビリついでに何か作る</h2>
+          <p>何がいいかなあと考えていたところ、 SNS に <strong>Infinity Table という不思議な形のテーブル</strong> が流れてきたのを見て、これなら Fusion 360 でスケッチして押し出すだけで作れそうだなーと思い、ためしに作ってみることにしました。</p>
+          <p><img alt="Infinity Table" src="resource01.jpg"> <img alt="Infinity Table" src="resource02.jpg"> <img alt="Infinity Table" src="resource03.jpg"> <img alt="Infinity Table" src="resource04.jpg"></p>
+          <p>そう、こんな形の奇妙なやつです。</p>
+          <p><img alt="Infinity Table" src="resource05.jpg"></p>
+          <p>作り始めて気づいたんですが、これ共通の頂点がほとんどないんですよね。</p>
+          <p>なので、一見浮いてそうに見えるけど、辿ってみると結局繋がってるという不思議な形。</p>
+          <p>で、前回の検証で 2mm あれば一旦強度は問題ない！ということだったので（自分のブログ見た）、 今回は厚み 3mm にして、1 辺の最大を 50mm にして、余白を 2mm にしてみました。</p>
+          <p>まとめると・・・</p>
+          <ul>
+            <li>1 面だけで見ると 1 辺 50mm の正方形</li>
+            <li>厚みは 3mm で、内側は 50 - 3 - 3 = 44mm になる</li>
+            <li>底部分は、1 辺だけが 5mm ずつの空白になってる (A)</li>
+            <li>底視点で、空白部分の手前から上方向にそれぞれ 1 辺が伸びる</li>
+            <li>横視点で、上方向に 1 辺が伸びたものを、 A と同じような形で別の場所に空白を作る</li>
+          </ul>
+          <p>みたいな感じで繰り返していくと作れました。 頂点がずれるので作ってると訳が分からなくなってきます w</p>
+          <h2 id="スライサーで見てみる">スライサーで見てみる</h2>
+          <p>さて今回は Prusa MK4 という機種を使います。</p>
+          <p>事前にインストールしておいたスライサーで表示してみます。</p>
+          <p><img alt="PrusaSlicer" src="resource06.jpg"></p>
+          <p>いい感じですね。ちなみにそれぞれのプリンターごとにスライサーは用意されていて、 stl ファイルを Gcode に変換してくれます。</p>
+          <p>この辺はだいぶ分かってきましたね。 stl ファイルが形のファイルで、 Gcode が動きのファイルです。</p>
+          <p>後者はプリンターごとに違ってて当然なので、プリンターごとに異なる Gcode を吐き出すスライサーツールも、プリンターごとに違ってて当然ですね。</p>
+          <p>サポート材も込みで実際に印刷するとどれくらいのフィラメントを使い、どれくらいの時間がかかるのか？を実際にシミュレーションしてくれるので、施設予約の際に重宝します。</p>
+          <h2 id="印刷">印刷！</h2>
+          <p>ここからはダイジェストで。</p>
+          <p><img alt="3Dプリンティング！" src="resource07.jpg"></p>
+          <p><img alt="3Dプリンティング！" src="resource08.jpg"></p>
+          <p>なんかエラー出てますが、とりあえず印刷してあとで調べます。</p>
+          <p><img alt="3Dプリンティング！" src="resource09.jpg"></p>
+          <p>温め終わって始まりました！</p>
+          <p><img alt="3Dプリンティング！" src="resource10.jpg"></p>
+          <p>おおー！</p>
+          <p><img alt="3Dプリンティング！" src="resource11.jpg"></p>
+          <p><img alt="3Dプリンティング！" src="resource12.jpg"></p>
+          <p>できました！</p>
+          <p>途中フィラメントの糸みたいなのが増え始めてきたときは、 本当にできるのかな？とちょっと思いましたが、 無事できたみたいです。</p>
+          <p><img alt="3Dプリンティング！" src="resource13.jpg"></p>
+          <p>ただ、上部分はほとんど宙に浮いている構造なので、 サポート材が思ったよりも多いです 🥺</p>
+          <p>サポート材取るの下手くそ太郎です 🥺 🥺 🥺</p>
+          <p><img alt="3Dプリンティング！" src="resource14.jpg"></p>
+          <p>施設予約の制限もあったので、一旦雑にサポート材が取れたくらいで妥協しました。</p>
+          <p>でも、まあ形にはなっていますよ？</p>
+          <p>すごい！ 🎉</p>
+          <p><img alt="3Dプリンティング！" src="resource15.jpg"></p>
+          <p>当初心配していた強度も、ほらご覧の通り、 伸び縮みするくらいには全く問題のない強度になっています！ 👍</p>
+          <p>いいですねえ 😃</p>
+          <p>成功しつつ課題も見えてきたのが一番学びがあって良いです！</p>
+          <h2 id="infinity-table-を作ってみたまとめ">Infinity Table を作ってみたまとめ</h2>
+          <ul>
+            <li>
+              作ろうと思ってから Fusion 360 で形を作って、実際に印刷するまでが早かった
+              <ul>
+                <li>形は難解だけど、3D プリンター初心者・初級者がプリントするのに向いてそう</li>
+                <li>最初はスライサーにちょっと手間取ったけど、概念わかってたからすぐ慣れた</li>
+              </ul>
+            </li>
+            <li>
+              設計は問題なし
+              <ul>
+                <li>3mm の厚みがあれば、大きく力を加えない限り折れたりはしなさそう</li>
+                <li>角を丸くしたりの処理もグッド</li>
+              </ul>
+            </li>
+            <li>
+              3D プリンターの設定は検討の余地あり
+              <ul>
+                <li>クオリティを求めるなら、もっとゆっくり丁寧に印刷した方が良さげ？</li>
+                <li>今回ほとんどデフォルト値でやってみたが、細かな作品だとちょっと雑さがある</li>
+              </ul>
+            </li>
+            <li>
+              施設利用する際は台を冷ましたりサポート材を外したりする時間も考慮しておく
+              <ul>
+                <li>現地ではあまり時間が確保できなさそうなので、家でサポート材を外す</li>
+                <li>ニッパーを購入しておくと良さげ</li>
+              </ul>
+            </li>
+          </ul>
+          <p>テーブルの天板がないので、実際のところテーブルか？って言われるとちょっと怪しいですが、 チョイスした印刷対象が今回はすごく良かったです。</p>
+          <p>ちなみに</p>
+          <blockquote>
+            <p>A filament speficied in the G-code is either not loaded or wrong type.</p>
+          </blockquote>
+          <p>という警告はこれから調べて、必要に応じて追記したりしなかったりしてみます。 フィラメントの指定がスライサー上のものと実際の 3D プリンター上とで異なっているとかそんな感じでしょうか？</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/fab/">#Fab</a> <a class="tag-link" href="/tags/fusion360/">#Fusion360</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Infinity%20Table%20%e3%82%92%e4%bd%9c%e3%82%8d%e3%81%86%ef%bc%81%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20240421/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20240421%2f&amp;text=Infinity%20Table%20%e3%82%92%e4%bd%9c%e3%82%8d%e3%81%86%ef%bc%81" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20240421/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

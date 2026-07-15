@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/ios/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in IOS on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;タイトル通りなのですが、色々調べたりするのに時間かかったので一応メモしておきます。&lt;/p&gt;\n&lt;p&gt;ひょっとすると、iOS7.1 以降にアップデートすると解消される内容かもしれません。 ただし現時点（2014/02/06）では iOS7.0.4 が最新であり、こちらのバージョンでは問題が確認できた内容です。&lt;/p&gt;\n&lt;h2 id=\"ipad-のランドスケープモードの表示でずれる\"&gt;iPad のランドスケープモードの表示でずれる&lt;/h2&gt;\n&lt;p&gt;たまたま手元に iOS6 のままアップデートしていない iPad があり、 まずそちらで検証して上手く行っていたのですが、 一通り検証し終わって「iOS7 にアップデートするかー」というタイミングで確認できた事象です。&lt;/p&gt;\n&lt;p&gt;iOS7.0.4 の最新にアップデートした後で、iPad を横向きにした状態、 つまりランドスケープモードにして再度確認してみたら、 なんだかスクロールバーのようなものが出て、タッチして上下にスクロールが出来てしまいます。&lt;/p&gt;\n&lt;p&gt;キャプチャにとって調べてみると、どうやら 20px ほど中身の要素が大きくはみ出てしまっている模様です。&lt;/p&gt;\n&lt;h2 id=\"スクロールバーの問題と思いきやただのバグだった\"&gt;スクロールバーの問題と思いきや、ただのバグだった&lt;/h2&gt;\n&lt;p&gt;iOS でそのサイズに相当するものが余分に表示、もしくは消えているなどで、 20px 相当ずれてしまっているのかな？と思ったのですが、 &lt;strong&gt;html 要素に対して height: 100% のスタイルを充てた状態だと、window.innerHeight は 672px ですが、window.outerHeight は 692px になるというバグ&lt;/strong&gt; があるようです。&lt;/p&gt;\n&lt;p&gt;検証用ページを用意されている方がいるようですので利用させてもらい、確認してみました。&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"http://krpano.com/ios/bugs/ios7-ipad-landscape/\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;iOS 7 iPad Landscape Bug&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=http://krpano.com/ios/bugs/ios7-ipad-landscape/\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n krpano.com\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image link-card__image--no-image\"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource01.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;これが Firefox 27（現時点で最新）のキャプチャです。 Chromeでも同じですがサイズ通りの表示です。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource02.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;次が iPad（iOS シミュレータ、ただし実機でも確認して同様）のポートレートモードのキャプチャです。 こちらも問題ないですね。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource03.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;こちらが問題の iPad, iOS7, ランドスケープモードのキャプチャです。 offsetHeight, clientHeight あたりの数値が 20px ほど（21px のときも？）増えちゃってます。&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20140206/",
+        "link": "https://girigiribauer.com/tech/20140206/",
+        "pubDate": "Wed, 05 Feb 2014 15:00:52 +0000",
+        "title": "iPad（iOS7.0.4）のランドスケープモードで height: 100% だとバグる"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Wed, 05 Feb 2014 15:00:52 +0000",
+      "link": "https://girigiribauer.com/tags/ios/",
+      "title": "IOS on ばうあーろぐ"
+    }
+  }
+}

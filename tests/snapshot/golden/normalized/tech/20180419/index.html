@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>MongoDB 内のデータの編集方法について （bson ファイルは直接いじれない） | ばうあーろぐ</title>
+    <meta content="crowi （正確には crowi-plus）をローカルで動かしているのですが、
+ユーザー名周りや一定の記事のパスを変えたくなってきてしまいました。
+で、 crowi で記事部分に使われているデータベースは MongoDB で、
+こちらを直接 mongodump, mongorestore コマンドでデータのバックアップなどをとって利用していたのですが、
+こちらに吐き出されるファイルは bson (binary json) であるため、
+ダンプデータを直接触ることは出来ません。
+さてさてどうしましょう、というお話。
+方針
+mongodump, mongorestore あたりは普通に使っていたのですが、
+実際 MongoDB のデータを直接編集する機会が今までなかったので、
+どうしたもんかなーという感じであれこれ方針考えました。
+
+bson を json に変換して、編集ののち bson ファイルに戻す
+mongodump で json 形式で吐き出してくれる方法がないか？
+データベースのビューワーみたいなもので見えるようにしてから GUI 上で編集する
+mongodump 以外の方法で json 形式で吐き出す方法はないか？
+
+bson を json に変換する方法
+bson と json は等価な情報なので、さくっとググったらすぐ見つかるだろーと思って探してみたら、意外と見つからず。
+エディターのプラグインとかで開いたら json で閲覧できる系のもの、あるでしょーと思って見てみても無し。
+最悪他に方法がなくとも、変換する方法は何かしらあるだろうと思い、
+一旦すぐに見つからなかったのでこの方法は保留に。
+mongodump は json 形式では吐き出してくれない
+次に mongodump で json で吐き出してくれて、 mongorestore でそれを取り込んでくれれば、
+あとは grep とかでどうとでもなると思い、調べてみたものの、
+そんなオプションは存在してません。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20180419/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20180419" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="MongoDB 内のデータの編集方法について （bson ファイルは直接いじれない）" itemprop="name">
+    <meta content="crowi （正確には crowi-plus）をローカルで動かしているのですが、
+ユーザー名周りや一定の記事のパスを変えたくなってきてしまいました。
+で、 crowi で記事部分に使われているデータベースは MongoDB で、
+こちらを直接 mongodump, mongorestore コマンドでデータのバックアップなどをとって利用していたのですが、
+こちらに吐き出されるファイルは bson (binary json) であるため、
+ダンプデータを直接触ることは出来ません。
+さてさてどうしましょう、というお話。
+方針
+mongodump, mongorestore あたりは普通に使っていたのですが、
+実際 MongoDB のデータを直接編集する機会が今までなかったので、
+どうしたもんかなーという感じであれこれ方針考えました。
+
+bson を json に変換して、編集ののち bson ファイルに戻す
+mongodump で json 形式で吐き出してくれる方法がないか？
+データベースのビューワーみたいなもので見えるようにしてから GUI 上で編集する
+mongodump 以外の方法で json 形式で吐き出す方法はないか？
+
+bson を json に変換する方法
+bson と json は等価な情報なので、さくっとググったらすぐ見つかるだろーと思って探してみたら、意外と見つからず。
+エディターのプラグインとかで開いたら json で閲覧できる系のもの、あるでしょーと思って見てみても無し。
+最悪他に方法がなくとも、変換する方法は何かしらあるだろうと思い、
+一旦すぐに見つからなかったのでこの方法は保留に。
+mongodump は json 形式では吐き出してくれない
+次に mongodump で json で吐き出してくれて、 mongorestore でそれを取り込んでくれれば、
+あとは grep とかでどうとでもなると思い、調べてみたものの、
+そんなオプションは存在してません。" itemprop="description">
+    <meta content="MongoDB 内のデータの編集方法について （bson ファイルは直接いじれない）" property="og:title">
+    <meta content="crowi （正確には crowi-plus）をローカルで動かしているのですが、
+ユーザー名周りや一定の記事のパスを変えたくなってきてしまいました。
+で、 crowi で記事部分に使われているデータベースは MongoDB で、
+こちらを直接 mongodump, mongorestore コマンドでデータのバックアップなどをとって利用していたのですが、
+こちらに吐き出されるファイルは bson (binary json) であるため、
+ダンプデータを直接触ることは出来ません。
+さてさてどうしましょう、というお話。
+方針
+mongodump, mongorestore あたりは普通に使っていたのですが、
+実際 MongoDB のデータを直接編集する機会が今までなかったので、
+どうしたもんかなーという感じであれこれ方針考えました。
+
+bson を json に変換して、編集ののち bson ファイルに戻す
+mongodump で json 形式で吐き出してくれる方法がないか？
+データベースのビューワーみたいなもので見えるようにしてから GUI 上で編集する
+mongodump 以外の方法で json 形式で吐き出す方法はないか？
+
+bson を json に変換する方法
+bson と json は等価な情報なので、さくっとググったらすぐ見つかるだろーと思って探してみたら、意外と見つからず。
+エディターのプラグインとかで開いたら json で閲覧できる系のもの、あるでしょーと思って見てみても無し。
+最悪他に方法がなくとも、変換する方法は何かしらあるだろうと思い、
+一旦すぐに見つからなかったのでこの方法は保留に。
+mongodump は json 形式では吐き出してくれない
+次に mongodump で json で吐き出してくれて、 mongorestore でそれを取り込んでくれれば、
+あとは grep とかでどうとでもなると思い、調べてみたものの、
+そんなオプションは存在してません。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20180419/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="MongoDB 内のデータの編集方法について （bson ファイルは直接いじれない）" name="twitter:title">
+    <meta content="crowi （正確には crowi-plus）をローカルで動かしているのですが、
+ユーザー名周りや一定の記事のパスを変えたくなってきてしまいました。
+で、 crowi で記事部分に使われているデータベースは MongoDB で、
+こちらを直接 mongodump, mongorestore コマンドでデータのバックアップなどをとって利用していたのですが、
+こちらに吐き出されるファイルは bson (binary json) であるため、
+ダンプデータを直接触ることは出来ません。
+さてさてどうしましょう、というお話。
+方針
+mongodump, mongorestore あたりは普通に使っていたのですが、
+実際 MongoDB のデータを直接編集する機会が今までなかったので、
+どうしたもんかなーという感じであれこれ方針考えました。
+
+bson を json に変換して、編集ののち bson ファイルに戻す
+mongodump で json 形式で吐き出してくれる方法がないか？
+データベースのビューワーみたいなもので見えるようにしてから GUI 上で編集する
+mongodump 以外の方法で json 形式で吐き出す方法はないか？
+
+bson を json に変換する方法
+bson と json は等価な情報なので、さくっとググったらすぐ見つかるだろーと思って探してみたら、意外と見つからず。
+エディターのプラグインとかで開いたら json で閲覧できる系のもの、あるでしょーと思って見てみても無し。
+最悪他に方法がなくとも、変換する方法は何かしらあるだろうと思い、
+一旦すぐに見つからなかったのでこの方法は保留に。
+mongodump は json 形式では吐き出してくれない
+次に mongodump で json で吐き出してくれて、 mongorestore でそれを取り込んでくれれば、
+あとは grep とかでどうとでもなると思い、調べてみたものの、
+そんなオプションは存在してません。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">MongoDB 内のデータの編集方法について （bson ファイルは直接いじれない）</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2018-04-19 20:42:30 +0900 JST">2018/04/19</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>crowi （正確には crowi-plus）をローカルで動かしているのですが、 ユーザー名周りや一定の記事のパスを変えたくなってきてしまいました。</p>
+          <p>で、 crowi で記事部分に使われているデータベースは MongoDB で、 こちらを直接 mongodump, mongorestore コマンドでデータのバックアップなどをとって利用していたのですが、 こちらに吐き出されるファイルは bson (binary json) であるため、 ダンプデータを直接触ることは出来ません。</p>
+          <p>さてさてどうしましょう、というお話。</p>
+          <h2 id="方針">方針</h2>
+          <p>mongodump, mongorestore あたりは普通に使っていたのですが、 実際 MongoDB のデータを直接編集する機会が今までなかったので、 どうしたもんかなーという感じであれこれ方針考えました。</p>
+          <ol>
+            <li>bson を json に変換して、編集ののち bson ファイルに戻す</li>
+            <li>mongodump で json 形式で吐き出してくれる方法がないか？</li>
+            <li>データベースのビューワーみたいなもので見えるようにしてから GUI 上で編集する</li>
+            <li>mongodump 以外の方法で json 形式で吐き出す方法はないか？</li>
+          </ol>
+          <h3 id="bson-を-json-に変換する方法">bson を json に変換する方法</h3>
+          <p>bson と json は等価な情報なので、さくっとググったらすぐ見つかるだろーと思って探してみたら、意外と見つからず。</p>
+          <p>エディターのプラグインとかで開いたら json で閲覧できる系のもの、あるでしょーと思って見てみても無し。</p>
+          <p>最悪他に方法がなくとも、変換する方法は何かしらあるだろうと思い、 一旦すぐに見つからなかったのでこの方法は保留に。</p>
+          <h3 id="mongodump-は-json-形式では吐き出してくれない">mongodump は json 形式では吐き出してくれない</h3>
+          <p>次に mongodump で json で吐き出してくれて、 mongorestore でそれを取り込んでくれれば、 あとは grep とかでどうとでもなると思い、調べてみたものの、 そんなオプションは存在してません。</p>
+          <h3 id="mongodb-のビューワー">MongoDB のビューワー</h3>
+          <p>調べてみるといくつかあるようで。</p>
+          <ul>
+            <li>MongoDB Compass</li>
+            <li>mongo-express <a class="link-card" href="https://github.com/mongo-express/mongo-express" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - mongo-express/mongo-express: Web-based MongoDB admin interface, written with Node.js and Express</span> <span class="link-card__desc">Web-based MongoDB admin interface, written with Node.js and Express - mongo-express/mongo-express</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/mongo-express/mongo-express"> github.com</span></span><span class="link-card__image"><img alt="GitHub - mongo-express/mongo-express: Web-based MongoDB admin interface, written with Node.js and Express" loading="lazy" src="https://opengraph.githubassets.com/81f1c5b92bfc6623ecc0c3dad27c8c07c69a771247136d30ccaf33cf8d1dde2a/mongo-express/mongo-express"></span></a></li>
+          </ul>
+          <p>今回は mongo-express というのを使ってみました。</p>
+          <p>なお、今回 crowi は Dockerized されたものを使っていたので、 同じく Dockerized された mongo-express を利用して、データベースのビューワーを立ち上げました。</p>
+          <p><a class="link-card" href="https://hub.docker.com/_/mongo-express/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">mongo-express - Official Image | Docker Hub</span> <span class="link-card__desc">DEPRECATED; Web-based MongoDB admin interface, written with Node.js and express</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/mongo-express/"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>こちらにもあるように、<code>docker run</code> でオプション指定しつつ、すでに動作しているコンテナ名を指定してやれば OK ですね。</p>
+          <pre tabindex="0"><code>docker run --link some_mongo_container:mongo -p 8081:8081 mongo-express
+</code></pre>
+          <p>この some_mongo_container がそれですね。 wiki_mongo_1 を指定しつつ、ネットワークのオプション <code>--net wiki_default</code> も併せて指定しています。 （僕の環境では <code>docker network ls</code> でこれが必要だっただけで、他の方の環境はこの限りではありません）</p>
+          <p>画面の雰囲気知りたい方は、こちらにスクリーンショットがあるので見ると良いかもです。 <a class="link-card" href="https://github.com/mongo-express/mongo-express" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - mongo-express/mongo-express: Web-based MongoDB admin interface, written with Node.js and Express</span> <span class="link-card__desc">Web-based MongoDB admin interface, written with Node.js and Express - mongo-express/mongo-express</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/mongo-express/mongo-express"> github.com</span></span><span class="link-card__image"><img alt="GitHub - mongo-express/mongo-express: Web-based MongoDB admin interface, written with Node.js and Express" loading="lazy" src="https://opengraph.githubassets.com/81f1c5b92bfc6623ecc0c3dad27c8c07c69a771247136d30ccaf33cf8d1dde2a/mongo-express/mongo-express"></span></a></p>
+          <p>データベースとコレクションを指定すると、リストのデータがずらっと表示され、 必要な箇所を直接編集することも可能でした。</p>
+          <p>数が限られているユーザー周りの編集に関しては、これだけで十分事足りたのですが、 記事のパスの編集に関しては、何百というデータ数があり、まあ根性でやれなくもないですが、 エンジニアとして大事な何かを失いそうになるので、この方法は断念することに。</p>
+          <p>ただ、方法としては使えないものの、どのデータベース、コレクションに修正すべき情報が含まれているかの確認は、 この mongo-express というビューワーで十分行うことが出来ます。</p>
+          <h3 id="mongodump-ではなく-mongoexport-を使う">mongodump ではなく、 mongoexport を使う</h3>
+          <p>上記の通りで、どこに修正すべき情報が含まれているかが分かったので、 データベース、コレクション単位でエクスポートが出来る、 <code>mongoexport</code> コマンドを用いることに。</p>
+          <p>特に今回は Docker を使用しているため、 適当に空ディレクトリと Docker コンテナ内部の /dump を紐づけて、 エクスポートした json ファイルが空ディレクトリに入るようにし、 それを直接編集し、同じように <code>mongoimport</code> コマンドで投入しなおしてます。</p>
+          <h2 id="結局どの方針が正しいの">結局どの方針が正しいの？</h2>
+          <p>結論としては、この4つ目の <code>mongoexport</code>, <code>mongoimport</code> コマンドを使う、というのが正規の方法と言えそうです。</p>
+          <p>ただ、どこにどういうデータが入っているのか分からない状態であれば、 一度ビューワーなどを立ち上げて、ざっと閲覧すると理解が早まるかと思います。</p>
+          <h2 id="手順">手順</h2>
+          <p>今回は以下のような手順で進めて事なきを得ました。</p>
+          <ol>
+            <li>MongoDB が起動している状態にする</li>
+            <li>mongo-express を起動し、データベースにアクセスしつつ修正箇所を調べる</li>
+            <li><code>mongoexport</code> コマンドで、必要なデータベース、コレクションを含む json ファイルをエクスポートする</li>
+            <li>エディタなどで編集する</li>
+            <li>mongo-express 上で、エクスポートしたデータを削除しておく</li>
+            <li><code>mongoimport</code> コマンドで、修正済みの json ファイルをインポートする</li>
+          </ol>
+          <h2 id="まとめ">まとめ</h2>
+          <p>mongodump, mongoexport の2種類のコマンドは、単に対象範囲の違いというだけでなくて、 バックアップ用とデータの差し替え用という、用途の違いなんかもあるのかなという印象です。</p>
+          <p>前者であれば、編集する必要はなくて、全体としてバックアップとりつつ、極力軽い状態にしておきたいので、 bson 形式のファイルでデータ部分を持っておき、 後者であれば、データの差し替えが主な目的だったりするので、 元々 json ファイルでインポート・エクスポートできるようになっていたり、という感じです。</p>
+          <p>ただ、まあ bson ファイル、エディタで直接編集できる方法があっても良いんじゃないかなあという感じはなくはないです。 （作らないけど）</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/mongodb/">#MongoDB</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=MongoDB%20%e5%86%85%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e7%b7%a8%e9%9b%86%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%20%ef%bc%88bson%20%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%af%e7%9b%b4%e6%8e%a5%e3%81%84%e3%81%98%e3%82%8c%e3%81%aa%e3%81%84%ef%bc%89%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20180419/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20180419%2f&amp;text=MongoDB%20%e5%86%85%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e7%b7%a8%e9%9b%86%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%20%ef%bc%88bson%20%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%af%e7%9b%b4%e6%8e%a5%e3%81%84%e3%81%98%e3%82%8c%e3%81%aa%e3%81%84%ef%bc%89" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20180419/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

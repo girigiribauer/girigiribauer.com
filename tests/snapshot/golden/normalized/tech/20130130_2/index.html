@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>コマンドラインでcdとかしたら勝手にlsするシェルスクリプト | ばうあーろぐ</title>
+    <meta content="ちょっと書いてみました！
+# 移動したらすぐls -lah
+# ただしファイルなどが20より多かった場合は
+# lsで簡易表示
+function chpwd() {
+  if [ 20 -gt `ls -1 | wc -l` ]; then
+    ls -lah
+  else
+    ls
+  fi
+}
+
+zsh だと、chpwd という関数を定義してやるだけで、移動したときに動作する関数ができちゃうらしいです。 普通に ls とだけ入れておけば、移動したらすぐに一覧表示してくれたりするのですが、僕は ls -lah として、詳細も表示してました。
+ただ落とし穴が・・・。
+これでしばらく使ってたら、ファイル数が1000以上あるディレクトリを自動的に ls -lah してしまって、しかもPCが激重な状態だったので、しばらくずらずらと表示する事態に・・・。
+これはいかん！と思って、ちょっと考えました。
+testコマンド
+この if の後にある [ と ] ですが、シェルスクリプトでは test コマンドに相当します。 man test とかで詳しく載ってます。
+※補足 man [ でも載ってました。知らなかった・・・。
+これを使うと、数式の計算結果が真か偽かで 0 か 1 を返すことができ、その後の処理を if 文で場合分け出来ちゃったりするので、20よりファイル数（ディレクトリなど含む）が多いかどうかで判定してみました。
+if [ 20 -gt `ls -1 | wc -l` ]; then
+
+また、ls -1 | wc -l は、ls を1行単位で出力させつつ、それを後の入力に渡して（パイプ処理）、その行数を計ってます。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20130130_2/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20130130_2" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="コマンドラインでcdとかしたら勝手にlsするシェルスクリプト" itemprop="name">
+    <meta content="ちょっと書いてみました！
+# 移動したらすぐls -lah
+# ただしファイルなどが20より多かった場合は
+# lsで簡易表示
+function chpwd() {
+  if [ 20 -gt `ls -1 | wc -l` ]; then
+    ls -lah
+  else
+    ls
+  fi
+}
+
+zsh だと、chpwd という関数を定義してやるだけで、移動したときに動作する関数ができちゃうらしいです。 普通に ls とだけ入れておけば、移動したらすぐに一覧表示してくれたりするのですが、僕は ls -lah として、詳細も表示してました。
+ただ落とし穴が・・・。
+これでしばらく使ってたら、ファイル数が1000以上あるディレクトリを自動的に ls -lah してしまって、しかもPCが激重な状態だったので、しばらくずらずらと表示する事態に・・・。
+これはいかん！と思って、ちょっと考えました。
+testコマンド
+この if の後にある [ と ] ですが、シェルスクリプトでは test コマンドに相当します。 man test とかで詳しく載ってます。
+※補足 man [ でも載ってました。知らなかった・・・。
+これを使うと、数式の計算結果が真か偽かで 0 か 1 を返すことができ、その後の処理を if 文で場合分け出来ちゃったりするので、20よりファイル数（ディレクトリなど含む）が多いかどうかで判定してみました。
+if [ 20 -gt `ls -1 | wc -l` ]; then
+
+また、ls -1 | wc -l は、ls を1行単位で出力させつつ、それを後の入力に渡して（パイプ処理）、その行数を計ってます。" itemprop="description">
+    <meta content="コマンドラインでcdとかしたら勝手にlsするシェルスクリプト" property="og:title">
+    <meta content="ちょっと書いてみました！
+# 移動したらすぐls -lah
+# ただしファイルなどが20より多かった場合は
+# lsで簡易表示
+function chpwd() {
+  if [ 20 -gt `ls -1 | wc -l` ]; then
+    ls -lah
+  else
+    ls
+  fi
+}
+
+zsh だと、chpwd という関数を定義してやるだけで、移動したときに動作する関数ができちゃうらしいです。 普通に ls とだけ入れておけば、移動したらすぐに一覧表示してくれたりするのですが、僕は ls -lah として、詳細も表示してました。
+ただ落とし穴が・・・。
+これでしばらく使ってたら、ファイル数が1000以上あるディレクトリを自動的に ls -lah してしまって、しかもPCが激重な状態だったので、しばらくずらずらと表示する事態に・・・。
+これはいかん！と思って、ちょっと考えました。
+testコマンド
+この if の後にある [ と ] ですが、シェルスクリプトでは test コマンドに相当します。 man test とかで詳しく載ってます。
+※補足 man [ でも載ってました。知らなかった・・・。
+これを使うと、数式の計算結果が真か偽かで 0 か 1 を返すことができ、その後の処理を if 文で場合分け出来ちゃったりするので、20よりファイル数（ディレクトリなど含む）が多いかどうかで判定してみました。
+if [ 20 -gt `ls -1 | wc -l` ]; then
+
+また、ls -1 | wc -l は、ls を1行単位で出力させつつ、それを後の入力に渡して（パイプ処理）、その行数を計ってます。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20130130_2/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="コマンドラインでcdとかしたら勝手にlsするシェルスクリプト" name="twitter:title">
+    <meta content="ちょっと書いてみました！
+# 移動したらすぐls -lah
+# ただしファイルなどが20より多かった場合は
+# lsで簡易表示
+function chpwd() {
+  if [ 20 -gt `ls -1 | wc -l` ]; then
+    ls -lah
+  else
+    ls
+  fi
+}
+
+zsh だと、chpwd という関数を定義してやるだけで、移動したときに動作する関数ができちゃうらしいです。 普通に ls とだけ入れておけば、移動したらすぐに一覧表示してくれたりするのですが、僕は ls -lah として、詳細も表示してました。
+ただ落とし穴が・・・。
+これでしばらく使ってたら、ファイル数が1000以上あるディレクトリを自動的に ls -lah してしまって、しかもPCが激重な状態だったので、しばらくずらずらと表示する事態に・・・。
+これはいかん！と思って、ちょっと考えました。
+testコマンド
+この if の後にある [ と ] ですが、シェルスクリプトでは test コマンドに相当します。 man test とかで詳しく載ってます。
+※補足 man [ でも載ってました。知らなかった・・・。
+これを使うと、数式の計算結果が真か偽かで 0 か 1 を返すことができ、その後の処理を if 文で場合分け出来ちゃったりするので、20よりファイル数（ディレクトリなど含む）が多いかどうかで判定してみました。
+if [ 20 -gt `ls -1 | wc -l` ]; then
+
+また、ls -1 | wc -l は、ls を1行単位で出力させつつ、それを後の入力に渡して（パイプ処理）、その行数を計ってます。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">コマンドラインでcdとかしたら勝手にlsするシェルスクリプト</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2013-01-30 14:15:23 +0000 +0000">2013/01/30</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <h2 id="ちょっと書いてみました">ちょっと書いてみました！</h2>
+          <pre><code># 移動したらすぐls -lah
+# ただしファイルなどが20より多かった場合は
+# lsで簡易表示
+function chpwd() {
+  if [ 20 -gt `ls -1 | wc -l` ]; then
+    ls -lah
+  else
+    ls
+  fi
+}
+</code></pre>
+          <p>zsh だと、<code>chpwd</code> という関数を定義してやるだけで、移動したときに動作する関数ができちゃうらしいです。 普通に <code>ls</code> とだけ入れておけば、移動したらすぐに一覧表示してくれたりするのですが、僕は <code>ls -lah</code> として、詳細も表示してました。</p>
+          <p>ただ落とし穴が・・・。</p>
+          <p>これでしばらく使ってたら、ファイル数が1000以上あるディレクトリを自動的に <code>ls -lah</code> してしまって、しかもPCが激重な状態だったので、<strong>しばらくずらずらと表示する事態に・・・。</strong></p>
+          <p>これはいかん！と思って、ちょっと考えました。</p>
+          <h2 id="testコマンド">testコマンド</h2>
+          <p>この if の後にある <code>[</code> と <code>]</code> ですが、シェルスクリプトでは <strong>test</strong> コマンドに相当します。 <code>man test</code> とかで詳しく載ってます。</p>
+          <p>※補足 <code>man [</code> でも載ってました。知らなかった・・・。</p>
+          <p>これを使うと、数式の計算結果が真か偽かで 0 か 1 を返すことができ、その後の処理を if 文で場合分け出来ちゃったりするので、20よりファイル数（ディレクトリなど含む）が多いかどうかで判定してみました。</p>
+          <pre><code>if [ 20 -gt `ls -1 | wc -l` ]; then
+</code></pre>
+          <p>また、<code>ls -1 | wc -l</code> は、<code>ls</code> を1行単位で出力させつつ、それを後の入力に渡して（パイプ処理）、その行数を計ってます。</p>
+          <p><code>wc -l</code> で行数のみを出力するので、<strong>結果的にファイル数が20より多いかどうかが判定できてます。</strong>（ちなみに <code>-gt</code> は greater than つまり『より大きい』の略ですね）</p>
+          <p>UNIXの <strong>Small is beautiful.</strong> な思想に感動しつつ、大量の出力を避けるシェルスクリプトも書けて万々歳です。（30分ほど仕事が進んでおりませんでしたが・・・）</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a href="http://memo.officebrook.net/20100204.html" rel="noopener noreferrer" target="_blank">Zshでディレクトリを移動したときに色々やる</a></li>
+            <li><a href="http://linux.just4fun.biz/%E9%80%86%E5%BC%95%E3%81%8DUNIX%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%95%B0%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B.html" rel="noopener noreferrer" target="_blank">逆引きUNIXコマンド/ファイル数を取得する</a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/zsh/">#Zsh</a> <a class="tag-link" href="/tags/shellscript/">#ShellScript</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e3%81%a7cd%e3%81%a8%e3%81%8b%e3%81%97%e3%81%9f%e3%82%89%e5%8b%9d%e6%89%8b%e3%81%abls%e3%81%99%e3%82%8b%e3%82%b7%e3%82%a7%e3%83%ab%e3%82%b9%e3%82%af%e3%83%aa%e3%83%97%e3%83%88%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20130130_2/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20130130_2%2f&amp;text=%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e3%81%a7cd%e3%81%a8%e3%81%8b%e3%81%97%e3%81%9f%e3%82%89%e5%8b%9d%e6%89%8b%e3%81%abls%e3%81%99%e3%82%8b%e3%82%b7%e3%82%a7%e3%83%ab%e3%82%b9%e3%82%af%e3%83%aa%e3%83%97%e3%83%88" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20130130_2/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

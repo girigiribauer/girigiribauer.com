@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>html5shiv.jsの使いどころ | ばうあーろぐ</title>
+    <meta content="
+
+
+HTML5のタグで書いてはいけないレアケース にて、『html5shiv.jsを読み込んで・・・』みたいな記事を書いたのですが、そもそも html5shiv.js とは何でしょうか。
+似たようなものの中に、html5.js, html5shim.js, html5shiv.js などが見られますが、これらの違いについても調べてみたいと思います。
+html5shiv.jsってなに？
+html5shiv.js が読み込まれなかったとき、oldIEではどうなってしまうのかを、もう少し詳細に見てみたいと思います。
+
+これは 
+
+
+HTML5のタグで書いてはいけないレアケース で書いたサンプルページを、IE8の開発者ツールで見てみた時のスクリーンショットです。
+<!-- doctype html -->
+<html lang=&quot;ja&quot;>
+  <body>
+    <header class=&quot;block1&quot;/>
+    文字列 - block1
+    </header/>
+    <section class=&quot;block2&quot;/>
+    文字列 - block2
+    </section/>
+    <footer class=&quot;block3&quot;/>
+    文字列 - block3
+    </footer/>
+DOMツリーを見てみると分かるように、oldIEから見ると未知の要素である header などが上手く解釈されず、 header と /header の別要素だと解釈されてしまっています。 閉じタグも1つの要素として解釈されてしまっていますね。
+html5shiv.js では、 基本的に読み込むだけ で自動的に要素の解釈を行ってくれます。
+
+古いIEでのセクショニングコンテンツの認識
+IE6-9（及びその他レガシーブラウザ）のベースのスタイル付与
+
+1.に関しては、そもそも未知の要素なので、要素としての認識が上手く行われていません。これをDOMツリーの構築前に内部で document.createElement('header') などを呼ぶことで、要素として認識させることができます。 このあたりの話は、
+
+
+The Story of the HTML5 Shiv という形でまとまっています。
+また、未知の要素であるため、デフォルトのスタイルもあたっていません。 こちらに関しては、IE9も含めてデフォルトのスタイルがあたってない場合がありますので、header, sectionなどの未知の要素に display: block をあてて、他にスタイルがあたってない状態でも、崩れがおきないようにしてくれます。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20130204/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20130204" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="html5shiv.jsの使いどころ" itemprop="name">
+    <meta content="
+
+
+HTML5のタグで書いてはいけないレアケース にて、『html5shiv.jsを読み込んで・・・』みたいな記事を書いたのですが、そもそも html5shiv.js とは何でしょうか。
+似たようなものの中に、html5.js, html5shim.js, html5shiv.js などが見られますが、これらの違いについても調べてみたいと思います。
+html5shiv.jsってなに？
+html5shiv.js が読み込まれなかったとき、oldIEではどうなってしまうのかを、もう少し詳細に見てみたいと思います。
+
+これは 
+
+
+HTML5のタグで書いてはいけないレアケース で書いたサンプルページを、IE8の開発者ツールで見てみた時のスクリーンショットです。
+<!-- doctype html -->
+<html lang=&quot;ja&quot;>
+  <body>
+    <header class=&quot;block1&quot;/>
+    文字列 - block1
+    </header/>
+    <section class=&quot;block2&quot;/>
+    文字列 - block2
+    </section/>
+    <footer class=&quot;block3&quot;/>
+    文字列 - block3
+    </footer/>
+DOMツリーを見てみると分かるように、oldIEから見ると未知の要素である header などが上手く解釈されず、 header と /header の別要素だと解釈されてしまっています。 閉じタグも1つの要素として解釈されてしまっていますね。
+html5shiv.js では、 基本的に読み込むだけ で自動的に要素の解釈を行ってくれます。
+
+古いIEでのセクショニングコンテンツの認識
+IE6-9（及びその他レガシーブラウザ）のベースのスタイル付与
+
+1.に関しては、そもそも未知の要素なので、要素としての認識が上手く行われていません。これをDOMツリーの構築前に内部で document.createElement('header') などを呼ぶことで、要素として認識させることができます。 このあたりの話は、
+
+
+The Story of the HTML5 Shiv という形でまとまっています。
+また、未知の要素であるため、デフォルトのスタイルもあたっていません。 こちらに関しては、IE9も含めてデフォルトのスタイルがあたってない場合がありますので、header, sectionなどの未知の要素に display: block をあてて、他にスタイルがあたってない状態でも、崩れがおきないようにしてくれます。" itemprop="description">
+    <meta content="html5shiv.jsの使いどころ" property="og:title">
+    <meta content="
+
+
+HTML5のタグで書いてはいけないレアケース にて、『html5shiv.jsを読み込んで・・・』みたいな記事を書いたのですが、そもそも html5shiv.js とは何でしょうか。
+似たようなものの中に、html5.js, html5shim.js, html5shiv.js などが見られますが、これらの違いについても調べてみたいと思います。
+html5shiv.jsってなに？
+html5shiv.js が読み込まれなかったとき、oldIEではどうなってしまうのかを、もう少し詳細に見てみたいと思います。
+
+これは 
+
+
+HTML5のタグで書いてはいけないレアケース で書いたサンプルページを、IE8の開発者ツールで見てみた時のスクリーンショットです。
+<!-- doctype html -->
+<html lang=&quot;ja&quot;>
+  <body>
+    <header class=&quot;block1&quot;/>
+    文字列 - block1
+    </header/>
+    <section class=&quot;block2&quot;/>
+    文字列 - block2
+    </section/>
+    <footer class=&quot;block3&quot;/>
+    文字列 - block3
+    </footer/>
+DOMツリーを見てみると分かるように、oldIEから見ると未知の要素である header などが上手く解釈されず、 header と /header の別要素だと解釈されてしまっています。 閉じタグも1つの要素として解釈されてしまっていますね。
+html5shiv.js では、 基本的に読み込むだけ で自動的に要素の解釈を行ってくれます。
+
+古いIEでのセクショニングコンテンツの認識
+IE6-9（及びその他レガシーブラウザ）のベースのスタイル付与
+
+1.に関しては、そもそも未知の要素なので、要素としての認識が上手く行われていません。これをDOMツリーの構築前に内部で document.createElement('header') などを呼ぶことで、要素として認識させることができます。 このあたりの話は、
+
+
+The Story of the HTML5 Shiv という形でまとまっています。
+また、未知の要素であるため、デフォルトのスタイルもあたっていません。 こちらに関しては、IE9も含めてデフォルトのスタイルがあたってない場合がありますので、header, sectionなどの未知の要素に display: block をあてて、他にスタイルがあたってない状態でも、崩れがおきないようにしてくれます。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20130204/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="html5shiv.jsの使いどころ" name="twitter:title">
+    <meta content="
+
+
+HTML5のタグで書いてはいけないレアケース にて、『html5shiv.jsを読み込んで・・・』みたいな記事を書いたのですが、そもそも html5shiv.js とは何でしょうか。
+似たようなものの中に、html5.js, html5shim.js, html5shiv.js などが見られますが、これらの違いについても調べてみたいと思います。
+html5shiv.jsってなに？
+html5shiv.js が読み込まれなかったとき、oldIEではどうなってしまうのかを、もう少し詳細に見てみたいと思います。
+
+これは 
+
+
+HTML5のタグで書いてはいけないレアケース で書いたサンプルページを、IE8の開発者ツールで見てみた時のスクリーンショットです。
+<!-- doctype html -->
+<html lang=&quot;ja&quot;>
+  <body>
+    <header class=&quot;block1&quot;/>
+    文字列 - block1
+    </header/>
+    <section class=&quot;block2&quot;/>
+    文字列 - block2
+    </section/>
+    <footer class=&quot;block3&quot;/>
+    文字列 - block3
+    </footer/>
+DOMツリーを見てみると分かるように、oldIEから見ると未知の要素である header などが上手く解釈されず、 header と /header の別要素だと解釈されてしまっています。 閉じタグも1つの要素として解釈されてしまっていますね。
+html5shiv.js では、 基本的に読み込むだけ で自動的に要素の解釈を行ってくれます。
+
+古いIEでのセクショニングコンテンツの認識
+IE6-9（及びその他レガシーブラウザ）のベースのスタイル付与
+
+1.に関しては、そもそも未知の要素なので、要素としての認識が上手く行われていません。これをDOMツリーの構築前に内部で document.createElement('header') などを呼ぶことで、要素として認識させることができます。 このあたりの話は、
+
+
+The Story of the HTML5 Shiv という形でまとまっています。
+また、未知の要素であるため、デフォルトのスタイルもあたっていません。 こちらに関しては、IE9も含めてデフォルトのスタイルがあたってない場合がありますので、header, sectionなどの未知の要素に display: block をあてて、他にスタイルがあたってない状態でも、崩れがおきないようにしてくれます。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">html5shiv.jsの使いどころ</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2013-02-04 14:00:12 +0000 +0000">2013/02/04</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p><a href="/archives/690/">HTML5のタグで書いてはいけないレアケース</a> にて、『html5shiv.jsを読み込んで・・・』みたいな記事を書いたのですが、そもそも html5shiv.js とは何でしょうか。</p>
+          <p>似たようなものの中に、html5.js, html5shim.js, html5shiv.js などが見られますが、これらの違いについても調べてみたいと思います。</p>
+          <h2 id="html5shivjsってなに">html5shiv.jsってなに？</h2>
+          <p>html5shiv.js が読み込まれなかったとき、oldIEではどうなってしまうのかを、もう少し詳細に見てみたいと思います。</p>
+          <p><img alt="" src="resource01.jpg"></p>
+          <p>これは <a href="/archives/690/">HTML5のタグで書いてはいけないレアケース</a> で書いたサンプルページを、IE8の開発者ツールで見てみた時のスクリーンショットです。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-html" data-lang="html"><span style="display:flex"><span><span style="color:#75715e"><!-- doctype html --></span>
+</span></span><span style="display:flex"><span><<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">"ja"</span>>
+</span></span><span style="display:flex"><span>  <<span style="color:#f92672">body</span>>
+</span></span><span style="display:flex"><span>    <<span style="color:#f92672">header</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">"block1"</span>/>
+</span></span><span style="display:flex"><span>    文字列 - block1
+</span></span><span style="display:flex"><span>    <span style="color:#960050;background-color:#1e0010"><</span>/header/>
+</span></span><span style="display:flex"><span>    <<span style="color:#f92672">section</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">"block2"</span>/>
+</span></span><span style="display:flex"><span>    文字列 - block2
+</span></span><span style="display:flex"><span>    <span style="color:#960050;background-color:#1e0010"><</span>/section/>
+</span></span><span style="display:flex"><span>    <<span style="color:#f92672">footer</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">"block3"</span>/>
+</span></span><span style="display:flex"><span>    文字列 - block3
+</span></span><span style="display:flex"><span>    <span style="color:#960050;background-color:#1e0010"><</span>/footer/>
+</span></span></code></pre>
+          </div>
+          <p>DOMツリーを見てみると分かるように、oldIEから見ると未知の要素である header などが上手く解釈されず、 <strong>header と /header の別要素だと解釈されてしまっています。</strong> 閉じタグも1つの要素として解釈されてしまっていますね。</p>
+          <p>html5shiv.js では、 <strong>基本的に読み込むだけ</strong> で自動的に要素の解釈を行ってくれます。</p>
+          <ol>
+            <li>古いIEでのセクショニングコンテンツの認識</li>
+            <li>IE6-9（及びその他レガシーブラウザ）のベースのスタイル付与</li>
+          </ol>
+          <p>1.に関しては、そもそも未知の要素なので、要素としての認識が上手く行われていません。これをDOMツリーの構築前に内部で <code>document.createElement('header')</code> などを呼ぶことで、要素として認識させることができます。 このあたりの話は、 <a href="http://paulirish.com/2011/the-history-of-the-html5-shiv/" rel="noopener noreferrer" target="_blank">The Story of the HTML5 Shiv</a> という形でまとまっています。</p>
+          <p>また、未知の要素であるため、デフォルトのスタイルもあたっていません。 こちらに関しては、IE9も含めてデフォルトのスタイルがあたってない場合がありますので、header, sectionなどの未知の要素に <code>display: block</code> をあてて、他にスタイルがあたってない状態でも、崩れがおきないようにしてくれます。</p>
+          <p>ついでに html5shiv.js を適用した後でDOMツリーがどうなっているかも見ておきます。</p>
+          <p><img alt="" src="resource02.jpg"></p>
+          <p>きちんとDOMツリーが正しく構築され、描画も意図通りに行われています。</p>
+          <h2 id="html5js-と-html5shivjs-の違い">html5.js と html5shiv.js の違い</h2>
+          <p>一言でいうと、html5shiv.js のが新しいのでこちらを使うべきです。</p>
+          <p>詳しい話は、 <a href="http://www.skyward-design.net/blog/archives/000134.html" rel="noopener noreferrer" target="_blank">IE対応でよく利用するhtml5shivの使用方法変更について</a> に、もうそのまんま掲載されているので、こちらとこちらの記事内で紹介されているリンク先を参考にされると良いかと思います。</p>
+          <p>こちらが、そのさらに参照先ですね。 <a href="http://zoompf.com/2012/05/html5shiv-and-serving-content-from-code-repositories" rel="noopener noreferrer" target="_blank">html5shiv and Serving Content From Code Repositories</a></p>
+          <p>最新じゃないし、キャッシュもされないし、圧縮もされてないし・・・などの点がもろもろまとめられています。</p>
+          <h2 id="html5shiv-と-html5shim-の違い">html5shiv と html5shim の違い</h2>
+          <p>shiv と shim の違いは v と m の違いでしかないですよー、それ以外は全部一緒ですよーと言われています。</p>
+          <p><a href="http://code.google.com/p/html5shiv/#shiv_or_shim?" rel="noopener noreferrer" target="_blank">html5shiv – shiv or shim?</a></p>
+          <p>ただ、<strong>shiv のがかっこいい</strong> らしいです。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>仮に上記の話が難しくて良く分からなかったとしても、結局のところ <strong>html5.js よりは html5shiv.js のが新しくて素敵なので、こっちを使ってね</strong> 、ということですね。</p>
+          <p>IE6-8では基本読み込むだけで利用できますし、IE9でもベースのスタイルがあたるので読み込んでおくと良いかもしれません。</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a href="https://github.com/aFarkas/html5shiv" rel="noopener noreferrer" target="_blank">html5shiv</a></li>
+            <li><a href="http://www.skyward-design.net/blog/archives/000134.html" rel="noopener noreferrer" target="_blank">IE対応でよく利用するhtml5shivの使用方法変更について</a></li>
+            <li><a href="http://zoompf.com/2012/05/html5shiv-and-serving-content-from-code-repositories" rel="noopener noreferrer" target="_blank">html5shiv and Serving Content From Code Repositories</a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/html5/">#HTML5</a> <a class="tag-link" href="/tags/oldie/">#oldIE</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=html5shiv.js%e3%81%ae%e4%bd%bf%e3%81%84%e3%81%a9%e3%81%93%e3%82%8d%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20130204/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20130204%2f&amp;text=html5shiv.js%e3%81%ae%e4%bd%bf%e3%81%84%e3%81%a9%e3%81%93%e3%82%8d" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20130204/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

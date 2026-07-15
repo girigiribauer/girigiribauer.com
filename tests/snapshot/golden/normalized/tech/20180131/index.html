@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Google App Engine / Go で slack に通知する bot を作った | ばうあーろぐ</title>
+    <meta content="こちらは 
+
+
+フロントエンドもくもく会 - 新年LT大会 の、
+後半のLT大会で発表した内容を加筆修正しつつブログに起こしたものです。
+発表後、うまく動作しなかった箇所などを追記しています。
+ざっくり要点だけ知りたい方は、
+一番下にある
+
+
+GAE/Go slackbot のポイントだけ見てください。
+動機 - めんどいこと
+フロントエンドもくもく会はかなり低コストで回っているものの、
+以下の点で面倒だなあと感じることがありました。
+
+勉強会関連で何日前にあれこれする
+
+参加人数少なかったら告知したり
+キャンセル促したり
+
+
+イベントごとにお知らせしてほしい
+
+そこで slack に勝手に通知する bot を用意し、
+その辺常に気にするコストをさらに減らそうと思い立ちました。
+slack に勝手に通知する bot
+
+slack 
+
+
+
+            
+                Slack
+                
+                
+                    
+                    nfug.slack.com
+                
+            
+最新5件を以下に該当するかチェック
+イベント2週間前、2日前、当日、翌日あたり
+GAE/Go (GoogleAppEngine / Golang) で実装
+
+実装方法
+GAE/Go (GoogleAppEngine / Golang) とは
+
+Google Cloud Platform の一員
+Web アプリケーションをお手軽に公開できるプラットフォーム
+
+GAE/Go の helloworld を試すまでの手順
+
+アカウント登録する、クレジットカード情報が必要（ただし無料枠で対応可能）
+言語を選択する、ここでは Golang を選択
+チュートリアルに従って dev_appserver.py, gcoud app deploy 相当のことを画面内から行う
+
+GAE/Go の helloworld を試すまでのキャプチャ
+多いので抜粋。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20180131/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20180131" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Google App Engine / Go で slack に通知する bot を作った" itemprop="name">
+    <meta content="こちらは 
+
+
+フロントエンドもくもく会 - 新年LT大会 の、
+後半のLT大会で発表した内容を加筆修正しつつブログに起こしたものです。
+発表後、うまく動作しなかった箇所などを追記しています。
+ざっくり要点だけ知りたい方は、
+一番下にある
+
+
+GAE/Go slackbot のポイントだけ見てください。
+動機 - めんどいこと
+フロントエンドもくもく会はかなり低コストで回っているものの、
+以下の点で面倒だなあと感じることがありました。
+
+勉強会関連で何日前にあれこれする
+
+参加人数少なかったら告知したり
+キャンセル促したり
+
+
+イベントごとにお知らせしてほしい
+
+そこで slack に勝手に通知する bot を用意し、
+その辺常に気にするコストをさらに減らそうと思い立ちました。
+slack に勝手に通知する bot
+
+slack 
+
+
+
+            
+                Slack
+                
+                
+                    
+                    nfug.slack.com
+                
+            
+最新5件を以下に該当するかチェック
+イベント2週間前、2日前、当日、翌日あたり
+GAE/Go (GoogleAppEngine / Golang) で実装
+
+実装方法
+GAE/Go (GoogleAppEngine / Golang) とは
+
+Google Cloud Platform の一員
+Web アプリケーションをお手軽に公開できるプラットフォーム
+
+GAE/Go の helloworld を試すまでの手順
+
+アカウント登録する、クレジットカード情報が必要（ただし無料枠で対応可能）
+言語を選択する、ここでは Golang を選択
+チュートリアルに従って dev_appserver.py, gcoud app deploy 相当のことを画面内から行う
+
+GAE/Go の helloworld を試すまでのキャプチャ
+多いので抜粋。" itemprop="description">
+    <meta content="Google App Engine / Go で slack に通知する bot を作った" property="og:title">
+    <meta content="こちらは 
+
+
+フロントエンドもくもく会 - 新年LT大会 の、
+後半のLT大会で発表した内容を加筆修正しつつブログに起こしたものです。
+発表後、うまく動作しなかった箇所などを追記しています。
+ざっくり要点だけ知りたい方は、
+一番下にある
+
+
+GAE/Go slackbot のポイントだけ見てください。
+動機 - めんどいこと
+フロントエンドもくもく会はかなり低コストで回っているものの、
+以下の点で面倒だなあと感じることがありました。
+
+勉強会関連で何日前にあれこれする
+
+参加人数少なかったら告知したり
+キャンセル促したり
+
+
+イベントごとにお知らせしてほしい
+
+そこで slack に勝手に通知する bot を用意し、
+その辺常に気にするコストをさらに減らそうと思い立ちました。
+slack に勝手に通知する bot
+
+slack 
+
+
+
+            
+                Slack
+                
+                
+                    
+                    nfug.slack.com
+                
+            
+最新5件を以下に該当するかチェック
+イベント2週間前、2日前、当日、翌日あたり
+GAE/Go (GoogleAppEngine / Golang) で実装
+
+実装方法
+GAE/Go (GoogleAppEngine / Golang) とは
+
+Google Cloud Platform の一員
+Web アプリケーションをお手軽に公開できるプラットフォーム
+
+GAE/Go の helloworld を試すまでの手順
+
+アカウント登録する、クレジットカード情報が必要（ただし無料枠で対応可能）
+言語を選択する、ここでは Golang を選択
+チュートリアルに従って dev_appserver.py, gcoud app deploy 相当のことを画面内から行う
+
+GAE/Go の helloworld を試すまでのキャプチャ
+多いので抜粋。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20180131/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Google App Engine / Go で slack に通知する bot を作った" name="twitter:title">
+    <meta content="こちらは 
+
+
+フロントエンドもくもく会 - 新年LT大会 の、
+後半のLT大会で発表した内容を加筆修正しつつブログに起こしたものです。
+発表後、うまく動作しなかった箇所などを追記しています。
+ざっくり要点だけ知りたい方は、
+一番下にある
+
+
+GAE/Go slackbot のポイントだけ見てください。
+動機 - めんどいこと
+フロントエンドもくもく会はかなり低コストで回っているものの、
+以下の点で面倒だなあと感じることがありました。
+
+勉強会関連で何日前にあれこれする
+
+参加人数少なかったら告知したり
+キャンセル促したり
+
+
+イベントごとにお知らせしてほしい
+
+そこで slack に勝手に通知する bot を用意し、
+その辺常に気にするコストをさらに減らそうと思い立ちました。
+slack に勝手に通知する bot
+
+slack 
+
+
+
+            
+                Slack
+                
+                
+                    
+                    nfug.slack.com
+                
+            
+最新5件を以下に該当するかチェック
+イベント2週間前、2日前、当日、翌日あたり
+GAE/Go (GoogleAppEngine / Golang) で実装
+
+実装方法
+GAE/Go (GoogleAppEngine / Golang) とは
+
+Google Cloud Platform の一員
+Web アプリケーションをお手軽に公開できるプラットフォーム
+
+GAE/Go の helloworld を試すまでの手順
+
+アカウント登録する、クレジットカード情報が必要（ただし無料枠で対応可能）
+言語を選択する、ここでは Golang を選択
+チュートリアルに従って dev_appserver.py, gcoud app deploy 相当のことを画面内から行う
+
+GAE/Go の helloworld を試すまでのキャプチャ
+多いので抜粋。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Google App Engine / Go で slack に通知する bot を作った</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2018-01-31 15:00:00 +0900 JST">2018/01/31</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>こちらは <a href="https://html5nagoya.connpass.com/event/74096/" rel="noopener noreferrer" target="_blank">フロントエンドもくもく会 - 新年LT大会</a> の、 後半のLT大会で発表した内容を加筆修正しつつブログに起こしたものです。 発表後、うまく動作しなかった箇所などを追記しています。</p>
+          <p>ざっくり要点だけ知りたい方は、 一番下にある <a href="#gaego-slackbot">GAE/Go slackbot のポイント</a>だけ見てください。</p>
+          <h2 id="動機---めんどいこと">動機 - めんどいこと</h2>
+          <p>フロントエンドもくもく会はかなり低コストで回っているものの、 以下の点で面倒だなあと感じることがありました。</p>
+          <ul>
+            <li>
+              勉強会関連で何日前にあれこれする
+              <ul>
+                <li>参加人数少なかったら告知したり</li>
+                <li>キャンセル促したり</li>
+              </ul>
+            </li>
+            <li>イベントごとにお知らせしてほしい</li>
+          </ul>
+          <p>そこで slack に勝手に通知する bot を用意し、 その辺常に気にするコストをさらに減らそうと思い立ちました。</p>
+          <h3 id="slack-に勝手に通知する-bot">slack に勝手に通知する bot</h3>
+          <ul>
+            <li>slack <a class="link-card" href="https://nfug.slack.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Slack</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://nfug.slack.com/"> nfug.slack.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li>最新5件を以下に該当するかチェック</li>
+            <li>イベント2週間前、2日前、当日、翌日あたり</li>
+            <li>GAE/Go (GoogleAppEngine / Golang) で実装</li>
+          </ul>
+          <h2 id="実装方法">実装方法</h2>
+          <h3 id="gaego-googleappengine--golang-とは">GAE/Go (GoogleAppEngine / Golang) とは</h3>
+          <ul>
+            <li>Google Cloud Platform の一員</li>
+            <li>Web アプリケーションをお手軽に公開できるプラットフォーム</li>
+          </ul>
+          <h3 id="gaego-の-helloworld-を試すまでの手順">GAE/Go の helloworld を試すまでの手順</h3>
+          <ol>
+            <li>アカウント登録する、クレジットカード情報が必要（ただし無料枠で対応可能）</li>
+            <li>言語を選択する、ここでは Golang を選択</li>
+            <li>チュートリアルに従って dev_appserver.py, gcoud app deploy 相当のことを画面内から行う</li>
+          </ol>
+          <h3 id="gaego-の-helloworld-を試すまでのキャプチャ">GAE/Go の helloworld を試すまでのキャプチャ</h3>
+          <p>多いので抜粋。</p>
+          <p><img alt="" src="resource01.jpg"></p>
+          <p><img alt="" src="resource02.jpg"></p>
+          <p><img alt="" src="resource03.jpg"></p>
+          <p><img alt="" src="resource04.jpg"></p>
+          <p><img alt="" src="resource05.jpg"></p>
+          <p><img alt="" src="resource06.jpg"></p>
+          <p><img alt="" src="resource07.jpg"></p>
+          <p><img alt="" src="resource08.jpg"></p>
+          <p><img alt="" src="resource09.jpg"></p>
+          <p>ここまでがチュートリアルでした。</p>
+          <h3 id="gaego-でローカル開発する">GAE/Go でローカル開発する</h3>
+          <p>さらに、 <code>gcloud</code> コマンドをインストールして、 ローカルで開発を進める手法もあります。 さすがにローカルで進めていかないとしんどいので、こちらの方法で開発を進めていきます。</p>
+          <p>指示通りにインストールして、 ローカルで <code>dev_appserver.py</code> の実行や <code>gcloud app deploy</code> の実行ができるようにします。 ちなみに <code>dev_appserver.py</code> というのは gcloud をインストールすると使える開発環境用スクリプトです。 インストールの指示通りに google-cloud-sdk/bin にパスを通しておくと使えます。 （gcloud_devsever とかいう名前にすればいいのに・・・）</p>
+          <h2 id="ソースコード">ソースコード</h2>
+          <p><a class="link-card" href="https://github.com/girigiribauer/nfug-eventbot" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - girigiribauer/nfug-eventbot: 勉強会の slackbot です、さくっと作っただけなので汎用性はないです</span> <span class="link-card__desc">勉強会の slackbot です、さくっと作っただけなので汎用性はないです. Contribute to girigiribauer/nfug-eventbot development by …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/nfug-eventbot"> github.com</span></span><span class="link-card__image"><img alt="GitHub - girigiribauer/nfug-eventbot: 勉強会の slackbot です、さくっと作っただけなので汎用性はないです" loading="lazy" src="https://opengraph.githubassets.com/735720bebca5df2c654e505186121de7c007ca88fd79ed28d01287a16753fbea/girigiribauer/nfug-eventbot"></span></a>にあります。汎用性はないです。</p>
+          <h2 id="追記-cron-ジョブの登録について">追記: cron ジョブの登録について</h2>
+          <p>ドキュメントをもっときちんと読み込むべきだったんですが、 普通に <code>gcloud app deploy</code> しただけでは、 cron ジョブ関連はデプロイされないようです。</p>
+          <p>その証拠に、Google Cloud Platform の管理画面上から cron ジョブの様子が確認できるのですが、 そこにはどうも何も認識されていないようです。</p>
+          <p><img alt="" src="resource10.jpg"></p>
+          <p>こちらに書いてありますが、 cron ジョブをデプロイするためには、 <code>gcloud app deploy cron.yaml</code> といったように、さらに引数に指定する必要があるようです。 道理で動かなかったわけだ・・・。</p>
+          <p><a class="link-card" href="https://cloud.google.com/appengine/docs/standard/go/config/cron" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Scheduling jobs with cron.yaml &amp;nbsp;|&amp;nbsp; App Engine standard environment &amp;nbsp;|&amp;nbsp; Google Cloud Documentation</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://cloud.google.com/appengine/docs/standard/go/config/cron"> cloud.google.com</span></span><span class="link-card__image"><img alt="Scheduling jobs with cron.yaml &amp;nbsp;|&amp;nbsp; App Engine standard environment &amp;nbsp;|&amp;nbsp; Google Cloud Documentation" loading="lazy" src="https://docs.cloud.google.com/_static/cloud/images/social-icon-google-cloud-1200-630.png"></span></a></p>
+          <p>これで試してみると、以下のようなメッセージが表示されつつ、 デプロイしますか？と問われます。</p>
+          <pre><code>descriptor:      [/path/to/nfug-eventbot/slackbot/cron.yaml]
+type:            [cron jobs]
+target project:  [nfug-eventbot]
+</code></pre>
+          <p>でもって再び管理画面見てみると・・・</p>
+          <p><img alt="" src="resource11.jpg"></p>
+          <p>きておったー。</p>
+          <h3 id="それ以外に疑った点-timezone-周り">それ以外に疑った点: timezone 周り</h3>
+          <p>当初、これが怪しいと思ったんですよ。 結局違ったんですが、timezone を指定しておくのは（無用なトラブルを避ける意味で） やっておいた方が良いかと思います。</p>
+          <p>特にグローバルなサービスを利用するときは気をつけておきたいポイントかと思いました。</p>
+          <ul>
+            <li>Golang の中の timezone 設定</li>
+            <li>cron.yaml での timezone 設定</li>
+          </ul>
+          <p>前者は time.Local を設定することで timezone の設定が可能です。</p>
+          <p>後者は timezone: Asia/Tokyo とすることで設定可能ですが、 そもそも1時間ごとに処理するのに timezone は関係ないし、 これも一番最初にリージョン設定で指定が出来てるはずなので、 ここで問題が起きているとは考えにくかったりするんですよね。（実際違った）</p>
+          <h2 id="その他気をつけたいこと">その他気をつけたいこと</h2>
+          <h3 id="googleappengine-の中から外へのリクエスト">GoogleAppEngine の中から外へのリクエスト</h3>
+          <p>Go で外に向けてリクエスト投げたりするときは、通常 http.Get とか使うことになるかと思います。</p>
+          <p>ただ、GoogleAppEngine の中からリクエスト投げる場合は制限があって、 “google.golang.org/appengine” や “google.golang.org/appengine/urlfetch” などの、 専用のライブラリを使う必要があります。</p>
+          <p><a class="link-card" href="https://cloud.google.com/appengine/docs/standard/go/issue-requests" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Issue HTTPS requests &amp;nbsp;|&amp;nbsp; App Engine standard environment &amp;nbsp;|&amp;nbsp; Google Cloud Documentation</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://cloud.google.com/appengine/docs/standard/go/issue-requests"> cloud.google.com</span></span><span class="link-card__image"><img alt="Issue HTTPS requests &amp;nbsp;|&amp;nbsp; App Engine standard environment &amp;nbsp;|&amp;nbsp; Google Cloud Documentation" loading="lazy" src="https://docs.cloud.google.com/_static/cloud/images/social-icon-google-cloud-1200-630.png"></span></a></p>
+          <p>こっちを使わないと中から外へのリクエストは投げられません。</p>
+          <p>どこかから情報を引っ張ってきて加工して出す系の処理は、 大抵これに該当すると思うので、気をつけると良いと思います。 まあこれもドキュメントしっかり読めって話です。</p>
+          <h2 id="gaego-slackbot">GAE/Go slackbot のポイント</h2>
+          <ul>
+            <li>cron が普通に使えるのは、他のサーバーレスな仕組みだけ使うのと比べるとメリット</li>
+            <li>
+              <del><strong>定期的に何かやるやつはこっちのが良さげ</strong> （逆に応答するだけなら aws lambda とか gcp cloud functions とか使ったら良さげ）</del>
+              =&gt; AWS にも CloudWatch というサービスがあって、 cron っぽく書けるようです。知らんかったー。 ( <a class="link-card" href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/events/ScheduledEvents.html" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Amazon EventBridge でスケジュールされたルール (レガシー) を作成する - Amazon EventBridge</span> <span class="link-card__desc">スケジュールに従って定期的にまたは特定の時間に実行する EventBridge ルールを作成する方法について説明します。</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/events/ScheduledEvents.html"> docs.aws.amazon.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )
+            </li>
+            <li>GoogleAppEngine の Always Free の使用制限に気をつける <a class="link-card" href="https://cloud.google.com/free/docs/always-free-usage-limits" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Funcionalidades gratuitas do Google Cloud e oferta de avaliação &amp;nbsp;|&amp;nbsp; Google Cloud Free Program &amp;nbsp;|&amp;nbsp; Google Cloud Documentation</span> <span class="link-card__desc">Saiba mais acerca das ofertas e avaliações gratuitas do Google Cloud, bem como sobre como atualizar …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://cloud.google.com/free/docs/always-free-usage-limits"> cloud.google.com</span></span><span class="link-card__image"><img alt="Funcionalidades gratuitas do Google Cloud e oferta de avaliação &amp;nbsp;|&amp;nbsp; Google Cloud Free Program &amp;nbsp;|&amp;nbsp; Google Cloud Documentation" loading="lazy" src="https://docs.cloud.google.com/_static/cloud/images/social-icon-google-cloud-1200-630.png?hl=pt"></span></a></li>
+            <li>GoogleAppEngine はデプロイが楽（更新してくならここ大事）</li>
+            <li>外から情報引っ張ってきて加工する系の bot は専用ライブラリ使う</li>
+            <li>cron ジョブのデプロイはアプリ側のデプロイとは別に <code>gcloud app deploy cron.yaml</code> と関連ファイル名を直接指定する</li>
+            <li>ドキュメントよく読む</li>
+          </ul>
+          <p>今回さくっと作ってみましたが、 作るところ自体にそれほど時間はかかっていません。</p>
+          <p>ドキュメントしっかり読んでおけば問題ないケースがほとんどなので、 <strong>要するにドキュメントしっかり読もうってことです。</strong> はい。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <ul>
+            <li>身近なところから自動化・仕組み化していきたい</li>
+            <li>ドキュメントしっかり読もう</li>
+          </ul>
+          <p>今回直接アクセスしたら動作しちゃうし、そこまで厳密にあれこれやってないです。 GoogleAppEngine も、一度やってしまえば（必要なドキュメント読んでおけば） 次からは全然時間かからずにデプロイまで行けちゃうんじゃないですかね。かなり楽です。</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://cloud.google.com/free/docs/always-free-usage-limits" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Funcionalidades gratuitas do Google Cloud e oferta de avaliação &amp;nbsp;|&amp;nbsp; Google Cloud Free Program &amp;nbsp;|&amp;nbsp; Google Cloud Documentation</span> <span class="link-card__desc">Saiba mais acerca das ofertas e avaliações gratuitas do Google Cloud, bem como sobre como atualizar …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://cloud.google.com/free/docs/always-free-usage-limits"> cloud.google.com</span></span><span class="link-card__image"><img alt="Funcionalidades gratuitas do Google Cloud e oferta de avaliação &amp;nbsp;|&amp;nbsp; Google Cloud Free Program &amp;nbsp;|&amp;nbsp; Google Cloud Documentation" loading="lazy" src="https://docs.cloud.google.com/_static/cloud/images/social-icon-google-cloud-1200-630.png?hl=pt"></span></a></li>
+            <li><a class="link-card" href="https://blog.apar.jp/web/6912/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">ゼロから始める Google App Engine の使い方（2017年）</span> <span class="link-card__desc">Google App Engine（よくGAEと略されます）は、自分が作ったWEBアプリケーションを簡単に公開することができる PaaS （Platform as a Service）です。最近ではサ …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://blog.apar.jp/web/6912/"> blog.apar.jp</span></span><span class="link-card__image"><img alt="ゼロから始める Google App Engine の使い方（2017年）" loading="lazy" src="https://blog.apar.jp/wp-content/uploads/2017/03/ogp-start-gae.png"></span></a></li>
+            <li><a class="link-card" href="https://cloud.google.com/appengine/docs/standard/go/issue-requests" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Issue HTTPS requests &amp;nbsp;|&amp;nbsp; App Engine standard environment &amp;nbsp;|&amp;nbsp; Google Cloud Documentation</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://cloud.google.com/appengine/docs/standard/go/issue-requests"> cloud.google.com</span></span><span class="link-card__image"><img alt="Issue HTTPS requests &amp;nbsp;|&amp;nbsp; App Engine standard environment &amp;nbsp;|&amp;nbsp; Google Cloud Documentation" loading="lazy" src="https://docs.cloud.google.com/_static/cloud/images/social-icon-google-cloud-1200-630.png"></span></a></li>
+            <li><a class="link-card" href="https://cloud.google.com/appengine/docs/standard/go/config/cronref" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Scheduling jobs with cron.yaml &amp;nbsp;|&amp;nbsp; App Engine standard environment &amp;nbsp;|&amp;nbsp; Google Cloud Documentation</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://cloud.google.com/appengine/docs/standard/go/config/cronref"> cloud.google.com</span></span><span class="link-card__image"><img alt="Scheduling jobs with cron.yaml &amp;nbsp;|&amp;nbsp; App Engine standard environment &amp;nbsp;|&amp;nbsp; Google Cloud Documentation" loading="lazy" src="https://docs.cloud.google.com/_static/cloud/images/social-icon-google-cloud-1200-630.png"></span></a></li>
+            <li><a class="link-card" href="https://connpass.com/about/api/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">connpass API</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://connpass.com/about/api/"> connpass.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a class="link-card" href="https://qiita.com/shiena/items/dee4d10947bebb7e92d4" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Goでローカルのタイムゾーンを設定する - Qiita</span> <span class="link-card__desc">Goでタイムゾーンを変えたい場合はfunc (Time) Inを使います。 package main import "time" const location = "Asia/Tokyo" func …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://qiita.com/shiena/items/dee4d10947bebb7e92d4"> qiita.com</span></span><span class="link-card__image"><img alt="Goでローカルのタイムゾーンを設定する - Qiita" loading="lazy" src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-user-contents.imgix.net%2Fhttps%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-afbab5eb44e0b055cce1258705637a91.png%3Fixlib%3Drb-4.1.1%26w%3D1200%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLXByb2ZpbGUtaW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnFpaXRhLWltYWdlLXN0b3JlLnMzLmFtYXpvbmF3cy5jb20lMkYwJTJGODk5NSUyRnByb2ZpbGUtaW1hZ2VzJTJGMTQ3MzY4MTIxOD9peGxpYj1yYi00LjEuMSZhcj0xJTNBMSZmaXQ9Y3JvcCZtYXNrPWVsbGlwc2UmYmc9RkZGRkZGJmZtPXBuZzMyJnM9ODk4NWQ1ZjYwNmYzNjljOWUzYWY4MjVjYzhlMjE0ZDA%26blend-x%3D120%26blend-y%3D462%26blend-w%3D90%26blend-h%3D90%26blend-mode%3Dnormal%26mark64%3DaHR0cHM6Ly9xaWl0YS1vcmdhbml6YXRpb24taW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnMzLWFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb20lMkZxaWl0YS1vcmdhbml6YXRpb24taW1hZ2UlMkYyZjY4NzVmNWNkMjVlNDRiZDM0MzM5NmE0YjU5YmMxYzM3OWY3NjRjJTJGb3JpZ2luYWwuanBnJTNGMTU3MDY2NTE3OD9peGxpYj1yYi00LjEuMSZ3PTQ0Jmg9NDQmZml0PWNyb3AmbWFzaz1jb3JuZXJzJmNvcm5lci1yYWRpdXM9OCZiZz1GRkZGRkYmYm9yZGVyPTIlMkNGRkZGRkYmZm09cG5nMzImcz05YTA0MmMyMWFmZDVhYWZhYjhhNGNjYWNjMDk3ZTZlZg%26mark-x%3D186%26mark-y%3D515%26mark-w%3D40%26mark-h%3D40%26s%3Dbc6a9f6c2628dea06b15a24db783abaf?ixlib=rb-4.1.1&amp;amp;w=1200&amp;amp;fm=jpg&amp;amp;mark64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjEuMSZ3PTk2MCZoPTMyNCZ0eHQ9R28lRTMlODElQTclRTMlODMlQUQlRTMlODMlQkMlRTMlODIlQUIlRTMlODMlQUIlRTMlODElQUUlRTMlODIlQkYlRTMlODIlQTQlRTMlODMlQTAlRTMlODIlQkUlRTMlODMlQkMlRTMlODMlQjMlRTMlODIlOTIlRTglQTglQUQlRTUlQUUlOUElRTMlODElOTklRTMlODIlOEImdHh0LWFsaWduPWxlZnQlMkN0b3AmdHh0LWNvbG9yPSUyMzFFMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT01NiZ0eHQtcGFkPTAmcz00NDY5ZTRiOTY5MTE1ZWZmNTA5MjZjNzQ3YjYwNTg3ZQ&amp;amp;mark-x=120&amp;amp;mark-y=112&amp;amp;blend64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjEuMSZ3PTgzOCZoPTU4JnR4dD0lNDBzaGllbmEmdHh0LWNvbG9yPSUyMzFFMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT0zNiZ0eHQtcGFkPTAmcz0yNzQ0YzJlZDA4NjlmNDM4Mjg2NTBiNmIwNTkzNDI3Zg&amp;amp;blend-x=242&amp;amp;blend-y=454&amp;amp;blend-w=838&amp;amp;blend-h=46&amp;amp;blend-fit=crop&amp;amp;blend-crop=left%2Cbottom&amp;amp;blend-mode=normal&amp;amp;txt64=44Kr44OH44Kj44Oz44OB44Kn5qCq5byP5Lya56S-&amp;amp;txt-x=242&amp;amp;txt-y=539&amp;amp;txt-width=838&amp;amp;txt-clip=end%2Cellipsis&amp;amp;txt-color=%231E2121&amp;amp;txt-font=Hiragino%20Sans%20W6&amp;amp;txt-size=28&amp;amp;s=205fb82ad3e5197cf535e52ce46a0d27"></span></a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/googleappengine/">#GoogleAppEngine</a> <a class="tag-link" href="/tags/golang/">#Golang</a> <a class="tag-link" href="/tags/slack/">#slack</a> <a class="tag-link" href="/tags/bot/">#bot</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Google%20App%20Engine%20/%20Go%20%e3%81%a7%20slack%20%e3%81%ab%e9%80%9a%e7%9f%a5%e3%81%99%e3%82%8b%20bot%20%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20180131/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20180131%2f&amp;text=Google%20App%20Engine%20%2f%20Go%20%e3%81%a7%20slack%20%e3%81%ab%e9%80%9a%e7%9f%a5%e3%81%99%e3%82%8b%20bot%20%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20180131/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>コマンド履歴の Ctrl-R 使ってますか？ | ばうあーろぐ</title>
+    <meta content="大学で初めて Linux を触りつつも、 その後働き始めてほぼ GUI オンリーの生活を送り、 iTerm, tmux, Vim 達とのと出会いを経て、 コマンドライン中心の生活を送っている girigiribauer ですこんにちは。
+大学で初めて触り始めた頃は、コマンドの補完をタブキーで出来るだとか、上下キーで自分の打ったコマンド履歴を移動できたりと、単にコマンド名だけでなく、ショートカットキーも大事だなあと思いながら色々覚えていきました。 近年では VM 立ち上げたりタスクランナー走らせたりと、コマンドラインなしでは生きていけないくらいには使わせてもらってます。
+ですが、過去のコマンドラインの履歴を入力するのに、後方からの履歴のインクリメンタルサーチのショートカットが用意されていることを、僕は恥ずかしながらつい先日まで知りませんでした。（！）
+同じ記事は溢れているかもしれませんが、まだ見ぬ『知らんかったー』って人のために、恥を忍んでメモっておこうと思います。
+コマンド履歴の後方からのインクリメンタルサーチ
+bash にも最初から入ってるんですねー。なんで知らなかったんでしょうねー。
+Ctrl-R を押すと、
+(reverse-i-search)`':
+
+のような感じで表示され、そのまま過去に入力したコマンドを数文字打つと、インクリメンタルサーチの要領で候補が絞られていきます。
+後方検索なので、複数の候補があれば新しいものが優先して表示されます。 ちなみに、前方検索もあって Ctrl-S らしいのですが、他のショートカットキーに割り当てられてあるケースも多いようなので、.bashrc なり .zshrc なりに書いてやる必要があります。
+1時間前くらいに入力したけどもう一度同じコマンド打ちたいとか、そういったケースなどに重宝するかと思います。これは知ってて当たり前のショートカットですねサーセン・・・
+まとめ
+マニュアルをちゃんと読もう。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20150623/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20150623" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="コマンド履歴の Ctrl-R 使ってますか？" itemprop="name">
+    <meta content="大学で初めて Linux を触りつつも、 その後働き始めてほぼ GUI オンリーの生活を送り、 iTerm, tmux, Vim 達とのと出会いを経て、 コマンドライン中心の生活を送っている girigiribauer ですこんにちは。
+大学で初めて触り始めた頃は、コマンドの補完をタブキーで出来るだとか、上下キーで自分の打ったコマンド履歴を移動できたりと、単にコマンド名だけでなく、ショートカットキーも大事だなあと思いながら色々覚えていきました。 近年では VM 立ち上げたりタスクランナー走らせたりと、コマンドラインなしでは生きていけないくらいには使わせてもらってます。
+ですが、過去のコマンドラインの履歴を入力するのに、後方からの履歴のインクリメンタルサーチのショートカットが用意されていることを、僕は恥ずかしながらつい先日まで知りませんでした。（！）
+同じ記事は溢れているかもしれませんが、まだ見ぬ『知らんかったー』って人のために、恥を忍んでメモっておこうと思います。
+コマンド履歴の後方からのインクリメンタルサーチ
+bash にも最初から入ってるんですねー。なんで知らなかったんでしょうねー。
+Ctrl-R を押すと、
+(reverse-i-search)`':
+
+のような感じで表示され、そのまま過去に入力したコマンドを数文字打つと、インクリメンタルサーチの要領で候補が絞られていきます。
+後方検索なので、複数の候補があれば新しいものが優先して表示されます。 ちなみに、前方検索もあって Ctrl-S らしいのですが、他のショートカットキーに割り当てられてあるケースも多いようなので、.bashrc なり .zshrc なりに書いてやる必要があります。
+1時間前くらいに入力したけどもう一度同じコマンド打ちたいとか、そういったケースなどに重宝するかと思います。これは知ってて当たり前のショートカットですねサーセン・・・
+まとめ
+マニュアルをちゃんと読もう。" itemprop="description">
+    <meta content="コマンド履歴の Ctrl-R 使ってますか？" property="og:title">
+    <meta content="大学で初めて Linux を触りつつも、 その後働き始めてほぼ GUI オンリーの生活を送り、 iTerm, tmux, Vim 達とのと出会いを経て、 コマンドライン中心の生活を送っている girigiribauer ですこんにちは。
+大学で初めて触り始めた頃は、コマンドの補完をタブキーで出来るだとか、上下キーで自分の打ったコマンド履歴を移動できたりと、単にコマンド名だけでなく、ショートカットキーも大事だなあと思いながら色々覚えていきました。 近年では VM 立ち上げたりタスクランナー走らせたりと、コマンドラインなしでは生きていけないくらいには使わせてもらってます。
+ですが、過去のコマンドラインの履歴を入力するのに、後方からの履歴のインクリメンタルサーチのショートカットが用意されていることを、僕は恥ずかしながらつい先日まで知りませんでした。（！）
+同じ記事は溢れているかもしれませんが、まだ見ぬ『知らんかったー』って人のために、恥を忍んでメモっておこうと思います。
+コマンド履歴の後方からのインクリメンタルサーチ
+bash にも最初から入ってるんですねー。なんで知らなかったんでしょうねー。
+Ctrl-R を押すと、
+(reverse-i-search)`':
+
+のような感じで表示され、そのまま過去に入力したコマンドを数文字打つと、インクリメンタルサーチの要領で候補が絞られていきます。
+後方検索なので、複数の候補があれば新しいものが優先して表示されます。 ちなみに、前方検索もあって Ctrl-S らしいのですが、他のショートカットキーに割り当てられてあるケースも多いようなので、.bashrc なり .zshrc なりに書いてやる必要があります。
+1時間前くらいに入力したけどもう一度同じコマンド打ちたいとか、そういったケースなどに重宝するかと思います。これは知ってて当たり前のショートカットですねサーセン・・・
+まとめ
+マニュアルをちゃんと読もう。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20150623/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="コマンド履歴の Ctrl-R 使ってますか？" name="twitter:title">
+    <meta content="大学で初めて Linux を触りつつも、 その後働き始めてほぼ GUI オンリーの生活を送り、 iTerm, tmux, Vim 達とのと出会いを経て、 コマンドライン中心の生活を送っている girigiribauer ですこんにちは。
+大学で初めて触り始めた頃は、コマンドの補完をタブキーで出来るだとか、上下キーで自分の打ったコマンド履歴を移動できたりと、単にコマンド名だけでなく、ショートカットキーも大事だなあと思いながら色々覚えていきました。 近年では VM 立ち上げたりタスクランナー走らせたりと、コマンドラインなしでは生きていけないくらいには使わせてもらってます。
+ですが、過去のコマンドラインの履歴を入力するのに、後方からの履歴のインクリメンタルサーチのショートカットが用意されていることを、僕は恥ずかしながらつい先日まで知りませんでした。（！）
+同じ記事は溢れているかもしれませんが、まだ見ぬ『知らんかったー』って人のために、恥を忍んでメモっておこうと思います。
+コマンド履歴の後方からのインクリメンタルサーチ
+bash にも最初から入ってるんですねー。なんで知らなかったんでしょうねー。
+Ctrl-R を押すと、
+(reverse-i-search)`':
+
+のような感じで表示され、そのまま過去に入力したコマンドを数文字打つと、インクリメンタルサーチの要領で候補が絞られていきます。
+後方検索なので、複数の候補があれば新しいものが優先して表示されます。 ちなみに、前方検索もあって Ctrl-S らしいのですが、他のショートカットキーに割り当てられてあるケースも多いようなので、.bashrc なり .zshrc なりに書いてやる必要があります。
+1時間前くらいに入力したけどもう一度同じコマンド打ちたいとか、そういったケースなどに重宝するかと思います。これは知ってて当たり前のショートカットですねサーセン・・・
+まとめ
+マニュアルをちゃんと読もう。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">コマンド履歴の Ctrl-R 使ってますか？</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2015-06-23 11:01:36 +0000 +0000">2015/06/23</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>大学で初めて Linux を触りつつも、 その後働き始めてほぼ GUI オンリーの生活を送り、 iTerm, tmux, Vim 達とのと出会いを経て、 コマンドライン中心の生活を送っている girigiribauer ですこんにちは。</p>
+          <p>大学で初めて触り始めた頃は、コマンドの補完をタブキーで出来るだとか、上下キーで自分の打ったコマンド履歴を移動できたりと、単にコマンド名だけでなく、ショートカットキーも大事だなあと思いながら色々覚えていきました。 近年では VM 立ち上げたりタスクランナー走らせたりと、コマンドラインなしでは生きていけないくらいには使わせてもらってます。</p>
+          <p>ですが、過去のコマンドラインの履歴を入力するのに、後方からの<strong>履歴のインクリメンタルサーチ</strong>のショートカットが用意されていることを、僕は恥ずかしながらつい先日まで知りませんでした。（！）</p>
+          <p>同じ記事は溢れているかもしれませんが、まだ見ぬ『知らんかったー』って人のために、恥を忍んでメモっておこうと思います。</p>
+          <h2 id="コマンド履歴の後方からのインクリメンタルサーチ">コマンド履歴の後方からのインクリメンタルサーチ</h2>
+          <p>bash にも最初から入ってるんですねー。なんで知らなかったんでしょうねー。</p>
+          <p><strong>Ctrl-R</strong> を押すと、</p>
+          <pre><code>(reverse-i-search)`':
+</code></pre>
+          <p>のような感じで表示され、そのまま過去に入力したコマンドを数文字打つと、インクリメンタルサーチの要領で候補が絞られていきます。</p>
+          <p>後方検索なので、複数の候補があれば新しいものが優先して表示されます。 ちなみに、前方検索もあって <strong>Ctrl-S</strong> らしいのですが、他のショートカットキーに割り当てられてあるケースも多いようなので、.bashrc なり .zshrc なりに書いてやる必要があります。</p>
+          <p>1時間前くらいに入力したけどもう一度同じコマンド打ちたいとか、そういったケースなどに重宝するかと思います。これは知ってて当たり前のショートカットですねサーセン・・・</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>マニュアルをちゃんと読もう。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/linux/">#Linux</a> <a class="tag-link" href="/tags/cli/">#CLI</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e5%b1%a5%e6%ad%b4%e3%81%ae%20Ctrl-R%20%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%be%e3%81%99%e3%81%8b%ef%bc%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20150623/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20150623%2f&amp;text=%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e5%b1%a5%e6%ad%b4%e3%81%ae%20Ctrl-R%20%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%be%e3%81%99%e3%81%8b%ef%bc%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20150623/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/ai/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in AI on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;ポエムです。&lt;/p&gt;\n&lt;h2 id=\"何の技術書を買えばいいかわからない\"&gt;何の技術書を買えばいいかわからない&lt;/h2&gt;\n&lt;p&gt;最近、 &lt;strong&gt;技術書で何を買って読めばいいのか&lt;/strong&gt; 分からなくなってきました。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource01.png\" alt=\"気になった本 from Bluesky\"&gt;&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"https://bsky.app/profile/girigiribauer.com/post/3mon27g2jic2t\" target=\"_blank\" rel=\"noopener noreferrer\"&gt;https://bsky.app/profile/girigiribauer.com/post/3mon27g2jic2t&lt;/a&gt;&lt;/p&gt;\n&lt;p&gt;ブログには書いてませんでしたが、\nいつのまにか IT/Web の業界は自分でコードを書く世界ではなくなりつつあって、\nAI に如何にしてコードを書かせるか？という技術トピックばかりになってきました。&lt;/p&gt;\n&lt;p&gt;たぶん読むべきは技術書以外の別業界の本なんでしょうけど、\n（実際技術書以外にだいぶ偏ってきてます）\nいざ技術書を買ったとしても、手元でAIに聞いた方が早いよねになっちゃうと思うんですよね。&lt;/p&gt;\n&lt;p&gt;もう本当に最近何買ったらいいかわからない。\nたぶん書く側の人も困ってそうな気がします。&lt;/p&gt;\n&lt;h2 id=\"何の記事を書けばいいのかわからない\"&gt;何の記事を書けばいいのかわからない&lt;/h2&gt;\n&lt;p&gt;最近、 &lt;strong&gt;&lt;code&gt;tech&lt;/code&gt; カテゴリーの記事で何書けばいいのか&lt;/strong&gt; 分からなくなってきました。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource02.png\" alt=\"書きかけの記事 form Bluesky\"&gt;&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"https://bsky.app/profile/girigiribauer.com/post/3moxmqlqjts2h\" target=\"_blank\" rel=\"noopener noreferrer\"&gt;https://bsky.app/profile/girigiribauer.com/post/3moxmqlqjts2h&lt;/a&gt;&lt;/p&gt;\n&lt;p&gt;テック記事も結構な割合の人がAIに書かせているようで、\n一番下の行に、 &lt;strong&gt;「このブログ記事はAIに書かせました」&lt;/strong&gt; と書いてあると &lt;strong&gt;若干萎えます。&lt;/strong&gt;\nもしかすると知らずに読んでるものもきっといくつかあるでしょう。&lt;/p&gt;\n&lt;p&gt;ちなみにこのブログはどちらでしょうか？当ててみてください &amp;#x1f60e;&lt;/p&gt;\n&lt;p&gt;技術的なこだわりも最近意識的に捨てようとしていて、\n昔はエディタがこれ、こういうカスタマイズをして、ショートカットでこれが動くようにする！\nみたいなのを頑張ってたし、そういう記事も昔いくつか書いた記憶はありますが、\n今は標準の設定に体を慣れさせることを優先していて、極力 &lt;strong&gt;こだわりを捨ててレールに乗ろう&lt;/strong&gt; としています。&lt;/p&gt;\n&lt;p&gt;例えば tmux のプレフィックスキーも、昔は &lt;code&gt;Ctrl+J&lt;/code&gt; に割り振って右手人差し指の特等席を譲ってたのが、\n今はデフォルトの &lt;code&gt;Ctrl+B&lt;/code&gt; に変更し直して、大きい船が来た時に気軽に乗れるように心がけています。\n（実際 Antigravity から &lt;code&gt;Ctrl+J&lt;/code&gt; を求められたのがきっかけだった気がする）&lt;/p&gt;\n&lt;p&gt;いや、むしろ tmux すらもはや捨ててしまってもいいくらい。\nもう全然こだわってません。&lt;/p&gt;\n&lt;p&gt;さて、こだわりがないのなら、じゃあAIの記事でも書くか？って言ったら、\nそんな足の速い記事書いたところですぐに腐って正しくない情報になるだけだし、\nなによりも面白みがない。&lt;/p&gt;\n&lt;p&gt;行き着く先はAIが完全自動で書くAIの記事ですよね。\nいや、必要に応じて読みはするかもだけど、自分で書こうとは思わない。うーん。&lt;/p&gt;\n&lt;h2 id=\"ギュられる危機感焦燥感\"&gt;ギュられる危機感・焦燥感&lt;/h2&gt;\n&lt;p&gt;シンギュラリティが来てAIに仕事を代替される現象を &lt;strong&gt;『ギュられる』&lt;/strong&gt; と言うらしいです。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource03.png\" alt=\"ギュられる\"&gt;&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20260707/",
+        "link": "https://girigiribauer.com/tech/20260707/",
+        "pubDate": "Tue, 07 Jul 2026 09:00:00 +0900",
+        "title": "最近、自分のリソースをどこに投下すべきかわからなくなってきた話"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Tue, 07 Jul 2026 09:00:00 +0900",
+      "link": "https://girigiribauer.com/tags/ai/",
+      "title": "AI on ばうあーろぐ"
+    }
+  }
+}

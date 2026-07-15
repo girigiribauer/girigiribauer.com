@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>jQuery から卒業するための第1歩を polyfills から学ぼう – その2 | ばうあーろぐ</title>
+    <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
+
+
+
+            
+                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+                
+                    
+                    www.itmedia.co.jp
+                
+            
+                
+             （追記終わり）
+前回からの続きです。 
+
+
+jQuery から卒業するための第 1 歩を polyfills から学ぼう
+
+
+
+
+            
+                GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
+                JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
+                
+                    
+                    github.com
+                
+            
+                
+             にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
+XMLHttpRequest（XHR）
+いわゆる Ajax の核となる API です。
+
+
+
+
+            
+                XMLHttpRequest - Wikipedia
+                
+                
+                    
+                    ja.wikipedia.org
+                
+            
+例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20140203/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20140203" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="jQuery から卒業するための第1歩を polyfills から学ぼう – その2" itemprop="name">
+    <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
+
+
+
+            
+                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+                
+                    
+                    www.itmedia.co.jp
+                
+            
+                
+             （追記終わり）
+前回からの続きです。 
+
+
+jQuery から卒業するための第 1 歩を polyfills から学ぼう
+
+
+
+
+            
+                GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
+                JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
+                
+                    
+                    github.com
+                
+            
+                
+             にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
+XMLHttpRequest（XHR）
+いわゆる Ajax の核となる API です。
+
+
+
+
+            
+                XMLHttpRequest - Wikipedia
+                
+                
+                    
+                    ja.wikipedia.org
+                
+            
+例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。" itemprop="description">
+    <meta content="jQuery から卒業するための第1歩を polyfills から学ぼう – その2" property="og:title">
+    <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
+
+
+
+            
+                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+                
+                    
+                    www.itmedia.co.jp
+                
+            
+                
+             （追記終わり）
+前回からの続きです。 
+
+
+jQuery から卒業するための第 1 歩を polyfills から学ぼう
+
+
+
+
+            
+                GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
+                JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
+                
+                    
+                    github.com
+                
+            
+                
+             にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
+XMLHttpRequest（XHR）
+いわゆる Ajax の核となる API です。
+
+
+
+
+            
+                XMLHttpRequest - Wikipedia
+                
+                
+                    
+                    ja.wikipedia.org
+                
+            
+例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20140203/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="jQuery から卒業するための第1歩を polyfills から学ぼう – その2" name="twitter:title">
+    <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
+
+
+
+            
+                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+                
+                    
+                    www.itmedia.co.jp
+                
+            
+                
+             （追記終わり）
+前回からの続きです。 
+
+
+jQuery から卒業するための第 1 歩を polyfills から学ぼう
+
+
+
+
+            
+                GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
+                JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
+                
+                    
+                    github.com
+                
+            
+                
+             にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
+XMLHttpRequest（XHR）
+いわゆる Ajax の核となる API です。
+
+
+
+
+            
+                XMLHttpRequest - Wikipedia
+                
+                
+                    
+                    ja.wikipedia.org
+                
+            
+例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">jQuery から卒業するための第1歩を polyfills から学ぼう – その2</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2014-02-02 15:00:10 +0000 +0000">2014/02/02</time> <span>(Updated: 2024/06/29)</span></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 <a class="link-card" href="https://www.itmedia.co.jp/enterprise/articles/2406/29/news057.html" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��</span> <span class="link-card__desc">Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.itmedia.co.jp/enterprise/articles/2406/29/news057.html"> www.itmedia.co.jp</span></span><span class="link-card__image"><img alt="JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��" loading="lazy" src="https://image.itmedia.co.jp/enterprise/articles/2406/29/cover_news057.jpg"></span></a>（追記終わり）</p>
+          <p>前回からの続きです。 <a href="/tech/20140131/">jQuery から卒業するための第 1 歩を polyfills から学ぼう</a></p>
+          <p><a class="link-card" href="https://github.com/inexorabletash/polyfill" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More</span> <span class="link-card__desc">JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/inexorabletash/polyfill"> github.com</span></span><span class="link-card__image"><img alt="GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More" loading="lazy" src="https://opengraph.githubassets.com/045d80c166c41bc484eafd65c1396c31bc76a2bf974c82aaca23503001f61b3a/inexorabletash/polyfill"></span></a>にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。</p>
+          <h2 id="xmlhttprequestxhr">XMLHttpRequest（XHR）</h2>
+          <p>いわゆる Ajax の核となる API です。</p>
+          <p><a class="link-card" href="http://ja.wikipedia.org/wiki/XMLHttpRequest" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">XMLHttpRequest - Wikipedia</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://ja.wikipedia.org/wiki/XMLHttpRequest"> ja.wikipedia.org</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">ajax</span>({
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"POST"</span>,
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"some.php"</span>,
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"John"</span>, <span style="color:#a6e22e">location</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"Boston"</span> },
+</span></span><span style="display:flex"><span>});
+</span></span></code></pre>
+          </div>
+          <p><a class="link-card" href="http://api.jquery.com/jQuery.ajax/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">jQuery.ajax() | jQuery API Documentation</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://api.jquery.com/jQuery.ajax/"> api.jquery.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> の Examples からの引用です。</p>
+          <p>この <code>$.ajax</code> の内部で使われているのが、<strong>window.XMLHttpRequest</strong> ですね。</p>
+          <p><code>window.XMLHttpRequest</code> は、IE7 から使えるのですが、IE6 以前では使えはするものの、同じ記述ではできません。</p>
+          <p>23〜37 行目を抜粋します。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#75715e">//
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">// XMLHttpRequest (http://www.w3.org/TR/XMLHttpRequest/)
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">//
+</span></span></span><span style="display:flex"><span>window.<span style="color:#a6e22e">XMLHttpRequest</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex"><span>  window.<span style="color:#a6e22e">XMLHttpRequest</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex"><span>    <span style="color:#75715e">/*global ActiveXObject*/</span>
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">"Msxml2.XMLHTTP.6.0"</span>);
+</span></span><span style="display:flex"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e1</span>) {}
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">"Msxml2.XMLHTTP.3.0"</span>);
+</span></span><span style="display:flex"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e2</span>) {}
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ActiveXObject</span>(<span style="color:#e6db74">"Msxml2.XMLHTTP"</span>);
+</span></span><span style="display:flex"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e3</span>) {}
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">throw</span> Error(<span style="color:#e6db74">"This browser does not support XMLHttpRequest."</span>);
+</span></span><span style="display:flex"><span>  };
+</span></span><span style="display:flex"><span><span style="color:#a6e22e">XMLHttpRequest</span>.<span style="color:#a6e22e">UNSENT</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex"><span><span style="color:#a6e22e">XMLHttpRequest</span>.<span style="color:#a6e22e">OPENED</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex"><span><span style="color:#a6e22e">XMLHttpRequest</span>.<span style="color:#a6e22e">HEADERS_RECEIVED</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex"><span><span style="color:#a6e22e">XMLHttpRequest</span>.<span style="color:#a6e22e">LOADING</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex"><span><span style="color:#a6e22e">XMLHttpRequest</span>.<span style="color:#a6e22e">DONE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+</span></span></code></pre>
+          </div>
+          <p>ActiveX について掘り下げると本質的ではなくなってしまうのであまり触れませんが、IE6 で Ajax を実現するためには、<strong>ActiveXObject</strong> を用います。</p>
+          <p>try ~ catch を用いて、試しにオブジェクトを作って上手くいけばそれを採用しています。 try 文の中で、すぐに return するように書かれているので、 new ActiveXObject 部分に問題がなければそのまま function の処理が終わります。 （逆に問題があれば “Illegal return statement” などの SyntaxError が起きますが、catch 文でそのままキャッチアンドリリースしちゃってるので、実際何も起きません。）</p>
+          <p>その後、XMLHttpRequest オブジェクトに対して、 必要な定数（正確には大文字なだけでただの変数ですが、定数として見なして使っています）を 定義しています。</p>
+          <p>このあたりの話はかなり使い古されており、もうすでに caniuse.com にすら項目として掲載されていないくらい当たり前の手法となっています。詳しくは以下などをご覧ください。</p>
+          <p><a class="link-card" href="http://ja.wikipedia.org/wiki/XMLHttpRequest#.E5.88.A9.E7.94.A8.E6.B3.95" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">XMLHttpRequest - Wikipedia</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://ja.wikipedia.org/wiki/XMLHttpRequest#.E5.88.A9.E7.94.A8.E6.B3.95"> ja.wikipedia.org</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>なお、<strong>XHR</strong> という略は本当によく使うので、 知らなかった人はこれだけは覚えておいた方が良いと思います。 <strong>XHR = XML Http Request</strong> です。</p>
+          <h2 id="xmlhttprequest-level-2-xhr2">XMLHttpRequest Level 2 (XHR2)</h2>
+          <p>上記のパワーアップ版です。</p>
+          <p>先に 42 行目、73 行目を抜粋します。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(<span style="color:#e6db74">"FormData"</span> <span style="color:#66d9ef">in</span> window)) {
+</span></span><span style="display:flex"><span>}
+</span></span></code></pre>
+          </div>
+          <p>外枠は FormData オブジェクトがあるかどうかで判別をしています。この FormData が一体なんなのか？というのを知るのと同時に、XHR2 でざっくり何が出来るようになったのかを調べてみます。</p>
+          <p><a class="link-card" href="http://caniuse.com/#feat=xhr2" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Can I use... Support tables for HTML5, CSS3, etc</span> <span class="link-card__desc">"Can I use" provides up-to-date browser support tables for support of front-end web technologies on …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://caniuse.com/#feat=xhr2"> caniuse.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p><img alt="" src="resource01.jpg"></p>
+          <p>IE10, iOS5.0, Android3.x, 4.x 以降、その他モダンブラウザで使えるようになったものですが、 <strong>ファイルアップロード時の進捗</strong>を取れたり（progress）、<strong>クロスドメインのリクエスト</strong>などが出来るようになりました。</p>
+          <p>その他にも、フォームに入力された情報を FormData オブジェクトとして XHR オブジェクトにそのまま渡す仕組みも導入されています。以下に詳しく載ってますが、サンプルコードだけ抜粋します。</p>
+          <p><a class="link-card" href="http://www.html5rocks.com/ja/tutorials/file/xhr2/#toc-send-formdata" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Learn web development &amp;nbsp;|&amp;nbsp; web.dev</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://www.html5rocks.com/ja/tutorials/file/xhr2/#toc-send-formdata"> www.html5rocks.com</span></span><span class="link-card__image"><img alt="Learn web development &amp;nbsp;|&amp;nbsp; web.dev" loading="lazy" src="https://web.dev/static/images/social-wide.jpg"></span></a></p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sendForm</span>() {
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">formData</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">FormData</span>();
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">formData</span>.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">'username'</span>, <span style="color:#e6db74">'johndoe'</span>);
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">formData</span>.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">'id'</span>, <span style="color:#ae81ff">123456</span>);
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">'POST'</span>, <span style="color:#e6db74">'/server'</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">e</span>) { ... };
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">formData</span>);
+</span></span><span style="display:flex"><span>}
+</span></span></code></pre>
+          </div>
+          <p>最後の <code>xhr.send(formData)</code> で、FormData オブジェクトを引数にして XHR オブジェクトに渡しているのがなんとなく分かると思います。</p>
+          <p>という感じで、XHR2 の新しい機能みたいなのは大まかには知ることが出来たと思います。</p>
+          <h3 id="果たしてxhr2-をすべて-polyfills-として提供できるのか">果たして、XHR2 をすべて polyfills として提供できるのか？</h3>
+          <p>ここまで読んで、**全部は無理じゃね？**と気づかれた方もいるのではないでしょうか。</p>
+          <p>クロスドメインのリクエストなんかは、IE8 では非標準の <strong>XDomainRequest</strong> を代用して 実現は出来るのですが、IE7 以前でクロスドメインでファイルのリクエストをするのは難しいです。</p>
+          <p>自分も日々気をつけたいと思っているのですが、polyfills があるから安易に 「クロスブラウザ対応、問題なくできちゃいます！」と判断しちゃうと、 後で痛い目見ることになると思うので注意が必要です。 <strong>実際に読んで把握したり試したりするのがやっぱり大事ですね。</strong></p>
+          <p>さっきの抜粋だと、</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(<span style="color:#e6db74">"FormData"</span> <span style="color:#66d9ef">in</span> window)) {
+</span></span><span style="display:flex"><span>}
+</span></span></code></pre>
+          </div>
+          <p>FormData オブジェクトがあるかどうかチェックしているため、 FormData オブジェクトに関する polyfills であることが分かります。</p>
+          <h3 id="即時関数と-jsperf">即時関数と jsperf</h3>
+          <p>さらにもう内側、43 行目、72 行目</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">global</span>) {
+</span></span><span style="display:flex"><span>  <span style="color:#960050;background-color:#1e0010">（</span><span style="color:#a6e22e">中略</span><span style="color:#960050;background-color:#1e0010">）</span>
+</span></span><span style="display:flex"><span>}(<span style="color:#66d9ef">this</span>));
+</span></span></code></pre>
+          </div>
+          <p>このように、function （と丸括弧）で挟んでやることで、 引数を渡してすぐにその引数を受け取って実行することが出来るわけですが**（即時関数）**、 this は元々 global であるため、無くてもちゃんと動きます。</p>
+          <p>何が違うかというと、function の仮引数である global は、function の中だけで有効なローカル変数となっているので、ローカル変数へのアクセスとなり、window オブジェクトへの頻繁なアクセスを避けた方が効率的であるためです。</p>
+          <p>・・・なんのことを言っているのか分からない人もいると思うので、実際に動かしてみましょう。</p>
+          <p><strong>jsperf</strong> というサイトがあって、検証コードをその場で試して動かすことが可能です。なお、js の <strong>perf</strong>ormance の略です。 （jsperf に関しては、余裕があればまた改めて記事として書ければなーと思います。）</p>
+          <p><a href="http://jsperf.com/writing-to-global-objects" rel="noopener noreferrer" target="_blank">http://jsperf.com/writing-to-global-objects</a></p>
+          <p><img alt="" src="resource02.jpg"></p>
+          <p>IE8 にて動作させた結果のキャプチャです。</p>
+          <p>そのまま global として扱った場合と、一度即時関数内でローカル変数として扱った場合とでは、<strong>IE8 にて約 5%のパフォーマンスの差異</strong>が出るようです。（もちろんブラウザによって異なります）</p>
+          <p>なので、こういった頻繁に window オブジェクトにアクセスするようなものは、 予め即時関数でラッピングしてどうこうする、みたいに書かれることが多いですね。勉強になります。</p>
+          <h3 id="xhr2-の-formdata-オブジェクトの-polyfills">XHR2 の FormData オブジェクトの polyfills</h3>
+          <p>大分寄り道しましたが、中身を読んでいきます。 とはいえ、全部紹介してたらきりがないので、ポイントだけ抜粋します。</p>
+          <p>44〜49 行目の抜粋です。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">FormData</span>(<span style="color:#a6e22e">form</span>) {
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_data</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">form</span>) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672"><</span> <span style="color:#a6e22e">form</span>.<span style="color:#a6e22e">elements</span>.<span style="color:#a6e22e">length</span>; <span style="color:#f92672">++</span><span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">append</span>(<span style="color:#a6e22e">form</span>.<span style="color:#a6e22e">elements</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">form</span>.<span style="color:#a6e22e">elements</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">value</span>);
+</span></span><span style="display:flex"><span>}
+</span></span></code></pre>
+          </div>
+          <p>new するための FormData オブジェクトを用意しています。 そもそもの FormData オブジェクトの使い方として、引数に HTMLFormElement を取ることが出来るので、引数が無ければそのまま return、あれば append を呼ぶ、となってます。</p>
+          <p>続いて 51〜55 行目です。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#a6e22e">FormData</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">append</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">value</span> <span style="color:#75715e">/*, filename */</span>) {
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">"Blob"</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">global</span> <span style="color:#f92672">&&</span> <span style="color:#a6e22e">value</span> <span style="color:#66d9ef">instanceof</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">Blob</span>)
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">TypeError</span>(<span style="color:#e6db74">"Blob not supported"</span>);
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">name</span>);
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_data</span>.<span style="color:#a6e22e">push</span>([<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">value</span>]);
+</span></span><span style="display:flex"><span>};
+</span></span></code></pre>
+          </div>
+          <p>後追いでフォームの名前と値を追加できるメソッドを用意しています。XHR2 になって、Blob データも送ることが出来るようになったので、Blob 関連の記述もあります。</p>
+          <p>63 行目です。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">FormData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">FormData</span>;
+</span></span></code></pre>
+          </div>
+          <p>global のプロパティに紐付けてやることで、即時関数内で定義したものを外からも呼べるようになります。</p>
+          <p>最後に 64〜71 行目の抜粋です。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">send</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">XMLHttpRequest</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">send</span>;
+</span></span><span style="display:flex"><span><span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">XMLHttpRequest</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">send</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">body</span>) {
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">body</span> <span style="color:#66d9ef">instanceof</span> <span style="color:#a6e22e">FormData</span>) {
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setRequestHeader</span>(<span style="color:#e6db74">"Content-Type"</span>, <span style="color:#e6db74">"application/x-www-form-urlencoded"</span>);
+</span></span><span style="display:flex"><span>    <span style="color:#a6e22e">arguments</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex"><span>  }
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">send</span>.<span style="color:#a6e22e">apply</span>(<span style="color:#66d9ef">this</span>, <span style="color:#a6e22e">arguments</span>);
+</span></span><span style="display:flex"><span>};
+</span></span></code></pre>
+          </div>
+          <p>ここからは、FormData オブジェクトについてではなく、それに関連した既存の XHR オブジェクトの send メソッドの改良についてです。</p>
+          <p>元々 XHR には send メソッドがあるのですが、新たに FormData も送ることが出来るようになったので、基本の仕組みはそのまま踏襲しつつも、FormData オブジェクトも受け取れるようにしなくてはなりません。</p>
+          <p>そこで、まず var send = … として一時的に send 変数に入れておき、 新たに global.XMLHttpRequest.prototype.send として定義して、 FormData オブジェクトだったときの処理を挟みつつ、最後に send.apply で元々の処理を呼んでやるという流れになっています。</p>
+          <p>・・・とこんな感じで XHR, XHR2 と通信周りを順に読んでみましたが、polyfills を追っていくだけでも色々と勉強になりますね。 いやぁ、けっこう長くなりました。</p>
+          <h2 id="requestanimationframe">requestAnimationFrame</h2>
+          <p>お次は requestAnimationFrame です。</p>
+          <p>HTML ベースのアニメーションは、ほとんどパラパラアニメの仕組みと同じで、 フレームごとに再描画して動いているわけですが、 長らく setTimeout, setInterval などのタイマーを用いてそれが行われていました。</p>
+          <p>これはもう名前のごとく、アニメーションフレームをリクエストするためのメソッドですね。</p>
+          <p>詳しい説明はこちらです。</p>
+          <p><a class="link-card" href="https://developer.mozilla.org/ja/docs/Web/API/window.requestAnimationFrame" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Window: requestAnimationFrame() メソッド - Web API | MDN</span> <span class="link-card__desc">window.requestAnimationFrame() メソッドは、アニメーションを実行したいことをブラウザーに指示します。 このメソッドは、次回の再描画の前に、ユーザーが指定したコールバック関 …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://developer.mozilla.org/ja/docs/Web/API/window.requestAnimationFrame"> developer.mozilla.org</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>これも元々 setTimeout, setInterval があるので、polyfills として問題なく提供できるはずですね。</p>
+          <p>流れは XHR とほとんど同じで、即時関数にラッピングして最後に global に紐付けする形です。 requestAnimationFrame が global に紐付けされる前までに、即時関数内だけで使われている処理、94 行目から 106 行目を抜粋します。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onFrameTimer</span>() {
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cur_requests</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">requests</span>;
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">requests</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">create</span>(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">timeout_handle</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>  Object.<span style="color:#a6e22e">keys</span>(<span style="color:#a6e22e">cur_requests</span>).<span style="color:#a6e22e">forEach</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">id</span>) {
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">request</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cur_requests</span>[<span style="color:#a6e22e">id</span>];
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">element</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">isVisible</span>(<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">element</span>)) {
+</span></span><span style="display:flex"><span>      <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">callback</span>(Date.<span style="color:#a6e22e">now</span>());
+</span></span><span style="display:flex"><span>    }
+</span></span><span style="display:flex"><span>  });
+</span></span><span style="display:flex"><span>}
+</span></span></code></pre>
+          </div>
+          <p>これは毎フレームごとに呼ばれる関数となっています。 request は、function のすぐ上に requests = Object.create(null); という変数で用意されており、function 内にも全く同じ記述がされています。</p>
+          <h3 id="proto-と-consoledir">proto と console.dir</h3>
+          <p>じゃあ、この Object.create(null) っていうのは一体何やってるのか？というと、 本当の意味で何もない空のオブジェクトを生成しています。</p>
+          <p>例えば、今開発者ツールを開いて、</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">create</span>(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex"><span><span style="color:#a6e22e">a</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">b</span>; <span style="color:#75715e">// => ?
+</span></span></span></code></pre>
+          </div>
+          <p>と入力してみると、実際 <strong>false</strong> になります。 そういうときは、例えば <strong>console.dir</strong> などを使ってオブジェクトの中身を詳しく見てみると違いが分かると思います。</p>
+          <p><strong>+++2017/09/12 追記ここから+++</strong></p>
+          <blockquote class="twitter-tweet" data-lang="ja">
+            <p dir="ltr" lang="ja">&gt;例えば、今開発者ツールを開いて、<br>&gt;var a = Object.create(null);<br>&gt;var b = {};<br>&gt;a === b; // =&gt; ?<br>&gt;と入力してみると、実際 false になります。<br>これでは参照値の比較になってしまうので</p>
+            — こひな (@37coHiNa) <a href="https://twitter.com/37coHiNa/status/907378036965699585">2017年9月11日</a>
+          </blockquote>
+          <script async="" src="//platform.twitter.com/widgets.js"></script>
+          <p>でご指摘を受けておっしゃる通りでございます・・・。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex"><span><span style="color:#a6e22e">a</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">b</span>; <span style="color:#75715e">// => ?
+</span></span></span></code></pre>
+          </div>
+          <p>そもそもこれでも <strong>false</strong> になりますね。</p>
+          <p>改めて見直すと、上で <strong>本当の意味で何もない空のオブジェクト</strong> というのが何なのか、 きちんと説明できてないのも良くないですね・・・。</p>
+          <p><code>var b = {};</code> というのは、空のオブジェクトを生成しているものの、継承しているプロパティが存在しているために、 実際 <code>toString()</code> メソッドやら <code>valueOf()</code> メソッドやらが存在しています。</p>
+          <p>一方、 <code>var a = Object.create(null)</code> で作った何も継承していないオブジェクトは、何のメソッドも存在してません。</p>
+          <p>ご指摘の通りそういった継承したものがあるかどうかを比較するなら、</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">create</span>(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex"><span>Object.<span style="color:#a6e22e">getPrototypeOf</span>(<span style="color:#a6e22e">a</span>) <span style="color:#f92672">===</span> Object.<span style="color:#a6e22e">getPrototypeOf</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// => false
+</span></span></span></code></pre>
+          </div>
+          <p>と比較すると良いですね。あとは以下に続くように実際に console.dir などでオブジェクトの中身を見て見ると分かりやすいかと思います。</p>
+          <p><strong>+++2017/09/12 追記ここまで+++</strong></p>
+          <p><img alt="" src="resource03.jpg"></p>
+          <p>こちらが Firefox での <code>console.dir</code> の表示結果です。</p>
+          <p><strong>proto</strong> があるかないかの違いが見られます。</p>
+          <p><img alt="" src="resource04.jpg"></p>
+          <p>こちらは Chrome での <code>console.dir</code> の表示結果です。（もちろん結果は同じです）</p>
+          <p>何らかの key, value を持ったオブジェクトを作り、それを for in などでループして何か処理しようとしても、プロトタイプ継承によって余分なプロパティまでもアクセスできてしまいます。それを防ぐために、for in ループの中に Object.prototype.hasOwnProperty を使って自分自身のプロパティでないものは外す、といった定石は有名ですね。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buz</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">fog</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"stack"</span>,
+</span></span><span style="display:flex"><span>};
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">buz</span>) {
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">buz</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#a6e22e">name</span>)) {
+</span></span><span style="display:flex"><span>    <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">"this is fog ("</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">") for sure. Value: "</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">buz</span>[<span style="color:#a6e22e">name</span>]);
+</span></span><span style="display:flex"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex"><span>    <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">name</span>); <span style="color:#75715e">// toString or something else
+</span></span></span><span style="display:flex"><span>  }
+</span></span><span style="display:flex"><span>}
+</span></span></code></pre>
+          </div>
+          <p><a class="link-card" href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Object.prototype.hasOwnProperty() - JavaScript | MDN</span> <span class="link-card__desc">hasOwnProperty() は Object インスタンスのメソッドで、オブジェクト自身が（継承されていない）指定されたプロパティを持っているかどうかを示す論理値を返します。</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty"> developer.mozilla.org</span></span><span class="link-card__image link-card__image--no-image"></span></a> の『例: オブジェクトのプロパティの反復処理』より抜粋</p>
+          <p>これを実現する別の方法として、何にも継承していない本当に空のオブジェクトを Object.create(null) で作ってやることで、for などでループを回しても継承元がどうこうと考えなくてもよくなります。</p>
+          <h3 id="requestanimationframe-の残り">requestAnimationFrame の残り</h3>
+          <p>だいぶ話がそれましたが、Object.keys で cur_requests のキーだけの配列を取得し、それぞれ callback を呼んでいます。</p>
+          <p>いまいち element が何なのか分からなかったのですが、 （仕様には callback しかなく、第 2 引数に element を指定するような仕組みはないっぽい・・・）element が無ければ if の中がそのまま実行されるので無視しても良さそうです。</p>
+          <p>最後に 128〜134 行目の抜粋です。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">requestAnimationFrame</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">requestAnimationFrame</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">webkitRequestAnimationFrame</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">mozRequestAnimationFrame</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">oRequestAnimationFrame</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">msRequestAnimationFrame</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex"><span>  <span style="color:#a6e22e">requestAnimationFrame</span>;
+</span></span></code></pre>
+          </div>
+          <p>他のものと同様に、最後に global に紐付けて即時関数の外からも呼べるようにするのですが、 ブラウザの実装度合いによってベンダープレフィックスがついている場合もあるので、それも考慮した書き方になっています。</p>
+          <p>論理和ごとに順に使えるかどうかチェックして、使えるものがあればそれ、なければ次のものを見ていき、最終的にどれも使えなければ、今即時関数内に用意している requestAnimationFrame を使う、といった流れです。</p>
+          <h2 id="setimmediate">setImmediate</h2>
+          <p>似たような API として、今のところ IE だけが対応している setImmediate というのがあります。</p>
+          <p>ほぼ requestAnimationFrame と同じでそれよりもシンプルなので、 149〜154 行目だけ抜粋しておきます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setImmediate</span>(<span style="color:#a6e22e">callback</span> <span style="color:#75715e">/*, args*/</span>) {
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> [].<span style="color:#a6e22e">slice</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">arguments</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex"><span>    <span style="color:#a6e22e">callback</span>.<span style="color:#a6e22e">apply</span>(<span style="color:#66d9ef">null</span>, <span style="color:#a6e22e">params</span>);
+</span></span><span style="display:flex"><span>  }, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex"><span>}
+</span></span></code></pre>
+          </div>
+          <p>同様に setTimeout を用いて実現しています。</p>
+          <p><code>[].slice.call(arguments, 1)</code> は何をしているかというと、 arguments がその関数内における仮引数のリスト（配列っぽいオブジェクト）に相当するので、 それを実際に配列オブジェクトに用意されている slice メソッドを使って 1 つだけ切り出してます。</p>
+          <p><code>[0, 1, 2].slice(1) // =&gt; [1, 2]</code> このまま使えばこんな感じですが、arguments はあくまで配列っぽいオブジェクトであるため、 slice メソッドなどは持ち合わせてませんので、call を使って実現しています。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>はーー、思ったよりも進まない・・・。</p>
+          <p>ソースコードを読むこと自体は、そんなに時間のかかる行為ではないんですが、それをブログに説明として分かりやすく載せるとなると、意外に時間かかっちゃうものですね。</p>
+          <p>たぶんその 4、その 5 あたりまで行っちゃうかもしれません。</p>
+          <p>お次は DOM 周りの polyfills です。イベントもいけたらいいな。</p>
+          <p>追記： <a href="/tech/20140213/">続き書きました。</a></p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/ajax/">#ajax</a> <a class="tag-link" href="/tags/javascript/">#JavaScript</a> <a class="tag-link" href="/tags/jquery/">#jQuery</a> <a class="tag-link" href="/tags/jsperf/">#jsperf</a> <a class="tag-link" href="/tags/polyfills/">#polyfills</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86%20%e2%80%93%20%e3%81%9d%e3%81%ae2%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20140203/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20140203%2f&amp;text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86%20%e2%80%93%20%e3%81%9d%e3%81%ae2" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20140203/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

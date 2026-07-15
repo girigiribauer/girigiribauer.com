@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Chef を本番投入してみた | ばうあーろぐ</title>
+    <meta content="メモレベルでごめんなさい。
+サーバを移設してみました。 せっかくなので、移設ついでにブログのリニューアル（簡素化）と Chef cookbook を利用したプロビジョニングにも挑戦してみたよ、という記録です。
+やったこと概要
+
+Vagrant を利用してローカルに同じ環境を作る（空のVM）
+レシピを書きつつ、ローカルと本番環境との差異などを attributes に括り出す
+ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用
+
+本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。
+多くのサードパーティ製レシピは、
+
+
+Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
+レシピは大きく分けて2種類あり、attributes として json ファイルに値を書いていくスタイルのものと、もともと Chef に用意されている file, template のような、レシピ内に Chef の resources として記述するスタイルのものがあります。以下の記事にもわかりやすく紹介されてます。
+
+
+
+
+            
+                さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
+                
+                
+                    
+                    tsuchikazu.net
+                
+            
+                
+            
+例えば、今回レシピを適用したいマシンを仮に alpha としておいて、nodes/alphalocal.json と nodes/alphaproduction.json の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）
+{
+  &quot;name&quot;: &quot;alphalocal&quot;,
+  &quot;automatic&quot;: {
+    &quot;ipaddress&quot;: &quot;192.168.0.10&quot;
+  },
+
+  &quot;fqdn&quot;:             &quot;alphalocal&quot;,
+  &quot;platform_family&quot;:  &quot;rhel&quot;,
+  &quot;platform&quot;:         &quot;centos&quot;,
+  &quot;platform_version&quot;: &quot;6.6&quot;,
+
+  &quot;run_list&quot;: [
+    &quot;recipe[selinux::disabled]&quot;,
+
+    &quot;recipe[yum]&quot;,
+    &quot;recipe[yum-epel]&quot;,
+    &quot;recipe[yum-remi]&quot;,
+
+    &quot;recipe[ntp]&quot;,
+    &quot;recipe[locale]&quot;,
+    &quot;recipe[timezone-ii]&quot;
+  ],
+
+  &quot;locale&quot;: {
+    &quot;lang&quot;: &quot;ja_JP.utf8&quot;,
+    &quot;lc_all&quot;: &quot;ja_JP.utf8&quot;
+  },
+  &quot;ntp&quot;: {
+    &quot;servers&quot;: [
+      &quot;ntp.nict.jp&quot;,
+      &quot;ntp1.jst.mfeed.ad.jp&quot;,
+      &quot;ntp2.jst.mfeed.ad.jp&quot;,
+      &quot;ntp3.jst.mfeed.ad.jp&quot;
+    ]
+  },
+  &quot;tz&quot;: &quot;Asia/Tokyo&quot;
+}
+
+これは前者の attributes として json ファイルに値を書いていくスタイルですね。後者の場合は、独自にレシピを書いていきつつも、レシピ内で独自の resources を使って書いていく感じです。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20150610/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20150610" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Chef を本番投入してみた" itemprop="name">
+    <meta content="メモレベルでごめんなさい。
+サーバを移設してみました。 せっかくなので、移設ついでにブログのリニューアル（簡素化）と Chef cookbook を利用したプロビジョニングにも挑戦してみたよ、という記録です。
+やったこと概要
+
+Vagrant を利用してローカルに同じ環境を作る（空のVM）
+レシピを書きつつ、ローカルと本番環境との差異などを attributes に括り出す
+ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用
+
+本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。
+多くのサードパーティ製レシピは、
+
+
+Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
+レシピは大きく分けて2種類あり、attributes として json ファイルに値を書いていくスタイルのものと、もともと Chef に用意されている file, template のような、レシピ内に Chef の resources として記述するスタイルのものがあります。以下の記事にもわかりやすく紹介されてます。
+
+
+
+
+            
+                さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
+                
+                
+                    
+                    tsuchikazu.net
+                
+            
+                
+            
+例えば、今回レシピを適用したいマシンを仮に alpha としておいて、nodes/alphalocal.json と nodes/alphaproduction.json の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）
+{
+  &quot;name&quot;: &quot;alphalocal&quot;,
+  &quot;automatic&quot;: {
+    &quot;ipaddress&quot;: &quot;192.168.0.10&quot;
+  },
+
+  &quot;fqdn&quot;:             &quot;alphalocal&quot;,
+  &quot;platform_family&quot;:  &quot;rhel&quot;,
+  &quot;platform&quot;:         &quot;centos&quot;,
+  &quot;platform_version&quot;: &quot;6.6&quot;,
+
+  &quot;run_list&quot;: [
+    &quot;recipe[selinux::disabled]&quot;,
+
+    &quot;recipe[yum]&quot;,
+    &quot;recipe[yum-epel]&quot;,
+    &quot;recipe[yum-remi]&quot;,
+
+    &quot;recipe[ntp]&quot;,
+    &quot;recipe[locale]&quot;,
+    &quot;recipe[timezone-ii]&quot;
+  ],
+
+  &quot;locale&quot;: {
+    &quot;lang&quot;: &quot;ja_JP.utf8&quot;,
+    &quot;lc_all&quot;: &quot;ja_JP.utf8&quot;
+  },
+  &quot;ntp&quot;: {
+    &quot;servers&quot;: [
+      &quot;ntp.nict.jp&quot;,
+      &quot;ntp1.jst.mfeed.ad.jp&quot;,
+      &quot;ntp2.jst.mfeed.ad.jp&quot;,
+      &quot;ntp3.jst.mfeed.ad.jp&quot;
+    ]
+  },
+  &quot;tz&quot;: &quot;Asia/Tokyo&quot;
+}
+
+これは前者の attributes として json ファイルに値を書いていくスタイルですね。後者の場合は、独自にレシピを書いていきつつも、レシピ内で独自の resources を使って書いていく感じです。" itemprop="description">
+    <meta content="Chef を本番投入してみた" property="og:title">
+    <meta content="メモレベルでごめんなさい。
+サーバを移設してみました。 せっかくなので、移設ついでにブログのリニューアル（簡素化）と Chef cookbook を利用したプロビジョニングにも挑戦してみたよ、という記録です。
+やったこと概要
+
+Vagrant を利用してローカルに同じ環境を作る（空のVM）
+レシピを書きつつ、ローカルと本番環境との差異などを attributes に括り出す
+ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用
+
+本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。
+多くのサードパーティ製レシピは、
+
+
+Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
+レシピは大きく分けて2種類あり、attributes として json ファイルに値を書いていくスタイルのものと、もともと Chef に用意されている file, template のような、レシピ内に Chef の resources として記述するスタイルのものがあります。以下の記事にもわかりやすく紹介されてます。
+
+
+
+
+            
+                さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
+                
+                
+                    
+                    tsuchikazu.net
+                
+            
+                
+            
+例えば、今回レシピを適用したいマシンを仮に alpha としておいて、nodes/alphalocal.json と nodes/alphaproduction.json の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）
+{
+  &quot;name&quot;: &quot;alphalocal&quot;,
+  &quot;automatic&quot;: {
+    &quot;ipaddress&quot;: &quot;192.168.0.10&quot;
+  },
+
+  &quot;fqdn&quot;:             &quot;alphalocal&quot;,
+  &quot;platform_family&quot;:  &quot;rhel&quot;,
+  &quot;platform&quot;:         &quot;centos&quot;,
+  &quot;platform_version&quot;: &quot;6.6&quot;,
+
+  &quot;run_list&quot;: [
+    &quot;recipe[selinux::disabled]&quot;,
+
+    &quot;recipe[yum]&quot;,
+    &quot;recipe[yum-epel]&quot;,
+    &quot;recipe[yum-remi]&quot;,
+
+    &quot;recipe[ntp]&quot;,
+    &quot;recipe[locale]&quot;,
+    &quot;recipe[timezone-ii]&quot;
+  ],
+
+  &quot;locale&quot;: {
+    &quot;lang&quot;: &quot;ja_JP.utf8&quot;,
+    &quot;lc_all&quot;: &quot;ja_JP.utf8&quot;
+  },
+  &quot;ntp&quot;: {
+    &quot;servers&quot;: [
+      &quot;ntp.nict.jp&quot;,
+      &quot;ntp1.jst.mfeed.ad.jp&quot;,
+      &quot;ntp2.jst.mfeed.ad.jp&quot;,
+      &quot;ntp3.jst.mfeed.ad.jp&quot;
+    ]
+  },
+  &quot;tz&quot;: &quot;Asia/Tokyo&quot;
+}
+
+これは前者の attributes として json ファイルに値を書いていくスタイルですね。後者の場合は、独自にレシピを書いていきつつも、レシピ内で独自の resources を使って書いていく感じです。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20150610/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Chef を本番投入してみた" name="twitter:title">
+    <meta content="メモレベルでごめんなさい。
+サーバを移設してみました。 せっかくなので、移設ついでにブログのリニューアル（簡素化）と Chef cookbook を利用したプロビジョニングにも挑戦してみたよ、という記録です。
+やったこと概要
+
+Vagrant を利用してローカルに同じ環境を作る（空のVM）
+レシピを書きつつ、ローカルと本番環境との差異などを attributes に括り出す
+ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用
+
+本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。
+多くのサードパーティ製レシピは、
+
+
+Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
+レシピは大きく分けて2種類あり、attributes として json ファイルに値を書いていくスタイルのものと、もともと Chef に用意されている file, template のような、レシピ内に Chef の resources として記述するスタイルのものがあります。以下の記事にもわかりやすく紹介されてます。
+
+
+
+
+            
+                さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
+                
+                
+                    
+                    tsuchikazu.net
+                
+            
+                
+            
+例えば、今回レシピを適用したいマシンを仮に alpha としておいて、nodes/alphalocal.json と nodes/alphaproduction.json の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）
+{
+  &quot;name&quot;: &quot;alphalocal&quot;,
+  &quot;automatic&quot;: {
+    &quot;ipaddress&quot;: &quot;192.168.0.10&quot;
+  },
+
+  &quot;fqdn&quot;:             &quot;alphalocal&quot;,
+  &quot;platform_family&quot;:  &quot;rhel&quot;,
+  &quot;platform&quot;:         &quot;centos&quot;,
+  &quot;platform_version&quot;: &quot;6.6&quot;,
+
+  &quot;run_list&quot;: [
+    &quot;recipe[selinux::disabled]&quot;,
+
+    &quot;recipe[yum]&quot;,
+    &quot;recipe[yum-epel]&quot;,
+    &quot;recipe[yum-remi]&quot;,
+
+    &quot;recipe[ntp]&quot;,
+    &quot;recipe[locale]&quot;,
+    &quot;recipe[timezone-ii]&quot;
+  ],
+
+  &quot;locale&quot;: {
+    &quot;lang&quot;: &quot;ja_JP.utf8&quot;,
+    &quot;lc_all&quot;: &quot;ja_JP.utf8&quot;
+  },
+  &quot;ntp&quot;: {
+    &quot;servers&quot;: [
+      &quot;ntp.nict.jp&quot;,
+      &quot;ntp1.jst.mfeed.ad.jp&quot;,
+      &quot;ntp2.jst.mfeed.ad.jp&quot;,
+      &quot;ntp3.jst.mfeed.ad.jp&quot;
+    ]
+  },
+  &quot;tz&quot;: &quot;Asia/Tokyo&quot;
+}
+
+これは前者の attributes として json ファイルに値を書いていくスタイルですね。後者の場合は、独自にレシピを書いていきつつも、レシピ内で独自の resources を使って書いていく感じです。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Chef を本番投入してみた</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2015-06-09 23:39:55 +0000 +0000">2015/06/09</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>メモレベルでごめんなさい。</p>
+          <p>サーバを移設してみました。 せっかくなので、移設ついでにブログのリニューアル（簡素化）と <strong>Chef cookbook を利用したプロビジョニング</strong>にも挑戦してみたよ、という記録です。</p>
+          <h2 id="やったこと概要">やったこと概要</h2>
+          <ol>
+            <li>Vagrant を利用してローカルに同じ環境を作る（空のVM）</li>
+            <li>レシピを書きつつ、ローカルと本番環境との差異などを attributes に括り出す</li>
+            <li>ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用</li>
+          </ol>
+          <p>本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。</p>
+          <p>多くのサードパーティ製レシピは、 <a href="https://supermarket.chef.io/" rel="noopener noreferrer" target="_blank">Chef Supermarket</a> に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。</p>
+          <p>レシピは大きく分けて2種類あり、<strong>attributes として json ファイルに値を書いていくスタイル</strong>のものと、もともと Chef に用意されている file, template のような、<strong>レシピ内に Chef の resources として記述するスタイル</strong>のものがあります。以下の記事にもわかりやすく紹介されてます。</p>
+          <p><a class="link-card" href="http://tsuchikazu.net/vps_chef_solo/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://tsuchikazu.net/vps_chef_solo/"> tsuchikazu.net</span></span><span class="link-card__image"><img alt="さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog" loading="lazy" src="https://tsuchikazu.net/og-images/vps_chef_solo.png"></span></a></p>
+          <p>例えば、今回レシピを適用したいマシンを仮に alpha としておいて、<code>nodes/alphalocal.json</code> と <code>nodes/alphaproduction.json</code> の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）</p>
+          <pre><code>{
+  "name": "alphalocal",
+  "automatic": {
+    "ipaddress": "192.168.0.10"
+  },
+
+  "fqdn":             "alphalocal",
+  "platform_family":  "rhel",
+  "platform":         "centos",
+  "platform_version": "6.6",
+
+  "run_list": [
+    "recipe[selinux::disabled]",
+
+    "recipe[yum]",
+    "recipe[yum-epel]",
+    "recipe[yum-remi]",
+
+    "recipe[ntp]",
+    "recipe[locale]",
+    "recipe[timezone-ii]"
+  ],
+
+  "locale": {
+    "lang": "ja_JP.utf8",
+    "lc_all": "ja_JP.utf8"
+  },
+  "ntp": {
+    "servers": [
+      "ntp.nict.jp",
+      "ntp1.jst.mfeed.ad.jp",
+      "ntp2.jst.mfeed.ad.jp",
+      "ntp3.jst.mfeed.ad.jp"
+    ]
+  },
+  "tz": "Asia/Tokyo"
+}
+</code></pre>
+          <p>これは前者の <strong>attributes として json ファイルに値を書いていくスタイル</strong>ですね。後者の場合は、独自にレシピを書いていきつつも、レシピ内で独自の resources を使って書いていく感じです。</p>
+          <p>以下は apache2 のレシピで用意されている <strong>web_app</strong> resource を用いて、自ら用意したレシピ内でバーチャルホストの設定をするサンプルです。（この通り動いているわけではありません）</p>
+          <pre><code>  web_app host["id"] do
+    server_name         host["server_name"]
+    server_aliases      host["server_alias"]
+    docroot             host["docroot"]
+    enable              host["enable"]
+  end
+</code></pre>
+          <p>ちょっと話が逸れましたが、attributes として設定を括り出しておくことで、本番環境で動作させるためのレシピを、あらかじめローカル環境で検証することができるようになりました。</p>
+          <h2 id="やってみて気づいたこと思ったこと">やってみて気づいたこと、思ったこと</h2>
+          <p>だいたいこんなところです。</p>
+          <ul>
+            <li>どこまでレシピで書くべきか？</li>
+            <li>データベースのバックアップ大事</li>
+            <li>レシピのテストしなきゃ</li>
+          </ul>
+          <p>どこまでレシピで書くべきか？についてですが、全部レシピで書いて自動化すればいいってもんでもないんですよねえ。特にデプロイ対象のものについては、レシピで書かずに別のツールやシェルスクリプトなどで、いつでもマシン内から呼び出せるようにしておいた方が良さそうです。</p>
+          <p>Web コンテンツなら、vhosts の設定をして、そこにファイルを置けば表示はされるけど、入れ物だけは用意してあるよー、というあたりが落とし所かなと思いました。（あとは capistrano とかですかね・・・？）</p>
+          <h2 id="ついでにリニューアルを">ついでにリニューアルを</h2>
+          <p>読みづらい部分がまだあったので、読みやすさを重視して見直してみました。</p>
+          <p>あと一つ気づいたことがあるんですよ。ブログタイトルに丸々ドメイン名とか入れちゃうと、twitter とかその他外部サービスにタイトル付きで貼り付けたときに、<strong>タイトル内に含まれるサイト名にリンクが貼られてしまうんですよねえ・・・。</strong></p>
+          <p>これは正直運用するまで盲点でした。今後 gTLD が増えていくのは間違いないので、リンクが意図せず貼られてしまうリスクも併せて考えていった方がいいかもしれませんね。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/chef/">#Chef</a> <a class="tag-link" href="/tags/vagrant/">#Vagrant</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Chef%20%e3%82%92%e6%9c%ac%e7%95%aa%e6%8a%95%e5%85%a5%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20150610/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20150610%2f&amp;text=Chef%20%e3%82%92%e6%9c%ac%e7%95%aa%e6%8a%95%e5%85%a5%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20150610/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

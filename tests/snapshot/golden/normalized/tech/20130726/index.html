@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 | ばうあーろぐ</title>
+    <meta content="2015/04/01追記：続き書きました。
+
+
+Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた
+最近は、隙を見つけて（あんまりないけど） Vagrant + Chef で色々検証をしてたりします。
+現実のサーバ構築になるべく即した形でレシピを書こうとしたとき、 SSH のポート番号を変更する、といったケースは往々にして出てくるかと思います。（デフォルトは22ですが、そのまま22を使うとアタックを受けやすくなるので変えましょう、という記事は山のようにありますね）
+
+
+
+SSH 接続のポート番号を変更 | EasyRamble
+ただ、Vagrant で SSH のポート番号を変更すると、ちょっとしたところではまってしまって 思いのほか時間がかかったところがあったので、その部分だけメモっておきたいと思います。
+なお、CentOS 6 での検証です。他のディストリビューションで設定ファイルなどが異なる可能性はありますが、考え方などはほぼ共通しているかと思いますので、適宜置き換えて考えていただければと思います。
+通常のサーバの設定箇所
+まず、Vagrant などを使わずに設定する場合、どのファイルをいじる必要があるかというと、以下のファイルになるかと思います。
+
+/etc/ssh/sshd_config
+/etc/sysconfig/iptables
+
+1.は、SSH のポート番号を何番にするか？などの設定ファイルです。（もちろん他にも色々項目ありますが）
+こちらに、
+Port 22
+
+という設定が書かれているので、これを適当な番号、
+Port 12424
+
+などとして、 /etc/init.d/sshd restart で SSH のサービスを再起動することで設定が有効になります。
+2.は、そのポート番号の通信を許可するかどうか？などの設定ファイルです。
+こちらに、
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+
+という設定が書かれているので、こちらも先ほどの番号に合わせる形で
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 12424 -j ACCEPT
+
+などとします。 こちらも同様に /etc/init.d/networking restart でネットワークの再起動をすることで設定が有効になります。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20130726/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20130726" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話" itemprop="name">
+    <meta content="2015/04/01追記：続き書きました。
+
+
+Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた
+最近は、隙を見つけて（あんまりないけど） Vagrant + Chef で色々検証をしてたりします。
+現実のサーバ構築になるべく即した形でレシピを書こうとしたとき、 SSH のポート番号を変更する、といったケースは往々にして出てくるかと思います。（デフォルトは22ですが、そのまま22を使うとアタックを受けやすくなるので変えましょう、という記事は山のようにありますね）
+
+
+
+SSH 接続のポート番号を変更 | EasyRamble
+ただ、Vagrant で SSH のポート番号を変更すると、ちょっとしたところではまってしまって 思いのほか時間がかかったところがあったので、その部分だけメモっておきたいと思います。
+なお、CentOS 6 での検証です。他のディストリビューションで設定ファイルなどが異なる可能性はありますが、考え方などはほぼ共通しているかと思いますので、適宜置き換えて考えていただければと思います。
+通常のサーバの設定箇所
+まず、Vagrant などを使わずに設定する場合、どのファイルをいじる必要があるかというと、以下のファイルになるかと思います。
+
+/etc/ssh/sshd_config
+/etc/sysconfig/iptables
+
+1.は、SSH のポート番号を何番にするか？などの設定ファイルです。（もちろん他にも色々項目ありますが）
+こちらに、
+Port 22
+
+という設定が書かれているので、これを適当な番号、
+Port 12424
+
+などとして、 /etc/init.d/sshd restart で SSH のサービスを再起動することで設定が有効になります。
+2.は、そのポート番号の通信を許可するかどうか？などの設定ファイルです。
+こちらに、
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+
+という設定が書かれているので、こちらも先ほどの番号に合わせる形で
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 12424 -j ACCEPT
+
+などとします。 こちらも同様に /etc/init.d/networking restart でネットワークの再起動をすることで設定が有効になります。" itemprop="description">
+    <meta content="Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話" property="og:title">
+    <meta content="2015/04/01追記：続き書きました。
+
+
+Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた
+最近は、隙を見つけて（あんまりないけど） Vagrant + Chef で色々検証をしてたりします。
+現実のサーバ構築になるべく即した形でレシピを書こうとしたとき、 SSH のポート番号を変更する、といったケースは往々にして出てくるかと思います。（デフォルトは22ですが、そのまま22を使うとアタックを受けやすくなるので変えましょう、という記事は山のようにありますね）
+
+
+
+SSH 接続のポート番号を変更 | EasyRamble
+ただ、Vagrant で SSH のポート番号を変更すると、ちょっとしたところではまってしまって 思いのほか時間がかかったところがあったので、その部分だけメモっておきたいと思います。
+なお、CentOS 6 での検証です。他のディストリビューションで設定ファイルなどが異なる可能性はありますが、考え方などはほぼ共通しているかと思いますので、適宜置き換えて考えていただければと思います。
+通常のサーバの設定箇所
+まず、Vagrant などを使わずに設定する場合、どのファイルをいじる必要があるかというと、以下のファイルになるかと思います。
+
+/etc/ssh/sshd_config
+/etc/sysconfig/iptables
+
+1.は、SSH のポート番号を何番にするか？などの設定ファイルです。（もちろん他にも色々項目ありますが）
+こちらに、
+Port 22
+
+という設定が書かれているので、これを適当な番号、
+Port 12424
+
+などとして、 /etc/init.d/sshd restart で SSH のサービスを再起動することで設定が有効になります。
+2.は、そのポート番号の通信を許可するかどうか？などの設定ファイルです。
+こちらに、
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+
+という設定が書かれているので、こちらも先ほどの番号に合わせる形で
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 12424 -j ACCEPT
+
+などとします。 こちらも同様に /etc/init.d/networking restart でネットワークの再起動をすることで設定が有効になります。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20130726/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話" name="twitter:title">
+    <meta content="2015/04/01追記：続き書きました。
+
+
+Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた
+最近は、隙を見つけて（あんまりないけど） Vagrant + Chef で色々検証をしてたりします。
+現実のサーバ構築になるべく即した形でレシピを書こうとしたとき、 SSH のポート番号を変更する、といったケースは往々にして出てくるかと思います。（デフォルトは22ですが、そのまま22を使うとアタックを受けやすくなるので変えましょう、という記事は山のようにありますね）
+
+
+
+SSH 接続のポート番号を変更 | EasyRamble
+ただ、Vagrant で SSH のポート番号を変更すると、ちょっとしたところではまってしまって 思いのほか時間がかかったところがあったので、その部分だけメモっておきたいと思います。
+なお、CentOS 6 での検証です。他のディストリビューションで設定ファイルなどが異なる可能性はありますが、考え方などはほぼ共通しているかと思いますので、適宜置き換えて考えていただければと思います。
+通常のサーバの設定箇所
+まず、Vagrant などを使わずに設定する場合、どのファイルをいじる必要があるかというと、以下のファイルになるかと思います。
+
+/etc/ssh/sshd_config
+/etc/sysconfig/iptables
+
+1.は、SSH のポート番号を何番にするか？などの設定ファイルです。（もちろん他にも色々項目ありますが）
+こちらに、
+Port 22
+
+という設定が書かれているので、これを適当な番号、
+Port 12424
+
+などとして、 /etc/init.d/sshd restart で SSH のサービスを再起動することで設定が有効になります。
+2.は、そのポート番号の通信を許可するかどうか？などの設定ファイルです。
+こちらに、
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+
+という設定が書かれているので、こちらも先ほどの番号に合わせる形で
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 12424 -j ACCEPT
+
+などとします。 こちらも同様に /etc/init.d/networking restart でネットワークの再起動をすることで設定が有効になります。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2013-07-26 11:35:52 +0000 +0000">2013/07/26</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>2015/04/01追記：続き書きました。 <a href="/archives/1749/">Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた</a></p>
+          <p>最近は、隙を見つけて（あんまりないけど） Vagrant + Chef で色々検証をしてたりします。</p>
+          <p>現実のサーバ構築になるべく即した形でレシピを書こうとしたとき、 <strong>SSH のポート番号を変更する</strong>、といったケースは往々にして出てくるかと思います。（デフォルトは22ですが、そのまま22を使うとアタックを受けやすくなるので変えましょう、という記事は山のようにありますね）</p>
+          <p><a href="http://easyramble.com/change-ssh-port-number.html" rel="noopener noreferrer" target="_blank">SSH 接続のポート番号を変更 | EasyRamble</a></p>
+          <p>ただ、Vagrant で SSH のポート番号を変更すると、ちょっとしたところではまってしまって 思いのほか時間がかかったところがあったので、その部分だけメモっておきたいと思います。</p>
+          <p>なお、CentOS 6 での検証です。他のディストリビューションで設定ファイルなどが異なる可能性はありますが、考え方などはほぼ共通しているかと思いますので、適宜置き換えて考えていただければと思います。</p>
+          <h2 id="通常のサーバの設定箇所">通常のサーバの設定箇所</h2>
+          <p>まず、Vagrant などを使わずに設定する場合、どのファイルをいじる必要があるかというと、以下のファイルになるかと思います。</p>
+          <ol>
+            <li>/etc/ssh/sshd_config</li>
+            <li>/etc/sysconfig/iptables</li>
+          </ol>
+          <p>1.は、SSH のポート番号を何番にするか？などの設定ファイルです。（もちろん他にも色々項目ありますが）</p>
+          <p>こちらに、</p>
+          <pre><code>Port 22
+</code></pre>
+          <p>という設定が書かれているので、これを適当な番号、</p>
+          <pre><code>Port 12424
+</code></pre>
+          <p>などとして、 <code>/etc/init.d/sshd restart</code> で SSH のサービスを再起動することで設定が有効になります。</p>
+          <p>2.は、そのポート番号の通信を許可するかどうか？などの設定ファイルです。</p>
+          <p>こちらに、</p>
+          <pre><code>-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+</code></pre>
+          <p>という設定が書かれているので、こちらも先ほどの番号に合わせる形で</p>
+          <pre><code>-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 12424 -j ACCEPT
+</code></pre>
+          <p>などとします。 こちらも同様に <code>/etc/init.d/networking restart</code> でネットワークの再起動をすることで設定が有効になります。</p>
+          <p>ここまでは特に新しいことではなく、”linux ssh ポート 変更” とか、”linux iptables” とかでググればたくさんありますので、紹介程度にとどめておきます。</p>
+          <h2 id="vagrant--chef-で行う場合">Vagrant + Chef で行う場合</h2>
+          <p>今までの記事、 <a href="http://girigiribauer.localhost/archives/1048" rel="noopener noreferrer" target="_blank">http://girigiribauer.localhost/archives/1048</a> などを見てもらえれば分かるように、 各 Resource のうち、以下だけで上記レシピは書くことができるはずです。</p>
+          <ul>
+            <li>file（ファイルの設置）</li>
+            <li>service（サービスの起動・停止・再起動）</li>
+          </ul>
+          <p>ですが、結論から言うと、 SSH のポート番号を変えた際に、vagrant コマンド経由で仮想マシンへの接続が出来なくなってしまい、 （正確には、ポート番号を変えてサービスの再起動を行ったタイミングですね） 結果として上手くいきませんでした。</p>
+          <p>具体的には、<code>vagrant up</code> にて、最初のレシピが実行され、<code>vagrant up</code> の終了までは上手くいきます。 ですが、そこから <code>vagrant halt</code> や、<code>vagrant reload</code> などを行っても、そもそも仮想マシンとの通信が上手くいかなくなってしまい、最終的には <code>vagrant destroy</code> で世界の終わりを迎えるしかなくなってしまいます。</p>
+          <p>うーん、困りましたね。みなさんどうしているのでしょうか？</p>
+          <h3 id="vagrant-up-などで使うポート">vagrant up などで使うポート</h3>
+          <p><code>vagrant up</code> や、<code>vagrant halt</code> 、または <code>vagrant reload</code> のコマンドで仮想マシンに接続するのですが、 こちらの接続にも（おそらく）SSH が使われています。 デフォルトで22番ポートを使用することになるかと思います。</p>
+          <p>1回も仮想マシンを動かしておらず、Chef のレシピも実行されていないとき、仮想マシンのセットアップ処理が走ります。</p>
+          <p>結果として、vagrant という名前のユーザーとともに、すべて初期の設定ファイルが設置されるため、 SSH の接続も、最初は22番ポートでせざるをえないのかなーと思います。</p>
+          <h2 id="解決方法を色々考えてみた">解決方法を色々考えてみた</h2>
+          <p>まず前置きとして、Vagrantfile に書かれていない SSH の設定項目が存在しています。</p>
+          <p>ホストOSとゲストOSを SSH で接続する際、ホストOSの22番ポートを使わず、代わりに別の番号（2222番とか）を使用する、<strong>ポートフォワーディング</strong>の設定が暗黙的に行われています。</p>
+          <ul>
+            <li>host:2222 =&gt; guest: 22</li>
+          </ul>
+          <p>この設定が暗黙的に行われることで、ホスト側の2222番ポートでアクセスすると、ゲスト側である仮想OSの22番ポートに接続される、といった仕組みです。</p>
+          <p>今回やりたいのは、初回のレシピが実行され、SSH のポート番号が変更された時点で、</p>
+          <ul>
+            <li>host: 2222 =&gt; guest: 12424</li>
+          </ul>
+          <p>という接続ポート番号の変更を行いたいわけです。</p>
+          <h2 id="無理っぽくね">無理っぽくね？</h2>
+          <p>Vagrantfile が解釈されるのは、<code>vagrant up</code> などのコマンドが入力された時点になるかと思います。</p>
+          <p>その後レシピが実行されて SSH のポート番号が変更になっても、初回実行時はまだ22番ポートで普通に接続しているので、 レシピの実行が終わり、<code>vagrant halt</code> もしくは <code>vagrant reload</code> で再度仮想マシンに接続し直すと、 もうすでにポート番号が変わっていて、22番で接続できなくなっているという状態に陥ります。</p>
+          <h3 id="vagrantfile-上での-ssh-のポート番号の変更">Vagrantfile 上での SSH のポート番号の変更</h3>
+          <p>ちなみに、Vagrantfile 上で SSH のポート番号の変更をするには、以下のように書けば良いっぽいです。</p>
+          <pre><code>ssh_port = 12424
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "CentOS_6.4_x86_64_Minimal"
+
+  config.ssh.guest_port = ssh_port
+
+  config.vm.define :vmclient1 do |vmclient|
+
+    vmclient.vm.hostname = "vmclient1"
+    vmclient.vm.network :private_network, ip: "192.168.100.11"
+    vmclient.vm.network :forwarded_port, guest: ssh_port, host: 2222, id: "ssh"
+（以下略）
+</code></pre>
+          <p>ゲスト側、つまりレシピが実際に動いている仮想OS上の SSH ポート番号を、変数 ssh_port としてありますが、当然直に書いても動きます。</p>
+          <p>forwarded_port の設定で、 <strong>id: “ssh” と付け加えてやることで、SSH のデフォルトで動くポートフォワーディングの設定の上書きが出来る</strong>ようです。</p>
+          <h3 id="レシピ実行中に-ssh-のポート番号を変える">レシピ実行中に SSH のポート番号を変える・・・？</h3>
+          <p>Vagrantfile 上でなんとかレシピの実行中にポート番号変えられないかと色々調べてもみましたが、やはり無理そうです。</p>
+          <p>となると、 Vagrantfile 上でポート番号を変えるまでは、サービスの再起動などをしてはいけないことになります。</p>
+          <p>初回だけは、22番ポートを使って接続しつつ、設定ファイルのみ書き換えておき、サービスの再起動は後回し。 その後仮想OSをシャットダウンさせ（<code>vagrant reload</code> だと、この後 Vagrantfile を書き換えるタイミングを見失うので、ここでは <code>vagrant halt</code> でシャットダウンさせる）、 Vagrantfile の、さっきの ssh_port の変数のところを 22 から 12424 などに変え、<code>vagrant up</code> でゲストOSを立ち上げます。</p>
+          <p>こうすれば、SSH のポート番号の変更が可能になるわけですが、非常にめんどくさい話ですね。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>本当に何から何まで自動化したい場合は、vagrant コマンドの外側を管理する何かが必要になるんじゃないかなーとか思ってます。 （1回目の起動は22番使って、そこから自動で <code>vagrant halt</code> して、Vagrantfile のポート書き換えて再度 <code>vagrant up</code> してくれる何か）</p>
+          <p>とはいっても、そこまで厳密にワンストップですべて自動化したいかと言われると、そうでもなかったりするので、 SSH のポート番号を変えたいときは、以下の手順でやろうと思いました。</p>
+          <ol>
+            <li><strong>初回だけ22番</strong>で動かし、ssh の設定を走らせる（<strong>サービスの再起動はしない</strong>）</li>
+            <li><code>vagrant halt</code> で一旦シャットダウンする</li>
+            <li>Vagrantfile の<strong>ポート部分書き換え</strong></li>
+            <li>普通に <code>vagrant up</code></li>
+          </ol>
+          <p>逆になんかいい方法あれば教えてほしいです。ぜひ。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/chef/">#Chef</a> <a class="tag-link" href="/tags/ssh/">#SSH</a> <a class="tag-link" href="/tags/vagrant/">#Vagrant</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Vagrant%20%e3%81%a7%20SSH%20%e3%81%ae%e6%8e%a5%e7%b6%9a%e3%83%9d%e3%83%bc%e3%83%88%e7%95%aa%e5%8f%b7%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b%e3%81%a8%e3%80%81%e3%81%91%e3%81%a3%e3%81%93%e3%81%86%e8%a4%87%e9%9b%91%e3%81%ab%e3%81%aa%e3%82%8b%e3%81%a8%e3%81%84%e3%81%86%e8%a9%b1%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20130726/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20130726%2f&amp;text=Vagrant%20%e3%81%a7%20SSH%20%e3%81%ae%e6%8e%a5%e7%b6%9a%e3%83%9d%e3%83%bc%e3%83%88%e7%95%aa%e5%8f%b7%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b%e3%81%a8%e3%80%81%e3%81%91%e3%81%a3%e3%81%93%e3%81%86%e8%a4%87%e9%9b%91%e3%81%ab%e3%81%aa%e3%82%8b%e3%81%a8%e3%81%84%e3%81%86%e8%a9%b1" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20130726/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

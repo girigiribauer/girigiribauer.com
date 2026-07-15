@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/capacitor/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Capacitor on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;\n\n\n&lt;a href=\"https://adventar.org/calendars/7490\" target=\"_blank\"\n rel=\"noopener noreferrer\" &gt;知ってほしい技術 Advent Calendar 2022&lt;/a&gt; の2日目より。&lt;/p&gt;\n&lt;h2 id=\"3行まとめ\"&gt;3行まとめ&lt;/h2&gt;\n&lt;ul&gt;\n&lt;li&gt;Capacitor はそれ単体で使える Web コンテンツをラッピングしてネイティブアプリにする技術・仕組み&lt;/li&gt;\n&lt;li&gt;Ionic という UI フレームワークのチームが提供しているが UI 関係なく使える、フレームワーク関係なく使える&lt;/li&gt;\n&lt;li&gt;みんなもっと気軽に Web でネイティブアプリ作っていけばいいのに&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;というお話です。&lt;/p&gt;\n&lt;h2 id=\"capacitor-を始めとした用語整理\"&gt;Capacitor を始めとした用語整理&lt;/h2&gt;\n&lt;p&gt;正確じゃないざっくり用語整理なので、明らかにおかしなものは適宜ご指摘ください。&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;strong&gt;Cordova (PhoneGap)&lt;/strong&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;strong&gt;WebView&lt;/strong&gt; に Web コンテンツを表示したものをネイティブアプリとして見せる仕組み&lt;/li&gt;\n&lt;li&gt;だいぶ昔からある&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;&lt;strong&gt;Capacitor&lt;/strong&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;strong&gt;Cordova の後継&lt;/strong&gt; を目指して Ionic という UI フレームワークを作ってるチームが開発したもの&lt;/li&gt;\n&lt;li&gt;たぶん Cordova 使うのが嫌になったんだと思う、知らんけど&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;&lt;strong&gt;Ionic&lt;/strong&gt;\n&lt;ul&gt;\n&lt;li&gt;この UI フレームワークを使うと手間をかけずにネイティブっぽく表示できる&lt;/li&gt;\n&lt;li&gt;WebView で表示する仕組みと組み合わせて使うことを想定してる&lt;/li&gt;\n&lt;li&gt;Angular という JavaScript フレームワークをベースに開発が始まったけど、今は Angular との依存は切れてるっぽい（React でも Vue でも）&lt;/li&gt;\n&lt;li&gt;&lt;strong&gt;今日は関係ない&lt;/strong&gt;&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h3 id=\"cordova\"&gt;Cordova&lt;/h3&gt;\n&lt;p&gt;WebView でラッピングするやつです。&lt;/p&gt;\n&lt;p&gt;実は以前お仕事で少し使ったことありまして、複数アプリを同時に作る必要が出てきて、 Web とネイティブの技術者を別々に集めるのが大変だったことから（また機能的にネイティブで求められる要件がそう多くなかったことから）、\nビルドした Web コンテンツを Cordova 使ってラッピングしてネイティブアプリとして使えるようにしたらいいよね、というところで Cordova を使いました。&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20221202/",
+        "link": "https://girigiribauer.com/tech/20221202/",
+        "pubDate": "Fri, 02 Dec 2022 08:00:00 +0900",
+        "title": "Capacitor を知ってほしい"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Fri, 02 Dec 2022 08:00:00 +0900",
+      "link": "https://girigiribauer.com/tags/capacitor/",
+      "title": "Capacitor on ばうあーろぐ"
+    }
+  }
+}

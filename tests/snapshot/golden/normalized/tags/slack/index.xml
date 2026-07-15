@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/slack/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Slack on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;こちらは \n\n\n&lt;a href=\"https://html5nagoya.connpass.com/event/74096/\" target=\"_blank\"\n rel=\"noopener noreferrer\" &gt;フロントエンドもくもく会 - 新年LT大会&lt;/a&gt; の、\n後半のLT大会で発表した内容を加筆修正しつつブログに起こしたものです。\n発表後、うまく動作しなかった箇所などを追記しています。&lt;/p&gt;\n&lt;p&gt;ざっくり要点だけ知りたい方は、\n一番下にある\n\n\n&lt;a href=\"#gaego-slackbot\" &gt;GAE/Go slackbot のポイント&lt;/a&gt;だけ見てください。&lt;/p&gt;\n&lt;h2 id=\"動機---めんどいこと\"&gt;動機 - めんどいこと&lt;/h2&gt;\n&lt;p&gt;フロントエンドもくもく会はかなり低コストで回っているものの、\n以下の点で面倒だなあと感じることがありました。&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;勉強会関連で何日前にあれこれする\n&lt;ul&gt;\n&lt;li&gt;参加人数少なかったら告知したり&lt;/li&gt;\n&lt;li&gt;キャンセル促したり&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;イベントごとにお知らせしてほしい&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;そこで slack に勝手に通知する bot を用意し、\nその辺常に気にするコストをさらに減らそうと思い立ちました。&lt;/p&gt;\n&lt;h3 id=\"slack-に勝手に通知する-bot\"&gt;slack に勝手に通知する bot&lt;/h3&gt;\n&lt;ul&gt;\n&lt;li&gt;slack \n\n\n&lt;a href=\"https://nfug.slack.com/\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;Slack&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=https://nfug.slack.com/\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n nfug.slack.com\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image link-card__image--no-image\"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;最新5件を以下に該当するかチェック&lt;/li&gt;\n&lt;li&gt;イベント2週間前、2日前、当日、翌日あたり&lt;/li&gt;\n&lt;li&gt;GAE/Go (GoogleAppEngine / Golang) で実装&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h2 id=\"実装方法\"&gt;実装方法&lt;/h2&gt;\n&lt;h3 id=\"gaego-googleappengine--golang-とは\"&gt;GAE/Go (GoogleAppEngine / Golang) とは&lt;/h3&gt;\n&lt;ul&gt;\n&lt;li&gt;Google Cloud Platform の一員&lt;/li&gt;\n&lt;li&gt;Web アプリケーションをお手軽に公開できるプラットフォーム&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h3 id=\"gaego-の-helloworld-を試すまでの手順\"&gt;GAE/Go の helloworld を試すまでの手順&lt;/h3&gt;\n&lt;ol&gt;\n&lt;li&gt;アカウント登録する、クレジットカード情報が必要（ただし無料枠で対応可能）&lt;/li&gt;\n&lt;li&gt;言語を選択する、ここでは Golang を選択&lt;/li&gt;\n&lt;li&gt;チュートリアルに従って dev_appserver.py, gcoud app deploy 相当のことを画面内から行う&lt;/li&gt;\n&lt;/ol&gt;\n&lt;h3 id=\"gaego-の-helloworld-を試すまでのキャプチャ\"&gt;GAE/Go の helloworld を試すまでのキャプチャ&lt;/h3&gt;\n&lt;p&gt;多いので抜粋。&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20180131/",
+        "link": "https://girigiribauer.com/tech/20180131/",
+        "pubDate": "Wed, 31 Jan 2018 15:00:00 +0900",
+        "title": "Google App Engine / Go で slack に通知する bot を作った"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Wed, 31 Jan 2018 15:00:00 +0900",
+      "link": "https://girigiribauer.com/tags/slack/",
+      "title": "Slack on ばうあーろぐ"
+    }
+  }
+}

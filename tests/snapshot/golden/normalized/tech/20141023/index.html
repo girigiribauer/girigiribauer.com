@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>CSS3 PIE の動作の仕組みと副作用について | ばうあーろぐ</title>
+    <meta content="2014年9月現在、IE のシェアは過去と比べて劇的に変化しています。
+
+
+
+
+            
+                Statcounter Global Stats - Browser, OS, Search Engine including Mobile Usage Share
+                Tracks the Usage Share of Search Engines, Browsers and Operating Systems including Mobile from over …
+                
+                    
+                    gs.statcounter.com
+                
+            
+                
+            _version_partially_combined-JP-monthly-201309-201409 を見ると分かるように、 IE11 が全ブラウザの 30% を上回り、IE8,9,10 がそれぞれ 4% 前後の値です。
+
+ここまで来ると、oldIE の対応は完全にマイノリティとなってきており、 出来るブラウザを基準にして作るのがもう当たり前になってきていると言っていいかもしれません。
+
+そんな中、
+『IE7,8 などでも、どうしても同じように見せなきゃいけないんだ・・・！』
+という非常にもったいないケースにおいて、 CSS3 PIE というライブラリが検討の選択肢に入ってくることもあるかと思います。 （いやぁもったいないですね・・・）
+
+このライブラリで、border-radius, box-shadow, linear-gradient などの、本来 oldIE では使えなかった CSS3 のプロパティが使えるようになるわけです。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20141023/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20141023" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="CSS3 PIE の動作の仕組みと副作用について" itemprop="name">
+    <meta content="2014年9月現在、IE のシェアは過去と比べて劇的に変化しています。
+
+
+
+
+            
+                Statcounter Global Stats - Browser, OS, Search Engine including Mobile Usage Share
+                Tracks the Usage Share of Search Engines, Browsers and Operating Systems including Mobile from over …
+                
+                    
+                    gs.statcounter.com
+                
+            
+                
+            _version_partially_combined-JP-monthly-201309-201409 を見ると分かるように、 IE11 が全ブラウザの 30% を上回り、IE8,9,10 がそれぞれ 4% 前後の値です。
+
+ここまで来ると、oldIE の対応は完全にマイノリティとなってきており、 出来るブラウザを基準にして作るのがもう当たり前になってきていると言っていいかもしれません。
+
+そんな中、
+『IE7,8 などでも、どうしても同じように見せなきゃいけないんだ・・・！』
+という非常にもったいないケースにおいて、 CSS3 PIE というライブラリが検討の選択肢に入ってくることもあるかと思います。 （いやぁもったいないですね・・・）
+
+このライブラリで、border-radius, box-shadow, linear-gradient などの、本来 oldIE では使えなかった CSS3 のプロパティが使えるようになるわけです。" itemprop="description">
+    <meta content="CSS3 PIE の動作の仕組みと副作用について" property="og:title">
+    <meta content="2014年9月現在、IE のシェアは過去と比べて劇的に変化しています。
+
+
+
+
+            
+                Statcounter Global Stats - Browser, OS, Search Engine including Mobile Usage Share
+                Tracks the Usage Share of Search Engines, Browsers and Operating Systems including Mobile from over …
+                
+                    
+                    gs.statcounter.com
+                
+            
+                
+            _version_partially_combined-JP-monthly-201309-201409 を見ると分かるように、 IE11 が全ブラウザの 30% を上回り、IE8,9,10 がそれぞれ 4% 前後の値です。
+
+ここまで来ると、oldIE の対応は完全にマイノリティとなってきており、 出来るブラウザを基準にして作るのがもう当たり前になってきていると言っていいかもしれません。
+
+そんな中、
+『IE7,8 などでも、どうしても同じように見せなきゃいけないんだ・・・！』
+という非常にもったいないケースにおいて、 CSS3 PIE というライブラリが検討の選択肢に入ってくることもあるかと思います。 （いやぁもったいないですね・・・）
+
+このライブラリで、border-radius, box-shadow, linear-gradient などの、本来 oldIE では使えなかった CSS3 のプロパティが使えるようになるわけです。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20141023/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="CSS3 PIE の動作の仕組みと副作用について" name="twitter:title">
+    <meta content="2014年9月現在、IE のシェアは過去と比べて劇的に変化しています。
+
+
+
+
+            
+                Statcounter Global Stats - Browser, OS, Search Engine including Mobile Usage Share
+                Tracks the Usage Share of Search Engines, Browsers and Operating Systems including Mobile from over …
+                
+                    
+                    gs.statcounter.com
+                
+            
+                
+            _version_partially_combined-JP-monthly-201309-201409 を見ると分かるように、 IE11 が全ブラウザの 30% を上回り、IE8,9,10 がそれぞれ 4% 前後の値です。
+
+ここまで来ると、oldIE の対応は完全にマイノリティとなってきており、 出来るブラウザを基準にして作るのがもう当たり前になってきていると言っていいかもしれません。
+
+そんな中、
+『IE7,8 などでも、どうしても同じように見せなきゃいけないんだ・・・！』
+という非常にもったいないケースにおいて、 CSS3 PIE というライブラリが検討の選択肢に入ってくることもあるかと思います。 （いやぁもったいないですね・・・）
+
+このライブラリで、border-radius, box-shadow, linear-gradient などの、本来 oldIE では使えなかった CSS3 のプロパティが使えるようになるわけです。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">CSS3 PIE の動作の仕組みと副作用について</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2014-10-23 09:56:36 +0000 +0000">2014/10/23</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>2014年9月現在、IE のシェアは過去と比べて劇的に変化しています。</p>
+          <p><a class="link-card" href="http://gs.statcounter.com/#desktop-browser" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Statcounter Global Stats - Browser, OS, Search Engine including Mobile Usage Share</span> <span class="link-card__desc">Tracks the Usage Share of Search Engines, Browsers and Operating Systems including Mobile from over …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://gs.statcounter.com/#desktop-browser"> gs.statcounter.com</span></span><span class="link-card__image"><img alt="Statcounter Global Stats - Browser, OS, Search Engine including Mobile Usage Share" loading="lazy" src="https://statcounter.com/gs_snapshots/browser-05-2026-desktop_mobile_tablet_console-00.png"></span></a>_version_partially_combined-JP-monthly-201309-201409 を見ると分かるように、 IE11 が全ブラウザの 30% を上回り、IE8,9,10 がそれぞれ 4% 前後の値です。</p>
+          <p><img alt="" src="resource01.jpg"></p>
+          <p>ここまで来ると、oldIE の対応は完全にマイノリティとなってきており、 出来るブラウザを基準にして作るのがもう当たり前になってきていると言っていいかもしれません。</p>
+          <hr>
+          <p>そんな中、</p>
+          <p><strong>『IE7,8 などでも、どうしても同じように見せなきゃいけないんだ・・・！』</strong></p>
+          <p>という非常にもったいないケースにおいて、 <strong>CSS3 PIE</strong> というライブラリが検討の選択肢に入ってくることもあるかと思います。 （いやぁもったいないですね・・・）</p>
+          <p><img alt="" src="resource02.jpg"></p>
+          <p>このライブラリで、border-radius, box-shadow, linear-gradient などの、本来 oldIE では使えなかった CSS3 のプロパティが使えるようになるわけです。</p>
+          <p>ですが、<strong>動作原理を知っておかないと思わぬところではまる場合が出てくるので注意が必要です。</strong> 全く同じように動作するわけではなく、<strong>副作用が存在します。</strong></p>
+          <h2 id="css3-pie-の使い方振り返り">CSS3 PIE の使い方（振り返り）</h2>
+          <p>ということで、まずは CSS3 PIE の使い方を軽く振り返ります。</p>
+          <p><a href="http://css3pie.com/" rel="noopener noreferrer" target="_blank">http://css3pie.com/</a></p>
+          <ol>
+            <li>PIE.js を読み込む</li>
+            <li>対象セレクタ内に behavior: url(PIE.php); を入れる</li>
+          </ol>
+          <p>PIE.php 内では、</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-php" data-lang="php"><span style="display:flex"><span><span style="color:#a6e22e">header</span>( <span style="color:#e6db74">'Content-type: text/x-component'</span> );
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">include</span>( <span style="color:#e6db74">'PIE.htc'</span> );
+</span></span></code></pre>
+          </div>
+          <p>とあるだけなので、Web サーバの方で ContentType の追加さえできれば、 直接 PIE.htc を読み込んでも良いわけですね。</p>
+          <h2 id="piehtc-の中身">PIE.htc の中身</h2>
+          <p>そもそも htc というのは、 <strong>HTML Components</strong> のことを指しています。 （最近流行の Web Components とは全く関係ありません・・・。）</p>
+          <p>IE9 までは、CSS 内に</p>
+          <pre tabindex="0"><code>behavior: ***;
+</code></pre>
+          <p>などと書くことで、CSS 内部にスクリプトを埋め込むことが出来ます。</p>
+          <p>ちなみに、PIE.htc の中身はこんな感じにちょっと独自拡張したスクリプトになっています。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-html" data-lang="html"><span style="display:flex"><span><span style="color:#75715e"><!--
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">PIE: CSS3 rendering for IE
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">Version 1.0.0
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">http://css3pie.com
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">Dual-licensed for use under the Apache License Version 2.0 or the General Public License (GPL) Version 2.
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">--></span>
+</span></span><span style="display:flex"><span><<span style="color:#f92672">PUBLIC:COMPONENT</span> <span style="color:#a6e22e">lightWeight</span><span style="color:#f92672">=</span><span style="color:#e6db74">"true"</span>>
+</span></span><span style="display:flex"><span><span style="color:#75715e"><!-- saved from url=(0014)about:internet --></span>
+</span></span><span style="display:flex"><span><<span style="color:#f92672">PUBLIC:ATTACH</span> <span style="color:#a6e22e">EVENT</span><span style="color:#f92672">=</span><span style="color:#e6db74">"oncontentready"</span> <span style="color:#a6e22e">FOR</span><span style="color:#f92672">=</span><span style="color:#e6db74">"element"</span> <span style="color:#a6e22e">ONEVENT</span><span style="color:#f92672">=</span><span style="color:#e6db74">"init()"</span> />
+</span></span><span style="display:flex"><span><<span style="color:#f92672">PUBLIC:ATTACH</span> <span style="color:#a6e22e">EVENT</span><span style="color:#f92672">=</span><span style="color:#e6db74">"ondocumentready"</span> <span style="color:#a6e22e">FOR</span><span style="color:#f92672">=</span><span style="color:#e6db74">"element"</span> <span style="color:#a6e22e">ONEVENT</span><span style="color:#f92672">=</span><span style="color:#e6db74">"init()"</span> />
+</span></span><span style="display:flex"><span><<span style="color:#f92672">PUBLIC:ATTACH</span> <span style="color:#a6e22e">EVENT</span><span style="color:#f92672">=</span><span style="color:#e6db74">"ondetach"</span> <span style="color:#a6e22e">FOR</span><span style="color:#f92672">=</span><span style="color:#e6db74">"element"</span> <span style="color:#a6e22e">ONEVENT</span><span style="color:#f92672">=</span><span style="color:#e6db74">"cleanup()"</span> />
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">"text/javascript"</span>>
+</span></span><span style="display:flex"><span>var doc = element.document;var f=window.PIE;
+</span></span><span style="display:flex"><span>...（以下略）
+</span></span></code></pre>
+          </div>
+          <p>今更覚えても何の得にもならないと思うので、詳しく知りたい方は以下をご覧ください。</p>
+          <p><a href="http://msdn.microsoft.com/ja-jp/library/ms532146%28v=vs.85%29.aspx" rel="noopener noreferrer" target="_blank">http://msdn.microsoft.com/ja-jp/library/ms532146(v=vs.85).aspx</a></p>
+          <h2 id="開発者ツールで見てみる">開発者ツールで見てみる</h2>
+          <p>css3pie.com のトップにちょうどサンプルがあるので、それに対してどんな変化が起きているのか開発者ツールで見てみます。</p>
+          <p><img alt="" src="resource03.jpg"></p>
+          <p>なお、IE の開発者ツールは、<strong>HTML が一通り読み込まれた後の DOM の変化については、更新ボタンを押さないと反映されない</strong>ので、左上にある『最新の情報に更新』のアイコンをクリックします。</p>
+          <p><img alt="" src="resource04.jpg"></p>
+          <p>すると、こんな感じに</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-html" data-lang="html"><span style="display:flex"><span><<span style="color:#f92672">css3pie</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">_pie_101</span>>
+</span></span><span style="display:flex"><span>  <<span style="color:#f92672">pievml:shape</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">_pie_shadow0_98</span>>
+</span></span><span style="display:flex"><span>    <<span style="color:#f92672">pievml:fill</span>></<span style="color:#f92672">pievml:fill</span>>
+</span></span><span style="display:flex"><span>  </<span style="color:#f92672">pievml:shape</span>>
+</span></span><span style="display:flex"><span>  <<span style="color:#f92672">pievml:shape</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">_pie_bgImage0_99</span>>
+</span></span><span style="display:flex"><span>    <<span style="color:#f92672">pievml:fill</span>></<span style="color:#f92672">pievml:fill</span>>
+</span></span><span style="display:flex"><span>  </<span style="color:#f92672">pievml:shape</span>>
+</span></span><span style="display:flex"><span>  <<span style="color:#f92672">pievml:shape</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">_pie_border0_100</span>>
+</span></span><span style="display:flex"><span>    <<span style="color:#f92672">pievml:fill</span>></<span style="color:#f92672">pievml:fill</span>>
+</span></span><span style="display:flex"><span>  </<span style="color:#f92672">pievml:shape</span>>
+</span></span><span style="display:flex"><span></<span style="color:#f92672">css3pie</span>>
+</span></span><span style="display:flex"><span><<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">" pie_first-child "</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">"target"</span>>
+</span></span></code></pre>
+          </div>
+          <p>対象の要素の上に css3pie という要素が追加され、見た目の情報がすべてそちらに描画されます。（動的なスタイルは長くなるので省略）</p>
+          <p>ちなみに、 css3pie.com のトップでは、どうやら PIE-2.0 beta1 を利用しているようで、 ダウンロードしてきたファイルの PIE_IE678.js 内には、</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-javascript" data-lang="javascript"><span style="display:flex"><span><span style="color:#a6e22e">H</span>.<span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">"css3pie"</span>);
+</span></span></code></pre>
+          </div>
+          <p>や、</p>
+          <pre tabindex="0"><code>'<css3pie id="_pie'+h.Q.pa(this)+'" style="'+this.ac()+'">'
+</code></pre>
+          <p>といった記述が存在しており、HTML Components を利用して、見た目だけの要素を動的に生成していることがここからも分かります。</p>
+          <h2 id="css3-pie-の副作用">CSS3 PIE の副作用</h2>
+          <p>例えば、CSS3 を用いたスタイルを当てたい対象が、以下のようなツリーだったとします。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-html" data-lang="html"><span style="display:flex"><span><<span style="color:#f92672">ul</span>>
+</span></span><span style="display:flex"><span>  <<span style="color:#f92672">li</span>>item 1</<span style="color:#f92672">li</span>>
+</span></span><span style="display:flex"><span>  <<span style="color:#f92672">li</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">"target"</span>>item 2</<span style="color:#f92672">li</span>>
+</span></span><span style="display:flex"><span></<span style="color:#f92672">ul</span>>
+</span></span></code></pre>
+          </div>
+          <p>これに対して、</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-css" data-lang="css"><span style="display:flex"><span><span style="color:#f92672">li</span> <span style="color:#f92672">+</span> <span style="color:#f92672">li</span> {
+</span></span><span style="display:flex"><span>  <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#f00</span>;
+</span></span><span style="display:flex"><span>}
+</span></span></code></pre>
+          </div>
+          <p>といったように、連続した兄弟セレクタに対して別途スタイルをあてる記述が存在していた場合、 これが<strong>上手く適用されないケース</strong>が存在します。</p>
+          <p>CSS3 PIE のライブラリが id=”target” に対して動作した場合、 ツリーは以下のように変化します。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-html" data-lang="html"><span style="display:flex"><span><<span style="color:#f92672">ul</span>>
+</span></span><span style="display:flex"><span>  <<span style="color:#f92672">li</span>>item 1</<span style="color:#f92672">li</span>>
+</span></span><span style="display:flex"><span>  <<span style="color:#f92672">css3pie</span> <span style="color:#960050;background-color:#1e0010">...</span> ></<span style="color:#f92672">css3pie</span>>
+</span></span><span style="display:flex"><span>  <<span style="color:#f92672">li</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">"target"</span>>item 2</<span style="color:#f92672">li</span>>
+</span></span><span style="display:flex"><span></<span style="color:#f92672">ul</span>>
+</span></span></code></pre>
+          </div>
+          <p>こうなってしまうと、li が連続している前提のスタイルは、<strong>DOM ツリーが変化してしまうことにより</strong> スタイルがあたらない（または意図してないスタイルがあたる）ケースが出てきます。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p><strong>そのライブラリが、（大まかにでも）何やってるのか把握するべきだと思います。</strong></p>
+          <p>今回のケースでは、『CSS3 PIE というのは、見た目用の要素を対象の要素のすぐ下に生成し、見た目の情報をそちらに全部載せることで実現していて、副作用として DOM ツリーが変化してしまっている』ということまで分かっていれば、どうとでも対処できます。</p>
+          <p>なんでもかんでも『これさえ読み込めばオッケー！』みたいに考えてると、いざってときに何も出来ないので、 大まかにでも良いのでどういう仕組みで動いているのか、理解することは大事だなーと思います。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/css3/">#CSS3</a> <a class="tag-link" href="/tags/oldie/">#oldIE</a> <a class="tag-link" href="/tags/polyfills/">#polyfills</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=CSS3%20PIE%20%e3%81%ae%e5%8b%95%e4%bd%9c%e3%81%ae%e4%bb%95%e7%b5%84%e3%81%bf%e3%81%a8%e5%89%af%e4%bd%9c%e7%94%a8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20141023/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20141023%2f&amp;text=CSS3%20PIE%20%e3%81%ae%e5%8b%95%e4%bd%9c%e3%81%ae%e4%bb%95%e7%b5%84%e3%81%bf%e3%81%a8%e5%89%af%e4%bd%9c%e7%94%a8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20141023/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

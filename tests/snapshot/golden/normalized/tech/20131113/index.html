@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>mediaQuery における max-width, max-device-width の違い | ばうあーろぐ</title>
+    <meta content="最近改めて使い分けないとなーと実感したので、その実感を忘れないうちにメモしておこうと思います。
+デバイスの幅(width)と device-width の違いについて
+そもそもの話ですが、そのデバイスで何ピクセル x 何ピクセルで表示できますよーという値と、 device-width の値は異なります。（結果的に同じ場合もあり得ますが）
+
+
+
+
+            
+                Screen Sizes | Viewport Sizes and Pixel Densities for Popular Devices
+                Screensiz.es is a handy database of screen sizes, viewport sizes, and pixel densities for popular …
+                
+                    
+                    screensiz.es
+                
+            
+                
+            
+
+こちらに、デバイスごとの width, device-width がまとめてあります。たまに見ます。
+iPhone 3GS の時代であれば、width = 320px, device-width = 320px であったので問題なかったのですが、 retina ディスプレイが出てきてから、 width = 640px, device-width = 320px になってきています。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20131113/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20131113" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="mediaQuery における max-width, max-device-width の違い" itemprop="name">
+    <meta content="最近改めて使い分けないとなーと実感したので、その実感を忘れないうちにメモしておこうと思います。
+デバイスの幅(width)と device-width の違いについて
+そもそもの話ですが、そのデバイスで何ピクセル x 何ピクセルで表示できますよーという値と、 device-width の値は異なります。（結果的に同じ場合もあり得ますが）
+
+
+
+
+            
+                Screen Sizes | Viewport Sizes and Pixel Densities for Popular Devices
+                Screensiz.es is a handy database of screen sizes, viewport sizes, and pixel densities for popular …
+                
+                    
+                    screensiz.es
+                
+            
+                
+            
+
+こちらに、デバイスごとの width, device-width がまとめてあります。たまに見ます。
+iPhone 3GS の時代であれば、width = 320px, device-width = 320px であったので問題なかったのですが、 retina ディスプレイが出てきてから、 width = 640px, device-width = 320px になってきています。" itemprop="description">
+    <meta content="mediaQuery における max-width, max-device-width の違い" property="og:title">
+    <meta content="最近改めて使い分けないとなーと実感したので、その実感を忘れないうちにメモしておこうと思います。
+デバイスの幅(width)と device-width の違いについて
+そもそもの話ですが、そのデバイスで何ピクセル x 何ピクセルで表示できますよーという値と、 device-width の値は異なります。（結果的に同じ場合もあり得ますが）
+
+
+
+
+            
+                Screen Sizes | Viewport Sizes and Pixel Densities for Popular Devices
+                Screensiz.es is a handy database of screen sizes, viewport sizes, and pixel densities for popular …
+                
+                    
+                    screensiz.es
+                
+            
+                
+            
+
+こちらに、デバイスごとの width, device-width がまとめてあります。たまに見ます。
+iPhone 3GS の時代であれば、width = 320px, device-width = 320px であったので問題なかったのですが、 retina ディスプレイが出てきてから、 width = 640px, device-width = 320px になってきています。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20131113/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="mediaQuery における max-width, max-device-width の違い" name="twitter:title">
+    <meta content="最近改めて使い分けないとなーと実感したので、その実感を忘れないうちにメモしておこうと思います。
+デバイスの幅(width)と device-width の違いについて
+そもそもの話ですが、そのデバイスで何ピクセル x 何ピクセルで表示できますよーという値と、 device-width の値は異なります。（結果的に同じ場合もあり得ますが）
+
+
+
+
+            
+                Screen Sizes | Viewport Sizes and Pixel Densities for Popular Devices
+                Screensiz.es is a handy database of screen sizes, viewport sizes, and pixel densities for popular …
+                
+                    
+                    screensiz.es
+                
+            
+                
+            
+
+こちらに、デバイスごとの width, device-width がまとめてあります。たまに見ます。
+iPhone 3GS の時代であれば、width = 320px, device-width = 320px であったので問題なかったのですが、 retina ディスプレイが出てきてから、 width = 640px, device-width = 320px になってきています。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">mediaQuery における max-width, max-device-width の違い</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2013-11-13 09:29:57 +0000 +0000">2013/11/13</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>最近改めて使い分けないとなーと実感したので、その実感を忘れないうちにメモしておこうと思います。</p>
+          <h2 id="デバイスの幅widthと-device-width-の違いについて">デバイスの幅(width)と device-width の違いについて</h2>
+          <p>そもそもの話ですが、そのデバイスで何ピクセル x 何ピクセルで表示できますよーという値と、 device-width の値は異なります。（結果的に同じ場合もあり得ますが）</p>
+          <p><a class="link-card" href="http://screensiz.es/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Screen Sizes | Viewport Sizes and Pixel Densities for Popular Devices</span> <span class="link-card__desc">Screensiz.es is a handy database of screen sizes, viewport sizes, and pixel densities for popular …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://screensiz.es/"> screensiz.es</span></span><span class="link-card__image"><img alt="Screen Sizes | Viewport Sizes and Pixel Densities for Popular Devices" loading="lazy" src="https://screensizes-production-04411863.s3.us-east-1.amazonaws.com/static/images/screensizes-thumbnail.png"></span></a></p>
+          <p><img alt="" src="resource01.jpg"></p>
+          <p>こちらに、デバイスごとの width, device-width がまとめてあります。たまに見ます。</p>
+          <p>iPhone 3GS の時代であれば、width = 320px, device-width = 320px であったので問題なかったのですが、 retina ディスプレイが出てきてから、 width = 640px, device-width = 320px になってきています。</p>
+          <p>それならまだ 1:2 になるので分かりやすくて良かったのですが、 そうではない多種多様なデバイスが世に出回っています。</p>
+          <p>例えば Surface Pro は、1920 x 1200px で device-width = 1280px であったり、 Nexus7 は、800 x 1280px で device-width = 601px であったり、 さらに Nexus7 の例のように、<strong>アップデートで device-width は変化したりもします。</strong></p>
+          <p>一緒に作ってる人と話すときにそのあたりの認識が異なる場合がそこそこあるのですが、 device-width は、あくまでそのデバイスを提供している側が、<strong>見せたい側の都合の良いサイズ</strong>を決めているだけにすぎないもので、 width と device-width に依存関係はないと考えています。</p>
+          <p>タブレット周りは特にそれが顕著で、サイズ的にも『PCレイアウトで見せたい！』というデバイスの開発側の意図により、 PCレイアウトに近くなるような device-width が決められています。 （768px であったり、1024px であったり・・・）</p>
+          <p>そもそも device-width がどっちの辺を指すのか？も、デバイスの開発側の意図によるもので、 デバイスによって様々です。大変ですね。</p>
+          <p>なので、「必ずこの端末は意図した通りのデザインで見せたい！」とか、 「アプリとしてリリースするけど、この部分はWebViewでー」とか、そういったケースで viewport のメタタグに device-width が設定してある場合などは、 （当たり前とは思いつつも）きちんとチーム内で作る対象のサイズを共有しなければと思っているところです。</p>
+          <h2 id="max-width-と-max-device-width-の違い">max-width と max-device-width の違い</h2>
+          <p>こちらが本題です。</p>
+          <p>CSS の mediaQuery で幅に応じてスタイルの出し分けを行ったりするケースで使うのですが、</p>
+          <blockquote>
+            <p>@media only screen and (max-width: 480px) {</p>
+          </blockquote>
+          <p>とか、</p>
+          <blockquote>
+            <p>@media only screen and (max-device-width: 480px) {</p>
+          </blockquote>
+          <p>などのように使います。</p>
+          <p>max-width と max-device-width はどのような違いがあるかというと、 <strong>表示領域の幅</strong>なのか、<strong>そのデバイスそのものの幅</strong>なのかの違いがあります。</p>
+          <p>例えば以下のケースで、違いが顕著になってくると思います。</p>
+          <ol>
+            <li>スマートフォンレイアウトの検証を、簡易的にWebブラウザのウィンドウ幅を変えることで検証を行っている場合</li>
+            <li>スマートフォンなどのモバイルデバイスを縦横に傾けた場合</li>
+          </ol>
+          <p>max-width などの表示領域の幅で指定がしてあった場合、 1.のケースでは例えば開発者ツールを開きながらの検証が非常にスムーズであると思います。 これは表示領域の幅で切り替えており、ウィンドウサイズを変えることでこちらの数値が変わるためにスタイルのあたり方が変化することによるものです。</p>
+          <p>また、2.のケースでは、仮にしきい値が 480px にしてあった場合、iPhone5 などを縦から横に傾けた場合、 表示領域の幅が 320px から 568px に変化することにより、スタイルのあたり方は同様に変化します。</p>
+          <p>max-device-width などのデバイスそのものの幅で指定がしてあった場合、 1.のケースでウィンドウサイズを変化させただけでは表示の変化はしません。 この場合は開発者ツールなどでデバイスのサイズ（device metrics）を上書きしてやる必要が出てくると思います。</p>
+          <p>また、2.のケースでは、一部のデバイスを除き（どれまでかは細かく知らないです）、 デバイスごとに、device-widthを「Webコンテンツをこの幅で見せたいんだ！」と開発側が決めているため、 縦横に傾けてもこの数値は変わらず、上記の mediaQuery 指定でスタイルが変化することはありません。</p>
+          <p>こういった違いがあるため、作っているものによって使い分ける必要があるのではないかと思います。</p>
+          <h2 id="例えばレスポンシブレイアウトなど">例えばレスポンシブレイアウトなど</h2>
+          <p>例えばレスポンシブレイアウトなどで、大きく 480px あたりでPC用リソース、スマートフォン用リソースを出し分けていると仮定します。</p>
+          <p>max-width で指定してあった場合に、480px の幅を下回るデバイスで閲覧し、横に傾けて 480px を上回るケースでは、 傾けた時点で表示領域・幅が変化することになるため、 適用されるスタイルが大きく変わります。</p>
+          <p>PC用、スマートフォン用とでリソースを多く出し分けていたとしたら、<strong>傾けた時点で多くのリソースの読み込みが発生してしまう</strong>ことになります。大変なことですね。</p>
+          <p>どちらが良いとか決めうちで決められるものではないので、作っているものによってこのあたりの違いを踏まえて毎回適切な実装方法を考えていかないといけないなーと、改めて実感したところです。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/css/">#CSS</a> <a class="tag-link" href="/tags/mediaquery/">#mediaQuery</a> <a class="tag-link" href="/tags/viewport/">#viewport</a> <a class="tag-link" href="/tags/smartphone/">#Smartphone</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=mediaQuery%20%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%20max-width,%20max-device-width%20%e3%81%ae%e9%81%95%e3%81%84%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20131113/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20131113%2f&amp;text=mediaQuery%20%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%20max-width%2c%20max-device-width%20%e3%81%ae%e9%81%95%e3%81%84" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20131113/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

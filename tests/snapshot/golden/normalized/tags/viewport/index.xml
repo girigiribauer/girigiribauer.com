@@ -1,0 +1,40 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/viewport/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Viewport on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": [
+        {
+          "description": "&lt;p&gt;これはさすがに書いておいた方がよいかと思ったので書いておきます。&lt;/p&gt;\n&lt;p&gt;結論だけ先に言うと、設定によって viewport の値が変わるので注意です。&lt;/p&gt;\n&lt;h2 id=\"設定によって-viewport-の値が変わる件\"&gt;設定によって viewport の値が変わる件&lt;/h2&gt;\n&lt;p&gt;2014年の9月に iPhone6, iPhone6 Plus がそれぞれ発売されたわけですが、 購入して初期設定してるときに気になる画面が。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource01.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;へぇーー。初期設定の際に画面全体を標準サイズにするか、拡大サイズにするかを選択できるようになってました。&lt;/p&gt;\n&lt;p&gt;また、初期設定後であっても、&lt;strong&gt;設定 &amp;gt; 画面表示と明るさ &amp;gt; 画面表示の拡大&lt;/strong&gt; という項目で自由に変更できるようになっています。&lt;/p&gt;\n&lt;p&gt;プレビュー画面も用意されているので分かりやすいです。こちらが標準設定。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource02.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;以下が拡大設定です。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource03.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;h2 id=\"比率は一定で横幅柔軟にしましょう\"&gt;比率は一定で横幅柔軟にしましょう&lt;/h2&gt;\n&lt;p&gt;端末はデカくなったのですが、今までの考え方に沿うのであれば、マルチデバイスであっても&lt;strong&gt;比率は一定で横幅（or 高さ）を柔軟に考えていきましょう&lt;/strong&gt;という意味での device-width（or device-height） なので、画面がデカくなれば横幅が増えるはずです。&lt;/p&gt;\n&lt;p&gt;実際今回もその通りになっていて、iPhone6 の viewport は、&lt;strong&gt;device-width = 375(px), device-height = 559(px)&lt;/strong&gt; です。&lt;/p&gt;\n&lt;p&gt;上のキャプチャを見てもらえれば分かるように、ボタンのサイズ感はそのままなので、以前のものと同じような押しやすさになっており、ボタン間の余白が調整されています。&lt;/p&gt;\n&lt;p&gt;正直ここまでは予想通りだったかと思います。いまどき 320px の幅固定で作っちゃってる人は、まあ当然異なるスクリーンサイズが出て来ちゃったらはまるよねー、という感じで、device-width が異なるものが出てくるのは、もう既定路線というか、想定の範囲内だったと思います。&lt;/p&gt;\n&lt;h2 id=\"そこで颯爽と登場した画面表示の拡大設定\"&gt;そこで颯爽と登場した『画面表示の拡大』設定&lt;/h2&gt;\n&lt;p&gt;この拡大設定にしたときに、Safari で見たらどうなるんだろうとふと思ったのですが、比率が異なっているのであれば、逆に viewport の設定も変化しているのでは？と思い、それぞれ見比べてみました。&lt;/p&gt;\n&lt;p&gt;以下が通常設定時。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource04.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;対して、こちらが拡大設定時。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource05.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;ご覧の通り、この設定によって拡大率が変わってくるので、viewport の値も変わってきます。（余談ですが、device-width が小さくなっているのと同様に、キャプチャサイズも小さくなってました）&lt;/p&gt;\n&lt;p&gt;で、少し問題になってくるのが、初期設定のこの画面です。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource01.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;必ずどちらかユーザーが選択する&lt;/strong&gt;ようになっています。&lt;/p&gt;\n&lt;h3 id=\"ie-のズーム機能との違い\"&gt;IE のズーム機能との違い&lt;/h3&gt;\n&lt;p&gt;IE では、何もしなくてもズーム機能の値が標準になっているので、特に設定をいじらなければ標準のままですが、iPhone6 からは初期設定時に必ずユーザーが選択する必要があります。（というのをキャプチャ見せながら書くために再度出荷時にまで戻してキャプチャ取りました・・・）&lt;/p&gt;\n&lt;p&gt;IE のズーム機能の対応は、おそらくやる場合とやらない場合が出て来たかと思います。通例などは知りませんが、一例として、『何も触らなければ標準なんだし、標準の設定の場合だけサポートしますね』というのはよくある謳い文句かと思います。&lt;/p&gt;\n&lt;p&gt;ただ、今回のケースはそれとは異なり、必ずユーザーがどちらか選ばないといけません。 年配の方であれば、他の年代よりも拡大表示を選ぶ可能性が高くなるのではないでしょうか？&lt;/p&gt;",
+          "guid": "https://girigiribauer.com/tech/20140925/",
+          "link": "https://girigiribauer.com/tech/20140925/",
+          "pubDate": "Thu, 25 Sep 2014 01:45:36 +0000",
+          "title": "iOS8 on iPhone6 で設定によって viewport の値が変わる件"
+        },
+        {
+          "description": "&lt;p&gt;最近改めて使い分けないとなーと実感したので、その実感を忘れないうちにメモしておこうと思います。&lt;/p&gt;\n&lt;h2 id=\"デバイスの幅widthと-device-width-の違いについて\"&gt;デバイスの幅(width)と device-width の違いについて&lt;/h2&gt;\n&lt;p&gt;そもそもの話ですが、そのデバイスで何ピクセル x 何ピクセルで表示できますよーという値と、 device-width の値は異なります。（結果的に同じ場合もあり得ますが）&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"http://screensiz.es/\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;Screen Sizes | Viewport Sizes and Pixel Densities for Popular Devices&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;Screensiz.es is a handy database of screen sizes, viewport sizes, and pixel densities for popular …&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=http://screensiz.es/\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n screensiz.es\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image\"&gt;\n &lt;img src=\"https://screensizes-production-04411863.s3.us-east-1.amazonaws.com/static/images/screensizes-thumbnail.png\" alt=\"Screen Sizes | Viewport Sizes and Pixel Densities for Popular Devices\" loading=\"lazy\" /&gt;\n &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource01.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;こちらに、デバイスごとの width, device-width がまとめてあります。たまに見ます。&lt;/p&gt;\n&lt;p&gt;iPhone 3GS の時代であれば、width = 320px, device-width = 320px であったので問題なかったのですが、 retina ディスプレイが出てきてから、 width = 640px, device-width = 320px になってきています。&lt;/p&gt;",
+          "guid": "https://girigiribauer.com/tech/20131113/",
+          "link": "https://girigiribauer.com/tech/20131113/",
+          "pubDate": "Wed, 13 Nov 2013 09:29:57 +0000",
+          "title": "mediaQuery における max-width, max-device-width の違い"
+        }
+      ],
+      "language": "ja-jp",
+      "lastBuildDate": "Thu, 25 Sep 2014 01:45:36 +0000",
+      "link": "https://girigiribauer.com/tags/viewport/",
+      "title": "Viewport on ばうあーろぐ"
+    }
+  }
+}

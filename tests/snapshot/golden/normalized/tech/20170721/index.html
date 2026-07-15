@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>改めて curl の使い方まとめ | ばうあーろぐ</title>
+    <meta content="20162017 年にもなって curl の使い方をまとめるのもどうかという声もあるかもしれませんが、
+実際 20162017 年になっても よく使うコマンド なので、
+改めてよく使うオプションなどをまとめておきたいと思います。自分用です。
+ちなみに wget に関しては、クローリング機能があるのを過去に知らなかったので、
+そちらに関しては以下にまとめたことがあります。
+
+
+
+wgetが超絶便利なwebクローラー、クローリングツールだとは知らなかった・・・！
+curl の基本的な使い方
+wget はダウンロードが中心の使い方なのに対して、
+curl はケースごとにリクエストを投げる、といった使い方に向いてそうな気がします。
+アクセスできたかどうかの確認だけならば、
+わざわざブラウザを開かずとも黒い画面から curl コマンドだけで確認が可能です。
+ちなみにここからは以下のバージョンでの話になります。Mac です。
+curl 7.43.0 (x86_64-apple-darwin15.0) libcurl/7.43.0 SecureTransport zlib/1.2.5
+man curl をみると、
+NAME
+       curl - transfer a URL
+
+SYNOPSIS
+       curl [options] [URL...]
+
+もろもろオプションはあるものの、普通に使うだけならば以下のようにシンプルに使えます。
+curl http://girigiribauer.com
+
+-0 をつけないといけないみたいな紹介もあったりしますが、過去はそうだったんですかね？
+出力は得られた HTML ファイルがそのまま標準出力に表示されます。
+JSON ファイルの場合は、そのままパイプにつなげて jq コマンドあたりで整形やフィルタリングなどを
+しても便利かもしれません。
+ちなみに、プロトコルのバージョン指定のオプションは以下のようなものが用意されています。
+なにもつけなければ以下にあるように –http1.1 をつけたのと同じになります。（バージョン 7.33 から？）
+最近の HTTP/2 も追加されているようですね。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20170721/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20170721" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="改めて curl の使い方まとめ" itemprop="name">
+    <meta content="20162017 年にもなって curl の使い方をまとめるのもどうかという声もあるかもしれませんが、
+実際 20162017 年になっても よく使うコマンド なので、
+改めてよく使うオプションなどをまとめておきたいと思います。自分用です。
+ちなみに wget に関しては、クローリング機能があるのを過去に知らなかったので、
+そちらに関しては以下にまとめたことがあります。
+
+
+
+wgetが超絶便利なwebクローラー、クローリングツールだとは知らなかった・・・！
+curl の基本的な使い方
+wget はダウンロードが中心の使い方なのに対して、
+curl はケースごとにリクエストを投げる、といった使い方に向いてそうな気がします。
+アクセスできたかどうかの確認だけならば、
+わざわざブラウザを開かずとも黒い画面から curl コマンドだけで確認が可能です。
+ちなみにここからは以下のバージョンでの話になります。Mac です。
+curl 7.43.0 (x86_64-apple-darwin15.0) libcurl/7.43.0 SecureTransport zlib/1.2.5
+man curl をみると、
+NAME
+       curl - transfer a URL
+
+SYNOPSIS
+       curl [options] [URL...]
+
+もろもろオプションはあるものの、普通に使うだけならば以下のようにシンプルに使えます。
+curl http://girigiribauer.com
+
+-0 をつけないといけないみたいな紹介もあったりしますが、過去はそうだったんですかね？
+出力は得られた HTML ファイルがそのまま標準出力に表示されます。
+JSON ファイルの場合は、そのままパイプにつなげて jq コマンドあたりで整形やフィルタリングなどを
+しても便利かもしれません。
+ちなみに、プロトコルのバージョン指定のオプションは以下のようなものが用意されています。
+なにもつけなければ以下にあるように –http1.1 をつけたのと同じになります。（バージョン 7.33 から？）
+最近の HTTP/2 も追加されているようですね。" itemprop="description">
+    <meta content="改めて curl の使い方まとめ" property="og:title">
+    <meta content="20162017 年にもなって curl の使い方をまとめるのもどうかという声もあるかもしれませんが、
+実際 20162017 年になっても よく使うコマンド なので、
+改めてよく使うオプションなどをまとめておきたいと思います。自分用です。
+ちなみに wget に関しては、クローリング機能があるのを過去に知らなかったので、
+そちらに関しては以下にまとめたことがあります。
+
+
+
+wgetが超絶便利なwebクローラー、クローリングツールだとは知らなかった・・・！
+curl の基本的な使い方
+wget はダウンロードが中心の使い方なのに対して、
+curl はケースごとにリクエストを投げる、といった使い方に向いてそうな気がします。
+アクセスできたかどうかの確認だけならば、
+わざわざブラウザを開かずとも黒い画面から curl コマンドだけで確認が可能です。
+ちなみにここからは以下のバージョンでの話になります。Mac です。
+curl 7.43.0 (x86_64-apple-darwin15.0) libcurl/7.43.0 SecureTransport zlib/1.2.5
+man curl をみると、
+NAME
+       curl - transfer a URL
+
+SYNOPSIS
+       curl [options] [URL...]
+
+もろもろオプションはあるものの、普通に使うだけならば以下のようにシンプルに使えます。
+curl http://girigiribauer.com
+
+-0 をつけないといけないみたいな紹介もあったりしますが、過去はそうだったんですかね？
+出力は得られた HTML ファイルがそのまま標準出力に表示されます。
+JSON ファイルの場合は、そのままパイプにつなげて jq コマンドあたりで整形やフィルタリングなどを
+しても便利かもしれません。
+ちなみに、プロトコルのバージョン指定のオプションは以下のようなものが用意されています。
+なにもつけなければ以下にあるように –http1.1 をつけたのと同じになります。（バージョン 7.33 から？）
+最近の HTTP/2 も追加されているようですね。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20170721/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="改めて curl の使い方まとめ" name="twitter:title">
+    <meta content="20162017 年にもなって curl の使い方をまとめるのもどうかという声もあるかもしれませんが、
+実際 20162017 年になっても よく使うコマンド なので、
+改めてよく使うオプションなどをまとめておきたいと思います。自分用です。
+ちなみに wget に関しては、クローリング機能があるのを過去に知らなかったので、
+そちらに関しては以下にまとめたことがあります。
+
+
+
+wgetが超絶便利なwebクローラー、クローリングツールだとは知らなかった・・・！
+curl の基本的な使い方
+wget はダウンロードが中心の使い方なのに対して、
+curl はケースごとにリクエストを投げる、といった使い方に向いてそうな気がします。
+アクセスできたかどうかの確認だけならば、
+わざわざブラウザを開かずとも黒い画面から curl コマンドだけで確認が可能です。
+ちなみにここからは以下のバージョンでの話になります。Mac です。
+curl 7.43.0 (x86_64-apple-darwin15.0) libcurl/7.43.0 SecureTransport zlib/1.2.5
+man curl をみると、
+NAME
+       curl - transfer a URL
+
+SYNOPSIS
+       curl [options] [URL...]
+
+もろもろオプションはあるものの、普通に使うだけならば以下のようにシンプルに使えます。
+curl http://girigiribauer.com
+
+-0 をつけないといけないみたいな紹介もあったりしますが、過去はそうだったんですかね？
+出力は得られた HTML ファイルがそのまま標準出力に表示されます。
+JSON ファイルの場合は、そのままパイプにつなげて jq コマンドあたりで整形やフィルタリングなどを
+しても便利かもしれません。
+ちなみに、プロトコルのバージョン指定のオプションは以下のようなものが用意されています。
+なにもつけなければ以下にあるように –http1.1 をつけたのと同じになります。（バージョン 7.33 から？）
+最近の HTTP/2 も追加されているようですね。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">改めて curl の使い方まとめ</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2017-07-21 23:12:06 +0900 JST">2017/07/21</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>
+            <del>2016</del>
+            2017 年にもなって curl の使い方をまとめるのもどうかという声もあるかもしれませんが、 実際
+            <del>2016</del>
+            2017 年になっても <strong>よく使うコマンド</strong> なので、 改めてよく使うオプションなどをまとめておきたいと思います。自分用です。
+          </p>
+          <p>ちなみに wget に関しては、クローリング機能があるのを過去に知らなかったので、 そちらに関しては以下にまとめたことがあります。</p>
+          <p><a href="/archives/925/">wgetが超絶便利なwebクローラー、クローリングツールだとは知らなかった・・・！</a></p>
+          <h2 id="curl-の基本的な使い方">curl の基本的な使い方</h2>
+          <p>wget はダウンロードが中心の使い方なのに対して、 curl はケースごとにリクエストを投げる、といった使い方に向いてそうな気がします。 アクセスできたかどうかの確認だけならば、 わざわざブラウザを開かずとも黒い画面から <code>curl</code> コマンドだけで確認が可能です。</p>
+          <p>ちなみにここからは以下のバージョンでの話になります。Mac です。</p>
+          <p>curl 7.43.0 (x86_64-apple-darwin15.0) libcurl/7.43.0 SecureTransport zlib/1.2.5</p>
+          <p>man curl をみると、</p>
+          <pre><code>NAME
+       curl - transfer a URL
+
+SYNOPSIS
+       curl [options] [URL...]
+</code></pre>
+          <p>もろもろオプションはあるものの、普通に使うだけならば以下のようにシンプルに使えます。</p>
+          <pre><code>curl http://girigiribauer.com
+</code></pre>
+          <p>-0 をつけないといけないみたいな紹介もあったりしますが、過去はそうだったんですかね？ 出力は得られた HTML ファイルがそのまま標準出力に表示されます。 JSON ファイルの場合は、そのままパイプにつなげて jq コマンドあたりで整形やフィルタリングなどを しても便利かもしれません。</p>
+          <p>ちなみに、プロトコルのバージョン指定のオプションは以下のようなものが用意されています。 なにもつけなければ以下にあるように –http1.1 をつけたのと同じになります。（バージョン 7.33 から？） 最近の HTTP/2 も追加されているようですね。</p>
+          <pre><code>-0, --http1.0
+       (HTTP) Tells curl to use HTTP version 1.0 instead of using  its  internally
+       preferred: HTTP 1.1.
+
+--http1.1
+       (HTTP)  Tells  curl  to  use HTTP version 1.1. This is the internal default
+       version. (Added in 7.33.0)
+
+--http2
+       (HTTP) Tells curl to issue its requests using HTTP 2.  This  requires  that
+       the underlying libcurl was built to support it. (Added in 7.33.0)
+</code></pre>
+          <p>また、何もつけなければ GET リクエストになりますが、本当にアクセスしたいだけなら <code>--head</code> オプションをつけることで HEAD リクエストにもなります。 本文は送られてこないので、出力はレスポンスヘッダそのままです。</p>
+          <pre><code>% curl --head example.com
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: max-age=604800
+Content-Type: text/html
+Date: Wed, 14 Sep 2016 14:55:05 GMT
+Etag: "359670651"
+Expires: Wed, 21 Sep 2016 14:55:05 GMT
+Last-Modified: Fri, 09 Aug 2013 23:54:35 GMT
+Server: ECS (pae/3796)
+X-Cache: HIT
+x-ec-custom-error: 1
+Content-Length: 1270
+</code></pre>
+          <p>このあたりを最低限知っておくだけでも、 HTTP で GET リクエストの確認をしたいだけの場合に わざわざブラウザを開かずに済むと思います。</p>
+          <p>あと、 <code>-v</code> オプション（–verbose）をつけることでも リクエストヘッダ＆レスポンスヘッダを確認することができます。</p>
+          <pre><code>% curl --head -v example.com
+* Rebuilt URL to: example.com/
+*   Trying 93.184.216.34...
+* Connected to example.com (93.184.216.34) port 80 (#0)
+> HEAD / HTTP/1.1
+> Host: example.com
+> User-Agent: curl/7.43.0
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+HTTP/1.1 200 OK
+< Accept-Ranges: bytes
+Accept-Ranges: bytes
+< Cache-Control: max-age=604800
+Cache-Control: max-age=604800
+< Content-Type: text/html
+Content-Type: text/html
+< Date: Thu, 15 Sep 2016 09:10:38 GMT
+Date: Thu, 15 Sep 2016 09:10:38 GMT
+< Etag: "359670651"
+Etag: "359670651"
+< Expires: Thu, 22 Sep 2016 09:10:38 GMT
+Expires: Thu, 22 Sep 2016 09:10:38 GMT
+< Last-Modified: Fri, 09 Aug 2013 23:54:35 GMT
+Last-Modified: Fri, 09 Aug 2013 23:54:35 GMT
+< Server: ECS (pae/3796)
+Server: ECS (pae/3796)
+< X-Cache: HIT
+X-Cache: HIT
+< x-ec-custom-error: 1
+x-ec-custom-error: 1
+< Content-Length: 1270
+Content-Length: 1270
+
+<
+* Connection #0 to host example.com left intact
+</code></pre>
+          <p>頭に &gt; がついている方がリクエスト、 頭に &lt; がついている方がレスポンスですね。</p>
+          <p>このあたり＋ <code>man curl</code> を覚えておけば、 最低限調べながら使えると思います。</p>
+          <h2 id="curl-用途別の使い方">curl 用途別の使い方</h2>
+          <p>よく使うものをケースごとにまとめておきます。</p>
+          <h3 id="basic-認証内のページにアクセスする">basic 認証内のページにアクセスする</h3>
+          <p><code>--basic</code> オプションと <code>--user</code> オプションをつければ OK なのですが、 <code>--user</code> オプションだけでもいけちゃったりします。</p>
+          <pre><code>curl -u username:password example.com
+</code></pre>
+          <p>man ページ内の関連部分を抜粋しておきます。</p>
+          <pre><code>--basic
+       (HTTP)  Tells  curl  to use HTTP Basic authentication with the remote host.
+       This is the default and this option is usually pointless, unless you use it
+       to  override  a  previously set option that sets a different authentication
+       method (such as --ntlm, --digest, or --negotiate).
+
+       Used together with -u, --user and -x, --proxy.
+
+(中略)
+
+-u, --user <user:password>
+       Specify the user name and password to use for server authentication.  Over-
+       rides -n, --netrc and --netrc-optional.
+</code></pre>
+          <h3 id="フォームから-post-する">フォームから POST する</h3>
+          <p>結構簡単です。</p>
+          <pre><code>curl -F "id=foobar" example.com
+</code></pre>
+          <p>POST の場合、<code>-x</code> オプション（<code>--request</code>）のあとに POST と指定することもできますが、 試してみたところ <code>-F</code> オプション（<code>--form</code>）をつけるだけで POST になるようですね。</p>
+          <h3 id="json-を-post-する">JSON を POST する</h3>
+          <p>上記と少し異なり、 <code>-H</code> オプションでヘッダの Content-type を json に変えつつ、 実際にポストするデータを <code>-d</code> オプションで送ってやれば OK です。</p>
+          <pre><code>curl -H "Content-type: application/json" -d '{"id": "foobar"}' example.com
+</code></pre>
+          <p><code>-d</code> オプション（<code>--data</code>）で指定しているところは、実際の JSON データが入るので、 もちろん JSON valid である必要があります。JSON はダブルクオテーションです。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>普通に使う分には、</p>
+          <ul>
+            <li>通常の GET</li>
+            <li>フォーム経由の POST</li>
+            <li>JSON 経由の POST</li>
+            <li>basic 認証などでも使えるヘッダー付きアクセス</li>
+          </ul>
+          <p>あたりを知っておけば必要十分ですし、それ以上必要なときは <code>curl --help</code> を引けば OK だと思います。</p>
+          <p>また、戻り値が JSON であった場合は、 <code>jq</code> コマンドにパイプで繋げてやればスムーズに確認が可能です。</p>
+          <pre><code>curl -H "Content-type: application/json" -d '{"id": "foobar"}' example.com | jq "."
+</code></pre>
+          <p>そういえば前に jq について少し書いてました。</p>
+          <p><a href="/archives/20160819/">vagrant global-status の代替方法、あるいは jq コマンドの使い方</a></p>
+          <p>ちなみにこちらの curl の記事、本当は2016年に書いてあって放置してあって、 curl 使うたびにこの下書きをちらちら見てたりもしたので、実際これくらいが必要十分だと思います。</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a href="http://takuya71.hatenablog.com/entry/2012/11/10/143415" rel="noopener noreferrer" target="_blank">http://takuya71.hatenablog.com/entry/2012/11/10/143415</a></li>
+          </ul>
+        </div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=%e6%94%b9%e3%82%81%e3%81%a6%20curl%20%e3%81%ae%e4%bd%bf%e3%81%84%e6%96%b9%e3%81%be%e3%81%a8%e3%82%81%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20170721/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20170721%2f&amp;text=%e6%94%b9%e3%82%81%e3%81%a6%20curl%20%e3%81%ae%e4%bd%bf%e3%81%84%e6%96%b9%e3%81%be%e3%81%a8%e3%82%81" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20170721/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

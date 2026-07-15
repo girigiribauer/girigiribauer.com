@@ -1,0 +1,8 @@
+{
+  "createdAt": "2026-07-15T02:33:44.174Z",
+  "source": "hugo --buildFuture --minify",
+  "hugoVersion": "hugo v0.164.0+extended+withdeploy darwin/amd64 BuildDate=2026-07-06T16:39:30Z VendorInfo=Homebrew",
+  "fileCount": 1237,
+  "textCount": 686,
+  "assetCount": 551
+}

@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/gpu/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in GPU on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;あまりにも理解できてなかった部分が大きかったので、自分用にメモだけしておこうと思います。&lt;/p&gt;\n&lt;h2 id=\"windows-10-のサポートが-2025-年に切れる\"&gt;Windows 10 のサポートが 2025 年に切れる&lt;/h2&gt;\n&lt;p&gt;きっかけはこれでした。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource01.png\" alt=\"Windows 10 は 2025 年 10 月 14 日にサポート終了となります\"&gt;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;2025/10/14 にサポート切れちゃう&lt;/strong&gt; なと思って、手元にある Windows PC をあれこれ調べてみると、どうやら &lt;strong&gt;Windows 11 に対応してない&lt;/strong&gt; ようなんです &amp;#x1f97a;&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Windows 11 に対応しているのは、概ね 2018 年以降に発売された PC&lt;/li&gt;\n&lt;li&gt;対応してる CPU 一覧\n&lt;ul&gt;\n&lt;li&gt;\n\n\n&lt;a href=\"https://learn.microsoft.com/ja-jp/windows-hardware/design/minimum/supported/windows-11-supported-intel-processors\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;Windows プロセッサ要件 - Windows 11 でサポートされている Intel プロセッサ&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;この仕様では、Windows 製品 (カスタム イメージを含む) が含まれている Windows 11 カスタマー システムで使用できる Intel プロセッサについて詳しく説明します。&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=https://learn.microsoft.com/ja-jp/windows-hardware/design/minimum/supported/windows-11-supported-intel-processors\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n learn.microsoft.com\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image\"&gt;\n &lt;img src=\"https://learn.microsoft.com/en-us/media/open-graph-image.png\" alt=\"Windows プロセッサ要件 - Windows 11 でサポートされている Intel プロセッサ\" loading=\"lazy\" /&gt;\n &lt;/span&gt;&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;この中に入っている CPU ならオッケーらしい&lt;/li&gt;\n&lt;li&gt;たぶんこれが 2018 年あたり以降に発売されたものと概ね一致するらしい&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h2 id=\"まず自身の使っている-cpugpu-が何なのかを詳しく調べる\"&gt;まず自身の使っている CPU/GPU が何なのかを詳しく調べる&lt;/h2&gt;\n&lt;p&gt;一応 PC をメインに扱う仕事はしてるものの、そこまでハード方面に詳しいわけではなく、\n&lt;strong&gt;まず CPU/GPU がどれを使っているのか？&lt;/strong&gt; から調べないとダメなんですよね。&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20240629/",
+        "link": "https://girigiribauer.com/tech/20240629/",
+        "pubDate": "Sat, 29 Jun 2024 17:30:00 +0900",
+        "title": "Windows 11 のことを調べ出したら CPU/GPU のことを全然理解できてなかったことが分かった話"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Sat, 29 Jun 2024 17:30:00 +0900",
+      "link": "https://girigiribauer.com/tags/gpu/",
+      "title": "GPU on ばうあーろぐ"
+    }
+  }
+}

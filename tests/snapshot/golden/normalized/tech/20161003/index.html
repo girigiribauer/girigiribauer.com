@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Golang で DB が簡単に扱える自作コマンドを作ってみた | ばうあーろぐ</title>
+    <meta content="※どうでもいいけど、9月のブログ記事数が急に増えだしてます。
+Hugo 化がここにきてすごく効いてきてますね。
+この前 “db-cli” という自作コマンドをリリースしてみました。
+コマンド名自体は db です。超短いので何かにかぶってたらゴメンナサイ。
+
+
+
+
+            
+                GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang
+                `db` command line tools (Docker based) by Golang. Contribute to girigiribauer/db-cli development by …
+                
+                    
+                    github.com
+                
+            
+                
+            
+経緯
+何かプログラムなどを書いていて、
+試しに MySQL(MariaDB) でもちょこっと立てて検証したいなあ、
+みたいなことはたまにあると思います。
+最近になって、ローカルにそういったデータベースをインストールせずに
+Docker を利用するという選択肢も出てきたのですが、
+まだちょっととっつきにくいというか、
+長ったらしいコマンドをずらずらと並べて
+コンテナを立てることになる ので、
+結構面倒臭かったりします。
+まだコマンドラインのヒストリーから Ctrl+R とかで探していればまだマシなのですが、
+とても毎回ゼロから入力する気にはなれません。
+「僕は DB をちょこっと使いたいだけなんだよ！」 というところから、
+じゃあ試しに db って打ったら DB コンテナが立ち上がるようなコマンドでも作ってみるかー と思ったのがきっかけです。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20161003/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20161003" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Golang で DB が簡単に扱える自作コマンドを作ってみた" itemprop="name">
+    <meta content="※どうでもいいけど、9月のブログ記事数が急に増えだしてます。
+Hugo 化がここにきてすごく効いてきてますね。
+この前 “db-cli” という自作コマンドをリリースしてみました。
+コマンド名自体は db です。超短いので何かにかぶってたらゴメンナサイ。
+
+
+
+
+            
+                GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang
+                `db` command line tools (Docker based) by Golang. Contribute to girigiribauer/db-cli development by …
+                
+                    
+                    github.com
+                
+            
+                
+            
+経緯
+何かプログラムなどを書いていて、
+試しに MySQL(MariaDB) でもちょこっと立てて検証したいなあ、
+みたいなことはたまにあると思います。
+最近になって、ローカルにそういったデータベースをインストールせずに
+Docker を利用するという選択肢も出てきたのですが、
+まだちょっととっつきにくいというか、
+長ったらしいコマンドをずらずらと並べて
+コンテナを立てることになる ので、
+結構面倒臭かったりします。
+まだコマンドラインのヒストリーから Ctrl+R とかで探していればまだマシなのですが、
+とても毎回ゼロから入力する気にはなれません。
+「僕は DB をちょこっと使いたいだけなんだよ！」 というところから、
+じゃあ試しに db って打ったら DB コンテナが立ち上がるようなコマンドでも作ってみるかー と思ったのがきっかけです。" itemprop="description">
+    <meta content="Golang で DB が簡単に扱える自作コマンドを作ってみた" property="og:title">
+    <meta content="※どうでもいいけど、9月のブログ記事数が急に増えだしてます。
+Hugo 化がここにきてすごく効いてきてますね。
+この前 “db-cli” という自作コマンドをリリースしてみました。
+コマンド名自体は db です。超短いので何かにかぶってたらゴメンナサイ。
+
+
+
+
+            
+                GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang
+                `db` command line tools (Docker based) by Golang. Contribute to girigiribauer/db-cli development by …
+                
+                    
+                    github.com
+                
+            
+                
+            
+経緯
+何かプログラムなどを書いていて、
+試しに MySQL(MariaDB) でもちょこっと立てて検証したいなあ、
+みたいなことはたまにあると思います。
+最近になって、ローカルにそういったデータベースをインストールせずに
+Docker を利用するという選択肢も出てきたのですが、
+まだちょっととっつきにくいというか、
+長ったらしいコマンドをずらずらと並べて
+コンテナを立てることになる ので、
+結構面倒臭かったりします。
+まだコマンドラインのヒストリーから Ctrl+R とかで探していればまだマシなのですが、
+とても毎回ゼロから入力する気にはなれません。
+「僕は DB をちょこっと使いたいだけなんだよ！」 というところから、
+じゃあ試しに db って打ったら DB コンテナが立ち上がるようなコマンドでも作ってみるかー と思ったのがきっかけです。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20161003/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Golang で DB が簡単に扱える自作コマンドを作ってみた" name="twitter:title">
+    <meta content="※どうでもいいけど、9月のブログ記事数が急に増えだしてます。
+Hugo 化がここにきてすごく効いてきてますね。
+この前 “db-cli” という自作コマンドをリリースしてみました。
+コマンド名自体は db です。超短いので何かにかぶってたらゴメンナサイ。
+
+
+
+
+            
+                GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang
+                `db` command line tools (Docker based) by Golang. Contribute to girigiribauer/db-cli development by …
+                
+                    
+                    github.com
+                
+            
+                
+            
+経緯
+何かプログラムなどを書いていて、
+試しに MySQL(MariaDB) でもちょこっと立てて検証したいなあ、
+みたいなことはたまにあると思います。
+最近になって、ローカルにそういったデータベースをインストールせずに
+Docker を利用するという選択肢も出てきたのですが、
+まだちょっととっつきにくいというか、
+長ったらしいコマンドをずらずらと並べて
+コンテナを立てることになる ので、
+結構面倒臭かったりします。
+まだコマンドラインのヒストリーから Ctrl+R とかで探していればまだマシなのですが、
+とても毎回ゼロから入力する気にはなれません。
+「僕は DB をちょこっと使いたいだけなんだよ！」 というところから、
+じゃあ試しに db って打ったら DB コンテナが立ち上がるようなコマンドでも作ってみるかー と思ったのがきっかけです。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Golang で DB が簡単に扱える自作コマンドを作ってみた</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2016-10-03 09:08:04 +0900 JST">2016/10/03</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>※どうでもいいけど、9月のブログ記事数が急に増えだしてます。 Hugo 化がここにきてすごく効いてきてますね。</p>
+          <p>この前 <strong>“db-cli”</strong> という自作コマンドをリリースしてみました。 コマンド名自体は <code>db</code> です。超短いので何かにかぶってたらゴメンナサイ。</p>
+          <p><a class="link-card" href="https://github.com/girigiribauer/db-cli" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang</span> <span class="link-card__desc">`db` command line tools (Docker based) by Golang. Contribute to girigiribauer/db-cli development by …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/db-cli"> github.com</span></span><span class="link-card__image"><img alt="GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang" loading="lazy" src="https://opengraph.githubassets.com/2161b0d46b63b6a81ea1b6235d2848f2142777e4d143bf594e1eb62e24edfe13/girigiribauer/db-cli"></span></a></p>
+          <h2 id="経緯">経緯</h2>
+          <p>何かプログラムなどを書いていて、 試しに MySQL(MariaDB) でもちょこっと立てて検証したいなあ、 みたいなことはたまにあると思います。</p>
+          <p>最近になって、ローカルにそういったデータベースをインストールせずに Docker を利用するという選択肢も出てきたのですが、 まだちょっととっつきにくいというか、 <strong>長ったらしいコマンドをずらずらと並べて コンテナを立てることになる</strong> ので、 結構面倒臭かったりします。</p>
+          <p>まだコマンドラインのヒストリーから Ctrl+R とかで探していればまだマシなのですが、 とても毎回ゼロから入力する気にはなれません。</p>
+          <p><strong>「僕は DB をちょこっと使いたいだけなんだよ！」</strong> というところから、 じゃあ試しに <strong>db って打ったら DB コンテナが立ち上がるようなコマンドでも作ってみるかー</strong> と思ったのがきっかけです。</p>
+          <h2 id="コンセプト">コンセプト</h2>
+          <ul>
+            <li><strong>by Golang</strong></li>
+            <li><strong>ストローク数は超短く。 D! B! Enter!</strong> で終わりにしたい。</li>
+            <li>僕はほとんど使わないが、必要に応じて <strong>オプションで上書き</strong> 可能。</li>
+            <li>Docker で名前つけるのすらだるい、 <strong>勝手につけてほしい。</strong></li>
+            <li>dump, restore も可能な限り楽にやりたい。</li>
+          </ul>
+          <p>こんな感じで、後はオプション指定で別のデータベースとか指定できたらいいなあとか、 配布もさくっとできたらいいなあとか、 （僕は使わないけど）Windows とかでも使えたらいいなあとか、 他にも様々ありますが、必要な項目としては上の4つです。</p>
+          <p>するともう自然とコマンド名は <code>db</code> に決まり、 コマンドラインを作るのに今適してそうな Golang で書くのに決めました。 （というか先に Golang で書くことだけは決まっていた気がする）</p>
+          <h2 id="インストール">インストール</h2>
+          <p><strong>先にDocker あるいは Docker for Mac/Windows を入れましょう。</strong></p>
+          <p>その後 MacOS であれば</p>
+          <pre><code>$ brew tap girigiribauer/db-cli
+
+$ brew install db-cli
+</code></pre>
+          <p>でインストールできます。 （Homebrew 対応の話はまた別にメモっておきます）</p>
+          <p>バイナリファイルが直接欲しい人は <a class="link-card" href="https://github.com/girigiribauer/db-cli/releases" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Releases · girigiribauer/db-cli</span> <span class="link-card__desc">`db` command line tools (Docker based) by Golang. Contribute to girigiribauer/db-cli development by …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/db-cli/releases"> github.com</span></span><span class="link-card__image"><img alt="Releases · girigiribauer/db-cli" loading="lazy" src="https://opengraph.githubassets.com/2161b0d46b63b6a81ea1b6235d2848f2142777e4d143bf594e1eb62e24edfe13/girigiribauer/db-cli"></span></a>にあります。</p>
+          <h2 id="使い方">使い方</h2>
+          <p>基本的にヘルプに全部書いてありますのでお読みください。</p>
+          <p>以下は <a class="link-card" href="https://github.com/girigiribauer/db-cli" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang</span> <span class="link-card__desc">`db` command line tools (Docker based) by Golang. Contribute to girigiribauer/db-cli development by …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/db-cli"> github.com</span></span><span class="link-card__image"><img alt="GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang" loading="lazy" src="https://opengraph.githubassets.com/2161b0d46b63b6a81ea1b6235d2848f2142777e4d143bf594e1eb62e24edfe13/girigiribauer/db-cli"></span></a>と同じ内容です。</p>
+          <h3 id="データベース作る">データベース作る</h3>
+          <pre><code>$ db
+</code></pre>
+          <p>これだけで DB が立ち上がった状態になります。 MariaDB をイメージとした “db0” という名前のコンテナが起動状態になっていて、 通常利用するであろう 3306 ポートが空いていれば、その番号がそのままポートフォワーディングされます。</p>
+          <p>試しにもう1回 <code>db</code> と打てばわかりますが、名前が空いていなければ “db1”, “db2” と繰り上がり、 3306 ポートが空いていなければ自動で割り当てられます。</p>
+          <p>なので、 <strong>1つだけ使って消す、使って消す、みたいな使い方をしていれば、 名前は必ず “db0” になり、ポートは 3306 になります。</strong> （実際僕の利用用途の9割くらいはこれで満たされてます）</p>
+          <p>データベース名は何もつけなければ “db” です。 ユーザー名もパスワードも初期値 “db” です。</p>
+          <h3 id="データベース消す">データベース消す</h3>
+          <pre><code>$ db -d
+</code></pre>
+          <p><strong>消すのも合計6ストロークです。</strong> けっこう短くないですか？</p>
+          <p>これも上と同様で、“db0” があればそれが消えます。なければ “db1”, “db2” を探しにいきます。</p>
+          <h3 id="その他">その他</h3>
+          <p>オプション以外の設定項目も、一通り <strong>環境変数で上書きできるようになっています。</strong></p>
+          <p>例えば .bashrc などに</p>
+          <pre><code>DBCLI_CONTAINER_PREFIX=go
+</code></pre>
+          <p>などと書いておけば、勝手に go0, go1 … という名前のコンテナが立ち上がります。</p>
+          <p>dump, restore もできるので、 <a class="link-card" href="https://github.com/girigiribauer/db-cli" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang</span> <span class="link-card__desc">`db` command line tools (Docker based) by Golang. Contribute to girigiribauer/db-cli development by …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/db-cli"> github.com</span></span><span class="link-card__image"><img alt="GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang" loading="lazy" src="https://opengraph.githubassets.com/2161b0d46b63b6a81ea1b6235d2848f2142777e4d143bf594e1eb62e24edfe13/girigiribauer/db-cli"></span></a>をお読みください。</p>
+          <h2 id="まだ微妙なところ">まだ微妙なところ</h2>
+          <p>TODO というわけではないのですが、うーん・・・と思ってるところが若干あります。 ただ自分用のコマンドを単に見えるようにしただけなので、 正直対応するかどうかは微妙です。</p>
+          <ul>
+            <li>Docker コンテナのヘルスチェック</li>
+            <li>test</li>
+            <li>PostgreSQL 対応</li>
+          </ul>
+          <h3 id="docker-コンテナのヘルスチェック">Docker コンテナのヘルスチェック</h3>
+          <p>正直なところ、Docker 1.12 あたりで導入された、 コンテナのヘルスチェック周りの知見がちょっと足らないかもです・・・。</p>
+          <p>この辺いじりだしたのは restore オプションの導入あたりからなのですが、 <code>db</code>, <code>db -d</code> コマンドだけ使っていれば、 ヘルスチェックなどはそもそも不要でした。（create -&gt; start するだけで問題ない）</p>
+          <p>restore オプションを実装するには、 コンテナを作るときにボリュームをマウントするなどの必要があったのですが、 あまり複雑なことをやりたくなかったので、 データベースが完全に用意できてから dump と同じ要領で <strong>外部からのコマンドを流し込む方法</strong> をとりました。</p>
+          <p>なお、今回は <strong>ボリュームのマウント機能は一切利用せずにコマンド作ってます。</strong> ボリュームのマウントまで考慮に入れてしまうと、 じゃあローカルのどのディレクトリをマウント設定するんだとか、 そのオプションがなかった場合にどのような挙動になるんだとか、 色々（オペレーション的に）複雑になりすぎる気がしてたので ボリュームを一切使わない方法はないか検討しました。</p>
+          <p>で、この <strong>データベースが完全に用意できてから</strong> というのが曲者で、 MariaDB が使えるようになるまで待機するのがどこまでなのかが未だによくわかっておりません・・・。</p>
+          <p><strong>mysqladmin の ping が通り始めるタイミング</strong> なのか、 あるいは <strong>"/var/run/mysqld/mysqld.sock" のファイルができるタイミング</strong> なのか、 いずれにしてもタイミングによって restore ができるときとできないときが出てきてしまうので、 5秒程度余分に待つといったダサい策をとってます。ぐぬぬ。</p>
+          <p>なのでもうちょっと Docker のヘルスチェックというか、 Docker を利用した MariaDB の起動の仕組みについてもう一段掘り下げてきちんと調べる必要がありそうですが、 正直そこまでコストかけるかどうか微妙なところです。</p>
+          <h3 id="test">test</h3>
+          <p>今回は API を叩くのがほとんどで、大きく DockerClient の状態に依存するので、 正直なところあまり頑張らずに DockerClient のエラーなどをそのまま垂れ流してもいいかなと思い、 あまり力を入れてません。</p>
+          <p>最初はイメージダウンロードしてコンテナ作った状態を再現してから、ってやってたんですが、 僕のストレスが増加しそうだったのでやめました。</p>
+          <h3 id="postgresql-対応">PostgreSQL 対応</h3>
+          <p>めんどかったので入れませんでした。 気が向いたら入れるかも。</p>
+          <p>一応ある程度楽には入れられるような作りにはなってます。</p>
+          <p>ただこれもヘルスチェックどうするんだ的な話が絡んでくるので、 気が向いたとしてもすぐ飽きるかもしれません。</p>
+          <h2 id="逆に思ったよりもよくできたところ割り切ったところ">逆に思ったよりもよくできたところ、割り切ったところ</h2>
+          <ul>
+            <li>マルチプラットフォーム対応</li>
+            <li>そもそもの利用用途</li>
+          </ul>
+          <h3 id="マルチプラットフォーム対応">マルチプラットフォーム対応</h3>
+          <p>Golang のマルチプラットフォーム対応、なめてました。</p>
+          <pre><code>GOOS=windows GOARCH=amd64 go build -o build/windows-amd64/db.exe cmd/db/*.go
+</code></pre>
+          <p><code>go build</code> コマンドの前に <code>GOOS</code> と <code>GOARCH</code> 環境変数をセットしてやるだけで <strong>本当に Windows 用のバイナリが出来てしまいました。</strong></p>
+          <p>僕が使うわけではないので、あわよくば Windows 対応もできればいいなあくらいに思っていたのですが、 <strong>正直そんな手間もかからず（ゼロではないですが）対応できた</strong> のはありがたかったです。Golang マジすげえな。</p>
+          <p>ちょっと違うところといえば、 裏側で Docker Remote API を用いているのですが、 DockerClient のエンドポイントが Linux, MacOS は UNIX ドメインソケットなのに対して、 Windows では名前付きパイプ（npipe?）なんですよね。</p>
+          <p>ただこれも、大元のライブラリが普通に対応していて パスの違いを吸収する程度の手間だったので 「まあこれくらいなら・・・」と思わせてくれるのは良いですね。</p>
+          <p>ちなみにこの DockerClient ライブラリに大きくお世話になりました。</p>
+          <p><a class="link-card" href="https://github.com/fsouza/go-dockerclient" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - fsouza/go-dockerclient: Go client for the Docker Engine API.</span> <span class="link-card__desc">Go client for the Docker Engine API. Contribute to fsouza/go-dockerclient development by creating an …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/fsouza/go-dockerclient"> github.com</span></span><span class="link-card__image"><img alt="GitHub - fsouza/go-dockerclient: Go client for the Docker Engine API." loading="lazy" src="https://opengraph.githubassets.com/c0f6df3567be9fc13f949bc02577b2088df7a56d5e7efa1bd80e030a3b484ba7/fsouza/go-dockerclient"></span></a></p>
+          <p><code>docker</code> コマンドで一通りできることは問題無くできると思います。</p>
+          <h3 id="そもそもの利用用途">そもそもの利用用途</h3>
+          <p>あまり大事にしたくなかったというか、試しに構築してみたいくらいの温度感だったので、 <strong>僕が使うプラスアルファの対応に留めたい</strong> と最初から思っていました。</p>
+          <p>なので、そもそも開発用としてローカルで使うもの前提だし、 レプリケーションやら dump 時のテーブルロックの話などはばっさり切り捨てています。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>自分でコマンドを作ることは無くは無かったのですが、 表に出すところまではやったことがなかったので良い経験になりました。 Homebrew 対応についてはまた改めてメモっておきます。</p>
+          <p>Golang はクロスプラットフォームな CLI を作るのに適していると思います。</p>
+          <p>最後の方はみんなのGo言語も読みつつ進めていましたが、 ちょうど今回に合った話もちらほらあって読んでてとてもためになりました。</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://godoc.org/github.com/fsouza/go-dockerclient" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">docker package - github.com/fsouza/go-dockerclient - Go Packages</span> <span class="link-card__desc">Package docker provides a client for the Docker remote API.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://godoc.org/github.com/fsouza/go-dockerclient"> godoc.org</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a class="link-card" href="http://dev.classmethod.jp/cloud/aws/docker-healthcheck/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">[Docker]HEALTHCHECKオプションを試す | DevelopersIO</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://dev.classmethod.jp/cloud/aws/docker-healthcheck/"> dev.classmethod.jp</span></span><span class="link-card__image"><img alt="[Docker]HEALTHCHECKオプションを試す | DevelopersIO" loading="lazy" src="https://devio2023-media.developers.io/wp-content/uploads/2013/11/docker.png"></span></a></li>
+            <li><a href="https://suin.io/538" rel="noopener noreferrer" target="_blank">https://suin.io/538</a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/golang/">#Golang</a> <a class="tag-link" href="/tags/docker/">#Docker</a> <a class="tag-link" href="/tags/cli/">#CLI</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Golang%20%e3%81%a7%20DB%20%e3%81%8c%e7%b0%a1%e5%8d%98%e3%81%ab%e6%89%b1%e3%81%88%e3%82%8b%e8%87%aa%e4%bd%9c%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20161003/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20161003%2f&amp;text=Golang%20%e3%81%a7%20DB%20%e3%81%8c%e7%b0%a1%e5%8d%98%e3%81%ab%e6%89%b1%e3%81%88%e3%82%8b%e8%87%aa%e4%bd%9c%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20161003/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

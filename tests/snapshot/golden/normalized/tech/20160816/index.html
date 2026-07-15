@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Chef を捨てて Ansible に移行した | ばうあーろぐ</title>
+    <meta content="前の記事の 
+
+
+WordPress を捨てて Hugo に移行した よりも前に、
+ずいぶん前に “Chef を捨てて Ansible に移行” していたのですが、
+書いておかないと忘れるので自分用にメモしておきます。
+プロビジョニングツールを使い始める前の自分
+Chef を利用する前は、
+いわゆる プロビジョニングツール というのものを一切使っておらず、
+サーバの構築はそのマシンでうまく行くまで何度も行う、
+トライアンドエラーのようなサーバ構築を行っておりました。
+こういうのって、ちゃんとコマンドラインで入力した内容をメモるなりして
+きちんと手順化していかないと、
+すぐに忘れたりして環境の再現ができなかったりするんですよね。
+最初は実機に対して直接作業を行うことが多かったので、
+普段慣れない端末への入力だったり、異なる OS でのオペレーションなども相まって
+上手くインストールできないと結構なストレスを感じることも多くありました。
+そのうち、実機にそのまま試すのではなく、サンドボックスのような自由に試せる環境を
+予め用意し、まずはそっちで試してみようと思い、 VirtualBox + Vagrant を導入して
+自分のマシン上に対象となる Linux マシンと同一の環境を作り、
+先にそちらで試すようになりました。
+それと同時に、非常に簡易的ではありますが、
+シェルスクリプトベース の手順書のようなものを自分で用意するようになり、
+よくある一般的なサーバのセットアップ作業程度であれば
+素早く再現できるようになりました。
+ここまで来てようやく サーバのセットアップ手順をまとめることへの重要性 に
+段々と気づくようになってきます。
+Chef を導入し使い始めたころの自分
+手元の環境をローカル、セットアップ対象をリモートとすると、
+Chef 自体をリモートの方にインストールする必要 があったのですが、
+Vagrant のプラグインである vagrant-omnibus を利用して
+初回起動時に自動的に Chef をインストールできたことでだいぶ楽できました。
+Chef の Cookbook と呼ばれる手順書のファイル群を自分で書くか、
+あるいは 
+
+
+
+            
+                Welcome - The resource for Chef cookbooks - Chef Supermarket
+                Supermarket is Chef's open-source community platform. Find, explore and view Chef cookbooks for all …
+                
+                    
+                    supermarket.chef.io
+                
+             などで公開されている
+サードパーティ製の Cookbook を利用するなどして、
+シェルスクリプトベースで書かれていた秘伝のタレになりつつあった手順書を
+なんとか汎用化していこうと思い、少しずつ置き換えを進めていきました。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20160816/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20160816" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Chef を捨てて Ansible に移行した" itemprop="name">
+    <meta content="前の記事の 
+
+
+WordPress を捨てて Hugo に移行した よりも前に、
+ずいぶん前に “Chef を捨てて Ansible に移行” していたのですが、
+書いておかないと忘れるので自分用にメモしておきます。
+プロビジョニングツールを使い始める前の自分
+Chef を利用する前は、
+いわゆる プロビジョニングツール というのものを一切使っておらず、
+サーバの構築はそのマシンでうまく行くまで何度も行う、
+トライアンドエラーのようなサーバ構築を行っておりました。
+こういうのって、ちゃんとコマンドラインで入力した内容をメモるなりして
+きちんと手順化していかないと、
+すぐに忘れたりして環境の再現ができなかったりするんですよね。
+最初は実機に対して直接作業を行うことが多かったので、
+普段慣れない端末への入力だったり、異なる OS でのオペレーションなども相まって
+上手くインストールできないと結構なストレスを感じることも多くありました。
+そのうち、実機にそのまま試すのではなく、サンドボックスのような自由に試せる環境を
+予め用意し、まずはそっちで試してみようと思い、 VirtualBox + Vagrant を導入して
+自分のマシン上に対象となる Linux マシンと同一の環境を作り、
+先にそちらで試すようになりました。
+それと同時に、非常に簡易的ではありますが、
+シェルスクリプトベース の手順書のようなものを自分で用意するようになり、
+よくある一般的なサーバのセットアップ作業程度であれば
+素早く再現できるようになりました。
+ここまで来てようやく サーバのセットアップ手順をまとめることへの重要性 に
+段々と気づくようになってきます。
+Chef を導入し使い始めたころの自分
+手元の環境をローカル、セットアップ対象をリモートとすると、
+Chef 自体をリモートの方にインストールする必要 があったのですが、
+Vagrant のプラグインである vagrant-omnibus を利用して
+初回起動時に自動的に Chef をインストールできたことでだいぶ楽できました。
+Chef の Cookbook と呼ばれる手順書のファイル群を自分で書くか、
+あるいは 
+
+
+
+            
+                Welcome - The resource for Chef cookbooks - Chef Supermarket
+                Supermarket is Chef's open-source community platform. Find, explore and view Chef cookbooks for all …
+                
+                    
+                    supermarket.chef.io
+                
+             などで公開されている
+サードパーティ製の Cookbook を利用するなどして、
+シェルスクリプトベースで書かれていた秘伝のタレになりつつあった手順書を
+なんとか汎用化していこうと思い、少しずつ置き換えを進めていきました。" itemprop="description">
+    <meta content="Chef を捨てて Ansible に移行した" property="og:title">
+    <meta content="前の記事の 
+
+
+WordPress を捨てて Hugo に移行した よりも前に、
+ずいぶん前に “Chef を捨てて Ansible に移行” していたのですが、
+書いておかないと忘れるので自分用にメモしておきます。
+プロビジョニングツールを使い始める前の自分
+Chef を利用する前は、
+いわゆる プロビジョニングツール というのものを一切使っておらず、
+サーバの構築はそのマシンでうまく行くまで何度も行う、
+トライアンドエラーのようなサーバ構築を行っておりました。
+こういうのって、ちゃんとコマンドラインで入力した内容をメモるなりして
+きちんと手順化していかないと、
+すぐに忘れたりして環境の再現ができなかったりするんですよね。
+最初は実機に対して直接作業を行うことが多かったので、
+普段慣れない端末への入力だったり、異なる OS でのオペレーションなども相まって
+上手くインストールできないと結構なストレスを感じることも多くありました。
+そのうち、実機にそのまま試すのではなく、サンドボックスのような自由に試せる環境を
+予め用意し、まずはそっちで試してみようと思い、 VirtualBox + Vagrant を導入して
+自分のマシン上に対象となる Linux マシンと同一の環境を作り、
+先にそちらで試すようになりました。
+それと同時に、非常に簡易的ではありますが、
+シェルスクリプトベース の手順書のようなものを自分で用意するようになり、
+よくある一般的なサーバのセットアップ作業程度であれば
+素早く再現できるようになりました。
+ここまで来てようやく サーバのセットアップ手順をまとめることへの重要性 に
+段々と気づくようになってきます。
+Chef を導入し使い始めたころの自分
+手元の環境をローカル、セットアップ対象をリモートとすると、
+Chef 自体をリモートの方にインストールする必要 があったのですが、
+Vagrant のプラグインである vagrant-omnibus を利用して
+初回起動時に自動的に Chef をインストールできたことでだいぶ楽できました。
+Chef の Cookbook と呼ばれる手順書のファイル群を自分で書くか、
+あるいは 
+
+
+
+            
+                Welcome - The resource for Chef cookbooks - Chef Supermarket
+                Supermarket is Chef's open-source community platform. Find, explore and view Chef cookbooks for all …
+                
+                    
+                    supermarket.chef.io
+                
+             などで公開されている
+サードパーティ製の Cookbook を利用するなどして、
+シェルスクリプトベースで書かれていた秘伝のタレになりつつあった手順書を
+なんとか汎用化していこうと思い、少しずつ置き換えを進めていきました。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20160816/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Chef を捨てて Ansible に移行した" name="twitter:title">
+    <meta content="前の記事の 
+
+
+WordPress を捨てて Hugo に移行した よりも前に、
+ずいぶん前に “Chef を捨てて Ansible に移行” していたのですが、
+書いておかないと忘れるので自分用にメモしておきます。
+プロビジョニングツールを使い始める前の自分
+Chef を利用する前は、
+いわゆる プロビジョニングツール というのものを一切使っておらず、
+サーバの構築はそのマシンでうまく行くまで何度も行う、
+トライアンドエラーのようなサーバ構築を行っておりました。
+こういうのって、ちゃんとコマンドラインで入力した内容をメモるなりして
+きちんと手順化していかないと、
+すぐに忘れたりして環境の再現ができなかったりするんですよね。
+最初は実機に対して直接作業を行うことが多かったので、
+普段慣れない端末への入力だったり、異なる OS でのオペレーションなども相まって
+上手くインストールできないと結構なストレスを感じることも多くありました。
+そのうち、実機にそのまま試すのではなく、サンドボックスのような自由に試せる環境を
+予め用意し、まずはそっちで試してみようと思い、 VirtualBox + Vagrant を導入して
+自分のマシン上に対象となる Linux マシンと同一の環境を作り、
+先にそちらで試すようになりました。
+それと同時に、非常に簡易的ではありますが、
+シェルスクリプトベース の手順書のようなものを自分で用意するようになり、
+よくある一般的なサーバのセットアップ作業程度であれば
+素早く再現できるようになりました。
+ここまで来てようやく サーバのセットアップ手順をまとめることへの重要性 に
+段々と気づくようになってきます。
+Chef を導入し使い始めたころの自分
+手元の環境をローカル、セットアップ対象をリモートとすると、
+Chef 自体をリモートの方にインストールする必要 があったのですが、
+Vagrant のプラグインである vagrant-omnibus を利用して
+初回起動時に自動的に Chef をインストールできたことでだいぶ楽できました。
+Chef の Cookbook と呼ばれる手順書のファイル群を自分で書くか、
+あるいは 
+
+
+
+            
+                Welcome - The resource for Chef cookbooks - Chef Supermarket
+                Supermarket is Chef's open-source community platform. Find, explore and view Chef cookbooks for all …
+                
+                    
+                    supermarket.chef.io
+                
+             などで公開されている
+サードパーティ製の Cookbook を利用するなどして、
+シェルスクリプトベースで書かれていた秘伝のタレになりつつあった手順書を
+なんとか汎用化していこうと思い、少しずつ置き換えを進めていきました。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Chef を捨てて Ansible に移行した</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2016-08-16 10:00:00 +0900 JST">2016/08/16</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>前の記事の <a href="/archives/20160705/">WordPress を捨てて Hugo に移行した</a> よりも前に、 ずいぶん前に “Chef を捨てて Ansible に移行” していたのですが、 書いておかないと忘れるので自分用にメモしておきます。</p>
+          <h2 id="プロビジョニングツールを使い始める前の自分">プロビジョニングツールを使い始める前の自分</h2>
+          <p>Chef を利用する前は、 いわゆる <strong>プロビジョニングツール</strong> というのものを一切使っておらず、 サーバの構築はそのマシンでうまく行くまで何度も行う、 トライアンドエラーのようなサーバ構築を行っておりました。</p>
+          <p>こういうのって、ちゃんとコマンドラインで入力した内容をメモるなりして きちんと手順化していかないと、 すぐに忘れたりして環境の再現ができなかったりするんですよね。</p>
+          <p>最初は実機に対して直接作業を行うことが多かったので、 普段慣れない端末への入力だったり、異なる OS でのオペレーションなども相まって 上手くインストールできないと結構なストレスを感じることも多くありました。</p>
+          <p>そのうち、実機にそのまま試すのではなく、サンドボックスのような自由に試せる環境を 予め用意し、まずはそっちで試してみようと思い、 <strong>VirtualBox + Vagrant</strong> を導入して 自分のマシン上に対象となる Linux マシンと同一の環境を作り、 先にそちらで試すようになりました。</p>
+          <p>それと同時に、非常に簡易的ではありますが、 <strong>シェルスクリプトベース</strong> の手順書のようなものを自分で用意するようになり、 よくある一般的なサーバのセットアップ作業程度であれば 素早く再現できるようになりました。</p>
+          <p>ここまで来てようやく <strong>サーバのセットアップ手順をまとめることへの重要性</strong> に 段々と気づくようになってきます。</p>
+          <h2 id="chef-を導入し使い始めたころの自分">Chef を導入し使い始めたころの自分</h2>
+          <p>手元の環境をローカル、セットアップ対象をリモートとすると、 <strong>Chef 自体をリモートの方にインストールする必要</strong> があったのですが、 Vagrant のプラグインである vagrant-omnibus を利用して 初回起動時に自動的に Chef をインストールできたことでだいぶ楽できました。</p>
+          <p>Chef の Cookbook と呼ばれる手順書のファイル群を自分で書くか、 あるいは <a class="link-card" href="https://supermarket.chef.io/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Welcome - The resource for Chef cookbooks - Chef Supermarket</span> <span class="link-card__desc">Supermarket is Chef's open-source community platform. Find, explore and view Chef cookbooks for all …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://supermarket.chef.io/"> supermarket.chef.io</span></span><span class="link-card__image link-card__image--no-image"></span></a> などで公開されている サードパーティ製の Cookbook を利用するなどして、 シェルスクリプトベースで書かれていた秘伝のタレになりつつあった手順書を なんとか汎用化していこうと思い、少しずつ置き換えを進めていきました。</p>
+          <p>みんなが当たり前に行う一般的な手順であればあるほど、 同じ Cookbook を使うはずなので（ユーザーの作成や Web サーバのインストールなど）、 こういったよくある Cookbook は可能な限り多く使われているサードパーティ製を使い、 可能な限りレールから逸れないようにしようと思い、 サードパーティ製を積極的に利用していきました。 （もちろん無条件に信用したわけではなく、利用するものはきちんと中身を吟味したうえで利用しています）</p>
+          <p>用意さえできれば、あとはコマンド1つで全部整うのは正直気持ちが良いですね。 手元の Vagrant 環境と、VPS 環境とで環境変数を括り出し、 異なる環境で同じ Cookbook が正しく動作するととても清々しいです。</p>
+          <h3 id="chef-の-cookbook-は-debian-系がほとんど">Chef の Cookbook は debian 系がほとんど</h3>
+          <p>運用し始めると、公開されているサードパーティ製の Cookbook は <strong>そのほとんどが debian 系</strong> だということに気づきます。</p>
+          <p>実際 debian 系の方が世界ではシェアが多く、 逆に日本だけが特殊のようで（要出典、Web サーバに限った話ですかね？） Red Hat 系の方が多いようです。 ちなみに CentOS も Red Hat 系に含まれます。</p>
+          <p>もちろん利用の多いサードパーティ製の Cookbook は debian 系と Red Hat 系とで きちんと処理を分けて書かれているのですが、 中にはおまけ程度にしか用意されていない or そもそも debian 系しか用意してない といったものもあり、かゆいところに手が届かないケースもたびたび出てきました。</p>
+          <h3 id="アップデート地獄">アップデート地獄</h3>
+          <p>運用がしばらく続くと、個々の Cookbook でアップデートが起こります。 それ以前に各種ミドルウェア、アプリケーションにおいてもアップデートは当然起こりえます。 そうなると Cookbook でバージョンの差異などが吸収しきれなくなってきて、 プロビジョニングが通らなくなるケースが出てきます。</p>
+          <p>問題はある程度見えていて、直接リモートのサーバを直せばすぐ解決するのですが、 手順としてまとめられているので、「直接手を出したらだめだ、手順書の意味がない・・・」と ぐっとこらえて Cookbook の方をちまちま修正する日々が続きます。</p>
+          <h3 id="ruby-からくる記述の多様性">Ruby からくる記述の多様性</h3>
+          <p>プロビジョニングツール以外でも、変更があったときにフックとして あれを行うといった処理がよくあるかと思いますが、 Chef においても同様の処理が用意されてます。</p>
+          <p>ただ、色々と利用していくうちに、記述の仕方が数多くあり、 かなり煩雑になってきてしまい若干混乱をきたしてしまってました。 まあ僕が整理して書けてないだけなんですが、整理する気が段々起きなくなってくるんですよね・・・。 変更があったときにフックしたいだけなんですけどね・・・。</p>
+          <h3 id="chef-zero-ってなんぞ">Chef Zero ってなんぞ・・・</h3>
+          <p>たぶん僕が使い方を完全にわかってないせいだと思うのですが、 一時期「これからは Chef Zero だ」みたいな風潮（？）の高まり（？）があって、 僕も空いたタイミングで重い腰をあげて Chef Zero に移行してみました。</p>
+          <p>結論からいうとそのまま移行せずに使ってれば良かったなーという印象です。 Chef Zero があれば Chef Server が不要でうんぬんかんぬんとか、 僕はただシェルスクリプトの手順書を置き換えたかっただけなんですけどね・・・。</p>
+          <h2 id="運用していくと-chef-への不満が徐々にたまる">運用していくと Chef への不満が徐々にたまる</h2>
+          <p>不満をまとめるとこんな感じです。</p>
+          <ul>
+            <li>debian 系しか考慮されてないのつらい</li>
+            <li>アップデートで容易に破綻しやすい</li>
+            <li>色んな書き方ありすぎじゃないの</li>
+            <li>もっとコンパクトに使いたい</li>
+          </ul>
+          <p>Chef 使ってる方から見ると色々とお叱り受けそうな感じですが、 一言でいうと <strong>僕にはオーバースペックすぎた</strong> んじゃないかと・・・。 （大企業でサーバたくさんあって、という状況でルール定めてやる分には非常に良いと思います）</p>
+          <p>不満はたまれども、サーバは動いているので保守しなくてはなりません。</p>
+          <p>とある日、急ぎでこれを追加でインストールしなくてはいけない、といった状況が生まれ、 時間もなく止むを得ず <strong>直接ログインしてコマンドを叩く</strong> ことに。</p>
+          <p><strong>はい、禁断の一手。</strong></p>
+          <p>その日以降、Chef コマンドは叩かれなくなり、 いよいよ代用のプロビジョニングツールを探すことになりました。</p>
+          <h2 id="chef-を捨てて-ansible-に移行した">Chef を捨てて Ansible に移行した</h2>
+          <p>ようやく Ansible の話に入っていくわけなんですが、 Ansible の良いところは以下かなーと思っています。</p>
+          <ul>
+            <li>設定がシンプル、YAML ファイルいじるだけ</li>
+            <li>debian 系、 Red Hat 系はそれぞれ別の playbook（手順書）を書く</li>
+            <li>SSH に毛が生えた程度の仕組みのシンプルさ</li>
+          </ul>
+          <p>Chef の Cookbook に対して、Ansible の手順書のファイル群は playbook と呼ばれるのですが、 これが <strong>YAML</strong> で出来ており、とてもシンプルにまとまってすっきりします。</p>
+          <p>これは YAML だから良いというよりも、設定ファイルであるからこそ、 用意された記述方法しか許されないという点がシンプルさに繋がっているかと思います。 （YAML が素晴らしいとは言ってません。） Ansible でフックしたい場合は、 notify と書くしかありません。</p>
+          <p>Chef の時は debian 系しか用意されてない場合もあってつらかったのですが、 Ansible では yum モジュールと apt モジュールのそれぞれを用意しており、 Red Hat 系では yum モジュールを普通に使えば良いので、 そもそも playbook は最初から別モノになります。 <strong>無理に汎用化されてないので、逆に利用しやすい</strong> かなと思います。</p>
+          <p>あとセットアップ対象のリモートマシンに何もインストールせず、 SSH だけ動けば OK という <strong>プッシュベース</strong> なのが非常に楽でした。</p>
+          <h3 id="一方でローカルに若干インストールしづらいデメリットも">一方でローカルに若干インストールしづらいデメリットも</h3>
+          <p>リモートには Ansible をインストールする必要がない一方で、 ローカルには当然インストールする必要があります。</p>
+          <p>これが若干めんどくさかったのですが、 記事を書いている時点で Ansible 2.0.1.0 だったんですね。 （インストールした頃は 1.9 だったっけか） このバージョンは、現時点での最新バージョンである 2.1 ではなく、 2.1 で入った新機能を使いたくもあったので、 Python のパッケージの依存関係に若干はまりつつも個別にインストールしました。</p>
+          <p>Ansible って、利用するモジュールによって追加でパッケージが必要なものもあるので そのあたりは使っていて注意かもしれませんね。 その辺の詳しいことは各モジュールのページに書いてあります。 <a href="https://docs.ansible.com/ansible/list_of_all_modules.html" rel="noopener noreferrer" target="_blank">https://docs.ansible.com/ansible/list_of_all_modules.html</a></p>
+          <h3 id="おまけここから-ansible-21-が普通に提供されてたら関係ない話">（おまけ）ここから ansible 2.1 が普通に提供されてたら関係ない話</h3>
+          <p>現時点で Homebrew に 2.1 が提供されていなかったので 以下を元に（当時の）最新版を入れました。</p>
+          <p><a href="http://docs.ansible.com/ansible/intro_installation.html#latest-releases-via-pip" rel="noopener noreferrer" target="_blank">http://docs.ansible.com/ansible/intro_installation.html#latest-releases-via-pip</a></p>
+          <p><strong>2016/11/21追記</strong></p>
+          <p>ansible 2.2 が Homebrew に来てました。 これでクソみたいなインストール作業に時間を割かなくてすみますね！</p>
+          <blockquote>
+            <p>% brew info ansible ansible: stable 2.2.0.0 (bottled), HEAD Automate deployment, configuration, and upgrading <a class="link-card" href="https://www.ansible.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Ansible Collaborative</span> <span class="link-card__desc">Ansible Collaborative</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.ansible.com/"> www.ansible.com</span></span><span class="link-card__image"><img alt="Ansible Collaborative" loading="lazy" src="https://www.redhat.com/themes/custom/rhdc/img/red-hat-social-share.jpg"></span></a>Not installed From: <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/ansible.rb" rel="noopener noreferrer" target="_blank">https://github.com/Homebrew/homebrew-core/blob/master/Formula/ansible.rb</a> ==&gt; Dependencies Build: pkg-config ✘ Required: libyaml ✘, <a href="mailto:openssl@1.1">openssl@1.1</a> ✘ ==&gt; Requirements Required: python ✔</p>
+          </blockquote>
+          <p><strong>2016/11/21追記ここまで</strong></p>
+          <p>ちなみに Docker 周りは Ansible 2.1 でサポートがかなり強化されたので、 今後は 2.1 以降を入れた方が良いかもです。</p>
+          <p>docker_container モジュール、いいよ。</p>
+          <p><a class="link-card" href="https://www.ansible.com/blog/ansible-2.1" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Open source communities</span> <span class="link-card__desc">Discover how communities and organizations contribute to the open source ecosystem</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.ansible.com/blog/ansible-2.1"> www.ansible.com</span></span><span class="link-card__image"><img alt="Open source communities" loading="lazy" src="https://www.redhat.com/profiles/rh/themes/redhatdotcom/img/logo-rh-og-image.png"></span></a></p>
+          <p>確かこんな感じで入れたと思います。（メモが残ってたので多分これかと）</p>
+          <pre><code>$ curl https://bootstrap.pypa.io/ez_setup.py -o - | python
+$ sudo easy_install pip
+$ sudo pip install ansible
+PyYAML-3.11 ansible-2.1.0.0 cryptography-1.4 jinja2-2.8 paramiko-2.0.1 pycrypto-2.6.1
+</code></pre>
+          <p>ただ、これだと CentOS7 など一部で問題が起きるため、 ここからさらに paramiko のバージョンを 2.x から 1.x にダウングレードする必要があります。 （ややこしいのですが、ローカルに入れた ansible の依存パッケージのバージョンで 一部のリモートの環境にて問題が起きるケースがあるようです）</p>
+          <pre><code>sudo pip install paramiko==1.17.x
+</code></pre>
+          <p>みたいな感じですかね。</p>
+          <p>詳しくは <a class="link-card" href="http://www.paramiko.org/changelog.html#2.0.0" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Changelog &amp;#8212; Paramiko documentation</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://www.paramiko.org/changelog.html#2.0.0"> www.paramiko.org</span></span><span class="link-card__image link-card__image--no-image"></span></a>, <a class="link-card" href="http://www.paramiko.org/installing-1.x.html" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Installing (1.x) &amp;#8212; Paramiko documentation</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://www.paramiko.org/installing-1.x.html"> www.paramiko.org</span></span><span class="link-card__image link-card__image--no-image"></span></a> などをご確認ください。</p>
+          <p>あるいはリモート環境に直接アクセスして、ローカルの ansible の環境に合うように リモートの sshd_config の設定などを適宜見直すといった方法でも問題ないかと思います。 （が、リモートに接続して設定変更するのは本末転倒な気がするので僕はやりません）</p>
+          <p>Python のパッケージの依存関係、面倒で嫌になりますね・・・。 （対象マシンのパッケージの依存関係を解決したいがために ansible 経由で Docker を入れようとするも、 ansible のローカル側のパッケージ依存に悩まされるというこの本末転倒感・・・。）</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>まだ運用し続けているわけではないので、 これから問題が出てくる可能性も十分あるのですが、 今のところ快適に利用できています。</p>
+          <p>一応、Chef でやっていたローカル、リモートで変数を括り出して 同じ playbook でプロビジョニングする、といった程度は問題なく出来ています。 （ユーザー作成や SSH ポート番号の変更など） そのうち知見たまったらまたアウトプットしたいですね。</p>
+          <p>ちなみに、これは Chef でも Ansible でも両方に言えることですが、 <strong>手作業でインストールできない人がプロビジョニングツールを使ったら あら不思議、インストールできちゃったわ！なんてことはない</strong> ですし、 あったとしても後でトラブルで死ぬだけなので、ちゃんと元のコマンドを理解して <strong>用法用量を守って正しくお使いください。</strong></p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a href="http://mojavy.com/blog/2013/01/11/alc-nokogiri-tmux/" rel="noopener noreferrer" target="_blank">http://mojavy.com/blog/2013/01/11/alc-nokogiri-tmux/</a></li>
+            <li><a class="link-card" href="http://knowledge.sakura.ad.jp/tech/3084/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">実践！Ansibleベストプラクティス（前編） | さくらのナレッジ</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://knowledge.sakura.ad.jp/tech/3084/"> knowledge.sakura.ad.jp</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a href="http://www.sssg.org/blogs/naoya/archives/2768" rel="noopener noreferrer" target="_blank">http://www.sssg.org/blogs/naoya/archives/2768</a></li>
+            <li><a href="http://stackoverflow.com/questions/37426055/ansible-2-x-install-fails-due-to-paramiko-2-0-dependency-changes" rel="noopener noreferrer" target="_blank">http://stackoverflow.com/questions/37426055/ansible-2-x-install-fails-due-to-paramiko-2-0-dependency-changes</a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/chef/">#Chef</a> <a class="tag-link" href="/tags/ansible/">#Ansible</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Chef%20%e3%82%92%e6%8d%a8%e3%81%a6%e3%81%a6%20Ansible%20%e3%81%ab%e7%a7%bb%e8%a1%8c%e3%81%97%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20160816/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20160816%2f&amp;text=Chef%20%e3%82%92%e6%8d%a8%e3%81%a6%e3%81%a6%20Ansible%20%e3%81%ab%e7%a7%bb%e8%a1%8c%e3%81%97%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20160816/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

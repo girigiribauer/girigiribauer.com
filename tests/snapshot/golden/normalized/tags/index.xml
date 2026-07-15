@@ -1,0 +1,852 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Tags on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": [
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/ai/",
+          "link": "https://girigiribauer.com/tags/ai/",
+          "pubDate": "Tue, 07 Jul 2026 09:00:00 +0900",
+          "title": "AI"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/antigravity/",
+          "link": "https://girigiribauer.com/tags/antigravity/",
+          "pubDate": "Fri, 23 Jan 2026 09:00:00 +0900",
+          "title": "Antigravity"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/electron/",
+          "link": "https://girigiribauer.com/tags/electron/",
+          "pubDate": "Fri, 23 Jan 2026 09:00:00 +0900",
+          "title": "Electron"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/ffmpeg/",
+          "link": "https://girigiribauer.com/tags/ffmpeg/",
+          "pubDate": "Fri, 23 Jan 2026 09:00:00 +0900",
+          "title": "FFmpeg"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/nativeapp/",
+          "link": "https://girigiribauer.com/tags/nativeapp/",
+          "pubDate": "Fri, 23 Jan 2026 09:00:00 +0900",
+          "title": "NativeApp"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/bluesky/",
+          "link": "https://girigiribauer.com/tags/bluesky/",
+          "pubDate": "Tue, 13 Jan 2026 17:30:00 +0900",
+          "title": "Bluesky"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/sns/",
+          "link": "https://girigiribauer.com/tags/sns/",
+          "pubDate": "Tue, 13 Jan 2026 17:30:00 +0900",
+          "title": "SNS"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/flyfree/",
+          "link": "https://girigiribauer.com/tags/flyfree/",
+          "pubDate": "Mon, 22 Dec 2025 09:00:00 +0900",
+          "title": "FlyFree"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/twitter/",
+          "link": "https://girigiribauer.com/tags/twitter/",
+          "pubDate": "Mon, 22 Dec 2025 09:00:00 +0900",
+          "title": "Twitter"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/ansible/",
+          "link": "https://girigiribauer.com/tags/ansible/",
+          "pubDate": "Sat, 22 Feb 2025 09:00:00 +0900",
+          "title": "Ansible"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/https/",
+          "link": "https://girigiribauer.com/tags/https/",
+          "pubDate": "Sat, 22 Feb 2025 09:00:00 +0900",
+          "title": "HTTPS"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/nginx/",
+          "link": "https://girigiribauer.com/tags/nginx/",
+          "pubDate": "Sat, 22 Feb 2025 09:00:00 +0900",
+          "title": "Nginx"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/vps/",
+          "link": "https://girigiribauer.com/tags/vps/",
+          "pubDate": "Sat, 22 Feb 2025 09:00:00 +0900",
+          "title": "VPS"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/notion/",
+          "link": "https://girigiribauer.com/tags/notion/",
+          "pubDate": "Fri, 06 Dec 2024 09:00:00 +0900",
+          "title": "Notion"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/computer/",
+          "link": "https://girigiribauer.com/tags/computer/",
+          "pubDate": "Sat, 29 Jun 2024 17:30:00 +0900",
+          "title": "Computer"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/gpu/",
+          "link": "https://girigiribauer.com/tags/gpu/",
+          "pubDate": "Sat, 29 Jun 2024 17:30:00 +0900",
+          "title": "GPU"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/fab/",
+          "link": "https://girigiribauer.com/tags/fab/",
+          "pubDate": "Sun, 21 Apr 2024 09:00:00 +0900",
+          "title": "Fab"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/fusion360/",
+          "link": "https://girigiribauer.com/tags/fusion360/",
+          "pubDate": "Sun, 21 Apr 2024 09:00:00 +0900",
+          "title": "Fusion360"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/figma/",
+          "link": "https://girigiribauer.com/tags/figma/",
+          "pubDate": "Tue, 26 Dec 2023 09:00:00 +0900",
+          "title": "Figma"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/xcode/",
+          "link": "https://girigiribauer.com/tags/xcode/",
+          "pubDate": "Sun, 26 Nov 2023 13:00:00 +0900",
+          "title": "Xcode"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/browserextension/",
+          "link": "https://girigiribauer.com/tags/browserextension/",
+          "pubDate": "Mon, 30 Oct 2023 08:00:00 +0900",
+          "title": "BrowserExtension"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/plasmo/",
+          "link": "https://girigiribauer.com/tags/plasmo/",
+          "pubDate": "Mon, 30 Oct 2023 08:00:00 +0900",
+          "title": "Plasmo"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/css/",
+          "link": "https://girigiribauer.com/tags/css/",
+          "pubDate": "Mon, 19 Dec 2022 08:00:00 +0900",
+          "title": "CSS"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/dom/",
+          "link": "https://girigiribauer.com/tags/dom/",
+          "pubDate": "Mon, 19 Dec 2022 08:00:00 +0900",
+          "title": "DOM"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/html/",
+          "link": "https://girigiribauer.com/tags/html/",
+          "pubDate": "Mon, 19 Dec 2022 08:00:00 +0900",
+          "title": "HTML"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/javascript/",
+          "link": "https://girigiribauer.com/tags/javascript/",
+          "pubDate": "Mon, 19 Dec 2022 08:00:00 +0900",
+          "title": "JavaScript"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/capacitor/",
+          "link": "https://girigiribauer.com/tags/capacitor/",
+          "pubDate": "Fri, 02 Dec 2022 08:00:00 +0900",
+          "title": "Capacitor"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/cordova/",
+          "link": "https://girigiribauer.com/tags/cordova/",
+          "pubDate": "Fri, 02 Dec 2022 08:00:00 +0900",
+          "title": "Cordova"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/install/",
+          "link": "https://girigiribauer.com/tags/install/",
+          "pubDate": "Mon, 03 Jan 2022 21:00:00 +0900",
+          "title": "Install"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/setup/",
+          "link": "https://girigiribauer.com/tags/setup/",
+          "pubDate": "Mon, 03 Jan 2022 21:00:00 +0900",
+          "title": "Setup"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/study/",
+          "link": "https://girigiribauer.com/tags/study/",
+          "pubDate": "Tue, 08 Dec 2020 19:00:00 +0900",
+          "title": "Study"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/cli/",
+          "link": "https://girigiribauer.com/tags/cli/",
+          "pubDate": "Mon, 13 Jul 2020 11:00:00 +0900",
+          "title": "CLI"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/database/",
+          "link": "https://girigiribauer.com/tags/database/",
+          "pubDate": "Mon, 13 Jul 2020 11:00:00 +0900",
+          "title": "Database"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/docker/",
+          "link": "https://girigiribauer.com/tags/docker/",
+          "pubDate": "Mon, 13 Jul 2020 11:00:00 +0900",
+          "title": "Docker"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/mysql/",
+          "link": "https://girigiribauer.com/tags/mysql/",
+          "pubDate": "Mon, 13 Jul 2020 11:00:00 +0900",
+          "title": "MySQL"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/postgresql/",
+          "link": "https://girigiribauer.com/tags/postgresql/",
+          "pubDate": "Mon, 13 Jul 2020 11:00:00 +0900",
+          "title": "PostgreSQL"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/shellscript/",
+          "link": "https://girigiribauer.com/tags/shellscript/",
+          "pubDate": "Mon, 27 Apr 2020 08:00:00 +0900",
+          "title": "ShellScript"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/tmux/",
+          "link": "https://girigiribauer.com/tags/tmux/",
+          "pubDate": "Mon, 27 Apr 2020 08:00:00 +0900",
+          "title": "Tmux"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/fish/",
+          "link": "https://girigiribauer.com/tags/fish/",
+          "pubDate": "Mon, 20 Apr 2020 08:00:00 +0900",
+          "title": "Fish"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/zsh/",
+          "link": "https://girigiribauer.com/tags/zsh/",
+          "pubDate": "Mon, 20 Apr 2020 08:00:00 +0900",
+          "title": "Zsh"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/hugo/",
+          "link": "https://girigiribauer.com/tags/hugo/",
+          "pubDate": "Tue, 28 Jan 2020 17:00:00 +0900",
+          "title": "Hugo"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/static-site-generator/",
+          "link": "https://girigiribauer.com/tags/static-site-generator/",
+          "pubDate": "Tue, 28 Jan 2020 17:00:00 +0900",
+          "title": "Static Site Generator"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/api/",
+          "link": "https://girigiribauer.com/tags/api/",
+          "pubDate": "Mon, 18 Mar 2019 08:45:00 +0900",
+          "title": "API"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/openapi/",
+          "link": "https://girigiribauer.com/tags/openapi/",
+          "pubDate": "Mon, 18 Mar 2019 08:45:00 +0900",
+          "title": "OpenAPI"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/vim/",
+          "link": "https://girigiribauer.com/tags/vim/",
+          "pubDate": "Tue, 12 Feb 2019 08:00:00 +0900",
+          "title": "Vim"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/vscode/",
+          "link": "https://girigiribauer.com/tags/vscode/",
+          "pubDate": "Tue, 12 Feb 2019 08:00:00 +0900",
+          "title": "VSCode"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/mongodb/",
+          "link": "https://girigiribauer.com/tags/mongodb/",
+          "pubDate": "Thu, 19 Apr 2018 20:42:30 +0900",
+          "title": "MongoDB"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/angular/",
+          "link": "https://girigiribauer.com/tags/angular/",
+          "pubDate": "Sun, 15 Apr 2018 20:23:57 +0900",
+          "title": "Angular"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/apps/",
+          "link": "https://girigiribauer.com/tags/apps/",
+          "pubDate": "Sun, 15 Apr 2018 20:23:57 +0900",
+          "title": "Apps"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/ionic/",
+          "link": "https://girigiribauer.com/tags/ionic/",
+          "pubDate": "Sun, 15 Apr 2018 20:23:57 +0900",
+          "title": "Ionic"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/bot/",
+          "link": "https://girigiribauer.com/tags/bot/",
+          "pubDate": "Wed, 31 Jan 2018 15:00:00 +0900",
+          "title": "Bot"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/golang/",
+          "link": "https://girigiribauer.com/tags/golang/",
+          "pubDate": "Wed, 31 Jan 2018 15:00:00 +0900",
+          "title": "Golang"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/googleappengine/",
+          "link": "https://girigiribauer.com/tags/googleappengine/",
+          "pubDate": "Wed, 31 Jan 2018 15:00:00 +0900",
+          "title": "GoogleAppEngine"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/slack/",
+          "link": "https://girigiribauer.com/tags/slack/",
+          "pubDate": "Wed, 31 Jan 2018 15:00:00 +0900",
+          "title": "Slack"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/auth/",
+          "link": "https://girigiribauer.com/tags/auth/",
+          "pubDate": "Thu, 05 Oct 2017 10:00:00 +0900",
+          "title": "Auth"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/firebase/",
+          "link": "https://girigiribauer.com/tags/firebase/",
+          "pubDate": "Thu, 05 Oct 2017 10:00:00 +0900",
+          "title": "Firebase"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/ecmascript/",
+          "link": "https://girigiribauer.com/tags/ecmascript/",
+          "pubDate": "Thu, 24 Aug 2017 15:35:39 +0900",
+          "title": "ECMAScript"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/english/",
+          "link": "https://girigiribauer.com/tags/english/",
+          "pubDate": "Thu, 24 Aug 2017 15:35:39 +0900",
+          "title": "English"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/naming/",
+          "link": "https://girigiribauer.com/tags/naming/",
+          "pubDate": "Thu, 24 Aug 2017 15:35:39 +0900",
+          "title": "Naming"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/anyenv/",
+          "link": "https://girigiribauer.com/tags/anyenv/",
+          "pubDate": "Thu, 27 Jul 2017 17:45:52 +0900",
+          "title": "Anyenv"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/python/",
+          "link": "https://girigiribauer.com/tags/python/",
+          "pubDate": "Thu, 27 Jul 2017 17:45:52 +0900",
+          "title": "Python"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/lint/",
+          "link": "https://girigiribauer.com/tags/lint/",
+          "pubDate": "Fri, 17 Feb 2017 00:16:01 +0900",
+          "title": "Lint"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/linux/",
+          "link": "https://girigiribauer.com/tags/linux/",
+          "pubDate": "Sat, 14 Jan 2017 17:57:40 +0900",
+          "title": "Linux"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/git/",
+          "link": "https://girigiribauer.com/tags/git/",
+          "pubDate": "Tue, 27 Dec 2016 19:59:53 +0900",
+          "title": "Git"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/vagrant/",
+          "link": "https://girigiribauer.com/tags/vagrant/",
+          "pubDate": "Tue, 29 Nov 2016 18:26:15 +0900",
+          "title": "Vagrant"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/homebrew/",
+          "link": "https://girigiribauer.com/tags/homebrew/",
+          "pubDate": "Tue, 04 Oct 2016 13:11:17 +0900",
+          "title": "Homebrew"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/virtualization/",
+          "link": "https://girigiribauer.com/tags/virtualization/",
+          "pubDate": "Thu, 29 Sep 2016 20:02:24 +0900",
+          "title": "Virtualization"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/gitconfig/",
+          "link": "https://girigiribauer.com/tags/gitconfig/",
+          "pubDate": "Tue, 13 Sep 2016 14:05:35 +0900",
+          "title": "Gitconfig"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/jinja2/",
+          "link": "https://girigiribauer.com/tags/jinja2/",
+          "pubDate": "Mon, 12 Sep 2016 11:42:17 +0900",
+          "title": "Jinja2"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/automation/",
+          "link": "https://girigiribauer.com/tags/automation/",
+          "pubDate": "Tue, 06 Sep 2016 09:14:39 +0900",
+          "title": "Automation"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/ftp/",
+          "link": "https://girigiribauer.com/tags/ftp/",
+          "pubDate": "Sat, 03 Sep 2016 17:29:24 +0900",
+          "title": "FTP"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/rsync/",
+          "link": "https://girigiribauer.com/tags/rsync/",
+          "pubDate": "Sat, 03 Sep 2016 17:29:24 +0900",
+          "title": "Rsync"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/iterm/",
+          "link": "https://girigiribauer.com/tags/iterm/",
+          "pubDate": "Thu, 01 Sep 2016 17:48:32 +0900",
+          "title": "ITerm"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/jq/",
+          "link": "https://girigiribauer.com/tags/jq/",
+          "pubDate": "Fri, 19 Aug 2016 11:00:00 +0900",
+          "title": "Jq"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/chef/",
+          "link": "https://girigiribauer.com/tags/chef/",
+          "pubDate": "Tue, 16 Aug 2016 10:00:00 +0900",
+          "title": "Chef"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/ssh/",
+          "link": "https://girigiribauer.com/tags/ssh/",
+          "pubDate": "Wed, 01 Apr 2015 10:28:44 +0000",
+          "title": "SSH"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/apache/",
+          "link": "https://girigiribauer.com/tags/apache/",
+          "pubDate": "Wed, 25 Mar 2015 08:43:58 +0000",
+          "title": "Apache"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/webserver/",
+          "link": "https://girigiribauer.com/tags/webserver/",
+          "pubDate": "Wed, 25 Mar 2015 08:43:58 +0000",
+          "title": "WebServer"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/vimrc/",
+          "link": "https://girigiribauer.com/tags/vimrc/",
+          "pubDate": "Mon, 27 Oct 2014 11:57:58 +0000",
+          "title": "Vimrc"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/css3/",
+          "link": "https://girigiribauer.com/tags/css3/",
+          "pubDate": "Thu, 23 Oct 2014 09:56:36 +0000",
+          "title": "CSS3"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/oldie/",
+          "link": "https://girigiribauer.com/tags/oldie/",
+          "pubDate": "Thu, 23 Oct 2014 09:56:36 +0000",
+          "title": "OldIE"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/polyfills/",
+          "link": "https://girigiribauer.com/tags/polyfills/",
+          "pubDate": "Thu, 23 Oct 2014 09:56:36 +0000",
+          "title": "Polyfills"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/viewport/",
+          "link": "https://girigiribauer.com/tags/viewport/",
+          "pubDate": "Thu, 25 Sep 2014 01:45:36 +0000",
+          "title": "Viewport"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/event-conference/",
+          "link": "https://girigiribauer.com/tags/event-conference/",
+          "pubDate": "Fri, 11 Jul 2014 10:32:50 +0000",
+          "title": "Event-Conference"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/jquery/",
+          "link": "https://girigiribauer.com/tags/jquery/",
+          "pubDate": "Wed, 12 Feb 2014 15:00:46 +0000",
+          "title": "JQuery"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/bugs/",
+          "link": "https://girigiribauer.com/tags/bugs/",
+          "pubDate": "Wed, 05 Feb 2014 15:00:52 +0000",
+          "title": "Bugs"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/ios/",
+          "link": "https://girigiribauer.com/tags/ios/",
+          "pubDate": "Wed, 05 Feb 2014 15:00:52 +0000",
+          "title": "IOS"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/ajax/",
+          "link": "https://girigiribauer.com/tags/ajax/",
+          "pubDate": "Sun, 02 Feb 2014 15:00:10 +0000",
+          "title": "Ajax"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/jsperf/",
+          "link": "https://girigiribauer.com/tags/jsperf/",
+          "pubDate": "Sun, 02 Feb 2014 15:00:10 +0000",
+          "title": "Jsperf"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/mediaquery/",
+          "link": "https://girigiribauer.com/tags/mediaquery/",
+          "pubDate": "Wed, 13 Nov 2013 09:29:57 +0000",
+          "title": "MediaQuery"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/smartphone/",
+          "link": "https://girigiribauer.com/tags/smartphone/",
+          "pubDate": "Wed, 13 Nov 2013 09:29:57 +0000",
+          "title": "Smartphone"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/yeoman/",
+          "link": "https://girigiribauer.com/tags/yeoman/",
+          "pubDate": "Sun, 07 Jul 2013 07:21:37 +0000",
+          "title": "Yeoman"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/virtualbox/",
+          "link": "https://girigiribauer.com/tags/virtualbox/",
+          "pubDate": "Fri, 10 May 2013 03:11:38 +0000",
+          "title": "VirtualBox"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/crawler/",
+          "link": "https://girigiribauer.com/tags/crawler/",
+          "pubDate": "Mon, 08 Apr 2013 00:20:54 +0000",
+          "title": "Crawler"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/wget/",
+          "link": "https://girigiribauer.com/tags/wget/",
+          "pubDate": "Mon, 08 Apr 2013 00:20:54 +0000",
+          "title": "Wget"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/html5/",
+          "link": "https://girigiribauer.com/tags/html5/",
+          "pubDate": "Sun, 24 Mar 2013 00:26:26 +0000",
+          "title": "HTML5"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/output/",
+          "link": "https://girigiribauer.com/tags/output/",
+          "pubDate": "Sun, 24 Mar 2013 00:26:26 +0000",
+          "title": "Output"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/namespace/",
+          "link": "https://girigiribauer.com/tags/namespace/",
+          "pubDate": "Mon, 11 Mar 2013 00:08:58 +0000",
+          "title": "Namespace"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/opengraph/",
+          "link": "https://girigiribauer.com/tags/opengraph/",
+          "pubDate": "Mon, 11 Mar 2013 00:08:58 +0000",
+          "title": "OpenGraph"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/rdfa/",
+          "link": "https://girigiribauer.com/tags/rdfa/",
+          "pubDate": "Mon, 11 Mar 2013 00:08:58 +0000",
+          "title": "RDFa"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/functionallanguage/",
+          "link": "https://girigiribauer.com/tags/functionallanguage/",
+          "pubDate": "Fri, 01 Mar 2013 14:14:23 +0000",
+          "title": "FunctionalLanguage"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/mvc/",
+          "link": "https://girigiribauer.com/tags/mvc/",
+          "pubDate": "Fri, 01 Mar 2013 14:14:23 +0000",
+          "title": "MVC"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/canvas/",
+          "link": "https://girigiribauer.com/tags/canvas/",
+          "pubDate": "Sun, 24 Feb 2013 09:16:03 +0000",
+          "title": "Canvas"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/getusermedia/",
+          "link": "https://girigiribauer.com/tags/getusermedia/",
+          "pubDate": "Sun, 24 Feb 2013 09:16:03 +0000",
+          "title": "GetUserMedia"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/webaudioapi/",
+          "link": "https://girigiribauer.com/tags/webaudioapi/",
+          "pubDate": "Sun, 24 Feb 2013 09:16:03 +0000",
+          "title": "WebAudioAPI"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/webrtc/",
+          "link": "https://girigiribauer.com/tags/webrtc/",
+          "pubDate": "Sun, 24 Feb 2013 09:16:03 +0000",
+          "title": "WebRTC"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/font/",
+          "link": "https://girigiribauer.com/tags/font/",
+          "pubDate": "Sat, 02 Feb 2013 04:43:25 +0000",
+          "title": "Font"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/icon-font/",
+          "link": "https://girigiribauer.com/tags/icon-font/",
+          "pubDate": "Sat, 02 Feb 2013 04:43:25 +0000",
+          "title": "Icon-Font"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/svg/",
+          "link": "https://girigiribauer.com/tags/svg/",
+          "pubDate": "Sat, 02 Feb 2013 04:43:25 +0000",
+          "title": "SVG"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/webfont/",
+          "link": "https://girigiribauer.com/tags/webfont/",
+          "pubDate": "Sat, 02 Feb 2013 04:43:25 +0000",
+          "title": "WebFont"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/php/",
+          "link": "https://girigiribauer.com/tags/php/",
+          "pubDate": "Tue, 22 Jan 2013 15:49:43 +0000",
+          "title": "PHP"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/html5-outline/",
+          "link": "https://girigiribauer.com/tags/html5-outline/",
+          "pubDate": "Mon, 14 Jan 2013 08:12:04 +0000",
+          "title": "HTML5-Outline"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/scala/",
+          "link": "https://girigiribauer.com/tags/scala/",
+          "pubDate": "Mon, 14 Jan 2013 07:17:05 +0000",
+          "title": "Scala"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/cssfilter/",
+          "link": "https://girigiribauer.com/tags/cssfilter/",
+          "pubDate": "Fri, 21 Dec 2012 14:50:51 +0000",
+          "title": "CSSfilter"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/glsl/",
+          "link": "https://girigiribauer.com/tags/glsl/",
+          "pubDate": "Fri, 21 Dec 2012 14:50:51 +0000",
+          "title": "GLSL"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/webgl/",
+          "link": "https://girigiribauer.com/tags/webgl/",
+          "pubDate": "Fri, 21 Dec 2012 14:50:51 +0000",
+          "title": "WebGL"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/preloader/",
+          "link": "https://girigiribauer.com/tags/preloader/",
+          "pubDate": "Sun, 15 Apr 2012 23:54:19 +0000",
+          "title": "Preloader"
+        },
+        {
+          "description": "",
+          "guid": "https://girigiribauer.com/tags/webapp/",
+          "link": "https://girigiribauer.com/tags/webapp/",
+          "pubDate": "Sun, 15 Apr 2012 23:54:19 +0000",
+          "title": "WebApp"
+        }
+      ],
+      "language": "ja-jp",
+      "lastBuildDate": "Tue, 07 Jul 2026 09:00:00 +0900",
+      "link": "https://girigiribauer.com/tags/",
+      "title": "Tags on ばうあーろぐ"
+    }
+  }
+}

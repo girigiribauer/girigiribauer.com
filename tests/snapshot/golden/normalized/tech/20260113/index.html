@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>超分かりやすい Bluesky ラベラーの解説 | ばうあーろぐ</title>
+    <meta content="Bluesky のラベラーというたまに聞くけどよくわからない機能の筆頭について、超分かりやすくまとめてみます" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20260113/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20260113" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="超分かりやすい Bluesky ラベラーの解説" itemprop="name">
+    <meta content="Bluesky のラベラーというたまに聞くけどよくわからない機能の筆頭について、超分かりやすくまとめてみます" itemprop="description">
+    <meta content="超分かりやすい Bluesky ラベラーの解説" property="og:title">
+    <meta content="Bluesky のラベラーというたまに聞くけどよくわからない機能の筆頭について、超分かりやすくまとめてみます" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20260113/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="超分かりやすい Bluesky ラベラーの解説" name="twitter:title">
+    <meta content="Bluesky のラベラーというたまに聞くけどよくわからない機能の筆頭について、超分かりやすくまとめてみます" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">超分かりやすい Bluesky ラベラーの解説</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2026-01-13 17:30:00 +0900 JST">2026/01/13</time></div>
+        </header>
+        <div class="content">
+          <p>2026年1月時点の話です。簡単なものからレベル付けしてみました。</p>
+          <h2 id="レベル1-ラベラーはユーザーアカウントの一種である">レベル1. ラベラーはユーザーアカウントの一種である</h2>
+          <ul>
+            <li>
+              ラベラーを探すには、ユーザーを見つけるのと同じ検索の仕方で探す
+              <ul>
+                <li>名前空間・UI を分けてもいいとは思うけど…</li>
+              </ul>
+            </li>
+            <li>ラベラーはアカウントの一種なので、フォロー・フォロー解除やいいね、リポストもできる</li>
+            <li>
+              ラベラーアカウントは普通に投稿もできる
+              <ul>
+                <li>ラベラーを運用してる人は、何かトラブルがあったときに、ユーザーをスイッチしてラベラーアカウントで運用アナウンスしたりもする</li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="レベル2-ラベラーアカウントはユーザーアカウントが成るものである">レベル2. ラベラーアカウントはユーザーアカウントが成るものである</h2>
+          <ul>
+            <li>ラベラーになると、通常のフォロー・フォロー解除の部分に『ラベラーを登録する』ボタンが現れる</li>
+            <li>要するに、公式クライアントでは UI がちょっと変わる</li>
+            <li>購読ボタンの代わりにフォローボタンは消えて、メニューの奥まったところにフォローのメニューが現れる</li>
+          </ul>
+          <h2 id="レベル3-bluesky-の初期状態でみんなデフォルトラベラーを購読している状態である">レベル3. Bluesky の初期状態で、みんなデフォルトラベラーを購読している状態である</h2>
+          <ul>
+            <li>
+              <code>設定 &gt; モデレーション</code> にある購読中のラベラー一覧にすでに含まれている
+              <ul>
+                <li><a class="link-card" href="https://bsky.app/moderation" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Bluesky</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://bsky.app/moderation"> bsky.app</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+              </ul>
+            </li>
+            <li>
+              <code>Bluesky Moderation Service</code> というデフォルトラベラーは購読を外すことができない
+              <ul>
+                <li><a class="link-card" href="https://bsky.app/profile/moderation.bsky.app" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Bluesky Moderation Service (@moderation.bsky.app)</span> <span class="link-card__desc">Official Bluesky moderation service. https://bsky.social/about/support/community-guidelines</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://bsky.app/profile/moderation.bsky.app"> bsky.app</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+                <li>例: えっちな投稿に「これはえっちだ」とラベルを貼る</li>
+                <li>例: スパム投稿気味なアカウントに「この人はスパマーだ」とラベルを貼る</li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="レベル4-ラベラーは購読しているしていないに関わらず誰にでもラベルを貼ることができる">レベル4. ラベラーは、購読している・していないに関わらず、誰にでもラベルを貼ることができる</h2>
+          <ul>
+            <li>
+              購読してない人に対しても、ラベルを貼ることができる
+              <ul>
+                <li>例: 一部のユーザーに都合の悪い投稿・あるいは投稿者に対してラベルを貼る</li>
+                <li>例: どこかに所属していることを示すために、申請しつつ自身にラベルを貼る</li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="レベル5-ラベラーを購読するとラベルそれぞれについて見る見ないが選べる">レベル5. ラベラーを購読すると、ラベルそれぞれについて、見る見ないが選べる</h2>
+          <ul>
+            <li>見るもの、見ないものは自身で決められる</li>
+            <li><code>オフ</code> を選ぶと、ラベルが表示されなくなる</li>
+            <li><code>非表示</code> を選ぶと、ラベルの付与されたユーザー自体が表示されなくなる</li>
+            <li>分かりづらい… 🥺</li>
+          </ul>
+          <h2 id="レベル6-ラベラー側からは誰が購読してるかは確認できない">レベル6. ラベラー側からは、誰が購読してるかは確認できない</h2>
+          <ul>
+            <li>
+              直感と異なり、ラベラーの購読情報は秘密情報
+              <ul>
+                <li>分かりづらい… 🥺</li>
+              </ul>
+            </li>
+            <li>ラベラー自身からも分からない</li>
+            <li>
+              ラベラーがラベルを貼るユーザーは、購読とは別の方法で特定できていないといけない
+              <ul>
+                <li>リアルタイムに投稿を監視する（無差別）</li>
+                <li>ユーザー自身にアクションしてもらう（フォローやいいねなど）</li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="レベル7-ラベラーアカウントはほぼ全てボットアカウントである">レベル7. ラベラーアカウントは、ほぼ全てボットアカウントである</h2>
+          <ul>
+            <li>ラベラーはただラベル定義するだけじゃなく、常にラベルを貼ったり剥がしたりしないと価値がない</li>
+            <li>常時ラベル貼りのことを考えないといけないので、人力で運用はほぼ不可能</li>
+            <li>いつどれに（どの投稿に）どういうラベルを付与するか？は自分でラベラー用のサーバーを立てて提供する必要がある</li>
+          </ul>
+          <h2 id="レベル8-ラベラーはapiを叩いてラベラー定義をすればラベラーとして認識される">レベル8. ラベラーはAPIを叩いてラベラー定義をすればラベラーとして認識される</h2>
+          <ul>
+            <li>API 経由でラベル定義を投稿すると、ラベラーになる</li>
+            <li>
+              いつもの投稿とは違うスペースに投稿すると、ラベル定義が投稿できて、ラベル定義があるとラベラーとして認識される
+              <ul>
+                <li>通常の投稿は <code>app.bsky.feed.post</code> という場所（コレクション）に保存される</li>
+                <li>ラベル定義は <code>app.bsky.labeler.service</code> という場所（コレクション）に保存される</li>
+              </ul>
+            </li>
+            <li>ラベラー定義は常に最新上書きなので、空のラベラー定義を投稿すれば変身が解ける</li>
+            <li>ラベラーは多言語対応が可能、言語ごとに設定すれば適切なものを使ってくれる</li>
+          </ul>
+          <p>ちなみに、おみくじラベラーではこんなデータを追加しています。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-typescript" data-lang="typescript"><span style="display:flex"><span>{
+</span></span><span style="display:flex"><span>    <span style="color:#a6e22e">repo</span>: <span style="color:#66d9ef">bot.profile.did</span>,
+</span></span><span style="display:flex"><span>    <span style="color:#a6e22e">collection</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"app.bsky.labeler.service"</span>,
+</span></span><span style="display:flex"><span>    <span style="color:#a6e22e">rkey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"self"</span>,
+</span></span><span style="display:flex"><span>    <span style="color:#a6e22e">record</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex"><span>        <span style="color:#a6e22e">$type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"app.bsky.labeler.service"</span>,
+</span></span><span style="display:flex"><span>        <span style="color:#a6e22e">createdAt</span>: <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>(),
+</span></span><span style="display:flex"><span>        <span style="color:#a6e22e">policies</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex"><span>            <span style="color:#a6e22e">labelValues</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex"><span>                <span style="color:#e6db74">"daikichi"</span>,
+</span></span><span style="display:flex"><span>                <span style="color:#e6db74">"kichi"</span>,
+</span></span><span style="display:flex"><span>                <span style="color:#e6db74">"chukichi"</span>,
+</span></span><span style="display:flex"><span>                <span style="color:#e6db74">"shokichi"</span>,
+</span></span><span style="display:flex"><span>                <span style="color:#e6db74">"suekichi"</span>,
+</span></span><span style="display:flex"><span>                <span style="color:#e6db74">"kyo"</span>,
+</span></span><span style="display:flex"><span>                <span style="color:#e6db74">"daikyo"</span>,
+</span></span><span style="display:flex"><span>            ],
+</span></span><span style="display:flex"><span>            <span style="color:#a6e22e">labelValueDefinitions</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex"><span>                {
+</span></span><span style="display:flex"><span>                    <span style="color:#a6e22e">identifier</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"daikichi"</span>,
+</span></span><span style="display:flex"><span>                    <span style="color:#a6e22e">severity</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"inform"</span>,
+</span></span><span style="display:flex"><span>                    <span style="color:#a6e22e">blurs</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"none"</span>,
+</span></span><span style="display:flex"><span>                    <span style="color:#a6e22e">defaultSetting</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"warn"</span>,
+</span></span><span style="display:flex"><span>                    <span style="color:#a6e22e">locales</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex"><span>                        { <span style="color:#a6e22e">lang</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"ja"</span>, <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"大吉"</span>, <span style="color:#a6e22e">description</span><span style="color:#f92672">:</span> <span style="color:#e6db74">"今日の運勢は大吉！最高の一日があなたを待ってる！"</span> },
+</span></span><span style="display:flex"><span>                    ],
+</span></span><span style="display:flex"><span>                },
+</span></span><span style="display:flex"><span>                <span style="color:#75715e">// 以下略
+</span></span></span></code></pre>
+          </div>
+          <h2 id="レベル9-ラベラーのラベル貼りには自身でサーバーを立てる必要がある">レベル9. ラベラーのラベル貼りには自身でサーバーを立てる必要がある</h2>
+          <ul>
+            <li>
+              サーバーを立てないとラベル貼りは無理
+              <ul>
+                <li>ここがエンジニアリングしないと難しいところ</li>
+              </ul>
+            </li>
+            <li>カスタムフィードはサーバーを立ててくれている方に乗っかる形でフィード作成することができるが、ラベラーはアカウントが成るものなので、なかなかサービス化して他の人にラベラー作成してもらうのも難しい</li>
+          </ul>
+          <h2 id="レベル10-ラベル貼りの情報をラベラーサーバーから提供するには-websocket-で繋ぐ必要がある">レベル10. ラベル貼りの情報をラベラーサーバーから提供するには WebSocket で繋ぐ必要がある</h2>
+          <ul>
+            <li><code>@skyware/labeler</code> を使うと楽、必須エンドポイントを提供してくれる</li>
+            <li>Skyware ライブラリを使わずにやるなら、自前で WebSocket を繋ぐ必要がある</li>
+          </ul>
+          <hr>
+          <p>以上です！ <strong>有識者の方、間違いがあれば指摘してください！</strong></p>
+          <h2 id="おまけ-おみくじラベラーでの話">おまけ: おみくじラベラーでの話</h2>
+          <ul>
+            <li>さっきの話の通り、購読だけだとラベラーからもユーザーがわからないので、フォローしてもらう</li>
+            <li>フォロー・フォロー解除をDBに記録し、日付をまたいだタイミングでラベルの貼り替え、ラベル剥がしを行う</li>
+            <li>
+              日本時刻の0時にまとめて動かすので、日本語のみに限定している
+              <ul>
+                <li>タイムゾーン情報が拾えない、欲しい！</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/bluesky/">#Bluesky</a> <a class="tag-link" href="/tags/sns/">#SNS</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=%e8%b6%85%e5%88%86%e3%81%8b%e3%82%8a%e3%82%84%e3%81%99%e3%81%84%20Bluesky%20%e3%83%a9%e3%83%99%e3%83%a9%e3%83%bc%e3%81%ae%e8%a7%a3%e8%aa%ac%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20260113/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20260113%2f&amp;text=%e8%b6%85%e5%88%86%e3%81%8b%e3%82%8a%e3%82%84%e3%81%99%e3%81%84%20Bluesky%20%e3%83%a9%e3%83%99%e3%83%a9%e3%83%bc%e3%81%ae%e8%a7%a3%e8%aa%ac" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20260113/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

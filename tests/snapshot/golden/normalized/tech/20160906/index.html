@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Ansible で再起動後にも playbook を継続する方法 | ばうあーろぐ</title>
+    <meta content="タイトルの通りですが、正直これ出来ないと思っていたので、出来てすごく嬉しいです。
+Chef では少なくともそういった機能は無かったように思えますが（僕が知らないだけかもしれない）、
+Ansible はプッシュベース だからでしょうか。
+実行する主体がいつもローカル側にあるからこそ、
+一旦接続を切ってまた繋げるといったことがやりやすいのかもしれません。
+そもそもなぜ再接続したいのか？
+ほとんどの playbook では問題ないのですが、
+SELinux の設定の反映（一時的な設定だけなら問題なし）などの一部のセットアップにて、
+再起動が必要になるものが存在しています。
+他にもあるかもしれませんが、
+例えば SELinux の設定をいじる場合は以下のような手順を踏みます。
+$ getenforce #=> 今の設定確認
+Enforcing
+$ sudo vi /etc/sysconfig/selinux #=> SELINUX=disabled を設定
+$ sudo reboot #=> 再起動
+
+Ansible では playbook 上で reboot すると、
+playbook のステータスが unreachable になってそのまま終了 してしまいます。
+fatal: [machine_name]: UNREACHABLE! => {&quot;changed&quot;: false, &quot;msg&quot;: &quot;Failed to connect to the host via ssh.&quot;, &quot;unreachable&quot;: true}
+
+繋がらなくなるのでまあ当然ですよね。
+これを一連の playbook で再起動をはさんで実行できると、
+playbook を書くときにトリッキーなことをせずに済むこともあるかもしれません。
+（SELinux だけみると、最後にまとめて再起動すれば事足りるっちゃあそうですが・・・。）" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20160906/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20160906" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Ansible で再起動後にも playbook を継続する方法" itemprop="name">
+    <meta content="タイトルの通りですが、正直これ出来ないと思っていたので、出来てすごく嬉しいです。
+Chef では少なくともそういった機能は無かったように思えますが（僕が知らないだけかもしれない）、
+Ansible はプッシュベース だからでしょうか。
+実行する主体がいつもローカル側にあるからこそ、
+一旦接続を切ってまた繋げるといったことがやりやすいのかもしれません。
+そもそもなぜ再接続したいのか？
+ほとんどの playbook では問題ないのですが、
+SELinux の設定の反映（一時的な設定だけなら問題なし）などの一部のセットアップにて、
+再起動が必要になるものが存在しています。
+他にもあるかもしれませんが、
+例えば SELinux の設定をいじる場合は以下のような手順を踏みます。
+$ getenforce #=> 今の設定確認
+Enforcing
+$ sudo vi /etc/sysconfig/selinux #=> SELINUX=disabled を設定
+$ sudo reboot #=> 再起動
+
+Ansible では playbook 上で reboot すると、
+playbook のステータスが unreachable になってそのまま終了 してしまいます。
+fatal: [machine_name]: UNREACHABLE! => {&quot;changed&quot;: false, &quot;msg&quot;: &quot;Failed to connect to the host via ssh.&quot;, &quot;unreachable&quot;: true}
+
+繋がらなくなるのでまあ当然ですよね。
+これを一連の playbook で再起動をはさんで実行できると、
+playbook を書くときにトリッキーなことをせずに済むこともあるかもしれません。
+（SELinux だけみると、最後にまとめて再起動すれば事足りるっちゃあそうですが・・・。）" itemprop="description">
+    <meta content="Ansible で再起動後にも playbook を継続する方法" property="og:title">
+    <meta content="タイトルの通りですが、正直これ出来ないと思っていたので、出来てすごく嬉しいです。
+Chef では少なくともそういった機能は無かったように思えますが（僕が知らないだけかもしれない）、
+Ansible はプッシュベース だからでしょうか。
+実行する主体がいつもローカル側にあるからこそ、
+一旦接続を切ってまた繋げるといったことがやりやすいのかもしれません。
+そもそもなぜ再接続したいのか？
+ほとんどの playbook では問題ないのですが、
+SELinux の設定の反映（一時的な設定だけなら問題なし）などの一部のセットアップにて、
+再起動が必要になるものが存在しています。
+他にもあるかもしれませんが、
+例えば SELinux の設定をいじる場合は以下のような手順を踏みます。
+$ getenforce #=> 今の設定確認
+Enforcing
+$ sudo vi /etc/sysconfig/selinux #=> SELINUX=disabled を設定
+$ sudo reboot #=> 再起動
+
+Ansible では playbook 上で reboot すると、
+playbook のステータスが unreachable になってそのまま終了 してしまいます。
+fatal: [machine_name]: UNREACHABLE! => {&quot;changed&quot;: false, &quot;msg&quot;: &quot;Failed to connect to the host via ssh.&quot;, &quot;unreachable&quot;: true}
+
+繋がらなくなるのでまあ当然ですよね。
+これを一連の playbook で再起動をはさんで実行できると、
+playbook を書くときにトリッキーなことをせずに済むこともあるかもしれません。
+（SELinux だけみると、最後にまとめて再起動すれば事足りるっちゃあそうですが・・・。）" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20160906/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Ansible で再起動後にも playbook を継続する方法" name="twitter:title">
+    <meta content="タイトルの通りですが、正直これ出来ないと思っていたので、出来てすごく嬉しいです。
+Chef では少なくともそういった機能は無かったように思えますが（僕が知らないだけかもしれない）、
+Ansible はプッシュベース だからでしょうか。
+実行する主体がいつもローカル側にあるからこそ、
+一旦接続を切ってまた繋げるといったことがやりやすいのかもしれません。
+そもそもなぜ再接続したいのか？
+ほとんどの playbook では問題ないのですが、
+SELinux の設定の反映（一時的な設定だけなら問題なし）などの一部のセットアップにて、
+再起動が必要になるものが存在しています。
+他にもあるかもしれませんが、
+例えば SELinux の設定をいじる場合は以下のような手順を踏みます。
+$ getenforce #=> 今の設定確認
+Enforcing
+$ sudo vi /etc/sysconfig/selinux #=> SELINUX=disabled を設定
+$ sudo reboot #=> 再起動
+
+Ansible では playbook 上で reboot すると、
+playbook のステータスが unreachable になってそのまま終了 してしまいます。
+fatal: [machine_name]: UNREACHABLE! => {&quot;changed&quot;: false, &quot;msg&quot;: &quot;Failed to connect to the host via ssh.&quot;, &quot;unreachable&quot;: true}
+
+繋がらなくなるのでまあ当然ですよね。
+これを一連の playbook で再起動をはさんで実行できると、
+playbook を書くときにトリッキーなことをせずに済むこともあるかもしれません。
+（SELinux だけみると、最後にまとめて再起動すれば事足りるっちゃあそうですが・・・。）" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Ansible で再起動後にも playbook を継続する方法</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2016-09-06 09:14:39 +0900 JST">2016/09/06</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>タイトルの通りですが、正直これ出来ないと思っていたので、出来てすごく嬉しいです。</p>
+          <p>Chef では少なくともそういった機能は無かったように思えますが（僕が知らないだけかもしれない）、 <strong>Ansible はプッシュベース</strong> だからでしょうか。 実行する主体がいつもローカル側にあるからこそ、 一旦接続を切ってまた繋げるといったことがやりやすいのかもしれません。</p>
+          <h2 id="そもそもなぜ再接続したいのか">そもそもなぜ再接続したいのか？</h2>
+          <p>ほとんどの playbook では問題ないのですが、 SELinux の設定の反映（一時的な設定だけなら問題なし）などの一部のセットアップにて、 <strong>再起動が必要になるものが存在しています。</strong></p>
+          <p>他にもあるかもしれませんが、 例えば SELinux の設定をいじる場合は以下のような手順を踏みます。</p>
+          <pre><code>$ getenforce #=> 今の設定確認
+Enforcing
+$ sudo vi /etc/sysconfig/selinux #=> SELINUX=disabled を設定
+$ sudo reboot #=> 再起動
+</code></pre>
+          <p>Ansible では playbook 上で reboot すると、 <strong>playbook のステータスが unreachable になってそのまま終了</strong> してしまいます。</p>
+          <pre><code>fatal: [machine_name]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh.", "unreachable": true}
+</code></pre>
+          <p>繋がらなくなるのでまあ当然ですよね。</p>
+          <p>これを一連の playbook で再起動をはさんで実行できると、 playbook を書くときにトリッキーなことをせずに済むこともあるかもしれません。 （SELinux だけみると、最後にまとめて再起動すれば事足りるっちゃあそうですが・・・。）</p>
+          <p>ちょっと話が逸れますが、 reboot するのが通常の task ではなく handler だった場合、 （handler は変化があった場合のみ、最後にまとめて実行するタスクのこと） 単に再起動だけ実行させて、あとはほったらかしで問題ないケースも出てきます。 その場合は playbook の実行完了を待たない poll の値を設定することで、handler で再起動をさせて終了させることは可能です。</p>
+          <p><a href="http://docs.ansible.com/ansible/playbooks_async.html" rel="noopener noreferrer" target="_blank">http://docs.ansible.com/ansible/playbooks_async.html</a></p>
+          <h2 id="再接続を可能にする-ansible-のモジュール">再接続を可能にする Ansible のモジュール</h2>
+          <p>Ansible で再接続を行うために必要な関連モジュールをメモっておきます。 最初のやつは正確にはモジュールではないかもしれません。キーワード？</p>
+          <h3 id="local_action">local_action</h3>
+          <p><a href="http://docs.ansible.com/ansible/playbooks_delegation.html" rel="noopener noreferrer" target="_blank">http://docs.ansible.com/ansible/playbooks_delegation.html</a></p>
+          <p>この local_action は他のモジュールと同じように使うことが出来るのですが、 モジュールのさらに頭につけることで <strong>ローカルに処理を委譲することができます。</strong></p>
+          <p>ちなみに <code>delegate_to</code> というキーワードも存在していて、以下は同じ意味を指すようです。 （先ほどのリンク内から抜粋）</p>
+          <pre><code>- name: add back to load balancer pool
+command: /usr/bin/add_back_to_pool {{ inventory_hostname }}
+delegate_to: 127.0.0.1
+
+- name: take out of load balancer pool
+local_action: command /usr/bin/take_out_of_pool {{ inventory_hostname }}
+</code></pre>
+          <h3 id="wait_for-モジュール">wait_for モジュール</h3>
+          <p><a href="http://docs.ansible.com/ansible/wait_for_module.html" rel="noopener noreferrer" target="_blank">http://docs.ansible.com/ansible/wait_for_module.html</a></p>
+          <p>wait_for モジュールは、 <strong>指定したホスト名・ポートを監視し、有効になるまで待機します。</strong></p>
+          <p>先に非同期で再起動するような playbook を用意しておき、 その後 local_action をはさんだ wait_for モジュールを利用して、 再起動で処理が戻るまで待機するような playbook を書くことが可能です。</p>
+          <h3 id="set_fact-モジュール">set_fact モジュール</h3>
+          <p><a href="http://docs.ansible.com/ansible/set_fact_module.html" rel="noopener noreferrer" target="_blank">http://docs.ansible.com/ansible/set_fact_module.html</a></p>
+          <p>set_fact モジュールは、ansible-playbook の <strong>実行時の変数を途中で上書きできるモジュール</strong> です。</p>
+          <p>今回は結局使わなかったのですが、 例えばポート番号を変えたり、パスワード認証から公開鍵認証に変えたりした場合に、 接続するための情報を途中で変更する際に用いました。</p>
+          <p>あくまで僕のケースですが、個人的には接続方法が大きく変わった時には無理をせず、 強制的に fail などのメッセージを出して（鍵認証に変えたから接続し直してね的なやつ）、 変更後の接続方法で改めて playbook を実行するようにしています。 （この辺の話はまた長くなるので、余裕があれば改めて取りまとめたいですね・・・）</p>
+          <h2 id="selinux-の-playbook">SELinux の playbook</h2>
+          <p>他 playbook も参考にしながら、冪等性も踏まえて書いてみたのがこれです。 （抜粋＆本筋じゃないところは省略）</p>
+          <pre><code>- name: SELinux のステータス取得
+  shell: getenforce
+  register: selinux_status
+  changed_when: False
+  tags: selinux
+  become: True
+
+- name: SELinux をコントロールするためのパッケージ導入
+  yum: name=libselinux-python state=installed
+  when: selinux_status.stdout == 'Enforcing'
+  tags: selinux
+  become: True
+
+- name: SELinux の無効化
+  selinux: state=disabled
+  when: selinux_status.stdout == 'Enforcing'
+  tags: selinux
+  become: True
+
+- name: SELinux 設定後の再起動
+  shell: "sleep 2 && reboot"
+  async: 1
+  poll: 0
+  when: selinux_status.stdout == 'Enforcing'
+  tags: selinux
+  become: True
+
+- name: SELinux 設定後の再起動完了まで待機
+  local_action: wait_for host={{ inventory_hostname }} port={{ ssh_port }} delay=30
+  when: selinux_status.stdout == 'Enforcing'
+  tags: selinux
+  become: False
+</code></pre>
+          <p>inventory_hostname は <a href="http://docs.ansible.com/ansible/playbooks_variables.html" rel="noopener noreferrer" target="_blank">http://docs.ansible.com/ansible/playbooks_variables.html</a> にあるように Ansible のインベントリファイルがあるローカルを指しています。予め用意されている変数です。</p>
+          <p>register については <a href="http://docs.ansible.com/ansible/playbooks_conditionals.html#register-variables" rel="noopener noreferrer" target="_blank">http://docs.ansible.com/ansible/playbooks_conditionals.html#register-variables</a> にありますが、 実行結果などを後で参照するために一時保存してくれる機能です。</p>
+          <p>SELinux の設定を取得して、有効になっていた場合のみ無効となるような playbook を実行しています（冪等性）。 逆に <strong>2回目以降の playbook の実行ですでに無効になっていた場合は、 when と書いてあるところが False になるので playbook の実行がスキップされます。</strong> 毎回再起動をはさんでいては時間がかかってしまいますので、 時間短縮のため register や when などを用いて変更する必要があるときだけ処理をするようにしています。</p>
+          <p>ちなみに、再起動自体の playbook ですが、 sleep 2 や async: 1 がないと一番最初の例と同じく unreachable でストップしてしまいます。 shell モジュール内で sleep 2 などを頭につけて実行直後に再起動が実行されないようにしつつ、 async でこの playbook の終了タイミング自体も直後ではなく後ろにずらす必要がありました。</p>
+          <p>様々な環境で試したところ、両方ずらす必要があるようです。 最初は単にタイミングをずらすだけで良いかと思って sleep 1 になってたんですが、 Vagrant 上は問題がなくとも VPS 上では sleep 2 にしないと unreachable になってしまったりと、 再起動周りは多少経験則が必要なようです・・・。</p>
+          <p>ここに関しては内部の処理を見たわけではないのですが、 タイミングをずらすことで、再起動の処理の前に 次の local_action &amp; wait_for モジュールに処理を渡してから再起動を行う必要があるようです。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>Ansible のプッシュベースであるメリットが出てて便利だなーと思います。</p>
+          <p>再起動の playbook については、今まで問題があったわけではないのですが、 selinux の部分だけで設定完了することになるので、 playbook の依存関係が少しすっきりした気がします。 ただ、再起動タスクが多ければ多いほど、 最後にまとめて handler として実行した方が playbook 全体の処理時間は短くなると思います。</p>
+          <p>あと playbook の書き順によっては接続ポートの変更とかぶった場合、 <strong>再起動後に SSH のポートが変わっちゃって接続できなくなっちゃった、</strong> みたいなケースもありうるので そこは注意が必要かと思います。（今回使っていないset_fact モジュールである程度いけるかと思います）</p>
+          <p>ちなみに再起動に関してはこの記事の通りなのですが、 再ログインに関してはまだまとめきれてないので、 改めて記事にメモっておこうと思います。</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a class="link-card" href="http://qiita.com/volanja/items/d38fe0678848bae6902f" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Ansibleの事例とちょっとしたTips - Qiita</span> <span class="link-card__desc">2013/11/30時点でAnsibleについて書いてくれる方が8名(私除く)もいて嬉しいです！ まだまだ枠には余裕がありますので、できれば2回書いてください(笑) Ansibleを使っているけど、ま …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://qiita.com/volanja/items/d38fe0678848bae6902f"> qiita.com</span></span><span class="link-card__image"><img alt="Ansibleの事例とちょっとしたTips - Qiita" loading="lazy" src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-user-contents.imgix.net%2Fhttps%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Fadvent-calendar-ogp-background-7940cd1c8db80a7ec40711d90f43539e.jpg%3Fixlib%3Drb-4.1.1%26w%3D1200%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLXByb2ZpbGUtaW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnFpaXRhLWltYWdlLXN0b3JlLnMzLmFtYXpvbmF3cy5jb20lMkYwJTJGMjk5MDElMkZwcm9maWxlLWltYWdlcyUyRjE0NzM2ODU0MTA_aXhsaWI9cmItNC4xLjEmYXI9MSUzQTEmZml0PWNyb3AmbWFzaz1lbGxpcHNlJmJnPUZGRkZGRiZmbT1wbmczMiZzPWM5NTM1OTM2NDRkNTZjYTMxZmQzMTRlNWNkNGUzNzlk%26blend-x%3D120%26blend-y%3D467%26blend-w%3D82%26blend-h%3D82%26blend-mode%3Dnormal%26s%3D156f1c433a78d510a2dfd75cd3e7b3e9?ixlib=rb-4.1.1&amp;amp;w=1200&amp;amp;fm=jpg&amp;amp;mark64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjEuMSZ3PTk2MCZoPTMyNCZ0eHQ9QW5zaWJsZSVFMyU4MSVBRSVFNCVCQSU4QiVFNCVCRSU4QiVFMyU4MSVBOCVFMyU4MSVBMSVFMyU4MiU4NyVFMyU4MSVBMyVFMyU4MSVBOCVFMyU4MSU5NyVFMyU4MSU5RlRpcHMmdHh0LWFsaWduPWxlZnQlMkN0b3AmdHh0LWNvbG9yPSUyMzNBM0MzQyZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT01NiZ0eHQtcGFkPTAmcz1lYmExOWI5MWJhNjM5YWIxNDE1YTQ0YjkyM2E2OGNlMQ&amp;amp;mark-x=120&amp;amp;mark-y=112&amp;amp;blend64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjEuMSZ3PTgzOCZoPTU4JnR4dD0lNDB2b2xhbmphJnR4dC1jb2xvcj0lMjMzQTNDM0MmdHh0LWZvbnQ9SGlyYWdpbm8lMjBTYW5zJTIwVzYmdHh0LXNpemU9MzYmdHh0LXBhZD0wJnM9MGZkNjUyMzgwMmJlODBhM2IzMjY3MTNlYTEyMzg3ZDc&amp;amp;blend-x=242&amp;amp;blend-y=480&amp;amp;blend-w=838&amp;amp;blend-h=46&amp;amp;blend-fit=crop&amp;amp;blend-crop=left%2Cbottom&amp;amp;blend-mode=normal&amp;amp;s=18cc9eebf21d176df7f13a02b7ed9e10"></span></a></li>
+            <li><a class="link-card" href="https://gyagya1111.blogspot.jp/2015/02/ansibleselinux.html" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Web エンジニアの自分のための備忘録: AnsibleでSELinuxの状態を調べて&amp;#12289;既に無効だったらスキップする</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://gyagya1111.blogspot.jp/2015/02/ansibleselinux.html"> gyagya1111.blogspot.jp</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a class="link-card" href="http://jinja.pocoo.org/docs/dev/templates/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Template Designer Documentation &amp;#8212; Jinja Documentation (3.2.x)</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://jinja.pocoo.org/docs/dev/templates/"> jinja.pocoo.org</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a href="http://stackoverflow.com/questions/23877781/how-to-wait-for-server-restart-using-ansible" rel="noopener noreferrer" target="_blank">http://stackoverflow.com/questions/23877781/how-to-wait-for-server-restart-using-ansible</a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/ansible/">#Ansible</a> <a class="tag-link" href="/tags/automation/">#automation</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Ansible%20%e3%81%a7%e5%86%8d%e8%b5%b7%e5%8b%95%e5%be%8c%e3%81%ab%e3%82%82%20playbook%20%e3%82%92%e7%b6%99%e7%b6%9a%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20160906/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20160906%2f&amp;text=Ansible%20%e3%81%a7%e5%86%8d%e8%b5%b7%e5%8b%95%e5%be%8c%e3%81%ab%e3%82%82%20playbook%20%e3%82%92%e7%b6%99%e7%b6%9a%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20160906/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

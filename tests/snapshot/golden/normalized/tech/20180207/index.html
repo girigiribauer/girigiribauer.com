@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Docker 再入門2018 - エコシステム編 | ばうあーろぐ</title>
+    <meta content="今回はエコシステム編です。
+コンテナ編から順に読むことをお勧めします。
+目次
+
+
+
+
+コンテナ編
+
+読むと Docker のコンテナ周りがざっくり分かる
+
+
+
+
+
+コマンド編
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+
+
+
+
+
+エコシステム編 （いまここ）
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+Dockerfile を読んでみる
+DockerHub の公式のものをうまく活用する
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+Dockerfile を読んでみる
+ここまでで、Docker を利用するという点では必要最低限な知識を持っている状態になったかと思いますが、
+ここからはさらに Docker イメージの設計図である Dockerfile を読み込んでみようと思います。
+公式はこちら。 ( 
+
+
+
+            
+                Dockerfile reference
+                Find all the available commands you can use in a Dockerfile and learn how to use them, including …
+                
+                    
+                    docs.docker.com
+                
+             )
+
+Dockerfile とは Docker イメージの設計図
+公式のドキュメントの一番下にある 
+
+
+
+            
+                Dockerfile reference
+                Find all the available commands you can use in a Dockerfile and learn how to use them, including …
+                
+                    
+                    docs.docker.com
+                
+            
+Nginx のイメージを作る Dockerfile あたりを参考にしてみましょうか。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20180207/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20180207" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Docker 再入門2018 - エコシステム編" itemprop="name">
+    <meta content="今回はエコシステム編です。
+コンテナ編から順に読むことをお勧めします。
+目次
+
+
+
+
+コンテナ編
+
+読むと Docker のコンテナ周りがざっくり分かる
+
+
+
+
+
+コマンド編
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+
+
+
+
+
+エコシステム編 （いまここ）
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+Dockerfile を読んでみる
+DockerHub の公式のものをうまく活用する
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+Dockerfile を読んでみる
+ここまでで、Docker を利用するという点では必要最低限な知識を持っている状態になったかと思いますが、
+ここからはさらに Docker イメージの設計図である Dockerfile を読み込んでみようと思います。
+公式はこちら。 ( 
+
+
+
+            
+                Dockerfile reference
+                Find all the available commands you can use in a Dockerfile and learn how to use them, including …
+                
+                    
+                    docs.docker.com
+                
+             )
+
+Dockerfile とは Docker イメージの設計図
+公式のドキュメントの一番下にある 
+
+
+
+            
+                Dockerfile reference
+                Find all the available commands you can use in a Dockerfile and learn how to use them, including …
+                
+                    
+                    docs.docker.com
+                
+            
+Nginx のイメージを作る Dockerfile あたりを参考にしてみましょうか。" itemprop="description">
+    <meta content="Docker 再入門2018 - エコシステム編" property="og:title">
+    <meta content="今回はエコシステム編です。
+コンテナ編から順に読むことをお勧めします。
+目次
+
+
+
+
+コンテナ編
+
+読むと Docker のコンテナ周りがざっくり分かる
+
+
+
+
+
+コマンド編
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+
+
+
+
+
+エコシステム編 （いまここ）
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+Dockerfile を読んでみる
+DockerHub の公式のものをうまく活用する
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+Dockerfile を読んでみる
+ここまでで、Docker を利用するという点では必要最低限な知識を持っている状態になったかと思いますが、
+ここからはさらに Docker イメージの設計図である Dockerfile を読み込んでみようと思います。
+公式はこちら。 ( 
+
+
+
+            
+                Dockerfile reference
+                Find all the available commands you can use in a Dockerfile and learn how to use them, including …
+                
+                    
+                    docs.docker.com
+                
+             )
+
+Dockerfile とは Docker イメージの設計図
+公式のドキュメントの一番下にある 
+
+
+
+            
+                Dockerfile reference
+                Find all the available commands you can use in a Dockerfile and learn how to use them, including …
+                
+                    
+                    docs.docker.com
+                
+            
+Nginx のイメージを作る Dockerfile あたりを参考にしてみましょうか。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20180207/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Docker 再入門2018 - エコシステム編" name="twitter:title">
+    <meta content="今回はエコシステム編です。
+コンテナ編から順に読むことをお勧めします。
+目次
+
+
+
+
+コンテナ編
+
+読むと Docker のコンテナ周りがざっくり分かる
+
+
+
+
+
+コマンド編
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+
+
+
+
+
+エコシステム編 （いまここ）
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+Dockerfile を読んでみる
+DockerHub の公式のものをうまく活用する
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+Dockerfile を読んでみる
+ここまでで、Docker を利用するという点では必要最低限な知識を持っている状態になったかと思いますが、
+ここからはさらに Docker イメージの設計図である Dockerfile を読み込んでみようと思います。
+公式はこちら。 ( 
+
+
+
+            
+                Dockerfile reference
+                Find all the available commands you can use in a Dockerfile and learn how to use them, including …
+                
+                    
+                    docs.docker.com
+                
+             )
+
+Dockerfile とは Docker イメージの設計図
+公式のドキュメントの一番下にある 
+
+
+
+            
+                Dockerfile reference
+                Find all the available commands you can use in a Dockerfile and learn how to use them, including …
+                
+                    
+                    docs.docker.com
+                
+            
+Nginx のイメージを作る Dockerfile あたりを参考にしてみましょうか。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Docker 再入門2018 - エコシステム編</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2018-02-07 07:15:52 +0900 JST">2018/02/07</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>今回はエコシステム編です。 コンテナ編から順に読むことをお勧めします。</p>
+          <h2 id="index">目次</h2>
+          <ol>
+            <li>
+              <strong><a href="/archives/20180205/">コンテナ編</a></strong>
+              <ul>
+                <li>読むと Docker のコンテナ周りがざっくり分かる</li>
+              </ul>
+            </li>
+            <li>
+              <strong><a href="/archives/20180206/">コマンド編</a></strong>
+              <ul>
+                <li>読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる</li>
+              </ul>
+            </li>
+            <li>
+              <strong><a href="/archives/20180207/">エコシステム編</a> （いまここ）</strong>
+              <ul>
+                <li>読むと DockerHub のサービスの活用方法がざっくり分かる</li>
+                <li>Dockerfile を読んでみる</li>
+                <li>DockerHub の公式のものをうまく活用する</li>
+              </ul>
+            </li>
+            <li>
+              <strong><a href="/archives/20180208/">実践編</a></strong>
+              <ul>
+                <li>読むと Docker で環境構築する方法が分かる、怖くなくなる</li>
+              </ul>
+            </li>
+          </ol>
+          <h2 id="dockerfile-を読んでみる">Dockerfile を読んでみる</h2>
+          <p>ここまでで、Docker を利用するという点では必要最低限な知識を持っている状態になったかと思いますが、 ここからはさらに Docker イメージの設計図である Dockerfile を読み込んでみようと思います。</p>
+          <p>公式はこちら。 ( <a class="link-card" href="https://docs.docker.com/engine/reference/builder/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Dockerfile reference</span> <span class="link-card__desc">Find all the available commands you can use in a Dockerfile and learn how to use them, including …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/engine/reference/builder/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )</p>
+          <p><img alt="Dockerfile" src="resource01.jpg"></p>
+          <h3 id="dockerfile-とは-docker-イメージの設計図">Dockerfile とは Docker イメージの設計図</h3>
+          <p>公式のドキュメントの一番下にある <a class="link-card" href="https://docs.docker.com/engine/reference/builder/#dockerfile-examples" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Dockerfile reference</span> <span class="link-card__desc">Find all the available commands you can use in a Dockerfile and learn how to use them, including …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/engine/reference/builder/#dockerfile-examples"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> Nginx のイメージを作る Dockerfile あたりを参考にしてみましょうか。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex"><span><span style="color:#75715e"># Nginx</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">#</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#75715e"># VERSION               0.0.1</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span>FROM      ubuntu<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#66d9ef">LABEL</span> Description<span style="color:#f92672">=</span><span style="color:#e6db74">"This image is used to start the foobar executable"</span> Vendor<span style="color:#f92672">=</span><span style="color:#e6db74">"ACME Products"</span> Version<span style="color:#f92672">=</span><span style="color:#e6db74">"1.0"</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#f92672">&&</span> apt-get install -y inotify-tools nginx apache2 openssh-server<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre>
+          </div>
+          <p>まあ、最初なので3行くらいがちょうど良いかもしれません。</p>
+          <p>上部分がコメントなのは良いとして、 <strong>FROM, LABEL, RUN</strong> の部分が Dockerfile の文法に相当します。</p>
+          <p>大文字小文字は区別しませんが、分かりやすさのために、 Dockerfile の文法に相当する部分は通常大文字で記述します。</p>
+          <ul>
+            <li>FROM: どのイメージをベースにするか</li>
+            <li>LABEL: キーと値のセットの情報を記載、後ほど <code>docker inspect</code> などでも参照できる、無くても良い</li>
+            <li>RUN: シェルスクリプトを実行し、イメージに変更を加えていく</li>
+          </ul>
+          <p>大事なのは FROM と RUN です。</p>
+          <h3 id="docker-イメージは継承して作れる">Docker イメージは継承して作れる</h3>
+          <p><strong>FROM は必ず指定が必要です。</strong></p>
+          <p>つまり、 Docker イメージを作るためには、必ずベースとなるイメージが必要ですが、 ベースイメージを指定したくない場合でも、 FROM の行は必須です。</p>
+          <p><strong>最小限のイメージから始めたい場合は <code>FROM scratch</code> と指定します。</strong></p>
+          <ul>
+            <li><a class="link-card" href="https://hub.docker.com/_/scratch/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">scratch - Official Image | Docker Hub</span> <span class="link-card__desc">an explicitly empty image, especially for building images "FROM scratch"</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/scratch/"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a href="https://docs.docker.com/samples/library/scratch/" rel="noopener noreferrer" target="_blank">https://docs.docker.com/samples/library/scratch/</a></li>
+          </ul>
+          <p><code>FROM scratch</code> から始めた場合は本当に何も入っていないイメージができます。</p>
+          <p>どういう時に使えるかというと、例えばすぐ実行できるバイナリファイルがあって、 <strong>バイナリファイルを単に実行するだけのコンテナ</strong> が欲しい時なんかは、 余計なものが入っておらずに役立つのではないかと思います。</p>
+          <p>上の DockerHub の scratch のページにも例がありますが、 手元にある hello というバイナリファイルを一番上のルートにコピーして、 そのまま <code>/hello</code> を実行するだけのイメージなどが作れます。</p>
+          <p>該当ページにサンプル載ってますがこんな感じです。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">scratch</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#66d9ef">COPY</span> hello /<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">"/hello"</span>]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre>
+          </div>
+          <p>ちょっと話がそれましたが、 Nginx などが欲しい場合は、 centos や ubuntu などの公式が用意されているイメージをベースに、 <strong>必要なアプリケーションのみをインストールするイメージを継承して作る</strong> のが良いです。</p>
+          <p>ちなみに Linux にはディストリビューションという、流派のようなものが存在しています。</p>
+          <p>大きく分けて2種類（もちろん他にもありますが、有名どころは2つ）、 RedHat 系ならば CentOS あたり、 Debian 系ならば Ubuntu とかですかね。 使いたい方に合わせて選ぶと良いと思います。</p>
+          <p>さて、もう一度 Nginx のサンプルを見てみます。（抜粋）</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex"><span>FROM      ubuntu<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#f92672">&&</span> apt-get install -y inotify-tools nginx apache2 openssh-server<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre>
+          </div>
+          <p>これは <code>ubuntu</code> の公式イメージをベースにして、 そこから <code>RUN</code> 以降に書いてある debian 系のパッケージマネージャのコマンドである <code>apt-get</code> を使って、 必要なライブラリを一式インストールする、という Dockerfile になりますね。</p>
+          <h3 id="docker-イメージは段階ごとにキャッシュされる">Docker イメージは段階ごとにキャッシュされる</h3>
+          <p><code>docker image ls</code> または <code>docker images</code> を実行して分かるように、 名前のついていない（名前が &lt;none&gt; となっている）イメージが存在しています。</p>
+          <p>各行ごとにイメージが作られ、 <strong>同一のものはキャッシュされて次以降の高速化のために利用されます。</strong> また、 <strong>全く同じイメージは同じ ID になります。</strong> この辺は Git と同じで、全く同じファイルはハッシュ値が同一になるのと似ています。 （どうもタグ付けされたものは別の ID になるようですが・・・）</p>
+          <p>先ほどの Nging の Dockerfile のサンプルから、実際に Docker イメージを作ってみましょう。</p>
+          <p>以下を Dockerfile という名前で保存します。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex"><span><span style="color:#75715e"># Nginx</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">#</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#75715e"># VERSION               0.0.1</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span>FROM      ubuntu<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#66d9ef">LABEL</span> Description<span style="color:#f92672">=</span><span style="color:#e6db74">"This image is used to start the foobar executable"</span> Vendor<span style="color:#f92672">=</span><span style="color:#e6db74">"ACME Products"</span> Version<span style="color:#f92672">=</span><span style="color:#e6db74">"1.0"</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex"><span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#f92672">&&</span> apt-get install -y inotify-tools nginx apache2 openssh-server<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre>
+          </div>
+          <p>同じディレクトリ上で <code>docker build . -t sampleimage1</code> というタグ名付きでイメージを作ります。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker build . -t sampleimage1
+</span></span><span style="display:flex"><span>Sending build context to Docker daemon  2.048kB
+</span></span><span style="display:flex"><span>Step 1/3 : FROM      ubuntu
+</span></span><span style="display:flex"><span> ---> 0458a4468cbc
+</span></span><span style="display:flex"><span>Step 2/3 : LABEL Description="This image is used to start the foobar executable" Vendor="ACME Products" Version="1.0"
+</span></span><span style="display:flex"><span> ---> Using cache
+</span></span><span style="display:flex"><span> ---> 5e2812d1aee1
+</span></span><span style="display:flex"><span>Step 3/3 : RUN apt-get update && apt-get install -y inotify-tools nginx apache2 openssh-server
+</span></span><span style="display:flex"><span> ---> Using cache
+</span></span><span style="display:flex"><span> ---> 58a660b758eb
+</span></span><span style="display:flex"><span>Successfully built 58a660b758eb
+</span></span></code></pre>
+          </div>
+          <p>ビルド成功と出ました。 イメージ ID は 58a660b758eb ですね。 それとは別に、 Step 1/3 の段階では 0458a4468cbc というイメージ ID のものが出来ています。 （これは ubuntu そのものですね）</p>
+          <p>途中、 “Using cache” と表示されていますが、 これは僕の方で何回か実行しているために、 同じものはキャッシュをそのまま使いますよーという表示がされています。</p>
+          <p><code>docker image ls</code> でイメージ一覧を見てみます。</p>
+          <pre><code>REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+sampleimage1            latest              58a660b758eb        3 hours ago         310MB
+ubuntu                  latest              0458a4468cbc        7 days ago          112MB
+<none>                  <none>              88fef13a9951        8 days ago          689MB
+<none>                  <none>              f9134a5e9681        8 days ago          766MB
+<none>                  <none>              5ce7d9cdcde9        8 days ago          1.08GB
+（以下略）
+</code></pre>
+          <p>LABEL をつけただけではイメージ ID は出来ないようですが（たぶん）、 <strong>この &lt;none&gt; という名前の中間のイメージが、 Step に応じてどんどん増えていく</strong> 仕組みです。</p>
+          <p>余裕のある人は、 RUN の行を、</p>
+          <pre><code>RUN apt-get update && apt-get install -y inotify-tools nginx apache2 openssh-server
+RUN apt-get install -y zip
+</code></pre>
+          <p>のように2行に分けてやってみると、中間イメージが出来る様子が見られると思います。</p>
+          <p>やってみます。（一旦 sampleimage2 という別名で）</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker build . -t sampleimage2
+</span></span><span style="display:flex"><span>Sending build context to Docker daemon  2.048kB
+</span></span><span style="display:flex"><span>Step 1/5 : FROM      ubuntu
+</span></span><span style="display:flex"><span> ---> 0458a4468cbc
+</span></span><span style="display:flex"><span>Step 2/5 : LABEL Description="This image is used to start the foobar executable" Vendor="ACME Products" Version="1.0"
+</span></span><span style="display:flex"><span> ---> Using cache
+</span></span><span style="display:flex"><span> ---> 5e2812d1aee1
+</span></span><span style="display:flex"><span>Step 3/5 : RUN apt-get update
+</span></span><span style="display:flex"><span> ---> Using cache
+</span></span><span style="display:flex"><span> ---> 1a4d4c3febc6
+</span></span><span style="display:flex"><span>Step 4/5 : RUN apt-get install -y inotify-tools nginx apache2 openssh-server
+</span></span><span style="display:flex"><span> ---> Using cache
+</span></span><span style="display:flex"><span> ---> 1e8148a63daf
+</span></span><span style="display:flex"><span>Step 5/5 : RUN apt-get install -y zip
+</span></span><span style="display:flex"><span> ---> Running in f4f33e750d7c
+</span></span><span style="display:flex"><span>Reading package lists...
+</span></span><span style="display:flex"><span>Building dependency tree...
+</span></span><span style="display:flex"><span>Reading state information...
+</span></span><span style="display:flex"><span>（中略）
+</span></span><span style="display:flex"><span>Unpacking zip (3.0-11) ...
+</span></span><span style="display:flex"><span>Processing triggers for mime-support (3.59ubuntu1) ...
+</span></span><span style="display:flex"><span>Setting up unzip (6.0-20ubuntu1) ...
+</span></span><span style="display:flex"><span>Setting up zip (3.0-11) ...
+</span></span><span style="display:flex"><span>Removing intermediate container f4f33e750d7c
+</span></span><span style="display:flex"><span> ---> a15d93167abf
+</span></span><span style="display:flex"><span>Successfully built a15d93167abf
+</span></span><span style="display:flex"><span>Successfully tagged sampleimage2:latest
+</span></span></code></pre>
+          </div>
+          <p>Docker のイメージの変遷を見るには、 <code>docker image history</code> コマンドが便利です。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker image history sampleimage2
+</span></span><span style="display:flex"><span>IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+</span></span><span style="display:flex"><span>a15d93167abf        5 minutes ago       /bin/sh -c apt-get install -y zip               2.16MB
+</span></span><span style="display:flex"><span>1e8148a63daf        3 days ago          /bin/sh -c apt-get install -y inotify-tools …   158MB
+</span></span><span style="display:flex"><span>1a4d4c3febc6        3 days ago          /bin/sh -c apt-get update                       39.6MB
+</span></span><span style="display:flex"><span>5e2812d1aee1        3 days ago          /bin/sh -c #(nop)  LABEL Description=This im…   0B
+</span></span><span style="display:flex"><span>0458a4468cbc        11 days ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+</span></span><span style="display:flex"><span><missing>           11 days ago         /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B
+</span></span><span style="display:flex"><span><missing>           11 days ago         /bin/sh -c sed -i 's/^#\s*\(deb.*universe\)$…   2.76kB
+</span></span><span style="display:flex"><span><missing>           11 days ago         /bin/sh -c rm -rf /var/lib/apt/lists/*          0B
+</span></span><span style="display:flex"><span><missing>           11 days ago         /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   745B
+</span></span><span style="display:flex"><span><missing>           11 days ago         /bin/sh -c #(nop) ADD file:a3344b835ea6fdc56…   112MB
+</span></span></code></pre>
+          </div>
+          <p>0458a4468cbc となっているところが ubuntu そのものですね。 a15d93167abf となっているところが sampleimage2 となっているイメージです。</p>
+          <p>Docker イメージについて、これでなんとなく仕組みが見えて来たでしょうか。</p>
+          <h3 id="それ以外の文法">それ以外の文法</h3>
+          <p>この辺見ましょう。 <a class="link-card" href="https://docs.docker.com/compose/compose-file/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Compose file reference</span> <span class="link-card__desc">Find the latest recommended version of the Docker Compose file format for defining multi-container …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/compose/compose-file/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>よく使いそうなものはだいたいこの辺でしょうか？</p>
+          <ul>
+            <li>FROM: 前述</li>
+            <li>RUN: 前述</li>
+            <li>COPY: 手元のファイルをコピーしてイメージの方に反映させる</li>
+            <li>CMD: コマンドの実行</li>
+            <li>WORKDIR: RUN, COPY, CMD などの作業対象ディレクトリの指定（無ければ作る）</li>
+          </ul>
+          <p>ちょっと長くなってきてしまったので紹介に留めておきます。 <strong>公式ドキュメント見ましょう！</strong></p>
+          <h2 id="dockerhub-の公式のものをうまく活用する">DockerHub の公式のものをうまく活用する</h2>
+          <p>Dockerfile を自分で書く前に、大事なポイントがあります。</p>
+          <p><strong>車輪の再発明をせずに、今あるものを有効に活用しましょう</strong> ということです。</p>
+          <p>きっとあなたが考える欲しいものは、 他の人の欲しいものであって、みんなが欲しいもののはずなので、 <strong>すでに用意されている可能性が高いです。</strong> だいたいはかゆいところに手が届くようになっています。</p>
+          <p><strong>公式のドキュメント、ならびに Dockerfile をしっかり読み込んでみましょう。</strong> 自ずと Dockerfile の書き方なんかも理解してくるかもしれません。</p>
+          <h3 id="mysql-イメージの例">MySQL イメージの例</h3>
+          <p>前回、前触れもなく突然 mysql:5.7 の Docker イメージを利用しましたが、 もっとこれを掘り下げて見てみます。 ( <a class="link-card" href="https://hub.docker.com/_/mysql/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">mysql - Official Image | Docker Hub</span> <span class="link-card__desc">MySQL is a widely used, open-source relational database management system (RDBMS).</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/mysql/"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )</p>
+          <p><img alt="DockerHub MySQL" src="resource02.jpg"></p>
+          <p>もちろん互換性のある MariaDB も用意されているので、そちらでも構いません。 ( <a class="link-card" href="https://hub.docker.com/_/mariadb/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">mariadb - Official Image | Docker Hub</span> <span class="link-card__desc">MariaDB Server is a high performing open source relational database, forked from MySQL.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/mariadb/"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )</p>
+          <p>環境変数を設定することで、コンテナ起動時にそれを読み取って予め設定できる、というのは前回触れたかと思いますが、 他にも <strong>自分の欲しい環境に近づけるための設定方法が用意されています。</strong> （場合によってはドキュメントにもちゃんと書いてないケースがあるので、 後述する Dockerfile の読み込みもしてみると良いと思います）</p>
+          <h3 id="ケース1データベースを予め作っておいて欲しい">ケース1.データベースを予め作っておいて欲しい</h3>
+          <p>これは前に触れた通りです。</p>
+          <p>勘違いしないで欲しいのは、 Docker にそういう機能があるわけではなく、 Dockerfile 実行時（イメージ作成時）に、この環境変数に何か設定されていたら、 この処理をする、データベース作ったりデータベース用ユーザー作ったりする、 というシェルスクリプトが用意、実行されているからです。</p>
+          <ul>
+            <li>MYSQL_HOST</li>
+            <li>MYSQL_ROOT_PASSWORD</li>
+            <li>MYSQL_DATABASE</li>
+            <li>MYSQL_USER</li>
+            <li>MYSQL_PASSWORD</li>
+            <li>MYSQL_ALLOW_EMPTY_PASSWORD</li>
+            <li>MYSQL_RANDOM_ROOT_PASSWORD</li>
+            <li>MYSQL_ONETIME_PASSWORD</li>
+          </ul>
+          <p>この辺りが DockerHub 公式にある MySQL には用意されているようです。</p>
+          <p><code>MYSQL_RANDOM_ROOT_PASSWORD</code> を yes にすると、ランダムでルートのパスワードを設定してくれるようです。 その挙動のために、 Dockerfile 及びシェルスクリプトには、予め apt-get で pwgen というパッケージをインストールして、 以下のシェルスクリプトを実行しています。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-sh" data-lang="sh"><span style="display:flex"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> ! -z <span style="color:#e6db74">"</span>$MYSQL_RANDOM_ROOT_PASSWORD<span style="color:#e6db74">"</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex"><span>    export MYSQL_ROOT_PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">"</span><span style="color:#66d9ef">$(</span>pwgen -1 32<span style="color:#66d9ef">)</span><span style="color:#e6db74">"</span>
+</span></span><span style="display:flex"><span>    echo <span style="color:#e6db74">"GENERATED ROOT PASSWORD: </span>$MYSQL_ROOT_PASSWORD<span style="color:#e6db74">"</span>
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre>
+          </div>
+          <h3 id="ケース2こっちが持ってる-sql-ファイルを予め実行しておいて欲しい">ケース2.こっちが持ってる SQL ファイルを予め実行しておいて欲しい</h3>
+          <p>あるあるですね。</p>
+          <p>データベースだけでなく、テーブル作ったりレコード突っ込んだり、 あるいは本番環境からダンプして持ってきたダンプデータ（SQL 文）を、そのまま突っ込んで復元したい。</p>
+          <p>こんなケースもみんな考えるので、当然想定されています。</p>
+          <p><img alt="DockerHub MySQL - Initializing a fresh instance" src="resource03.jpg"></p>
+          <p>ポイントだけ抜粋します。</p>
+          <blockquote>
+            <p>it will execute files with extensions .sh, .sql and .sql.gz that are found in /docker-entrypoint-initdb.d.</p>
+          </blockquote>
+          <p>要は <strong>Docker コンテナの <code>/docker-entrypoint-initdb.d</code> というディレクトリに、 拡張子が <code>.sh</code>, <code>.sql</code>, <code>.sql.gz</code> のものを入れておくと、勝手に実行してくれる</strong> とあります。</p>
+          <p>Docker コンテナ側に直接ファイルは置けませんので、穴を開けてやる必要があります。 手順は以下の通りです。</p>
+          <ol>
+            <li>作業用ディレクトリの中にデータベース初期化用ファイルを置けるディレクトリを作る、ここでは init</li>
+            <li>データベース初期化用ファイルを置く（あるだけ全部実行するので、複数の時はアルファベット順に）</li>
+            <li><code>docker run</code> の時は <code>-v $(pwd)/init:/docker-entrypoint-initdb.d</code> オプションをつける、 <code>docker-compose.yml</code> の場合は volumes に <code>init:/docker-entrypoint-initdb.d</code> を加えて <code>docker-compose run -d</code> する</li>
+          </ol>
+          <p>ちなみに、これの設定がなされている Dockerfile 中（正確には呼ばれたシェルスクリプト中）の記述は以下です。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-sh" data-lang="sh"><span style="display:flex"><span><span style="color:#66d9ef">for</span> f in /docker-entrypoint-initdb.d/*; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">"</span>$f<span style="color:#e6db74">"</span> in
+</span></span><span style="display:flex"><span>        *.sh<span style="color:#f92672">)</span>     echo <span style="color:#e6db74">"</span>$0<span style="color:#e6db74">: running </span>$f<span style="color:#e6db74">"</span>; . <span style="color:#e6db74">"</span>$f<span style="color:#e6db74">"</span> ;;
+</span></span><span style="display:flex"><span>        *.sql<span style="color:#f92672">)</span>    echo <span style="color:#e6db74">"</span>$0<span style="color:#e6db74">: running </span>$f<span style="color:#e6db74">"</span>; <span style="color:#e6db74">"</span><span style="color:#e6db74">${</span>mysql[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">"</span> < <span style="color:#e6db74">"</span>$f<span style="color:#e6db74">"</span>; echo ;;
+</span></span><span style="display:flex"><span>        *.sql.gz<span style="color:#f92672">)</span> echo <span style="color:#e6db74">"</span>$0<span style="color:#e6db74">: running </span>$f<span style="color:#e6db74">"</span>; gunzip -c <span style="color:#e6db74">"</span>$f<span style="color:#e6db74">"</span> | <span style="color:#e6db74">"</span><span style="color:#e6db74">${</span>mysql[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">"</span>; echo ;;
+</span></span><span style="display:flex"><span>        *<span style="color:#f92672">)</span>        echo <span style="color:#e6db74">"</span>$0<span style="color:#e6db74">: ignoring </span>$f<span style="color:#e6db74">"</span> ;;
+</span></span><span style="display:flex"><span>    <span style="color:#66d9ef">esac</span>
+</span></span><span style="display:flex"><span>    echo
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre>
+          </div>
+          <p>当然自分でそういうイメージを作る経験も大事ですが、 すでに用意されていることを知らずに、それが最短だと信じて無駄な苦労をするのは良くないです。 <strong>適切にレールに乗っていきましょう。</strong></p>
+          <h3 id="ケース3すでにコンテナ内であれこれやったデータベースをダンプしたい取り出したい">ケース3.すでにコンテナ内であれこれやったデータベースをダンプしたい（取り出したい）</h3>
+          <p>若干話逸れてきますが、これもあるあるなので。</p>
+          <p><img alt="DockerHub MySQL - Creating database dumps" src="resource04.jpg"></p>
+          <p><code>docker exec</code> を使った例があるので抜粋します。（長いので改行入れました）</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker exec some-mysql sh -c \
+</span></span><span style="display:flex"><span>'exec mysqldump --all-databases -uroot -p"$MYSQL_ROOT_PASSWORD"' > \
+</span></span><span style="display:flex"><span>/some/path/on/your/host/all-databases.sql
+</span></span></code></pre>
+          </div>
+          <p>これは何をやっているかというと、 以前紹介した Docker コンテナに対して追加で何かを実行させるコマンドである、 <code>docker exec</code> コマンドを使って、インラインでシェルスクリプトを渡しています。 （<code>sh -c 'script ...</code> の部分）</p>
+          <p>これもコンテナの中に入ってあれこれやる、という考え方ではなく、 追加で Docker コンテナに対して任意のコマンドを実行してやる、という考え方です。</p>
+          <h4 id="別解">別解？</h4>
+          <p>なお、上でも良いのですが、 Docker コンテナに追加で実行する <code>docker exec</code> を使って、 もっとシンプルに以下のように書けると思います。 （たぶんこれも問題ないですよね？）</p>
+          <pre><code>docker exec -it [containername] mysqldump --all-databases -u[user] -p[pass] > dump.sql
+</code></pre>
+          <h3 id="先人の知恵をもっと知ろう">先人の知恵をもっと知ろう</h3>
+          <p>一般的なケースであれば、大抵の場合には公式のイメージで事足りるはずです。</p>
+          <p>MySQL の例で言えば、 Dockerfile がリンク先で GitHub 上で公開されています。 ( <a class="link-card" href="https://github.com/docker-library/mysql" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - docker-library/mysql: Docker Official Image packaging for MySQL Community Server</span> <span class="link-card__desc">Docker Official Image packaging for MySQL Community Server - docker-library/mysql</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/docker-library/mysql"> github.com</span></span><span class="link-card__image"><img alt="GitHub - docker-library/mysql: Docker Official Image packaging for MySQL Community Server" loading="lazy" src="https://opengraph.githubassets.com/3dcb7824db153473de9b0c047e320a374b9f59ee2cded20ae1433371602efd63/docker-library/mysql"></span></a>)</p>
+          <p><img alt="GitHub docker-library/mysql" src="resource05.jpg"></p>
+          <p>バージョンごとの <code>Dockerfile</code> 、及びそこから呼び出している <code>docker-entrypoint.sh</code> をざっと見るだけでも、 どういうイメージの利用のされ方を想定されているか、少し見えてくるかと思います。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>コンテナを利用してやりたいことは、 DockerHub にある公式を見ると大抵すでにあったりします。 自分で書こうとする前に、既存のものを利用できないか考えてみましょう。</p>
+          <p>本当はここまでで終わりたかったのに、まだ自分で環境を作るところまで行かない・・・。</p>
+          <p>次回でたぶん終わりまで行くと思います・・・。続きます。</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://docs.docker.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Home</span> <span class="link-card__desc">Docker Documentation is the official Docker library of resources, manuals, and guides to help you …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a class="link-card" href="https://hub.docker.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Docker Hub Container Image Library | App Containerization</span> <span class="link-card__desc">Welcome to the world&amp;#x27;s largest container registry built for developers and open source …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/"> hub.docker.com</span></span><span class="link-card__image"><img alt="Docker Hub Container Image Library | App Containerization" loading="lazy" src="https://dockerstatic.com/hub-ui/kzxxphbs.png"></span></a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/docker/">#Docker</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Docker%20%e5%86%8d%e5%85%a5%e9%96%802018%20-%20%e3%82%a8%e3%82%b3%e3%82%b7%e3%82%b9%e3%83%86%e3%83%a0%e7%b7%a8%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20180207/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20180207%2f&amp;text=Docker%20%e5%86%8d%e5%85%a5%e9%96%802018%20-%20%e3%82%a8%e3%82%b3%e3%82%b7%e3%82%b9%e3%83%86%e3%83%a0%e7%b7%a8" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20180207/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

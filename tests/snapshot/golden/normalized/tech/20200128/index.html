@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Hugo をしばらく触ってなかったので、わかりやすくまとめ直した | ばうあーろぐ</title>
+    <meta content="タイトルの通りです。
+インプット・アウトプットを色々見直そうと思った一環なのですが、
+しばらく触っていなかった Hugo (Static Site Generator) のテンプレートをあれこれ見直していたら、
+なんだかよく分からない機能があれこれ増えていて、あるいはすっかり忘れてしまった機能もあったりしたので、改めて調べてみた記録です。
+
+Hugo めっちゃ軽くて、 markdown や黒い画面とか触る人にはめっちゃおすすめな Static Site Generator なので、
+使いたいけどよく分からない人は、こちらをさくっと読んでどんどん使っていったらいいと思います。
+ページにどのような種類（Kind）があるか？
+まずページの種類を把握しないことにはなんともならないので、どういったものがあるか調べます。
+
+Home Page
+
+トップページ
+トップページも結局リストなので、対応記事は存在しない
+
+
+Regular Pages
+
+通常ページ、詳細ページ
+content/ 以下にある記事（ sample.md とか tech/20200128.md とか）が1対1に紐づいて表示される
+
+
+Section List Pages
+
+セクション一覧ページ（カテゴリーとは異なる）
+content/ 以下にディレクトリを作ると、それがセクションとなる
+つまり2つ以上のセクションにまたがった記事は存在しない
+content/xxx/_index.md を作ることで、セクション一覧用の記事を作ることができる
+
+
+Taxonomy Terms Pages
+
+タクソノミー一覧ページ タクソノミーに属する記事一覧ページ
+いわゆるタグ一覧ページ、カテゴリー一覧ページ
+リストの対象が記事ではなく、タクソノミー自体の一覧
+
+
+Taxonomy List Pages
+
+タクソノミーに属する記事一覧ページ タクソノミー一覧ページ
+いわゆるタグに属する記事一覧、カテゴリーに属する記事一覧がそれに相当する
+ちなみに categories, tags のタクソノミーは最初からある
+
+
+
+2/13 追記: taxonomy と taxonomyTerm の説明が逆になっていたので修正（すみません・・・）
+ああ、この辺過去に理解したつもりだったけどすっかり忘れてました・・・。
+特に セクションとカテゴリーを混同しやすい ので注意が必要かもしれません。
+カテゴリーもタグと同じく複数のカテゴリーに属することができるので、どこか必ず一つにのみ属するものが必要なのであれば、セクションを活用すべきですね。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20200128/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20200128" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Hugo をしばらく触ってなかったので、わかりやすくまとめ直した" itemprop="name">
+    <meta content="タイトルの通りです。
+インプット・アウトプットを色々見直そうと思った一環なのですが、
+しばらく触っていなかった Hugo (Static Site Generator) のテンプレートをあれこれ見直していたら、
+なんだかよく分からない機能があれこれ増えていて、あるいはすっかり忘れてしまった機能もあったりしたので、改めて調べてみた記録です。
+
+Hugo めっちゃ軽くて、 markdown や黒い画面とか触る人にはめっちゃおすすめな Static Site Generator なので、
+使いたいけどよく分からない人は、こちらをさくっと読んでどんどん使っていったらいいと思います。
+ページにどのような種類（Kind）があるか？
+まずページの種類を把握しないことにはなんともならないので、どういったものがあるか調べます。
+
+Home Page
+
+トップページ
+トップページも結局リストなので、対応記事は存在しない
+
+
+Regular Pages
+
+通常ページ、詳細ページ
+content/ 以下にある記事（ sample.md とか tech/20200128.md とか）が1対1に紐づいて表示される
+
+
+Section List Pages
+
+セクション一覧ページ（カテゴリーとは異なる）
+content/ 以下にディレクトリを作ると、それがセクションとなる
+つまり2つ以上のセクションにまたがった記事は存在しない
+content/xxx/_index.md を作ることで、セクション一覧用の記事を作ることができる
+
+
+Taxonomy Terms Pages
+
+タクソノミー一覧ページ タクソノミーに属する記事一覧ページ
+いわゆるタグ一覧ページ、カテゴリー一覧ページ
+リストの対象が記事ではなく、タクソノミー自体の一覧
+
+
+Taxonomy List Pages
+
+タクソノミーに属する記事一覧ページ タクソノミー一覧ページ
+いわゆるタグに属する記事一覧、カテゴリーに属する記事一覧がそれに相当する
+ちなみに categories, tags のタクソノミーは最初からある
+
+
+
+2/13 追記: taxonomy と taxonomyTerm の説明が逆になっていたので修正（すみません・・・）
+ああ、この辺過去に理解したつもりだったけどすっかり忘れてました・・・。
+特に セクションとカテゴリーを混同しやすい ので注意が必要かもしれません。
+カテゴリーもタグと同じく複数のカテゴリーに属することができるので、どこか必ず一つにのみ属するものが必要なのであれば、セクションを活用すべきですね。" itemprop="description">
+    <meta content="Hugo をしばらく触ってなかったので、わかりやすくまとめ直した" property="og:title">
+    <meta content="タイトルの通りです。
+インプット・アウトプットを色々見直そうと思った一環なのですが、
+しばらく触っていなかった Hugo (Static Site Generator) のテンプレートをあれこれ見直していたら、
+なんだかよく分からない機能があれこれ増えていて、あるいはすっかり忘れてしまった機能もあったりしたので、改めて調べてみた記録です。
+
+Hugo めっちゃ軽くて、 markdown や黒い画面とか触る人にはめっちゃおすすめな Static Site Generator なので、
+使いたいけどよく分からない人は、こちらをさくっと読んでどんどん使っていったらいいと思います。
+ページにどのような種類（Kind）があるか？
+まずページの種類を把握しないことにはなんともならないので、どういったものがあるか調べます。
+
+Home Page
+
+トップページ
+トップページも結局リストなので、対応記事は存在しない
+
+
+Regular Pages
+
+通常ページ、詳細ページ
+content/ 以下にある記事（ sample.md とか tech/20200128.md とか）が1対1に紐づいて表示される
+
+
+Section List Pages
+
+セクション一覧ページ（カテゴリーとは異なる）
+content/ 以下にディレクトリを作ると、それがセクションとなる
+つまり2つ以上のセクションにまたがった記事は存在しない
+content/xxx/_index.md を作ることで、セクション一覧用の記事を作ることができる
+
+
+Taxonomy Terms Pages
+
+タクソノミー一覧ページ タクソノミーに属する記事一覧ページ
+いわゆるタグ一覧ページ、カテゴリー一覧ページ
+リストの対象が記事ではなく、タクソノミー自体の一覧
+
+
+Taxonomy List Pages
+
+タクソノミーに属する記事一覧ページ タクソノミー一覧ページ
+いわゆるタグに属する記事一覧、カテゴリーに属する記事一覧がそれに相当する
+ちなみに categories, tags のタクソノミーは最初からある
+
+
+
+2/13 追記: taxonomy と taxonomyTerm の説明が逆になっていたので修正（すみません・・・）
+ああ、この辺過去に理解したつもりだったけどすっかり忘れてました・・・。
+特に セクションとカテゴリーを混同しやすい ので注意が必要かもしれません。
+カテゴリーもタグと同じく複数のカテゴリーに属することができるので、どこか必ず一つにのみ属するものが必要なのであれば、セクションを活用すべきですね。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20200128/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Hugo をしばらく触ってなかったので、わかりやすくまとめ直した" name="twitter:title">
+    <meta content="タイトルの通りです。
+インプット・アウトプットを色々見直そうと思った一環なのですが、
+しばらく触っていなかった Hugo (Static Site Generator) のテンプレートをあれこれ見直していたら、
+なんだかよく分からない機能があれこれ増えていて、あるいはすっかり忘れてしまった機能もあったりしたので、改めて調べてみた記録です。
+
+Hugo めっちゃ軽くて、 markdown や黒い画面とか触る人にはめっちゃおすすめな Static Site Generator なので、
+使いたいけどよく分からない人は、こちらをさくっと読んでどんどん使っていったらいいと思います。
+ページにどのような種類（Kind）があるか？
+まずページの種類を把握しないことにはなんともならないので、どういったものがあるか調べます。
+
+Home Page
+
+トップページ
+トップページも結局リストなので、対応記事は存在しない
+
+
+Regular Pages
+
+通常ページ、詳細ページ
+content/ 以下にある記事（ sample.md とか tech/20200128.md とか）が1対1に紐づいて表示される
+
+
+Section List Pages
+
+セクション一覧ページ（カテゴリーとは異なる）
+content/ 以下にディレクトリを作ると、それがセクションとなる
+つまり2つ以上のセクションにまたがった記事は存在しない
+content/xxx/_index.md を作ることで、セクション一覧用の記事を作ることができる
+
+
+Taxonomy Terms Pages
+
+タクソノミー一覧ページ タクソノミーに属する記事一覧ページ
+いわゆるタグ一覧ページ、カテゴリー一覧ページ
+リストの対象が記事ではなく、タクソノミー自体の一覧
+
+
+Taxonomy List Pages
+
+タクソノミーに属する記事一覧ページ タクソノミー一覧ページ
+いわゆるタグに属する記事一覧、カテゴリーに属する記事一覧がそれに相当する
+ちなみに categories, tags のタクソノミーは最初からある
+
+
+
+2/13 追記: taxonomy と taxonomyTerm の説明が逆になっていたので修正（すみません・・・）
+ああ、この辺過去に理解したつもりだったけどすっかり忘れてました・・・。
+特に セクションとカテゴリーを混同しやすい ので注意が必要かもしれません。
+カテゴリーもタグと同じく複数のカテゴリーに属することができるので、どこか必ず一つにのみ属するものが必要なのであれば、セクションを活用すべきですね。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Hugo をしばらく触ってなかったので、わかりやすくまとめ直した</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2020-01-28 17:00:00 +0900 JST">2020/01/28</time> <span>(Updated: 2020/02/13)</span></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>タイトルの通りです。</p>
+          <p>インプット・アウトプットを色々見直そうと思った一環なのですが、 しばらく触っていなかった Hugo (Static Site Generator) のテンプレートをあれこれ見直していたら、 なんだかよく分からない機能があれこれ増えていて、あるいはすっかり忘れてしまった機能もあったりしたので、改めて調べてみた記録です。</p>
+          <p><img alt="Hugo" src="resource01.jpg"></p>
+          <p>Hugo めっちゃ軽くて、 markdown や黒い画面とか触る人にはめっちゃおすすめな Static Site Generator なので、 使いたいけどよく分からない人は、こちらをさくっと読んでどんどん使っていったらいいと思います。</p>
+          <h2 id="ページにどのような種類kindがあるか">ページにどのような種類（Kind）があるか？</h2>
+          <p>まずページの種類を把握しないことにはなんともならないので、どういったものがあるか調べます。</p>
+          <ul>
+            <li>
+              <strong>Home Page</strong>
+              <ul>
+                <li>トップページ</li>
+                <li>トップページも結局リストなので、対応記事は存在しない</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Regular Pages</strong>
+              <ul>
+                <li>通常ページ、詳細ページ</li>
+                <li><code>content/</code> 以下にある記事（ <code>sample.md</code> とか <code>tech/20200128.md</code> とか）が1対1に紐づいて表示される</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Section List Pages</strong>
+              <ul>
+                <li>セクション一覧ページ（カテゴリーとは異なる）</li>
+                <li><code>content/</code> 以下にディレクトリを作ると、それがセクションとなる</li>
+                <li>つまり2つ以上のセクションにまたがった記事は存在しない</li>
+                <li><code>content/xxx/_index.md</code> を作ることで、セクション一覧用の記事を作ることができる</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Taxonomy Terms Pages</strong>
+              <ul>
+                <li>
+                  タクソノミー一覧ページ
+                  <del>タクソノミーに属する記事一覧ページ</del>
+                </li>
+                <li>いわゆるタグ一覧ページ、カテゴリー一覧ページ</li>
+                <li>リストの対象が記事ではなく、タクソノミー自体の一覧</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Taxonomy List Pages</strong>
+              <ul>
+                <li>
+                  タクソノミーに属する記事一覧ページ
+                  <del>タクソノミー一覧ページ</del>
+                </li>
+                <li>いわゆるタグに属する記事一覧、カテゴリーに属する記事一覧がそれに相当する</li>
+                <li>ちなみに <code>categories</code>, <code>tags</code> のタクソノミーは最初からある</li>
+              </ul>
+            </li>
+          </ul>
+          <p><strong>2/13 追記: taxonomy と taxonomyTerm の説明が逆になっていたので修正（すみません・・・）</strong></p>
+          <p>ああ、この辺過去に理解したつもりだったけどすっかり忘れてました・・・。</p>
+          <p>特に <strong>セクションとカテゴリーを混同しやすい</strong> ので注意が必要かもしれません。 カテゴリーもタグと同じく複数のカテゴリーに属することができるので、どこか必ず一つにのみ属するものが必要なのであれば、セクションを活用すべきですね。</p>
+          <p>一方でカテゴリーはあくまでタクソノミーの一種類でしかすぎません。 <code>categories</code> や <code>tags</code> とは異なるタクソノミーを独自に作ることも可能です。</p>
+          <p>もしややこしくてどちらか使いたくないのであれば、 <code>config.toml</code> の設定ファイル内に <code>disableKinds</code> を定義して、 <code>home</code>, <code>page</code>, <code>section</code>, <code>taxonomy</code>, <code>taxonomyTerm</code> のいずれか、または複数指定して無効化すれば、混乱することもなくなるかもしれません。</p>
+          <h2 id="テンプレートの表示順序について">テンプレートの表示順序について</h2>
+          <p>先に Base テンプレートの仕組みを理解する必要があります。</p>
+          <h3 id="base-テンプレート">Base テンプレート</h3>
+          <p>名前の通りベースのテンプレートとして使われるやつです。知っておくべきルールは以下あたりです。</p>
+          <ol>
+            <li>すべての HTML の共通部分を頭から（<code>&lt;!DOCTYPE HTML&gt;</code> から）全部書く</li>
+            <li>特になければ <code>layouts/_default/baseof.html</code> に配置する</li>
+            <li>セクションごとに特化した Base テンプレートは <code>layouts/[section_name]/baseof.html</code> に配置すると優先して使われる</li>
+            <li>テンプレート内でブロックを定義 <code>{{ block "main" . }}{{ end }}</code> して、後に続くテンプレート階層で必要に応じてブロック単位で上書きして使う</li>
+          </ol>
+          <p>最後のルールがちょっと分かりづらい（最初知らなかった）ので掘り下げます。</p>
+          <pre tabindex="0"><code>layouts/_default/baseof.html
+
+<!DOCTYPE HTML>
+（略）
+<main role="main">
+{{ block "main" . }}
+<h1>ベースのページです</h1>
+{{ end }}
+</main>
+</code></pre>
+          <p><code>layouts/_default/baseof.html</code> の方に block を指定します。</p>
+          <pre tabindex="0"><code>layouts/_default/list.html
+
+{{ define "main" }}
+<h1>一覧ページです</h1>
+{{ end }}
+</code></pre>
+          <p>そして <code>layouts/_default/list.html</code> などのテンプレートに define を指定します。</p>
+          <p>こうすると、レンダリング結果として以下のようになります。</p>
+          <pre tabindex="0"><code><!DOCTYPE HTML>
+（略）
+<main role="main">
+<h1>一覧ページです</h1>
+</main>
+</code></pre>
+          <p>もし仮に <code>layouts/_default/list.html</code> のテンプレートが存在してなければ、存在していても <code>define "main"</code> で上書きされていなければ、 <code>ベースのページです</code> とそのまま表示されます。</p>
+          <p>つまり、共通のものはできるだけ <code>baseof.html</code> の方に書いて、あとで差分が出そうなところを <code>block</code> で上書きできるように準備しつつ、 Base テンプレート以外のテンプレート階層のファイルで必要に応じて上書きしていきます。</p>
+          <p>詳しくはこちら。 <a class="link-card" href="https://gohugo.io/templates/base/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Template types</span> <span class="link-card__desc">Create templates of different types to render your content, resources, and data.</span><span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://gohugo.io/templates/base/"> gohugo.io</span></span><span class="link-card__image"><img alt="Template types" loading="lazy" src="https://gohugo.io/opengraph/gohugoio-card-base-1_hu_f36ecec5c28b6977.png"></span></a></p>
+          <h3 id="home-テンプレート"><code>Home</code> テンプレート</h3>
+          <p>ということで、ここから先は Base テンプレートで定義してある前提の話です。</p>
+          <ol>
+            <li><code>baseof.html</code> テンプレートを基準に描画</li>
+            <li><code>layouts/index.html</code> で必要に応じて <code>block</code> を上書き</li>
+            <li>上記を用意していなければ <code>layouts/_default/list.html</code> が使われる</li>
+          </ol>
+          <h3 id="regular-pages-テンプレート"><code>Regular Pages</code> テンプレート</h3>
+          <p>いわゆる詳細ページのテンプレートです。</p>
+          <ol>
+            <li><code>baseof.html</code> テンプレートを基準に描画</li>
+            <li><code>layouts/_default/single.html</code> で必要に応じて <code>block</code> を上書き</li>
+            <li>特定のセクションでレイアウトを変えたいときは <code>layouts/[section_name]/single.html</code> に配置すると優先して上書き</li>
+          </ol>
+          <h3 id="section-list-pages-テンプレート"><code>Section List Pages</code> テンプレート</h3>
+          <p>セクション一覧のテンプレートです。</p>
+          <ol>
+            <li><code>baseof.html</code> テンプレートを基準に描画</li>
+            <li><code>layouts/_default/section.html</code> で必要に応じて <code>block</code> を上書き</li>
+            <li>上記を用意していなければ <code>layouts/_default/list.html</code> が使われる</li>
+            <li>特定のセクションでレイアウトを変えたいときは <code>layouts/[section_name]/section.html</code> に配置すると優先して上書き</li>
+          </ol>
+          <h3 id="taxonomy-terms-pages-テンプレート"><code>Taxonomy Terms Pages</code> テンプレート</h3>
+          <p>いわゆるタグやカテゴリに属する記事一覧のテンプレートです。</p>
+          <ol>
+            <li><code>baseof.html</code> テンプレートを基準に描画</li>
+            <li><code>layouts/_default/terms.html</code> で必要に応じて <code>block</code> を上書き</li>
+            <li>上記を用意していなければ <code>layouts/_default/list.html</code> が使われる</li>
+            <li>特定のタクソノミーでレイアウトを変えたいときは <code>layouts/[taxonomy_name]/terms.html</code> に配置すると優先して上書き</li>
+          </ol>
+          <p>ちなみにここでいう <code>[taxonomy_name]</code> は、すでに用意してある <code>categories</code> や <code>tags</code> が相当します。</p>
+          <h3 id="taxonomy-list-pages-テンプレート"><code>Taxonomy List Pages</code> テンプレート</h3>
+          <p>タグやカテゴリ自体の一覧テンプレートです。</p>
+          <ol>
+            <li><code>baseof.html</code> テンプレートを基準に描画</li>
+            <li><code>layouts/_default/taxonomy.html</code> で必要に応じて <code>block</code> を上書き</li>
+            <li>上記を用意していなければ <code>layouts/_default/list.html</code> が使われる</li>
+            <li>特定のタクソノミーでレイアウトを変えたいときは <code>layouts/[taxonomy_name]/taxonomy.html</code> に配置すると優先して上書き</li>
+          </ol>
+          <h3 id="それ以外のテンプレート階層について">それ以外のテンプレート階層について</h3>
+          <p>種別としては上記までですべて出てるので、他のものは覚える必要はありません。</p>
+          <p>例えば <code>Home</code> テンプレートは <code>index.html</code> だけではなく <code>home.html</code> という名前で配置すれば同じようにアクセスできたり、 一部テンプレートは <code>list.html.html</code> などという <code>.html</code> が重複してても良いようなルールになっているらしかったり、 この辺が Hugo を若干複雑にしてきてる感があるのですが、もうちょっと簡素にしちゃってもいいんじゃないかなあとは思います。</p>
+          <h2 id="独自テーマの作り方">独自テーマの作り方</h2>
+          <p>上記テンプレート階層のルールを把握しておけば、あとは既存のテーマを参考にしながら作ると非常にスムーズだと思います。</p>
+          <p><a class="link-card" href="https://gohugo.io/getting-started/quick-start/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Quick start</span> <span class="link-card__desc">Create your first Hugo project.</span><span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://gohugo.io/getting-started/quick-start/"> gohugo.io</span></span><span class="link-card__image"><img alt="Quick start" loading="lazy" src="https://gohugo.io/opengraph/gohugoio-card-base-1_hu_e85096a8b624192c.png"></span></a></p>
+          <p>Quick Start でも紹介されている Ananke というテーマが都合が良いかもしれません。</p>
+          <p><img alt="Hugo" src="resource02.jpg"></p>
+          <p><a href="https://themes.gohugo.io/gohugo-theme-ananke/" rel="noopener noreferrer" target="_blank">https://themes.gohugo.io/gohugo-theme-ananke/</a></p>
+          <p>こちらのテーマは機能がすべて入っているため、公式の Quick Start でも紹介されていて、テーマの勉強ついでに触ってみるのも良いですね。</p>
+          <p>あるいは僕が今やっている方法なのですが、 <code>layouts/_default/baseof.html</code> だけをまず先に作って、 必要なページをすべて表示した状態で徐々にテンプレートを追加していくのもありだと思います。 （それで階層構造を把握しつつ公式ドキュメントを読んでたりしてました）</p>
+          <h3 id="おまけ知識">おまけ知識</h3>
+          <p>あとはおまけ知識です。</p>
+          <ul>
+            <li>
+              日付のフォーマットは Golang なので、 <strong>日付は必ず2006年01月02日</strong> を使う必要があります
+              <ul>
+                <li>詳しくはここ <a class="link-card" href="https://golang.org/pkg/time/#pkg-constants" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">time package - time - Go Packages</span> <span class="link-card__desc">Package time provides functionality for measuring and displaying time.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://golang.org/pkg/time/#pkg-constants"> golang.org</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+                <li><code>YYYYMMDD</code> みたいな書き方ではない</li>
+                <li>たぶん英語的な表示順で 01, 02… とついてるので、英語的に見るとわかりやすいのかもしれないが、年から並べると意味不明なのでこれはよくない</li>
+              </ul>
+            </li>
+            <li>
+              <code>&lt;head /&gt;</code> 内に定義するよくあるやつは、 <code>_internal</code> テンプレートとして予め用意されてる
+              <ul>
+                <li><a class="link-card" href="https://gohugo.io/templates/internal/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Embedded partial templates</span> <span class="link-card__desc">Hugo provides embedded partial templates for common use cases.</span><span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://gohugo.io/templates/internal/"> gohugo.io</span></span><span class="link-card__image"><img alt="Embedded partial templates" loading="lazy" src="https://gohugo.io/opengraph/gohugoio-card-base-1_hu_ca0ab157a4cb7740.png"></span></a></li>
+              </ul>
+            </li>
+            <li>
+              よく使う CLI コマンドは <code>hugo server</code>, <code>hugo</code> あたり
+              <ul>
+                <li><code>draft: true</code> の記事が localhost で表示されなくてハマるので <code>hugo server --buildDrafts</code> で起動するか <code>config.toml</code> の <code>buildDrafts</code> オプションで設定する</li>
+              </ul>
+            </li>
+            <li><code>{{- xxx -}}</code> のように、前後に <code>-</code> を入れることで、 HTML 出力時に改行やインデントをカットできる</li>
+          </ul>
+          <p>これ以上は実際に触ってみた方が早いです！ <strong>Let’s try!</strong></p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>恒例の締めなんですが、公式ドキュメントをちゃんと読みましょうってことですね。</p>
+          <p>分からないことの9割以上は公式のドキュメントに書いてあるはずなので、それをじっくり読みながら試しながらでやっていくといいと思います。</p>
+          <h2 id="参考-url">参考 URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">The world</span> <span class="link-card__desc">Hugo is one of the most popular open-source static site generators. With its amazing speed and …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://gohugo.io/"> gohugo.io</span></span><span class="link-card__image"><img alt="The world" loading="lazy" src="https://gohugo.io/featured.png"></span></a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/hugo/">#Hugo</a> <a class="tag-link" href="/tags/static-site-generator/">#Static Site Generator</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Hugo%20%e3%82%92%e3%81%97%e3%81%b0%e3%82%89%e3%81%8f%e8%a7%a6%e3%81%a3%e3%81%a6%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f%e3%81%ae%e3%81%a7%e3%80%81%e3%82%8f%e3%81%8b%e3%82%8a%e3%82%84%e3%81%99%e3%81%8f%e3%81%be%e3%81%a8%e3%82%81%e7%9b%b4%e3%81%97%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20200128/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20200128%2f&amp;text=Hugo%20%e3%82%92%e3%81%97%e3%81%b0%e3%82%89%e3%81%8f%e8%a7%a6%e3%81%a3%e3%81%a6%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f%e3%81%ae%e3%81%a7%e3%80%81%e3%82%8f%e3%81%8b%e3%82%8a%e3%82%84%e3%81%99%e3%81%8f%e3%81%be%e3%81%a8%e3%82%81%e7%9b%b4%e3%81%97%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20200128/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

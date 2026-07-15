@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>今思えば知らずに損してたコマンドラインのあれこれ | ばうあーろぐ</title>
+    <meta content="今でこそ iTerm2 を全面に表示して、
+tmux でセッション、ウィンドウ、ペインごとに分けて、
+ターミナル内の Vim であれこれやってるわけですが、
+始めたての頃はコマンドラインに慣れるまで大変でした。
+今振り返って、これを知ってから or 使うようになってから、
+劇的に変わったなあと思うようなものがあるので、
+それらをメモ代わりに残しておきます。
+今年からターミナルを使いこなしたい！ と思っている方におすすめします。
+Emacs, Vi 両方のキーバインドを最低限知っておく
+これはエディタの話ではなく、コマンドラインであれこれやるにあたって
+両方のキーバインドを最低限知っておく必要があった という意味です。
+僕の環境設定の考え方の話になるのですが、
+なんでもかんでも自分の使いやすいように変えていくのではなく、
+よくある標準の設定をベースにしつつ、より良い設定を邪魔せず上乗せしていく形
+を取りたいといつも思っています。
+コマンドラインを使っていくに従って、
+標準の設定というのがとても良く考えられていることに段々気づいていく と思います。
+当然なのですが、その標準の設定を考えた人というのがいるわけで、
+すべてのことには理由があるので、
+仮にその理由を知らなかったとしても
+その標準の設定に合わせることで
+自然とそのメリットを享受できる ことも出てきます。
+シェルスクリプトはもともと Emacs 風
+bash や zsh などのシェルでは、キーバインドのモードを切り替える設定が用意されています。
+# bash
+set -o vi
+
+# zsh
+bindkey -v
+
+上記はともに Vi モードに切り替える設定なのですが、
+設定を変更しない場合、 標準で Emacs 風 になっています。
+ここで仮に Ctrl-a で行頭に移動、 Ctrl-e で行末に移動、 Ctrl-w で1単語分の削除、
+などの Emacs 上での操作を知っていると、
+何も設定していないターミナル上で Emacs 風キーバインドで操作できる ことになります。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20170114/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20170114" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="今思えば知らずに損してたコマンドラインのあれこれ" itemprop="name">
+    <meta content="今でこそ iTerm2 を全面に表示して、
+tmux でセッション、ウィンドウ、ペインごとに分けて、
+ターミナル内の Vim であれこれやってるわけですが、
+始めたての頃はコマンドラインに慣れるまで大変でした。
+今振り返って、これを知ってから or 使うようになってから、
+劇的に変わったなあと思うようなものがあるので、
+それらをメモ代わりに残しておきます。
+今年からターミナルを使いこなしたい！ と思っている方におすすめします。
+Emacs, Vi 両方のキーバインドを最低限知っておく
+これはエディタの話ではなく、コマンドラインであれこれやるにあたって
+両方のキーバインドを最低限知っておく必要があった という意味です。
+僕の環境設定の考え方の話になるのですが、
+なんでもかんでも自分の使いやすいように変えていくのではなく、
+よくある標準の設定をベースにしつつ、より良い設定を邪魔せず上乗せしていく形
+を取りたいといつも思っています。
+コマンドラインを使っていくに従って、
+標準の設定というのがとても良く考えられていることに段々気づいていく と思います。
+当然なのですが、その標準の設定を考えた人というのがいるわけで、
+すべてのことには理由があるので、
+仮にその理由を知らなかったとしても
+その標準の設定に合わせることで
+自然とそのメリットを享受できる ことも出てきます。
+シェルスクリプトはもともと Emacs 風
+bash や zsh などのシェルでは、キーバインドのモードを切り替える設定が用意されています。
+# bash
+set -o vi
+
+# zsh
+bindkey -v
+
+上記はともに Vi モードに切り替える設定なのですが、
+設定を変更しない場合、 標準で Emacs 風 になっています。
+ここで仮に Ctrl-a で行頭に移動、 Ctrl-e で行末に移動、 Ctrl-w で1単語分の削除、
+などの Emacs 上での操作を知っていると、
+何も設定していないターミナル上で Emacs 風キーバインドで操作できる ことになります。" itemprop="description">
+    <meta content="今思えば知らずに損してたコマンドラインのあれこれ" property="og:title">
+    <meta content="今でこそ iTerm2 を全面に表示して、
+tmux でセッション、ウィンドウ、ペインごとに分けて、
+ターミナル内の Vim であれこれやってるわけですが、
+始めたての頃はコマンドラインに慣れるまで大変でした。
+今振り返って、これを知ってから or 使うようになってから、
+劇的に変わったなあと思うようなものがあるので、
+それらをメモ代わりに残しておきます。
+今年からターミナルを使いこなしたい！ と思っている方におすすめします。
+Emacs, Vi 両方のキーバインドを最低限知っておく
+これはエディタの話ではなく、コマンドラインであれこれやるにあたって
+両方のキーバインドを最低限知っておく必要があった という意味です。
+僕の環境設定の考え方の話になるのですが、
+なんでもかんでも自分の使いやすいように変えていくのではなく、
+よくある標準の設定をベースにしつつ、より良い設定を邪魔せず上乗せしていく形
+を取りたいといつも思っています。
+コマンドラインを使っていくに従って、
+標準の設定というのがとても良く考えられていることに段々気づいていく と思います。
+当然なのですが、その標準の設定を考えた人というのがいるわけで、
+すべてのことには理由があるので、
+仮にその理由を知らなかったとしても
+その標準の設定に合わせることで
+自然とそのメリットを享受できる ことも出てきます。
+シェルスクリプトはもともと Emacs 風
+bash や zsh などのシェルでは、キーバインドのモードを切り替える設定が用意されています。
+# bash
+set -o vi
+
+# zsh
+bindkey -v
+
+上記はともに Vi モードに切り替える設定なのですが、
+設定を変更しない場合、 標準で Emacs 風 になっています。
+ここで仮に Ctrl-a で行頭に移動、 Ctrl-e で行末に移動、 Ctrl-w で1単語分の削除、
+などの Emacs 上での操作を知っていると、
+何も設定していないターミナル上で Emacs 風キーバインドで操作できる ことになります。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20170114/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="今思えば知らずに損してたコマンドラインのあれこれ" name="twitter:title">
+    <meta content="今でこそ iTerm2 を全面に表示して、
+tmux でセッション、ウィンドウ、ペインごとに分けて、
+ターミナル内の Vim であれこれやってるわけですが、
+始めたての頃はコマンドラインに慣れるまで大変でした。
+今振り返って、これを知ってから or 使うようになってから、
+劇的に変わったなあと思うようなものがあるので、
+それらをメモ代わりに残しておきます。
+今年からターミナルを使いこなしたい！ と思っている方におすすめします。
+Emacs, Vi 両方のキーバインドを最低限知っておく
+これはエディタの話ではなく、コマンドラインであれこれやるにあたって
+両方のキーバインドを最低限知っておく必要があった という意味です。
+僕の環境設定の考え方の話になるのですが、
+なんでもかんでも自分の使いやすいように変えていくのではなく、
+よくある標準の設定をベースにしつつ、より良い設定を邪魔せず上乗せしていく形
+を取りたいといつも思っています。
+コマンドラインを使っていくに従って、
+標準の設定というのがとても良く考えられていることに段々気づいていく と思います。
+当然なのですが、その標準の設定を考えた人というのがいるわけで、
+すべてのことには理由があるので、
+仮にその理由を知らなかったとしても
+その標準の設定に合わせることで
+自然とそのメリットを享受できる ことも出てきます。
+シェルスクリプトはもともと Emacs 風
+bash や zsh などのシェルでは、キーバインドのモードを切り替える設定が用意されています。
+# bash
+set -o vi
+
+# zsh
+bindkey -v
+
+上記はともに Vi モードに切り替える設定なのですが、
+設定を変更しない場合、 標準で Emacs 風 になっています。
+ここで仮に Ctrl-a で行頭に移動、 Ctrl-e で行末に移動、 Ctrl-w で1単語分の削除、
+などの Emacs 上での操作を知っていると、
+何も設定していないターミナル上で Emacs 風キーバインドで操作できる ことになります。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">今思えば知らずに損してたコマンドラインのあれこれ</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2017-01-14 17:57:40 +0900 JST">2017/01/14</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>今でこそ iTerm2 を全面に表示して、 tmux でセッション、ウィンドウ、ペインごとに分けて、 ターミナル内の Vim であれこれやってるわけですが、 始めたての頃はコマンドラインに慣れるまで大変でした。</p>
+          <p>今振り返って、これを知ってから or 使うようになってから、 劇的に変わったなあと思うようなものがあるので、 それらをメモ代わりに残しておきます。</p>
+          <p><strong>今年からターミナルを使いこなしたい！</strong> と思っている方におすすめします。</p>
+          <h2 id="emacs-vi-両方のキーバインドを最低限知っておく">Emacs, Vi 両方のキーバインドを最低限知っておく</h2>
+          <p>これはエディタの話ではなく、コマンドラインであれこれやるにあたって <strong>両方のキーバインドを最低限知っておく必要があった</strong> という意味です。</p>
+          <p>僕の環境設定の考え方の話になるのですが、 なんでもかんでも自分の使いやすいように変えていくのではなく、 <strong>よくある標準の設定をベースにしつつ、より良い設定を邪魔せず上乗せしていく形</strong> を取りたいといつも思っています。</p>
+          <p>コマンドラインを使っていくに従って、 <strong>標準の設定というのがとても良く考えられていることに段々気づいていく</strong> と思います。</p>
+          <p>当然なのですが、その標準の設定を考えた人というのがいるわけで、 すべてのことには理由があるので、 仮にその理由を知らなかったとしても その標準の設定に合わせることで <strong>自然とそのメリットを享受できる</strong> ことも出てきます。</p>
+          <h3 id="シェルスクリプトはもともと-emacs-風">シェルスクリプトはもともと Emacs 風</h3>
+          <p>bash や zsh などのシェルでは、キーバインドのモードを切り替える設定が用意されています。</p>
+          <pre><code># bash
+set -o vi
+
+# zsh
+bindkey -v
+</code></pre>
+          <p>上記はともに Vi モードに切り替える設定なのですが、 設定を変更しない場合、 <strong>標準で Emacs 風</strong> になっています。</p>
+          <p>ここで仮に Ctrl-a で行頭に移動、 Ctrl-e で行末に移動、 Ctrl-w で1単語分の削除、 などの Emacs 上での操作を知っていると、 <strong>何も設定していないターミナル上で Emacs 風キーバインドで操作できる</strong> ことになります。</p>
+          <p>コマンドライン使いたての頃、比較的長めのコマンドを打って実行したらミスが見つかったけど、 その直したい箇所が入力の頭の方で、 左キーを連打しまくってるけど時間がかかってしょうがない、みたいなケース、 よくある話ではないでしょうか？</p>
+          <p>特に何も設定されていないサーバなどに始めてアクセスする際には、 こういったキーバインドを知っていることが効率に直結することもあると思います。</p>
+          <h3 id="未知の端末をなんとなく扱えるメリットも">未知の端末をなんとなく扱えるメリットも</h3>
+          <p>Windows の方はメリットを享受できないのですが、 Mac の方は command キーと control キーに分かれているため、 上記の Ctrl-a, Ctrl-e などのキーバインドが他アプリケーションで使えたりします。</p>
+          <p>例えば <strong>各種 Web ブラウザの URL バー</strong> などはすでにそういった想定がされています。 長い URL を入力しているとき、http じゃなくて https だったとなったときに マウスに手を伸ばす必要はありません。 Ctrl-a を押しましょう。</p>
+          <p>Windows だと全選択が Ctrl-a などで重複してしまっており、Emacs 風のものは割り当てられていないようですね。</p>
+          <h3 id="マニュアルを読むときは-vi-風">マニュアルを読むときは Vi 風</h3>
+          <p>一方でマニュアルを読む際は <strong>最低限の Vi のキーバインド</strong> を知っておく必要があります。 こちらもエディタとして使えるようになる必要はなく、 <strong>上下の移動、検索あたりができれば必要十分</strong> だと思います。</p>
+          <p>そもそも、</p>
+          <pre><code>man foobar
+
+foobar --help
+</code></pre>
+          <p>といったマニュアルを読む際は、 Ctrl-f(forward), Ctrl-d(down) で下スクロール、 Ctrl-b(back), Ctrl-u(up) で上スクロールでき、 / キーのあとにキーワードを入力して Enter キーを押せば検索できます。</p>
+          <p>これらのキーバインドは Vi から来ています。</p>
+          <h3 id="インターフェースとしての-emacs-vi">インターフェースとしての Emacs, Vi</h3>
+          <p><strong>インターフェース</strong> という言葉が一番しっくりきます。</p>
+          <p>エディタの操作方法としてではなく、 インターフェースとして最低限知っておくだけで ターミナル上のコマンドライン操作はだいぶ変わってくると思います。</p>
+          <p>自分が UI 実装する側になったときに、キーボード入力が想定されるのであれば、 こういったところにも配慮すると、より使いやすくなるかもしれません。</p>
+          <h2 id="コマンド履歴を使う">コマンド履歴を使う</h2>
+          <p>そもそも最初はコマンド履歴を知らなかったので、 上キーを押すことで過去に押したコマンドが表示されることも知りませんでした。</p>
+          <p>それを知ってるかどうかだけでも少し変わってくるのですが、 <strong>インクリメンタルサーチをきちんと使いこなす</strong> だけで大きく効率が変わってきます。</p>
+          <p>これ知ったのつい2年前ほどだったのですが、 <a class="link-card" href="http://girigiribauer.com/archives/1873/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">https://girigiribauer.com/tech/20150623/</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://girigiribauer.com/archives/1873/"> girigiribauer.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> それまで知らなかった自分に愕然としましたね。</p>
+          <p>特にサブコマンドやオプションの多い長いコマンドを、ある程度断続的に入力するケースの場合、 <strong>インクリメンタルサーチはおすすめです。</strong></p>
+          <p>こちらも設定なしで、 <strong>Ctrl-r</strong> が割り当てられています。</p>
+          <p>一度入力する前に任意のコマンドを入力しておきます。（なんでもいいです）</p>
+          <pre><code>% sudo service httpd restart
+</code></pre>
+          <p>何も入力していない状態で、Ctrl-r を押すと、</p>
+          <pre><code>%
+bck-i-search: _
+</code></pre>
+          <p>入力箇所の下に bck-i-search という表示が出ます。 <strong>後ろ方向のインクリメンタルサーチ</strong> のことです。</p>
+          <p>ここで http と順に打つと、 <strong>他に候補がない時点で先ほど入力したコマンドが表示されます。</strong></p>
+          <pre><code>% sudo service httpd restart
+bck-i-search: httpd\_
+</code></pre>
+          <p>もし候補が出たけどもっと過去の履歴が欲しい！となったときは、 後ろ方向のインクリメンタルサーチなので、何回か Ctrl-r を押しましょう。 その都度、履歴を過去方向に検索してくれます。</p>
+          <p>ちなみに遡りすぎた場合は、 <strong>前方向のインクリメンタルサーチである Ctrl-s</strong> も用意されています。 そちらで今度は過去方向から未来方向へインクリメンタルサーチしましょう。</p>
+          <pre><code>%
+fwd-i-search: _
+</code></pre>
+          <h3 id="オプション付きの長いコマンドを何回かおきに入力するケースなどに有効">オプション付きの長いコマンドを何回かおきに入力するケースなどに有効</h3>
+          <p>最近だと Docker を使ったりする方も増えてきていると思います。</p>
+          <pre><code>docker run -d -p 80 -v "$(pwd)/public:/usr/share/nginx/html" --name test nginx
+</code></pre>
+          <p>まだこれくらいならかわいいもので、追加でボリュームを紐付けたり、環境変数を設定したりすると、 2行3行と長くなってきます。</p>
+          <p>毎回同じコマンドを入力するだけなら、上キーだけで十分なのですが、 間に別のコマンドを何度か入力したりして、間がどんどん開いてくると、 上キーだけで遡るのは厳しくなってきます。</p>
+          <p>上記の例であれば、例えば <strong>Ctrl-r を押した後に docker と入力した方が直感的だし速い</strong> です。 場合によっては docker 全部入力せずに d だけで事足りるかもしれません。（インクリメンタルサーチなので）</p>
+          <p>僕の場合ですが、 tmux を利用して画面を分割してコマンド入力を色々行っており、 こっちの画面で過去に入力したコマンドを、今度はあっちの画面で入力したい、 みたいなケースがけっこう出て来ます。 そういったケースに対応するために、 .zshrc に履歴の共有を行う設定を入れています。</p>
+          <h2 id="tab-キーによるコマンド補完を使う">Tab キーによるコマンド補完を使う</h2>
+          <p>あとは当然知ってる話だと思うのでおまけ程度ですが、 <strong>コマンド打つときは Tab キーで補完できる</strong> ことは知っておきましょう。</p>
+          <p>さすがに自分はなかったですが、 たまに律儀に毎回全部入力している人を見ると「うーん・・・」という気分になります。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>標準の設定をインターフェースとして捉えることで、 様々なメリットが享受できると思います。 <strong>あまりあれこれ設定をいじりすぎずに、標準の設定に慣れるということも一定大事</strong> だと思います。</p>
+          <p>慣れるまでは大変だと思いますが、 GUI ではカバーしきれないところをコマンドラインで出来ることも多いので、 頑張って慣れていくと良いと思います。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/cli/">#CLI</a> <a class="tag-link" href="/tags/linux/">#Linux</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=%e4%bb%8a%e6%80%9d%e3%81%88%e3%81%b0%e7%9f%a5%e3%82%89%e3%81%9a%e3%81%ab%e6%90%8d%e3%81%97%e3%81%a6%e3%81%9f%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e3%81%ae%e3%81%82%e3%82%8c%e3%81%93%e3%82%8c%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20170114/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20170114%2f&amp;text=%e4%bb%8a%e6%80%9d%e3%81%88%e3%81%b0%e7%9f%a5%e3%82%89%e3%81%9a%e3%81%ab%e6%90%8d%e3%81%97%e3%81%a6%e3%81%9f%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e3%81%ae%e3%81%82%e3%82%8c%e3%81%93%e3%82%8c" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20170114/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

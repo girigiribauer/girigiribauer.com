@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>3Dグラフィックスのド素人がGLSLについて調べてみた | ばうあーろぐ</title>
+    <meta content="こちらの記事は、
+
+
+LL/ML Advent Calendarの21日目の記事です。
+#LLAdventJPとは？
+僕も知りません。 なごやって素敵 ですね！
+（※時間がどうしてもなくて、紹介記事止まりでごめんなさい！）
+この記事を書こうと思ったわけ
+“L”と”L”、もしくは”M”と”L”がつけばなんでもOKとのことだったので、最悪HT ML のことなんか書けばいいかーと思いつつ、悶々としていたのですが、CSS3 custom filterのデモを見ていて、
+-webkit-filter: custom(
+  url(shaders/vertex/page-curl.vs) mix(url(shaders/fragment/page-curl.fs) normal source-atop),
+  50 50 border-box,
+  transform perspective(1000) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg),
+  curlPosition 0 0,
+  curlDirection 135,
+  curlRadius 0.2,
+  bleedThrough 0.59
+);
+
+
+この page-curl.vs とか page-curl.fs ってなんぞ？ と思ったのがきっかけで、いろいろ調べてみたらG L S L というキーワードにぶち当たったので、なんだろうと思って軽めに調べてみました。
+以下、こんな感じで話が進みます。
+
+
+
+
+CSS filter、CSS custom filterについて
+
+
+
+GLSLとは？そもそもシェーダーとは？
+
+
+
+GLSLのHelloWorld
+
+
+
+まとめ
+
+ちなみにタイトルにもあるように、3Dグラフィックスの周りはド素人であるため、専門でやられている方にはつまらなく感じるかもしれません。もし間違いとかありましたら、叩かれるのはこわいのでやさしく指摘してくだされば幸いです。
+CSS filter、CSS custom filterについて
+CSS filter
+昨今のモダンブラウザの高速リリースによって、ビジュアル面でもFlashと同等レベルのことが出来るようになってきました。
+特にJavaScriptではなく、 CSSで出来ること の幅がぐんと広がってきており、CSSで様々なエフェクトがかけられるCSS filterは、その最たる例と言ってもいいのかもしれません。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20121221/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20121221" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="3Dグラフィックスのド素人がGLSLについて調べてみた" itemprop="name">
+    <meta content="こちらの記事は、
+
+
+LL/ML Advent Calendarの21日目の記事です。
+#LLAdventJPとは？
+僕も知りません。 なごやって素敵 ですね！
+（※時間がどうしてもなくて、紹介記事止まりでごめんなさい！）
+この記事を書こうと思ったわけ
+“L”と”L”、もしくは”M”と”L”がつけばなんでもOKとのことだったので、最悪HT ML のことなんか書けばいいかーと思いつつ、悶々としていたのですが、CSS3 custom filterのデモを見ていて、
+-webkit-filter: custom(
+  url(shaders/vertex/page-curl.vs) mix(url(shaders/fragment/page-curl.fs) normal source-atop),
+  50 50 border-box,
+  transform perspective(1000) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg),
+  curlPosition 0 0,
+  curlDirection 135,
+  curlRadius 0.2,
+  bleedThrough 0.59
+);
+
+
+この page-curl.vs とか page-curl.fs ってなんぞ？ と思ったのがきっかけで、いろいろ調べてみたらG L S L というキーワードにぶち当たったので、なんだろうと思って軽めに調べてみました。
+以下、こんな感じで話が進みます。
+
+
+
+
+CSS filter、CSS custom filterについて
+
+
+
+GLSLとは？そもそもシェーダーとは？
+
+
+
+GLSLのHelloWorld
+
+
+
+まとめ
+
+ちなみにタイトルにもあるように、3Dグラフィックスの周りはド素人であるため、専門でやられている方にはつまらなく感じるかもしれません。もし間違いとかありましたら、叩かれるのはこわいのでやさしく指摘してくだされば幸いです。
+CSS filter、CSS custom filterについて
+CSS filter
+昨今のモダンブラウザの高速リリースによって、ビジュアル面でもFlashと同等レベルのことが出来るようになってきました。
+特にJavaScriptではなく、 CSSで出来ること の幅がぐんと広がってきており、CSSで様々なエフェクトがかけられるCSS filterは、その最たる例と言ってもいいのかもしれません。" itemprop="description">
+    <meta content="3Dグラフィックスのド素人がGLSLについて調べてみた" property="og:title">
+    <meta content="こちらの記事は、
+
+
+LL/ML Advent Calendarの21日目の記事です。
+#LLAdventJPとは？
+僕も知りません。 なごやって素敵 ですね！
+（※時間がどうしてもなくて、紹介記事止まりでごめんなさい！）
+この記事を書こうと思ったわけ
+“L”と”L”、もしくは”M”と”L”がつけばなんでもOKとのことだったので、最悪HT ML のことなんか書けばいいかーと思いつつ、悶々としていたのですが、CSS3 custom filterのデモを見ていて、
+-webkit-filter: custom(
+  url(shaders/vertex/page-curl.vs) mix(url(shaders/fragment/page-curl.fs) normal source-atop),
+  50 50 border-box,
+  transform perspective(1000) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg),
+  curlPosition 0 0,
+  curlDirection 135,
+  curlRadius 0.2,
+  bleedThrough 0.59
+);
+
+
+この page-curl.vs とか page-curl.fs ってなんぞ？ と思ったのがきっかけで、いろいろ調べてみたらG L S L というキーワードにぶち当たったので、なんだろうと思って軽めに調べてみました。
+以下、こんな感じで話が進みます。
+
+
+
+
+CSS filter、CSS custom filterについて
+
+
+
+GLSLとは？そもそもシェーダーとは？
+
+
+
+GLSLのHelloWorld
+
+
+
+まとめ
+
+ちなみにタイトルにもあるように、3Dグラフィックスの周りはド素人であるため、専門でやられている方にはつまらなく感じるかもしれません。もし間違いとかありましたら、叩かれるのはこわいのでやさしく指摘してくだされば幸いです。
+CSS filter、CSS custom filterについて
+CSS filter
+昨今のモダンブラウザの高速リリースによって、ビジュアル面でもFlashと同等レベルのことが出来るようになってきました。
+特にJavaScriptではなく、 CSSで出来ること の幅がぐんと広がってきており、CSSで様々なエフェクトがかけられるCSS filterは、その最たる例と言ってもいいのかもしれません。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20121221/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="3Dグラフィックスのド素人がGLSLについて調べてみた" name="twitter:title">
+    <meta content="こちらの記事は、
+
+
+LL/ML Advent Calendarの21日目の記事です。
+#LLAdventJPとは？
+僕も知りません。 なごやって素敵 ですね！
+（※時間がどうしてもなくて、紹介記事止まりでごめんなさい！）
+この記事を書こうと思ったわけ
+“L”と”L”、もしくは”M”と”L”がつけばなんでもOKとのことだったので、最悪HT ML のことなんか書けばいいかーと思いつつ、悶々としていたのですが、CSS3 custom filterのデモを見ていて、
+-webkit-filter: custom(
+  url(shaders/vertex/page-curl.vs) mix(url(shaders/fragment/page-curl.fs) normal source-atop),
+  50 50 border-box,
+  transform perspective(1000) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg),
+  curlPosition 0 0,
+  curlDirection 135,
+  curlRadius 0.2,
+  bleedThrough 0.59
+);
+
+
+この page-curl.vs とか page-curl.fs ってなんぞ？ と思ったのがきっかけで、いろいろ調べてみたらG L S L というキーワードにぶち当たったので、なんだろうと思って軽めに調べてみました。
+以下、こんな感じで話が進みます。
+
+
+
+
+CSS filter、CSS custom filterについて
+
+
+
+GLSLとは？そもそもシェーダーとは？
+
+
+
+GLSLのHelloWorld
+
+
+
+まとめ
+
+ちなみにタイトルにもあるように、3Dグラフィックスの周りはド素人であるため、専門でやられている方にはつまらなく感じるかもしれません。もし間違いとかありましたら、叩かれるのはこわいのでやさしく指摘してくだされば幸いです。
+CSS filter、CSS custom filterについて
+CSS filter
+昨今のモダンブラウザの高速リリースによって、ビジュアル面でもFlashと同等レベルのことが出来るようになってきました。
+特にJavaScriptではなく、 CSSで出来ること の幅がぐんと広がってきており、CSSで様々なエフェクトがかけられるCSS filterは、その最たる例と言ってもいいのかもしれません。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">3Dグラフィックスのド素人がGLSLについて調べてみた</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2012-12-21 14:50:51 +0000 +0000">2012/12/21</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>こちらの記事は、 <a href="http://partake.in/events/9658f376-6ce3-4217-b392-b05d3de60021" rel="noopener noreferrer" target="_blank">LL/ML Advent Calendar</a>の21日目の記事です。</p>
+          <h2 id="lladventjpとは">#LLAdventJPとは？</h2>
+          <p>僕も知りません。 <strong>なごやって素敵</strong> ですね！</p>
+          <p>（※時間がどうしてもなくて、紹介記事止まりでごめんなさい！）</p>
+          <h2 id="この記事を書こうと思ったわけ">この記事を書こうと思ったわけ</h2>
+          <p>“L”と”L”、もしくは”M”と”L”がつけばなんでもOKとのことだったので、最悪HT <strong>ML</strong> のことなんか書けばいいかーと思いつつ、悶々としていたのですが、CSS3 custom filterのデモを見ていて、</p>
+          <pre><code>-webkit-filter: custom(
+  url(shaders/vertex/page-curl.vs) mix(url(shaders/fragment/page-curl.fs) normal source-atop),
+  50 50 border-box,
+  transform perspective(1000) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg),
+  curlPosition 0 0,
+  curlDirection 135,
+  curlRadius 0.2,
+  bleedThrough 0.59
+);
+</code></pre>
+          <p><img alt="" src="resource01.jpg"></p>
+          <p>この <strong>page-curl.vs とか page-curl.fs ってなんぞ？</strong> と思ったのがきっかけで、いろいろ調べてみたらG <strong>L</strong> S <strong>L</strong> というキーワードにぶち当たったので、なんだろうと思って軽めに調べてみました。</p>
+          <p>以下、こんな感じで話が進みます。</p>
+          <ul>
+            <li><a href="#css-filter">CSS filter、CSS custom filterについて</a></li>
+            <li><a href="#about-glsl">GLSLとは？そもそもシェーダーとは？</a></li>
+            <li><a href="#glsl-helloworld">GLSLのHelloWorld</a></li>
+            <li><a href="#conclusion">まとめ</a></li>
+          </ul>
+          <p>ちなみにタイトルにもあるように、3Dグラフィックスの周りはド素人であるため、専門でやられている方にはつまらなく感じるかもしれません。もし間違いとかありましたら、叩かれるのはこわいのでやさしく指摘してくだされば幸いです。</p>
+          <h2 id="css-filter">CSS filter、CSS custom filterについて</h2>
+          <h3 id="css-filter-1">CSS filter</h3>
+          <p>昨今のモダンブラウザの高速リリースによって、ビジュアル面でもFlashと同等レベルのことが出来るようになってきました。</p>
+          <p>特にJavaScriptではなく、 <strong>CSSで出来ること</strong> の幅がぐんと広がってきており、CSSで様々なエフェクトがかけられるCSS filterは、その最たる例と言ってもいいのかもしれません。</p>
+          <p>CSS filterに関しては、こちらのページが分かりやすいです。</p>
+          <p><a href="http://www.html5rocks.com/en/tutorials/filters/understanding-css/" rel="noopener noreferrer" target="_blank">Understanding CSS Filter Effects – HTML5 Rocks</a></p>
+          <p>グレースケール（灰色っぽくする）とか、コントラスト比をいじるとか、Flashで普通に出来たことが、同じようにHTMLに出来るようになっただけでしょ？と思われる方もいるかもしれません。</p>
+          <p>ただ、僕はそうは思っていなくて、 <strong>任意のDOM要素に対して使える</strong> というのがかなりのメリットではないかと考えています。</p>
+          <h3 id="試してみましょう">試してみましょう！</h3>
+          <p>試しにお使いのブラウザ（Chromeなど）の開発者ツールで、このページの下にあるであろう『いいね！』ボタンのiframeを選択し、以下のようなスタイルをあててみてください。</p>
+          <pre><code>-webkit-filter: grayscale(100%);
+</code></pre>
+          <p><img alt="" src="resource02.jpg"></p>
+          <p>どうですか？いいねボタンが白黒になりましたか？ <strong>まるでF</strong> <em>B</em> <strong>のお葬式のようですね！</strong></p>
+          <p>これってかなりすごいことで、例えばbodyに対してブラーエフェクト（blur、ぼかしのエフェクトのこと）を先にかけておいて、ちょっと間を置いてエフェクトを消してやれば、 <strong>ぼやけていたWebコンテンツがしゅっと見えるような表現</strong> が出来たりしますよね！</p>
+          <p>こういった今までつまんない感じだったWebコンテンツを、少しのCSSの記述だけでとても簡単にカッコイイ感じに変身させることができちゃうのです。</p>
+          <p>※もちろん、色んな要素にエフェクトかけまくっちゃうとレンダリング負荷は高まりますので、それだけあれば何でも解決するかというとそんなことはありません。</p>
+          <p>公式の仕様は以下に載ってます。僕もまだこれからちゃんと読まないといけないレベルですが、一応紹介までに。</p>
+          <p><a href="http://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html" rel="noopener noreferrer" target="_blank">Filter Effects 1.0(仕様)</a></p>
+          <h3 id="css-filter-の-custom-filter">CSS filter の custom filter</h3>
+          <p>この css filter の種類の1つに、 <strong>custom</strong> というのがあります。エフェクトのかけ方を、こちらで自由に制御できちゃうみたいなんですねー。これはすごい。</p>
+          <p>とりあえずデモを見て、「おー、すげー！」でもしてみましょうか。</p>
+          <p><a href="http://www.adobe.com/devnet/html5/articles/css-shaders.html" rel="noopener noreferrer" target="_blank">CSS shaders: Cinematic effects for the web | Adobe Developer Connection</a></p>
+          <p><strong>「おー、すげー！」</strong></p>
+          <p>css custom filter も、css filter の1つであるため、任意のDOM要素に対してエフェクトがかけられるわけですね。</p>
+          <p>見る限り、以下のようなことが出来そうです。</p>
+          <ol>
+            <li>色の塗り分け</li>
+            <li>影の付け方をいじる</li>
+            <li>3Dを2Dに対応付けして、3Dっぽく見せる</li>
+          </ol>
+          <p>・・・と、ここまで調べてみると、3Dグラフィックスの専門用語がそれなりにわんさか出てきます。GLSLに触れるとともに一通り調べてみました。</p>
+          <h2 id="about-glsl">GLSLとは？そもそもシェーダーとは？</h2>
+          <p>まずGLSLについて。</p>
+          <blockquote>
+            <p>GLSL (OpenGL Shading Language) はGLslangとしても知られ、C言語をベースとした高レベルシェーディング言語である。これはアセンブリ言語やハードウェアに依存した言語を使わないで、開発者がグラフィックスパイプラインを直接制御できるようにOpenGL ARBで策定された。最新版は、GLSL 4.10（米国時間2010年7月28日）である。</p>
+          </blockquote>
+          <p><a href="http://ja.wikipedia.org/wiki/GLSL" rel="noopener noreferrer" target="_blank">wikipedia: GLSL</a>より引用</p>
+          <p>はい、 <strong>OpenGL</strong> の <strong>シェーディング言語</strong> なわけですね。わかりません。</p>
+          <p>GLはGraphics Libraryの略なので、2D, 3Dのグラフィックスが扱えるとしても、 <strong>シェーディング</strong> 、 <strong>シェーダー</strong> とはなんでしょうか？</p>
+          <blockquote>
+            <p>シェーディング（英: shading）は、3次元コンピュータグラフィックスやイラストレーションなどで明暗のコントラストで立体感を与える技法である。絵画では陰影画法と呼ぶ。</p>
+          </blockquote>
+          <p><a href="http://ja.wikipedia.org/wiki/%E3%82%B7%E3%82%A7%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0" rel="noopener noreferrer" target="_blank">wikipedia: シェーディング</a>より引用</p>
+          <p>ほほう、これはデモで見て予想した通りのことが出来る技法ですね。</p>
+          <blockquote>
+            <p>コンピュータグラフィックスのシェーダ（英: shader）は、主にライティング（光源計算）・シェーディング（陰影処理）とレンダリング（ピクセル化）を実行するためにグラフィック リソースに対して使用するソフトウェア命令の組み合わせである。</p>
+          </blockquote>
+          <p><a href="http://ja.wikipedia.org/wiki/%E3%82%B7%E3%82%A7%E3%83%BC%E3%83%80" rel="noopener noreferrer" target="_blank">wikipedia: シェーダ</a>より引用</p>
+          <p>シェーディング（光や影、ピクセルの色や位置などの変化）をシェーダーが担当してくれているのですね。</p>
+          <p>・・・なるほど。</p>
+          <p>ということは、一番最初に見たCSSの記述は、シェーダーのことを表しているようです。もう一度見てみます。</p>
+          <pre><code>-webkit-filter: custom(
+  url(shaders/vertex/page-curl.vs) mix(url(shaders/fragment/page-curl.fs) normal source-atop),
+  50 50 border-box,
+  transform perspective(1000) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg),
+  curlPosition 0 0,
+  curlDirection 135,
+  curlRadius 0.2,
+  bleedThrough 0.59
+);
+</code></pre>
+          <p>このpage-curl.vs の <strong>vs</strong> は、 <strong>vertex shader</strong> の略のようです。また page-curl.fs の <strong>fs</strong> は、 <strong>fragment shader</strong> の略のようです。</p>
+          <ul>
+            <li>バーテックスシェーダー（バーテックスは頂点の意味、頂点シェーダーとも呼ばれる）</li>
+            <li>フラグメントシェーダー（フラグメントは断片の意味、ピクセルシェーダーとも呼ばれる）</li>
+          </ul>
+          <p>点と面のシェーダーがあるよ、と考えておけばいいのかもしれません。</p>
+          <h3 id="つまり">つまり・・・</h3>
+          <ul>
+            <li>GLSLはOpenGLのシェーディングのための言語</li>
+            <li>.vs .fsといったシェーダーの種類がある</li>
+          </ul>
+          <p>あとおまけで、</p>
+          <ul>
+            <li>WebGL（Webで3Dグラフィックスが扱える）でもGLSLを使ってた</li>
+          </ul>
+          <p>あたりが分かりました。</p>
+          <h2 id="glsl-helloworld">GLSLのHelloWorld</h2>
+          <p>さて、WebGLはクロノス・グループという団体が標準化を行っています。</p>
+          <p>そちらにGLSL 1.0の仕様がありましたので、紹介しつつ少しだけ読んでみようと思います。</p>
+          <p><a href="http://www.khronos.org/registry/gles/specs/2.0/GLSL_ES_Specification_1.0.17.pdf" rel="noopener noreferrer" target="_blank">The OpenGL ® ES Shading Language</a> ※PDFです</p>
+          <p>・・・。</p>
+          <p>・・・・・・。</p>
+          <p><strong>やばい、予想以上にC言語っぽい。</strong></p>
+          <p>しっかり読んで紹介していると21日目のブログ記事が間に合わなくなってしまうので、ちょっと <strong>落としどころを探りたい</strong> と思いますw</p>
+          <p>WikipediaのGLSLの項目に、一番シンプルであろう fragment shader の例が載っていたので、それについてだけ調べてみます。</p>
+          <pre><code>void main(void)
+{
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+}
+</code></pre>
+          <p>gl_FragColor や gl_FragData に代入することで、フラグメントシェーダーとして書き出しますよーということを表します。</p>
+          <p>ちなみにとても良いサイト見つけました。 そのまま <strong>GLSLを書いて試せる</strong> っぽいです。（ <a href="http://glsl.heroku.com/" rel="noopener noreferrer" target="_blank">GLSL Sandbox</a>）上記コードは1〜3までの引数でカラー指定をしているようですね！（第4引数はなんだろう、透明度なのかな・・・？）</p>
+          <p><img alt="" src="resource03.jpg"></p>
+          <p><strong>「おー、すげー！」</strong></p>
+          <h2 id="conclusion">まとめ</h2>
+          <p>って感じで、とりあえずHelloWorldまで行くだけでもだいぶ長くなってしまいましたが、ここまで調べられればこの後の導入が比較的スピーディーに行けるのでは？と思っています。</p>
+          <ul>
+            <li>シェーダーは光や影をつけたりピクセルの色や位置をいじったりできる</li>
+            <li>GLSLはCSSのcustom filterやWebGLで使われてる</li>
+            <li>とりあえずHelloWorldに相当するやつ書いてみた</li>
+          </ul>
+          <p>これで色んなGLSLを書いて、オリジナルのエフェクトとか作れたらかなり表現の幅が広がりそうです！</p>
+          <h2 id="おまけ">おまけ</h2>
+          <p>僕は余力がなくて参加できてないのですが、 <a href="http://www.adventar.org/calendars/10" rel="noopener noreferrer" target="_blank">GraphicalWeb (CSS, SVG, WebGL etc) Advent Calendar 2012</a> の中のyomotsuさんが書かれたCSS shaderに関する一連の記事はかなり勉強になります。時間作ってしっかり読みたいなーと思いました。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/cssfilter/">#CSSfilter</a> <a class="tag-link" href="/tags/glsl/">#GLSL</a> <a class="tag-link" href="/tags/webgl/">#WebGL</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=3D%e3%82%b0%e3%83%a9%e3%83%95%e3%82%a3%e3%83%83%e3%82%af%e3%82%b9%e3%81%ae%e3%83%89%e7%b4%a0%e4%ba%ba%e3%81%8cGLSL%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e8%aa%bf%e3%81%b9%e3%81%a6%e3%81%bf%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20121221/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20121221%2f&amp;text=3D%e3%82%b0%e3%83%a9%e3%83%95%e3%82%a3%e3%83%83%e3%82%af%e3%82%b9%e3%81%ae%e3%83%89%e7%b4%a0%e4%ba%ba%e3%81%8cGLSL%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e8%aa%bf%e3%81%b9%e3%81%a6%e3%81%bf%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20121221/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

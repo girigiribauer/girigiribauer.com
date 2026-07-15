@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>ionic でハマりそうだと思ったところメモ | ばうあーろぐ</title>
+    <meta content="ionic の勉強会に参加してきたのですが、
+細かいところは置いといて自分用にメモでも残しておこうと思います。
+正直ここから掘り下げてやるかどうか分からないですが、
+もしやることがあったら改めてきちんと書きたいと思います。今回はメモ程度で。
+前提
+
+ionic とは、 Angular ベースのフレームワーク
+cordova を利用してネイティブアプリのリリースまでの機能が用意されている
+デザイン込みで UI とか予め用意されていて、モック作るなら超楽
+React Native などと立ち位置は同じ
+
+ハマったところ
+
+ionic serve をずっと起動させっぱなしだとハマる
+tabs と navCtrl 周りの連携
+ionic g サブコマンドは9割くらいを自動化してくれる印象
+AoT ビルドが通ったあとの環境固有の問題
+
+他にもありそうだけど、大きくこのあたりでしょうか。
+ionic serve をずっと起動させっぱなしだとハマる
+ionic serve の livereload で反映されないことがあったのですが、
+NgModule 周りのファイルを触るときに、モジュールの過不足が検知できないとのこと。
+tabs と navCtrl 周りの連携
+ionic start myApp tabs などで生成したタブ付きのページで、
+普通にタブ切り替えの実装はすでにされていて、特に問題なく扱えるのですが、
+隣のタブの1つ下の詳細ページに直接飛ばす、みたいなのはちょっと面倒でした。
+ionic g サブコマンドは9割くらいを自動化してくれる印象
+ionic generator (alias: g) サブコマンドで、全部作ってくれるとは限らないため、
+レールに乗るのは良いと思うのですが、同時に本来の構成・手順をきちんと知っておく必要もあるのかなと思います。
+あと、過不足あるときはちゃんとエラー出してくれるので、当たり前ですがエラー読むといいですね。
+AoT ビルドが通ったあとの環境固有の問題
+
+
+
+
+            
+                Handling CORS issues in Ionic
+                If you&amp;#8217;ve used ionic serve or ionic run with live reload and accessing external API endpoints, …
+                
+                    
+                    blog.ionicframework.com
+                
+            " name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20180415/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20180415" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="ionic でハマりそうだと思ったところメモ" itemprop="name">
+    <meta content="ionic の勉強会に参加してきたのですが、
+細かいところは置いといて自分用にメモでも残しておこうと思います。
+正直ここから掘り下げてやるかどうか分からないですが、
+もしやることがあったら改めてきちんと書きたいと思います。今回はメモ程度で。
+前提
+
+ionic とは、 Angular ベースのフレームワーク
+cordova を利用してネイティブアプリのリリースまでの機能が用意されている
+デザイン込みで UI とか予め用意されていて、モック作るなら超楽
+React Native などと立ち位置は同じ
+
+ハマったところ
+
+ionic serve をずっと起動させっぱなしだとハマる
+tabs と navCtrl 周りの連携
+ionic g サブコマンドは9割くらいを自動化してくれる印象
+AoT ビルドが通ったあとの環境固有の問題
+
+他にもありそうだけど、大きくこのあたりでしょうか。
+ionic serve をずっと起動させっぱなしだとハマる
+ionic serve の livereload で反映されないことがあったのですが、
+NgModule 周りのファイルを触るときに、モジュールの過不足が検知できないとのこと。
+tabs と navCtrl 周りの連携
+ionic start myApp tabs などで生成したタブ付きのページで、
+普通にタブ切り替えの実装はすでにされていて、特に問題なく扱えるのですが、
+隣のタブの1つ下の詳細ページに直接飛ばす、みたいなのはちょっと面倒でした。
+ionic g サブコマンドは9割くらいを自動化してくれる印象
+ionic generator (alias: g) サブコマンドで、全部作ってくれるとは限らないため、
+レールに乗るのは良いと思うのですが、同時に本来の構成・手順をきちんと知っておく必要もあるのかなと思います。
+あと、過不足あるときはちゃんとエラー出してくれるので、当たり前ですがエラー読むといいですね。
+AoT ビルドが通ったあとの環境固有の問題
+
+
+
+
+            
+                Handling CORS issues in Ionic
+                If you&amp;#8217;ve used ionic serve or ionic run with live reload and accessing external API endpoints, …
+                
+                    
+                    blog.ionicframework.com
+                
+            " itemprop="description">
+    <meta content="ionic でハマりそうだと思ったところメモ" property="og:title">
+    <meta content="ionic の勉強会に参加してきたのですが、
+細かいところは置いといて自分用にメモでも残しておこうと思います。
+正直ここから掘り下げてやるかどうか分からないですが、
+もしやることがあったら改めてきちんと書きたいと思います。今回はメモ程度で。
+前提
+
+ionic とは、 Angular ベースのフレームワーク
+cordova を利用してネイティブアプリのリリースまでの機能が用意されている
+デザイン込みで UI とか予め用意されていて、モック作るなら超楽
+React Native などと立ち位置は同じ
+
+ハマったところ
+
+ionic serve をずっと起動させっぱなしだとハマる
+tabs と navCtrl 周りの連携
+ionic g サブコマンドは9割くらいを自動化してくれる印象
+AoT ビルドが通ったあとの環境固有の問題
+
+他にもありそうだけど、大きくこのあたりでしょうか。
+ionic serve をずっと起動させっぱなしだとハマる
+ionic serve の livereload で反映されないことがあったのですが、
+NgModule 周りのファイルを触るときに、モジュールの過不足が検知できないとのこと。
+tabs と navCtrl 周りの連携
+ionic start myApp tabs などで生成したタブ付きのページで、
+普通にタブ切り替えの実装はすでにされていて、特に問題なく扱えるのですが、
+隣のタブの1つ下の詳細ページに直接飛ばす、みたいなのはちょっと面倒でした。
+ionic g サブコマンドは9割くらいを自動化してくれる印象
+ionic generator (alias: g) サブコマンドで、全部作ってくれるとは限らないため、
+レールに乗るのは良いと思うのですが、同時に本来の構成・手順をきちんと知っておく必要もあるのかなと思います。
+あと、過不足あるときはちゃんとエラー出してくれるので、当たり前ですがエラー読むといいですね。
+AoT ビルドが通ったあとの環境固有の問題
+
+
+
+
+            
+                Handling CORS issues in Ionic
+                If you&amp;#8217;ve used ionic serve or ionic run with live reload and accessing external API endpoints, …
+                
+                    
+                    blog.ionicframework.com
+                
+            " property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20180415/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="ionic でハマりそうだと思ったところメモ" name="twitter:title">
+    <meta content="ionic の勉強会に参加してきたのですが、
+細かいところは置いといて自分用にメモでも残しておこうと思います。
+正直ここから掘り下げてやるかどうか分からないですが、
+もしやることがあったら改めてきちんと書きたいと思います。今回はメモ程度で。
+前提
+
+ionic とは、 Angular ベースのフレームワーク
+cordova を利用してネイティブアプリのリリースまでの機能が用意されている
+デザイン込みで UI とか予め用意されていて、モック作るなら超楽
+React Native などと立ち位置は同じ
+
+ハマったところ
+
+ionic serve をずっと起動させっぱなしだとハマる
+tabs と navCtrl 周りの連携
+ionic g サブコマンドは9割くらいを自動化してくれる印象
+AoT ビルドが通ったあとの環境固有の問題
+
+他にもありそうだけど、大きくこのあたりでしょうか。
+ionic serve をずっと起動させっぱなしだとハマる
+ionic serve の livereload で反映されないことがあったのですが、
+NgModule 周りのファイルを触るときに、モジュールの過不足が検知できないとのこと。
+tabs と navCtrl 周りの連携
+ionic start myApp tabs などで生成したタブ付きのページで、
+普通にタブ切り替えの実装はすでにされていて、特に問題なく扱えるのですが、
+隣のタブの1つ下の詳細ページに直接飛ばす、みたいなのはちょっと面倒でした。
+ionic g サブコマンドは9割くらいを自動化してくれる印象
+ionic generator (alias: g) サブコマンドで、全部作ってくれるとは限らないため、
+レールに乗るのは良いと思うのですが、同時に本来の構成・手順をきちんと知っておく必要もあるのかなと思います。
+あと、過不足あるときはちゃんとエラー出してくれるので、当たり前ですがエラー読むといいですね。
+AoT ビルドが通ったあとの環境固有の問題
+
+
+
+
+            
+                Handling CORS issues in Ionic
+                If you&amp;#8217;ve used ionic serve or ionic run with live reload and accessing external API endpoints, …
+                
+                    
+                    blog.ionicframework.com
+                
+            " name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">ionic でハマりそうだと思ったところメモ</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2018-04-15 20:23:57 +0900 JST">2018/04/15</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>ionic の勉強会に参加してきたのですが、 細かいところは置いといて自分用にメモでも残しておこうと思います。</p>
+          <p>正直ここから掘り下げてやるかどうか分からないですが、 もしやることがあったら改めてきちんと書きたいと思います。今回はメモ程度で。</p>
+          <h2 id="前提">前提</h2>
+          <ul>
+            <li>ionic とは、 Angular ベースのフレームワーク</li>
+            <li>cordova を利用してネイティブアプリのリリースまでの機能が用意されている</li>
+            <li>デザイン込みで UI とか予め用意されていて、モック作るなら超楽</li>
+            <li>React Native などと立ち位置は同じ</li>
+          </ul>
+          <h2 id="ハマったところ">ハマったところ</h2>
+          <ul>
+            <li><strong><code>ionic serve</code> をずっと起動させっぱなしだとハマる</strong></li>
+            <li><strong>tabs と navCtrl 周りの連携</strong></li>
+            <li><strong><code>ionic g</code> サブコマンドは9割くらいを自動化してくれる印象</strong></li>
+            <li><strong>AoT ビルドが通ったあとの環境固有の問題</strong></li>
+          </ul>
+          <p>他にもありそうだけど、大きくこのあたりでしょうか。</p>
+          <h3 id="ionic-serve-をずっと起動させっぱなしだとハマる"><code>ionic serve</code> をずっと起動させっぱなしだとハマる</h3>
+          <p><code>ionic serve</code> の livereload で反映されないことがあったのですが、 NgModule 周りのファイルを触るときに、モジュールの過不足が検知できないとのこと。</p>
+          <h3 id="tabs-と-navctrl-周りの連携"><strong>tabs と navCtrl 周りの連携</strong></h3>
+          <p><code>ionic start myApp tabs</code> などで生成したタブ付きのページで、 普通にタブ切り替えの実装はすでにされていて、特に問題なく扱えるのですが、 隣のタブの1つ下の詳細ページに直接飛ばす、みたいなのはちょっと面倒でした。</p>
+          <h3 id="ionic-g-サブコマンドは9割くらいを自動化してくれる印象"><code>ionic g</code> サブコマンドは9割くらいを自動化してくれる印象</h3>
+          <p><code>ionic generator (alias: g)</code> サブコマンドで、全部作ってくれるとは限らないため、 レールに乗るのは良いと思うのですが、同時に本来の構成・手順をきちんと知っておく必要もあるのかなと思います。</p>
+          <p>あと、過不足あるときはちゃんとエラー出してくれるので、当たり前ですがエラー読むといいですね。</p>
+          <h3 id="aot-ビルドが通ったあとの環境固有の問題">AoT ビルドが通ったあとの環境固有の問題</h3>
+          <p><a class="link-card" href="https://blog.ionicframework.com/handling-cors-issues-in-ionic/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Handling CORS issues in Ionic</span> <span class="link-card__desc">If you&amp;#8217;ve used ionic serve or ionic run with live reload and accessing external API endpoints, …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://blog.ionicframework.com/handling-cors-issues-in-ionic/"> blog.ionicframework.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>自分は CORS 周りでハマりそうだと分かってて、実際あえてハマってみたところもありましたが、 AoT ビルドが正しく通ってしまったあとの環境固有の問題は、ハマりそうなポイントだなあと感じました。</p>
+          <p>CORS 以外にも、 wkwebview (iOS) の中でページが描画されることになるので、 その辺固有の問題とかは、 AoT ビルドが通ったあとに出てきそうな問題なので、気をつけたいなあと。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <ul>
+            <li>モックレベルならサクッと作れる <strong>圧倒的スピード感</strong></li>
+            <li>ファイル構成はだいたい Angular なので、かゆいところに手を伸ばすつもりなら <strong>Angular もある程度知ってないと厳しい</strong></li>
+          </ul>
+          <p>まあ自分用メモなので。</p>
+          <p>勉強会のときに、お隣で座っていらして発表されてた方に、あれこれ聞いてみたりしたのですが、 デフォルトのスタイルを上書きして独自のデザインあてるの辛くないですか？って聞いたら、 辛いですねー、みたいなことをおっしゃられていたので、ああやっぱりそうなんだ・・・と思った次第であります。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/ionic/">#ionic</a> <a class="tag-link" href="/tags/angular/">#Angular</a> <a class="tag-link" href="/tags/cordova/">#Cordova</a> <a class="tag-link" href="/tags/apps/">#Apps</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=ionic%20%e3%81%a7%e3%83%8f%e3%83%9e%e3%82%8a%e3%81%9d%e3%81%86%e3%81%a0%e3%81%a8%e6%80%9d%e3%81%a3%e3%81%9f%e3%81%a8%e3%81%93%e3%82%8d%e3%83%a1%e3%83%a2%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20180415/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20180415%2f&amp;text=ionic%20%e3%81%a7%e3%83%8f%e3%83%9e%e3%82%8a%e3%81%9d%e3%81%86%e3%81%a0%e3%81%a8%e6%80%9d%e3%81%a3%e3%81%9f%e3%81%a8%e3%81%93%e3%82%8d%e3%83%a1%e3%83%a2" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20180415/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>年始セットアップメモ（2022年） | ばうあーろぐ</title>
+    <meta content="2022年の年始セットアップメモです。 MacBook Pro 2021 14インチ購入時、特にデータの移行をせずにクリーンインストールの状態から行なっています。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20220103/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20220103" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="年始セットアップメモ（2022年）" itemprop="name">
+    <meta content="2022年の年始セットアップメモです。 MacBook Pro 2021 14インチ購入時、特にデータの移行をせずにクリーンインストールの状態から行なっています。" itemprop="description">
+    <meta content="年始セットアップメモ（2022年）" property="og:title">
+    <meta content="2022年の年始セットアップメモです。 MacBook Pro 2021 14インチ購入時、特にデータの移行をせずにクリーンインストールの状態から行なっています。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20220103/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/tech/20220103/feature.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="年始セットアップメモ（2022年）" name="twitter:title">
+    <meta content="2022年の年始セットアップメモです。 MacBook Pro 2021 14インチ購入時、特にデータの移行をせずにクリーンインストールの状態から行なっています。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/tech/20220103/feature.jpg" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">年始セットアップメモ（2022年）</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2022-01-03 21:00:00 +0900 JST">2022/01/03</time> <span>(Updated: 2022/01/06)</span></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>もしかすると、 <strong>毎年新年にセットアップするといいかも？</strong> と思いはじめてきました。</p>
+          <p><img alt="MacBook Pro 2021 14インチ" src="resource01.jpg"></p>
+          <p>じゃじゃーん 🎉</p>
+          <p><strong>買いました！ 🎉 🎉</strong></p>
+          <p>M1 Mac を年末に購入したため、 どちらにしろセットアップはやらないといけなかったのですが、 やっていくうちに <strong>年始にセットアップすると思った以上にメリットがあるなあ</strong> と思うようになりました。</p>
+          <p>例えば以下とか。</p>
+          <ul>
+            <li>永続化すべきものがちゃんと出来ているかどうかのチェックになる</li>
+            <li>古い設定が残って悪さするのを定期的にリセットできる</li>
+            <li>
+              メイン PC にトラブルがあっても、仕事ができるまでの復旧が早くなる
+              <ul>
+                <li>TwentyFour だと荷物捨てるシーンはよくある</li>
+              </ul>
+            </li>
+            <li><strong>ミニ式年遷宮</strong> することで、 <strong>新年新たな気持ちで迎えられる 🎍</strong></li>
+          </ul>
+          <p>最後のは気持ちの問題ですが、 古いものをばっさり行って新たな気持ちで新年迎えるのはけっこう清々しくて良いです。</p>
+          <p>なので来年やるかどうかは分からないまでも、とりあえず今年分のメモくらいはやっておきましょう。 ということでメモメモ。</p>
+          <h2 id="メニュー">メニュー</h2>
+          <p>そんなにしっかり書き込んで記事に残す必要もないので、あくまで自分向けに <strong>『こんなこと設定しました』</strong> というメモを残せればいいかなと思います。</p>
+          <ul>
+            <li><a href="#before">セットアップ前チェック</a></li>
+            <li><a href="#browsing">最低限ブラウジングできるまで</a></li>
+            <li><a href="#communication">PC でコミュニケーション取れるまで</a></li>
+            <li><a href="#blog">ブログ投稿できるまで</a></li>
+            <li><a href="#optimization">各種作業への最適化</a></li>
+          </ul>
+          <h2 id="before">セットアップ前チェック</h2>
+          <p>今回は PC が2台あるから大丈夫だけど、次回以降でクリーンインストールする前にチェックすべきだなーと思うことを挙げておきます。</p>
+          <ul>
+            <li>
+              リポジトリ内でリポジトリに含まれないファイルのうち、 <strong>消したらまずいもの</strong> をチェック
+              <ul>
+                <li>例: <code>.env.sample</code> に対する <code>.env</code> など</li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="browsing">最低限ブラウジングできるまで</h2>
+          <p><img alt="MacBook Pro 2021 14インチ" src="resource02.jpg"></p>
+          <p>ここではパスワードマネージャをインストールして、 <strong>ブラウザ経由でログインして使うサービスが使えるところまで</strong> とします。</p>
+          <ul>
+            <li>
+              OS のセットアップ
+              <ul>
+                <li>概ね流れのままに設定</li>
+                <li><strong>言語は英語</strong> にして、普段から英語に慣れる</li>
+              </ul>
+            </li>
+            <li>Dock から不要なもの削除（全部）</li>
+            <li>
+              System Preferences
+              <ul>
+                <li>Dock が邪魔しないよう極力小さく</li>
+                <li>
+                  ショートカット設定
+                  <ul>
+                    <li><strong>極力いじらない方針</strong></li>
+                    <li>F1〜F12キーはそのまま入力できるように（物理キー最高〜）</li>
+                    <li>
+                      <code>Shift + Ctrl + H</code> でウィンドウ左スクロール
+                      <ul>
+                        <li>本当は <code>fn + H</code> にしたい・・・</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <code>Shift + Ctrl + L</code> でウィンドウ右スクロール
+                      <ul>
+                        <li>本当は <code>fn + L</code> にしたい・・・</li>
+                      </ul>
+                    </li>
+                    <li>
+                      Spotlight と Input Sources のキー入れ替え
+                      <ul>
+                        <li>本当はカスタマイズしたくないけど、ここは止むを得ない</li>
+                        <li>日本語圏なので Input Method の方が優先度高い</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <del>スリープキーは <code>Ctrl-Cmd-Q</code> で代用</del>
+                  <ul>
+                    <li>
+                      <del>以前は Touch Bar でスリープキーを一番右に指定</del>
+                    </li>
+                    <li>
+                      <del>スリープキー自体の割り当てはないので、 <strong>ロックをかけるショートカットを覚える</strong></del>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  スリープのショートカットを App Shortcuts からタイトルを <code>Sleep</code> にして作る
+                  <ul>
+                    <li>F6 が三日月マークなので <code>Opt-Cmd-F6</code> あたりに割り当て</li>
+                  </ul>
+                </li>
+                <li>
+                  同一アプリ・別ウィンドウの切り替えは `Cmd-`` で代用
+                  <ul>
+                    <li><code>Cmd-Tab</code> ではアプリ間の切り替えしかできない（ Windows と挙動が異なる）</li>
+                  </ul>
+                </li>
+                <li>firewall の設定</li>
+                <li>
+                  Trackpad の設定
+                  <ul>
+                    <li>
+                      <code>Force Click and haptic feedback</code> の項目を OFF に
+                      <ul>
+                        <li>トラックパッド強く押して意図に反した操作になるのを防ぐ</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              各種ブラウザインストール
+              <ul>
+                <li>Google Chrome</li>
+                <li>Firefox</li>
+              </ul>
+            </li>
+            <li>
+              1password に依存している Dropbox インストール
+              <ul>
+                <li>Dropbox は削除可能なので、次までに依存しないようにしたい・・・</li>
+                <li>1password が利用している代替ストレージは iCloud あたり？</li>
+              </ul>
+            </li>
+            <li>1password インストール</li>
+            <li>
+              feedly のアカウント移行 <strong>（今回のみ）</strong>
+              <ul>
+                <li>ユーザーの整理をする必要があったので再設定</li>
+                <li>OPML 形式でインポートエクスポート</li>
+              </ul>
+            </li>
+            <li>
+              Chrome の設定 <strong>（今回のみ）</strong>
+              <ul>
+                <li>本来は同期されるので不要、今回のみ再設定</li>
+                <li>よく使うショートカットをブックマークバーにアイコンだけ登録</li>
+              </ul>
+            </li>
+            <li>
+              Google Chrome 拡張機能インストール <strong>（今回のみ）</strong>
+              <ul>
+                <li>ここも同様に再設定</li>
+                <li>
+                  Empty New Tab Page
+                  <ul>
+                    <li>画面共有したときに余計なものが映らないようにする</li>
+                  </ul>
+                </li>
+                <li>
+                  Toggl Track
+                  <ul>
+                    <li>時間計測する</li>
+                  </ul>
+                </li>
+                <li>
+                  Lighthouse
+                  <ul>
+                    <li>Web ページの分析用、すぐ使うわけではないけどいずれ必要になるのでこのタイミングで</li>
+                  </ul>
+                </li>
+                <li>
+                  DeepL Translate
+                  <ul>
+                    <li>UI を英語にしたり読む記事を英語にする分、日本語に翻訳しやすくしておく</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="communication">PC でコミュニケーション取れるまで</h2>
+          <p><img alt="MacBook Pro 2021 14インチ" src="resource03.jpg"></p>
+          <p>最低限連絡ついたり仕事ができたりする状態に早めにしておくと安心ですよね。</p>
+          <p>ということで、最低限の仕事ができるまでを一旦の目標とします。</p>
+          <ul>
+            <li>
+              Slack インストール
+              <ul>
+                <li>各種ワークスペースへのログインし直し</li>
+              </ul>
+            </li>
+            <li>Zoom インストール</li>
+            <li>Teams インストール</li>
+            <li>
+              ターミナルインストール
+              <ul>
+                <li>iTerm2 を使っていたが、このタイミングで <strong>Alacritty</strong> に乗り換えてみる</li>
+                <li><a class="link-card" href="https://github.com/alacritty/alacritty" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - alacritty/alacritty: A cross-platform, OpenGL terminal emulator.</span> <span class="link-card__desc">A cross-platform, OpenGL terminal emulator. Contribute to alacritty/alacritty development by …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/alacritty/alacritty"> github.com</span></span><span class="link-card__image"><img alt="GitHub - alacritty/alacritty: A cross-platform, OpenGL terminal emulator." loading="lazy" src="https://repository-images.githubusercontent.com/51980455/c6857780-448b-11ea-95ed-00fdbc59eb0b"></span></a></li>
+                <li>ターミナルとターミナルマルチプレクサが分離できていれば、ターミナルは比較的なんでも可</li>
+              </ul>
+            </li>
+            <li>
+              ターミナル設定
+              <ul>
+                <li>
+                  <a class="link-card" href="https://github.com/girigiribauer/dotfiles" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - girigiribauer/dotfiles: dotfiles for myself</span> <span class="link-card__desc">dotfiles for myself. Contribute to girigiribauer/dotfiles development by creating an account on …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/dotfiles"> github.com</span></span><span class="link-card__image"><img alt="GitHub - girigiribauer/dotfiles: dotfiles for myself" loading="lazy" src="https://opengraph.githubassets.com/2cb2f722e17a35479842f958024b32199bc2bba87f1f443470134735b757c452/girigiribauer/dotfiles"></span></a>を clone
+                  <ul>
+                    <li>中身はだいぶ古いので、見直しが必要・・・</li>
+                  </ul>
+                </li>
+                <li>
+                  シンボリックリンク張り替え
+                  <ul>
+                    <li>（以下概要のみ）</li>
+                    <li>zsh 周り（シェル）</li>
+                    <li>tmux 周り（ターミナルマルチプレクサ）</li>
+                    <li>ssh 周り</li>
+                  </ul>
+                </li>
+                <li>
+                  <code>.ssh/</code> 内のパーミッション設定
+                  <ul>
+                    <li><code>id_rsa</code> は 0600 にしないと後で弾かれる</li>
+                  </ul>
+                </li>
+                <li>
+                  Homebrew インストール
+                  <ul>
+                    <li>（以下概要のみ）</li>
+                    <li>oh-my-zsh</li>
+                    <li>tmux</li>
+                    <li>fzf</li>
+                    <li>tig</li>
+                  </ul>
+                </li>
+                <li>Alacritty の YAML 設定ファイルを最低限書く</li>
+              </ul>
+            </li>
+            <li>仕事用のリポジトリを手元にクローン</li>
+            <li>
+              VSCode インストール
+              <ul>
+                <li><code>code</code> コマンドで立ち上がるよう設定</li>
+              </ul>
+            </li>
+          </ul>
+          <p>ここまでで最低限、チャットツールでやりとりができ、エディタ開いて少し修正してコミット、程度のことができるようになりました。</p>
+          <p><strong>わーい 👏</strong></p>
+          <p>あとおまけでブログも書けるようにしておきつつ、 <code>brew install imagemagick</code> して、手元で <code>mogrify</code> コマンドを叩けるようにしておきました。 画像の一括処理とかが手元のコマンドでできてすごく便利で、ここの記事の画像もこれで処理しちゃってます。</p>
+          <h2 id="blog">ブログ投稿できるまで</h2>
+          <p>ブログ投稿を、 Go 製のスタティックサイトジェネレータである Hugo を利用して行なっています。</p>
+          <ul>
+            <li>
+              Homebrew 追加インストール
+              <ul>
+                <li>
+                  hugo （スタティックサイトジェネレータ）
+                  <ul>
+                    <li><a class="link-card" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">The world</span> <span class="link-card__desc">Hugo is one of the most popular open-source static site generators. With its amazing speed and …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://gohugo.io/"> gohugo.io</span></span><span class="link-card__image"><img alt="The world" loading="lazy" src="https://gohugo.io/featured.png"></span></a></li>
+                    <li>ただしブログのテンプレートはぐちゃぐちゃなので見直す</li>
+                  </ul>
+                </li>
+                <li>
+                  imagemagick （ブログ作成時の画像変換用）
+                  <ul>
+                    <li><a class="link-card" href="https://imagemagick.org/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">ImageMagick | Mastering Digital Image Alchemy</span> <span class="link-card__desc">ImageMagick is a powerful open-source software suite for creating, editing, converting, and …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://imagemagick.org/"> imagemagick.org</span></span><span class="link-card__image"><img alt="ImageMagick | Mastering Digital Image Alchemy" loading="lazy" src="https://imagemagick.org/image/logo.png"></span></a></li>
+                    <li>単体なら <code>convert</code> コマンド、画像が多いときは <code>mogrify</code> コマンドを使う</li>
+                  </ul>
+                </li>
+                <li>
+                  ffmpeg （ブログ作成時の動画変換用）
+                  <ul>
+                    <li><a href="https://www.ffmpeg.org/" rel="noopener noreferrer" target="_blank">https://www.ffmpeg.org/</a></li>
+                    <li><code>ffmpeg -i src.mov dst.mp4</code> だけで変換できる</li>
+                  </ul>
+                </li>
+                <li>
+                  massren （CLI のファイル一括リネーム）
+                  <ul>
+                    <li><a class="link-card" href="https://github.com/laurent22/massren" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - laurent22/massren: massren - easily rename multiple files using your text editor</span> <span class="link-card__desc">massren - easily rename multiple files using your text editor - laurent22/massren</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/laurent22/massren"> github.com</span></span><span class="link-card__image"><img alt="GitHub - laurent22/massren: massren - easily rename multiple files using your text editor" loading="lazy" src="https://opengraph.githubassets.com/90426dcdcca28e8fcf09238f2ea45c574f3f33f92a87b9a6d94e268c6aab40dd/laurent22/massren"></span></a></li>
+                    <li>リネームしたいディレクトリで <code>massren</code> コマンドを実行</li>
+                    <li>ファイル名の一覧をテキストファイルに表示し、それを編集することでリネームする（発想が好き）</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              KeyCastr インストール
+              <ul>
+                <li><a class="link-card" href="https://github.com/keycastr/keycastr" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - keycastr/keycastr: KeyCastr, an open-source keystroke visualizer</span> <span class="link-card__desc">KeyCastr, an open-source keystroke visualizer. Contribute to keycastr/keycastr development by …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/keycastr/keycastr"> github.com</span></span><span class="link-card__image"><img alt="GitHub - keycastr/keycastr: KeyCastr, an open-source keystroke visualizer" loading="lazy" src="https://opengraph.githubassets.com/09217dddfb938d5e39611955586503b621cac58c852d9fbecb86b8338f77edec/keycastr/keycastr"></span></a></li>
+                <li>キー操作を可視化したい（画面共有時、動画化など）</li>
+                <li>KeyCastr のキャプチャ ON/OFF のキーバインドを <code>Shift+Opt+Cmd+0</code> あたりに（滅多に入力しない）</li>
+              </ul>
+            </li>
+          </ul>
+          <p>この辺まで入れれば、以下のように <strong>動画キャプチャをブログに持ってくるまでの敷居がめちゃめちゃ低く</strong> なります。</p>
+          <a href="resource.mp4" target="_blank">
+  <video autoplay="" controls="" height="467" loop="" muted="" width="710">
+    <source src="resource04.mp4" type="video/mp4">
+  </video>
+</a>
+          <p>この辺は別記事にまとめてもいいかもしれませんね。</p>
+          <h2 id="optimization">各種作業への最適化</h2>
+          <p>前項目まででは以前通り仕事ができるとは言い難いので、足りない項目を順次セットアップしていきます。</p>
+          <p>ここから先はやりながらの方が抜け漏れ気付きやすいと思うので、仕事と平行してセットアップしていきます。</p>
+          <h3 id="共通あるいはよく使うもの">共通、あるいはよく使うもの</h3>
+          <ul>
+            <li>
+              zsh で vi-mode indicator が表示されてない状態だったのを修正 <strong>（今回のみ）</strong>
+              <ul>
+                <li><a class="link-card" href="https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">ohmyzsh/plugins/vi-mode at master · ohmyzsh/ohmyzsh</span> <span class="link-card__desc">🙃 A delightful community-driven (with 2,500+ contributors) framework for managing your zsh …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode"> github.com</span></span><span class="link-card__image"><img alt="ohmyzsh/plugins/vi-mode at master · ohmyzsh/ohmyzsh" loading="lazy" src="https://repository-images.githubusercontent.com/291137/fb009080-6110-11e9-82c2-b21ca7831f5c"></span></a></li>
+                <li>上記の環境変数追加</li>
+              </ul>
+            </li>
+            <li>
+              VSCode の拡張機能インストール <strong>（今回のみ）</strong>
+              <ul>
+                <li>（以下概要のみ）</li>
+                <li>vscodevim</li>
+                <li>その他仕事で使いそうなシンタックスハイライト系</li>
+                <li>自動で同期取れるようになったら毎回やらなくて OK</li>
+              </ul>
+            </li>
+            <li>
+              VSCode / vscodevim 設定
+              <ul>
+                <li><a class="link-card" href="https://github.com/VSCodeVim/Vim#mac" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - VSCodeVim/Vim: :star: Vim for Visual Studio Code</span> <span class="link-card__desc">:star: Vim for Visual Studio Code. Contribute to VSCodeVim/Vim development by creating an account on …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/VSCodeVim/Vim#mac"> github.com</span></span><span class="link-card__image"><img alt="GitHub - VSCodeVim/Vim: :star: Vim for Visual Studio Code" loading="lazy" src="https://opengraph.githubassets.com/9b5bfa949ccc8d4d62ffd4f232785adba25e2bcfc2a1536c54ad43960fa1b697/VSCodeVim/Vim"></span></a></li>
+                <li>公式にあるようにキー押しっぱなし時の挙動を修正する必要あり</li>
+                <li><code>$ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false # For VS Code</code></li>
+                <li>自動で同期取れるようになったら毎回やらなくて OK</li>
+              </ul>
+            </li>
+            <li>
+              VSCode の設定 <strong>（今回のみ）</strong>
+              <ul>
+                <li><code>settings.json</code> と <code>keybindings.json</code> をそれぞれ必要な分だけ追記</li>
+                <li>ここに全部書ける気がしないので、別途記事にまとめた方が良いかも・・・？</li>
+              </ul>
+            </li>
+            <li>
+              VSCode の設定の同期機能を使う
+              <ul>
+                <li><a class="link-card" href="https://code.visualstudio.com/docs/editor/settings-sync" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Settings Sync</span> <span class="link-card__desc">Synchronize your user settings across all your Visual Studio Code instances.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://code.visualstudio.com/docs/editor/settings-sync"> code.visualstudio.com</span></span><span class="link-card__image"><img alt="Settings Sync" loading="lazy" src="https://code.visualstudio.com/opengraphimg/generated/docs/configure/settings-sync.webp"></span></a></li>
+                <li>Microsoft アカウントに紐づけておき、新しい環境でサインインと共に再び同期する</li>
+              </ul>
+            </li>
+            <li>
+              Homebrew 追加インストール
+              <ul>
+                <li>git-lfs （でかいバイナリ用）</li>
+              </ul>
+            </li>
+          </ul>
+          <p><img alt="" src="resource05.jpg"></p>
+          <p>VSCode の設定の同期機能、いいっすね・・・ 👍</p>
+          <p>VSCode の設定項目については、ちょっと別のところに書きましょうか。</p>
+          <h3 id="go-環境">Go 環境</h3>
+          <p>2022/01 時点で 1.17 が最新です。</p>
+          <p><img alt="" src="resource06.jpg"></p>
+          <ul>
+            <li>
+              Go インストール
+              <ul>
+                <li><a class="link-card" href="https://go.dev/dl/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">All releases - The Go Programming Language</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://go.dev/dl/"> go.dev</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+                <li>M1 Mac なら <code>go1.xx.x.darwin-amd64.pkg</code> ではなく <code>go1.xx.x.darwin-arm64.pkg</code> 、 ARM の方を選ぶ</li>
+              </ul>
+            </li>
+            <li>
+              PATH を通す
+              <ul>
+                <li>$GOROOT が $GOPATH と同じ <code>$HOME/go</code> になっていると警告が出る</li>
+                <li>$GOROOT のパスをチェックして <code>/usr/local/go</code> になるようにする</li>
+                <li>それ以外の環境変数は不要</li>
+                <li><code>go version</code> でバージョンのみ出力されたら OK</li>
+              </ul>
+            </li>
+            <li>
+              VSCode の拡張機能インストール <strong>（たぶん今回のみ）</strong>
+              <ul>
+                <li>Go</li>
+                <li>インストール後に何らか Go プロジェクトを開くと右下で関連パッケージ入れる？と聞かれるので全部入れる</li>
+                <li>左下の方にバージョン表示されたら OK</li>
+              </ul>
+            </li>
+            <li>
+              VSCode の設定 <strong>（たぶん今回のみ）</strong>
+              <ul>
+                <li>保存時にフォーマッティングが動くようになってなかったら設定（全体で設定しておくが吉）</li>
+                <li><code>"editor.formatOnSave": true</code></li>
+                <li>後は設定しなくても大丈夫そう・・・？（今のところ問題なし）</li>
+              </ul>
+            </li>
+          </ul>
+          <p><img alt="" src="resource07.jpg"></p>
+          <p>以前は開発環境のパッケージ、どれ入れるか（ gofmt? goimports? goreturns? ）で若干迷ったりもしましたが、その辺も <strong>自動で必要な分入れてくれる</strong> ので、超楽になりました。 🙌</p>
+          <h3 id="docker-環境">Docker 環境</h3>
+          <ul>
+            <li>
+              Docker (Docker Desktop) インストール
+              <ul>
+                <li><a href="https://docs.docker.com/desktop/mac/apple-silicon/" rel="noopener noreferrer" target="_blank">https://docs.docker.com/desktop/mac/apple-silicon/</a></li>
+                <li>ちゃんと M1 Mac のものをインストール、アーキテクチャ変わったので他よりはトラブル多め</li>
+              </ul>
+            </li>
+          </ul>
+          <h3 id="javascript--typescript-環境">JavaScript / TypeScript 環境</h3>
+          <p>（TODO: ここから下、編集中です）</p>
+          <p>VSCode と Node 周りがあればとりあえずは良さそう・・・？</p>
+          <ul>
+            <li>
+              Volta の導入（ Node のバージョン管理ツール）
+              <ul>
+                <li><a class="link-card" href="https://volta.sh/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Volta - The Hassle-Free JavaScript Tool Manager</span> <span class="link-card__desc">Volta: Start your engines.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://volta.sh/"> volta.sh</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+                <li>書いてある通り、インストールしてからパスを通す</li>
+                <li><code>volta</code> コマンドが通れば OK</li>
+              </ul>
+            </li>
+            <li>
+              必要な Node のバージョンを必要なだけ入れておく
+              <ul>
+                <li>2022/01 時点では v16, v14, v12</li>
+              </ul>
+            </li>
+            <li>
+              <del>Homebrew 追加インストール</del>
+              <ul>
+                <li>
+                  <del>n （Node.js のバージョン管理ツール）</del>
+                  <ul>
+                    <li>
+                      <del>最初 nodenv や nvm を検討したが、さっと使えそうになかった（？）</del>
+                    </li>
+                    <li>
+                      <del>n ってインストール時に sudo 必要？</del>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <del>yarn （Node.js のパッケージマネージャ）</del>
+                  <ul>
+                    <li>yarn も volta 経由でパス張ってくれるので不要</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h3 id="haxe-環境">Haxe 環境</h3>
+          <p>使うので。</p>
+          <ul>
+            <li>
+              Haxe インストール
+              <ul>
+                <li><a class="link-card" href="https://haxe.org/download/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Haxe 4.3.7 - Haxe - The Cross-platform Toolkit</span> <span class="link-card__desc">Haxe is an open source toolkit based on a modern, high level, strictly typed programming language.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://haxe.org/download/"> haxe.org</span></span><span class="link-card__image"><img alt="Haxe 4.3.7 - Haxe - The Cross-platform Toolkit" loading="lazy" src="https://haxe.org/img/share.jpg"></span></a></li>
+                <li>haxelib は一緒にインストールされるので <code>haxelib setup</code> でセットアップだけしておく</li>
+              </ul>
+            </li>
+            <li>
+              VSCode の拡張機能インストール <strong>（今回のみ）</strong>
+              <ul>
+                <li>Haxe</li>
+                <li>Haxe Checkstyle</li>
+                <li>Haxe JSX （どうやら JSX をシンタックスハイライトしてくれるっぽい？お試しで）</li>
+              </ul>
+            </li>
+          </ul>
+          <h3 id="ネイティブアプリios">ネイティブアプリ（iOS）</h3>
+          <ul>
+            <li>
+              Xcode インストール
+              <ul>
+                <li>AppStore から</li>
+                <li>ギガ単位なのでテザリングでやったら一撃死注意</li>
+              </ul>
+            </li>
+            <li>
+              cocoapods インストール
+              <ul>
+                <li><a class="link-card" href="https://cocoapods.org/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">CocoaPods.org</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://cocoapods.org/"> cocoapods.org</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+                <li>iOS パッケージ管理ツール</li>
+                <li>事前に Ruby のインストールが必要だが、標準で ruby も gem もインストール済みなので気にしなくて OK</li>
+              </ul>
+            </li>
+            <li>
+              <h2 id="xcode-からのアカウント登録">Xcode からのアカウント登録</h2>
+            </li>
+          </ul>
+          <h3 id="その他">その他</h3>
+          <ul>
+            <li>
+              TripMode3 インストール
+              <ul>
+                <li><a class="link-card" href="https://tripmode.ch/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">TripMode - Save data, browse faster</span> <span class="link-card__desc">Easily control your Mac's data usage on slow or expensive networks. Stop wasting money on limited …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://tripmode.ch/"> tripmode.ch</span></span><span class="link-card__image"><img alt="TripMode - Save data, browse faster" loading="lazy" src="https://unicorn-images.b-cdn.net/c69ff38a-aee6-4be4-821a-cf2657f88b12?optimizer=gif"></span></a></li>
+                <li>外のネット環境で Docker イメージとかダウンロードして死ぬ、などを避ける</li>
+                <li>でも今はそれほど必要と感じてないかも</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/setup/">#Setup</a> <a class="tag-link" href="/tags/install/">#Install</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=%e5%b9%b4%e5%a7%8b%e3%82%bb%e3%83%83%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%83%a1%e3%83%a2%ef%bc%882022%e5%b9%b4%ef%bc%89%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20220103/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20220103%2f&amp;text=%e5%b9%b4%e5%a7%8b%e3%82%bb%e3%83%83%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%83%a1%e3%83%a2%ef%bc%882022%e5%b9%b4%ef%bc%89" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20220103/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

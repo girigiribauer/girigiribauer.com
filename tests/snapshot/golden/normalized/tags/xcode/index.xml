@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/xcode/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Xcode on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;もはやタイトルと説明文の通りなんですが、いつからか分からないものの、テザリングをオンにしながら Xcode を立ち上げると、実機が認識されません。&lt;/p&gt;\n&lt;p&gt;テザリングをオフにして、 Wi-Fi 同一ネットワークか優先でつなぐかしておくと、実機が認識されます。&lt;/p&gt;\n&lt;p&gt;ただ、誤解のないよう言っておくと、昨今 Xcode で階発用端末として認識される手順はめっちゃ簡単になっています。&lt;/p&gt;\n&lt;ol&gt;\n&lt;li&gt;端末の方でデベロッパーモードを ON にして再起動する（正確には再起動直後に ON にする）&lt;/li&gt;\n&lt;li&gt;有線または無線で同一ネットワークにつなぐ&lt;/li&gt;\n&lt;/ol&gt;\n&lt;p&gt;マジでこれだけで感動しています！ 😂&lt;/p&gt;\n&lt;p&gt;繋げたらあとは勝手にやってくれるので、昔の端末を登録してうんぬんの作業から比較すると雲泥の差があります。超楽チンです。 🤗&lt;/p&gt;\n&lt;h2 id=\"どうやらテザリングで-mac-を繋いでいると同一ネットワークと認識されないらしい\"&gt;どうやらテザリングで Mac を繋いでいると、同一ネットワークと認識されないらしい&lt;/h2&gt;\n&lt;p&gt;同一ネットワークと認識されないと、以下のエラーメッセージが出ます。&lt;/p&gt;\n&lt;p&gt;エラーメッセージでググる人もいるでしょうから、エラーメッセージも載せておきます。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource01.png\" alt=\"no eligible devices connected to &amp;lsquo;My Mac&amp;rsquo;\"&gt;&lt;/p&gt;\n&lt;blockquote&gt;\n&lt;p&gt;no eligible devices connected to &amp;lsquo;My Mac&amp;rsquo;&lt;/p&gt;\n&lt;/blockquote&gt;\n&lt;p&gt;対象デバイスがないらしいです。&lt;/p&gt;\n&lt;hr&gt;\n&lt;p&gt;&lt;img src=\"resource02.png\" alt=\"Browsing on the local area network for xxx\"&gt;&lt;/p&gt;\n&lt;blockquote&gt;\n&lt;p&gt;Browsing on the local area network for xxx&lt;/p&gt;\n&lt;p&gt;Ensure the device is unlocked and attached with a cable or associated with the same local area network as this Mac.\nThe device must be opted into Developer Mode to connect wirelessly.&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20231126/",
+        "link": "https://girigiribauer.com/tech/20231126/",
+        "pubDate": "Sun, 26 Nov 2023 13:00:00 +0900",
+        "title": "メモ: テザリングしながら iOS で実機ビルドはできなかった"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Tue, 09 Apr 2024 11:30:00 +0900",
+      "link": "https://girigiribauer.com/tags/xcode/",
+      "title": "Xcode on ばうあーろぐ"
+    }
+  }
+}

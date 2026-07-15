@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>git-diff と git-difftool を混同していた話 | ばうあーろぐ</title>
+    <meta content="git diff のカスタマイズがしたくて .gitconfig に以下のような記述をしたことがある人もいるかと思います。
+[diff]
+  tool = vimdiff
+
+でもこれ、違ったんです。
+git diff 用の設定じゃなくて、 git difftool 用の設定だったのです。
+なんだってー！？ （色々略）
+git の diff 周りの設定の整理
+diff 周りの設定を .gitconfig に何も書いてない状態の時は、
+% git diff .zsh/basic.zsh
+diff --git a/.zsh/basic.zsh b/.zsh/basic.zsh
+index beff72b..19ac86c 100644
+--- a/.zsh/basic.zsh
++++ b/.zsh/basic.zsh
+@@ -12,19 +12,15 @@ export LANG=&quot;ja_JP.UTF-8&quot;
+ export SHELL=&quot;/bin/zsh&quot;
+
+ # PAGER
+-export PAGER=&quot;less&quot;
++export PAGER=&quot;lv -c&quot;
+
+ # EDITOR
+-export EDITOR=&quot;/usr/bin/mvim -v&quot;
+-export PATH=&quot;/usr/bin/mvim:$PATH&quot;
++export EDITOR=&quot;/usr/local/bin/vim -v -p&quot;
++export PATH=&quot;/usr/local/bin/vim:$PATH&quot;
+このように ユニファイド形式 の差分で出力されます。（テキスト自体の内容は本筋とは関係ありません）" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20161227/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20161227" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="git-diff と git-difftool を混同していた話" itemprop="name">
+    <meta content="git diff のカスタマイズがしたくて .gitconfig に以下のような記述をしたことがある人もいるかと思います。
+[diff]
+  tool = vimdiff
+
+でもこれ、違ったんです。
+git diff 用の設定じゃなくて、 git difftool 用の設定だったのです。
+なんだってー！？ （色々略）
+git の diff 周りの設定の整理
+diff 周りの設定を .gitconfig に何も書いてない状態の時は、
+% git diff .zsh/basic.zsh
+diff --git a/.zsh/basic.zsh b/.zsh/basic.zsh
+index beff72b..19ac86c 100644
+--- a/.zsh/basic.zsh
++++ b/.zsh/basic.zsh
+@@ -12,19 +12,15 @@ export LANG=&quot;ja_JP.UTF-8&quot;
+ export SHELL=&quot;/bin/zsh&quot;
+
+ # PAGER
+-export PAGER=&quot;less&quot;
++export PAGER=&quot;lv -c&quot;
+
+ # EDITOR
+-export EDITOR=&quot;/usr/bin/mvim -v&quot;
+-export PATH=&quot;/usr/bin/mvim:$PATH&quot;
++export EDITOR=&quot;/usr/local/bin/vim -v -p&quot;
++export PATH=&quot;/usr/local/bin/vim:$PATH&quot;
+このように ユニファイド形式 の差分で出力されます。（テキスト自体の内容は本筋とは関係ありません）" itemprop="description">
+    <meta content="git-diff と git-difftool を混同していた話" property="og:title">
+    <meta content="git diff のカスタマイズがしたくて .gitconfig に以下のような記述をしたことがある人もいるかと思います。
+[diff]
+  tool = vimdiff
+
+でもこれ、違ったんです。
+git diff 用の設定じゃなくて、 git difftool 用の設定だったのです。
+なんだってー！？ （色々略）
+git の diff 周りの設定の整理
+diff 周りの設定を .gitconfig に何も書いてない状態の時は、
+% git diff .zsh/basic.zsh
+diff --git a/.zsh/basic.zsh b/.zsh/basic.zsh
+index beff72b..19ac86c 100644
+--- a/.zsh/basic.zsh
++++ b/.zsh/basic.zsh
+@@ -12,19 +12,15 @@ export LANG=&quot;ja_JP.UTF-8&quot;
+ export SHELL=&quot;/bin/zsh&quot;
+
+ # PAGER
+-export PAGER=&quot;less&quot;
++export PAGER=&quot;lv -c&quot;
+
+ # EDITOR
+-export EDITOR=&quot;/usr/bin/mvim -v&quot;
+-export PATH=&quot;/usr/bin/mvim:$PATH&quot;
++export EDITOR=&quot;/usr/local/bin/vim -v -p&quot;
++export PATH=&quot;/usr/local/bin/vim:$PATH&quot;
+このように ユニファイド形式 の差分で出力されます。（テキスト自体の内容は本筋とは関係ありません）" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20161227/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="git-diff と git-difftool を混同していた話" name="twitter:title">
+    <meta content="git diff のカスタマイズがしたくて .gitconfig に以下のような記述をしたことがある人もいるかと思います。
+[diff]
+  tool = vimdiff
+
+でもこれ、違ったんです。
+git diff 用の設定じゃなくて、 git difftool 用の設定だったのです。
+なんだってー！？ （色々略）
+git の diff 周りの設定の整理
+diff 周りの設定を .gitconfig に何も書いてない状態の時は、
+% git diff .zsh/basic.zsh
+diff --git a/.zsh/basic.zsh b/.zsh/basic.zsh
+index beff72b..19ac86c 100644
+--- a/.zsh/basic.zsh
++++ b/.zsh/basic.zsh
+@@ -12,19 +12,15 @@ export LANG=&quot;ja_JP.UTF-8&quot;
+ export SHELL=&quot;/bin/zsh&quot;
+
+ # PAGER
+-export PAGER=&quot;less&quot;
++export PAGER=&quot;lv -c&quot;
+
+ # EDITOR
+-export EDITOR=&quot;/usr/bin/mvim -v&quot;
+-export PATH=&quot;/usr/bin/mvim:$PATH&quot;
++export EDITOR=&quot;/usr/local/bin/vim -v -p&quot;
++export PATH=&quot;/usr/local/bin/vim:$PATH&quot;
+このように ユニファイド形式 の差分で出力されます。（テキスト自体の内容は本筋とは関係ありません）" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">git-diff と git-difftool を混同していた話</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2016-12-27 19:59:53 +0900 JST">2016/12/27</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p><code>git diff</code> のカスタマイズがしたくて <code>.gitconfig</code> に以下のような記述をしたことがある人もいるかと思います。</p>
+          <pre><code>[diff]
+  tool = vimdiff
+</code></pre>
+          <p>でもこれ、違ったんです。 <strong>git diff</strong> 用の設定じゃなくて、 <strong>git difftool</strong> 用の設定だったのです。</p>
+          <p><strong>なんだってー！？</strong> （色々略）</p>
+          <h2 id="git-の-diff-周りの設定の整理">git の diff 周りの設定の整理</h2>
+          <p>diff 周りの設定を <code>.gitconfig</code> に何も書いてない状態の時は、</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% git diff .zsh/basic.zsh
+</span></span><span style="display:flex"><span>diff --git a/.zsh/basic.zsh b/.zsh/basic.zsh
+</span></span><span style="display:flex"><span>index beff72b..19ac86c 100644
+</span></span><span style="display:flex"><span>--- a/.zsh/basic.zsh
+</span></span><span style="display:flex"><span>+++ b/.zsh/basic.zsh
+</span></span><span style="display:flex"><span>@@ -12,19 +12,15 @@ export LANG="ja_JP.UTF-8"
+</span></span><span style="display:flex"><span> export SHELL="/bin/zsh"
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span> # PAGER
+</span></span><span style="display:flex"><span>-export PAGER="less"
+</span></span><span style="display:flex"><span>+export PAGER="lv -c"
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span> # EDITOR
+</span></span><span style="display:flex"><span>-export EDITOR="/usr/bin/mvim -v"
+</span></span><span style="display:flex"><span>-export PATH="/usr/bin/mvim:$PATH"
+</span></span><span style="display:flex"><span>+export EDITOR="/usr/local/bin/vim -v -p"
+</span></span><span style="display:flex"><span>+export PATH="/usr/local/bin/vim:$PATH"
+</span></span></code></pre>
+          </div>
+          <p>このように <strong>ユニファイド形式</strong> の差分で出力されます。（テキスト自体の内容は本筋とは関係ありません）</p>
+          <p>Vim とか使ってると、いやそれ以外のエディタであっても、 diff とったときには左右に分割した状態（diff-mode）で比較したいじゃないですか。</p>
+          <p>となると、この <code>git diff</code> の挙動をカスタマイズしたいと思うのはけっこう自然なことだと思います。</p>
+          <p>でも、いくら以下のように設定しても、変化はおきません。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>[diff]
+</span></span><span style="display:flex"><span>  tool = vimdiff
+</span></span></code></pre>
+          </div>
+          <p>そこで色々調べていくうちに、 <strong>git diff</strong> とは別のコマンドが存在していることを知るのです・・・。</p>
+          <h2 id="マニュアルをちゃんと読もう">マニュアルをちゃんと読もう</h2>
+          <p>マニュアルをちゃんと読みましょう（自分）。</p>
+          <p><code>git help diff</code> を実行してマニュアルをよく読むと、 どこにも tool なんて解説項目はありません。</p>
+          <p>次に <code>git help config</code> を実行して diff 周りに tool の設定項目がないか調べてみると、 今度は見つかりました。ただ・・・</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>diff.tool
+</span></span><span style="display:flex"><span>    Controls which diff tool is used by git-difftool(1). This variable overrides the value
+</span></span><span style="display:flex"><span>    configured in merge.tool. The list below shows the valid built-in values. Any other value
+</span></span><span style="display:flex"><span>    is treated as a custom diff tool and requires that a corresponding difftool.<tool>.cmd
+</span></span><span style="display:flex"><span>    variable is defined.
+</span></span></code></pre>
+          </div>
+          <p><strong>used by git-difftool(1)</strong> とありますね・・・。</p>
+          <p>そう、 <strong>git-diff</strong> ではなく、 <strong>git-difftool</strong> だったのです・・・。</p>
+          <h2 id="git-difftool-について">git-difftool について</h2>
+          <p>試しに <code>git difftool</code> を実行してみると、</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-sh" data-lang="sh"><span style="display:flex"><span>% git difftool
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>This message is displayed because <span style="color:#e6db74">'diff.tool'</span> is not configured.
+</span></span><span style="display:flex"><span>See <span style="color:#e6db74">'git difftool --tool-help'</span> or <span style="color:#e6db74">'git help config'</span> <span style="color:#66d9ef">for</span> more details.
+</span></span><span style="display:flex"><span><span style="color:#e6db74">'git difftool'</span> will now attempt to use one of the following tools:
+</span></span><span style="display:flex"><span>kompare vimdiff emerge
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Viewing <span style="color:#f92672">(</span>1/1<span style="color:#f92672">)</span>: <span style="color:#e6db74">'path/to/file'</span>
+</span></span><span style="display:flex"><span>Launch <span style="color:#e6db74">'vimdiff'</span> <span style="color:#f92672">[</span>Y/n<span style="color:#f92672">]</span>:
+</span></span></code></pre>
+          </div>
+          <p><code>--tool-help</code> オプション付きでヘルプを見ろとあります。</p>
+          <p>そのまま付けて実行してみます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-sh" data-lang="sh"><span style="display:flex"><span>% git difftool --tool-help
+</span></span><span style="display:flex"><span><span style="color:#e6db74">'git difftool --tool=<tool>'</span> may be set to one of the following:
+</span></span><span style="display:flex"><span>                araxis
+</span></span><span style="display:flex"><span>                emerge
+</span></span><span style="display:flex"><span>                opendiff
+</span></span><span style="display:flex"><span>                vimdiff
+</span></span><span style="display:flex"><span>                vimdiff2
+</span></span><span style="display:flex"><span>                vimdiff3
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>The following tools are valid, but not currently available:
+</span></span><span style="display:flex"><span>                bc
+</span></span><span style="display:flex"><span>                bc3
+</span></span><span style="display:flex"><span>                codecompare
+</span></span><span style="display:flex"><span>                deltawalker
+</span></span><span style="display:flex"><span>                diffmerge
+</span></span><span style="display:flex"><span>                diffuse
+</span></span><span style="display:flex"><span>                ecmerge
+</span></span><span style="display:flex"><span>                gvimdiff
+</span></span><span style="display:flex"><span>                gvimdiff2
+</span></span><span style="display:flex"><span>                gvimdiff3
+</span></span><span style="display:flex"><span>                kdiff3
+</span></span><span style="display:flex"><span>                kompare
+</span></span><span style="display:flex"><span>                meld
+</span></span><span style="display:flex"><span>                p4merge
+</span></span><span style="display:flex"><span>                tkdiff
+</span></span><span style="display:flex"><span>                winmerge
+</span></span><span style="display:flex"><span>                xxdiff
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Some of the tools listed above only work in a windowed
+</span></span><span style="display:flex"><span>environment. If run in a terminal-only session, they will fail.
+</span></span></code></pre>
+          </div>
+          <p>つまり、 <code>git difftool</code> というコマンドが存在していて、 <strong>その差分比較に使える difftool が複数存在しているものの、その標準で使う tool を設定できるのが diff.tool だったのです。</strong></p>
+          <p>では <code>.gitconfig</code> の diff 周りの設定を空にした状態で <code>git difftool</code> コマンドを使ってみましょう。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-sh" data-lang="sh"><span style="display:flex"><span>% git difftool .zsh/basic.zsh
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>This message is displayed because <span style="color:#e6db74">'diff.tool'</span> is not configured.
+</span></span><span style="display:flex"><span>See <span style="color:#e6db74">'git difftool --tool-help'</span> or <span style="color:#e6db74">'git help config'</span> <span style="color:#66d9ef">for</span> more details.
+</span></span><span style="display:flex"><span><span style="color:#e6db74">'git difftool'</span> will now attempt to use one of the following tools:
+</span></span><span style="display:flex"><span>kompare vimdiff emerge
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Viewing <span style="color:#f92672">(</span>1/1<span style="color:#f92672">)</span>: <span style="color:#e6db74">'.zsh/basic.zsh'</span>
+</span></span><span style="display:flex"><span>Launch <span style="color:#e6db74">'vimdiff'</span> <span style="color:#f92672">[</span>Y/n<span style="color:#f92672">]</span>:
+</span></span></code></pre>
+          </div>
+          <p>今は .gitconfig の diff 周りが未設定の状態で実行しているため、いくつか使用可能な difftool が列挙されています。</p>
+          <p>ここで Y を押してもいいですが、先に <strong>diff.tool</strong> の設定を追加してからもう一度実行してみます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>[diff]
+</span></span><span style="display:flex"><span>  tool = vimdiff
+</span></span></code></pre>
+          </div>
+          <p>上記を追加して、もう一度 <code>git difftool</code> コマンドを実行します。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-sh" data-lang="sh"><span style="display:flex"><span>% git difftool .zsh/basic.zsh
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Viewing <span style="color:#f92672">(</span>1/1<span style="color:#f92672">)</span>: <span style="color:#e6db74">'.zsh/basic.zsh'</span>
+</span></span><span style="display:flex"><span>Launch <span style="color:#e6db74">'vimdiff'</span> <span style="color:#f92672">[</span>Y/n<span style="color:#f92672">]</span>:
+</span></span></code></pre>
+          </div>
+          <p>余計なメッセージが減りました。 つまり <strong>diff.tool</strong> の設定が正しく適用されています。そのまま Y キーを押します。</p>
+          <p><img alt="" src="resource01.jpg"></p>
+          <p>こんな感じで左右に分割された差分が表示されます。</p>
+          <p>ちなみに、毎回 Y/n を打つのは面倒なので、 .gitconfig に <strong>difftool.prompt</strong> を設定しておくと、すぐに分割表示されます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>[difftool]
+</span></span><span style="display:flex"><span>  prompt = false
+</span></span></code></pre>
+          </div>
+          <p>はい。</p>
+          <h2 id="git-diff-と-git-difftool-の違いについて">git diff と git difftool の違いについて</h2>
+          <p>結局のところ何が違うのでしょう。 <code>git difftool</code> にはこんな説明文が書いてあります。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>DESCRIPTION
+</span></span><span style="display:flex"><span>       git difftool is a Git command that allows you to compare and edit files between revisions using
+</span></span><span style="display:flex"><span>       common diff tools. git difftool is a frontend to git diff and accepts the same options and
+</span></span><span style="display:flex"><span>       arguments. See git-diff(1).
+</span></span></code></pre>
+          </div>
+          <p>要するに、 <strong>git-difftool は（普段使っているような）共通の差分比較ツールを使って比較をするためのコマンド</strong> です。</p>
+          <p>つまり <strong>vimdiff のような比較表示をしたい場合は、本来こっちの git-difftool コマンドを使うべき</strong> であって、 git-diff を vimdiff に近づけるのは本来の用途とはちょっと違う、と言えるかもしれません。</p>
+          <p>ちなみに、今回は触れていませんが、 difftool に対して同様に <strong>git-mergetool</strong> というのもあります。ほぼ同じような感じなのであとはお調べください。</p>
+          <h2 id="git-diff-に対するカスタマイズ">git diff に対するカスタマイズ</h2>
+          <p>それが分かった上で、あえて git diff の挙動を変えることをしようとするならば、 <strong>diff.external</strong> というオプションがありますよ、というのが <strong>git-config</strong> に書いてあります。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>diff.external
+</span></span><span style="display:flex"><span>    If this config variable is set, diff generation is not performed using the internal diff
+</span></span><span style="display:flex"><span>    machinery, but using the given command. Can be overridden with the `GIT_EXTERNAL_DIFF'
+</span></span><span style="display:flex"><span>    environment variable. The command is called with parameters as described under "git Diffs"
+</span></span><span style="display:flex"><span>    in git(1). Note: if you want to use an external diff program only on a subset of your
+</span></span><span style="display:flex"><span>    files, you might want to use gitattributes(5) instead.
+</span></span></code></pre>
+          </div>
+          <p>ここから先は <a class="link-card" href="https://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Git Diff with Vimdiff</span> <span class="link-card__desc">What happens when you type git diff? As with all interesting questions, the answer is &amp;#8220;it …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/"> technotales.wordpress.com</span></span><span class="link-card__image"><img alt="Git Diff with Vimdiff" loading="lazy" src="http://mps.s3.amazonaws.com/images/vimdiff.jpg"></span></a>に書いてある方が詳しいのですが、 <strong>vimdiff</strong> の入出力の関係上、シェルスクリプトを挟みつつ、 diff の際の pager をオフにしてやる必要があるようです。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>一言でまとめると、</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>[diff]
+</span></span><span style="display:flex"><span>  tool = vimdiff
+</span></span><span style="display:flex"><span>[difftool]
+</span></span><span style="display:flex"><span>  prompt = false
+</span></span></code></pre>
+          </div>
+          <p><strong>これらの設定は git-diff 用ではなく git-difftool 用です。</strong> それぞれお間違えなく。</p>
+          <p>基本的にドキュメント読んだので一応自己解決した話なのですが、 ググって書いてあったからといって盲信するのはよくありません。 <strong>ちゃんとドキュメント読んで自分で検証しましょう。</strong></p>
+          <p>2016年もあとわずかですが、 来年も引き続きこういった勘違いとか混乱しやすい気づき系の記事を 不定期で細々と書いていって、 同じように困った人にとって助けになればと思います。</p>
+          <p>（もし解釈が間違ってるよ！ or 誤字脱字がー、などのツッコミなどあれば Twitter 経由などでいただけると幸いです）</p>
+          <p>では良いお年を。</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://git-scm.com/docs/git-config" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Git - git-config Documentation</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://git-scm.com/docs/git-config"> git-scm.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a class="link-card" href="https://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Git Diff with Vimdiff</span> <span class="link-card__desc">What happens when you type git diff? As with all interesting questions, the answer is &amp;#8220;it …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/"> technotales.wordpress.com</span></span><span class="link-card__image"><img alt="Git Diff with Vimdiff" loading="lazy" src="http://mps.s3.amazonaws.com/images/vimdiff.jpg"></span></a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/git/">#Git</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=git-diff%20%e3%81%a8%20git-difftool%20%e3%82%92%e6%b7%b7%e5%90%8c%e3%81%97%e3%81%a6%e3%81%84%e3%81%9f%e8%a9%b1%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20161227/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20161227%2f&amp;text=git-diff%20%e3%81%a8%20git-difftool%20%e3%82%92%e6%b7%b7%e5%90%8c%e3%81%97%e3%81%a6%e3%81%84%e3%81%9f%e8%a9%b1" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20161227/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

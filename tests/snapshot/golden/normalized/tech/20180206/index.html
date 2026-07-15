@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Docker 再入門2018 - コマンド編 | ばうあーろぐ</title>
+    <meta content="今回はコマンド編です。
+コンテナ編から順に読むことをお勧めします。
+目次
+
+
+
+
+コンテナ編
+
+読むと Docker のコンテナ周りがざっくり分かる
+
+
+
+
+
+コマンド編 （いまここ）
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+docker コマンドを基準に Docker を掘り下げてみる
+docker-compose コマンドを基準に Docker を掘り下げてみる
+コンテナへの侵入、ログの見方など
+
+
+
+
+
+エコシステム編
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+docker コマンドを基準に Docker を掘り下げてみる
+前回は Docker コンテナにぼんやりイメージを持ってもらいつつ、
+その周辺の用語整理などを行いました。
+その際、 docker コマンドを多少触りましたが、
+今回は他にどんなコマンドがあるかを整理しながら、 Docker をもう少し掘り下げて見てみます。
+ちなみに公式ドキュメントはこちらです。
+
+
+
+
+            
+                docker
+                
+                
+                    
+                    docs.docker.com
+                
+            
+
+なお、どこかのバージョンでコマンドの再整理が行われたのですが、
+特に新旧対比させてもここでは意味がないので、新しいコマンド体系のみ触れたいと思います。
+詳しくは自分で調べてもらうか、以下なんか分かりやすいのではないでしょうか。
+
+
+
+
+            
+                docker container / image コマンド新旧比較 - Qiita
+                概要 2017年1月18日にリリースされた Docker v1.13 以降（今日現在の v17.03.0-ce ）は、 docker コマンドラインの命令体系が再編成されました。本記事では変更に至った …
+                
+                    
+                    qiita.com
+                
+            
+                
+            " name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20180206/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20180206" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Docker 再入門2018 - コマンド編" itemprop="name">
+    <meta content="今回はコマンド編です。
+コンテナ編から順に読むことをお勧めします。
+目次
+
+
+
+
+コンテナ編
+
+読むと Docker のコンテナ周りがざっくり分かる
+
+
+
+
+
+コマンド編 （いまここ）
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+docker コマンドを基準に Docker を掘り下げてみる
+docker-compose コマンドを基準に Docker を掘り下げてみる
+コンテナへの侵入、ログの見方など
+
+
+
+
+
+エコシステム編
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+docker コマンドを基準に Docker を掘り下げてみる
+前回は Docker コンテナにぼんやりイメージを持ってもらいつつ、
+その周辺の用語整理などを行いました。
+その際、 docker コマンドを多少触りましたが、
+今回は他にどんなコマンドがあるかを整理しながら、 Docker をもう少し掘り下げて見てみます。
+ちなみに公式ドキュメントはこちらです。
+
+
+
+
+            
+                docker
+                
+                
+                    
+                    docs.docker.com
+                
+            
+
+なお、どこかのバージョンでコマンドの再整理が行われたのですが、
+特に新旧対比させてもここでは意味がないので、新しいコマンド体系のみ触れたいと思います。
+詳しくは自分で調べてもらうか、以下なんか分かりやすいのではないでしょうか。
+
+
+
+
+            
+                docker container / image コマンド新旧比較 - Qiita
+                概要 2017年1月18日にリリースされた Docker v1.13 以降（今日現在の v17.03.0-ce ）は、 docker コマンドラインの命令体系が再編成されました。本記事では変更に至った …
+                
+                    
+                    qiita.com
+                
+            
+                
+            " itemprop="description">
+    <meta content="Docker 再入門2018 - コマンド編" property="og:title">
+    <meta content="今回はコマンド編です。
+コンテナ編から順に読むことをお勧めします。
+目次
+
+
+
+
+コンテナ編
+
+読むと Docker のコンテナ周りがざっくり分かる
+
+
+
+
+
+コマンド編 （いまここ）
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+docker コマンドを基準に Docker を掘り下げてみる
+docker-compose コマンドを基準に Docker を掘り下げてみる
+コンテナへの侵入、ログの見方など
+
+
+
+
+
+エコシステム編
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+docker コマンドを基準に Docker を掘り下げてみる
+前回は Docker コンテナにぼんやりイメージを持ってもらいつつ、
+その周辺の用語整理などを行いました。
+その際、 docker コマンドを多少触りましたが、
+今回は他にどんなコマンドがあるかを整理しながら、 Docker をもう少し掘り下げて見てみます。
+ちなみに公式ドキュメントはこちらです。
+
+
+
+
+            
+                docker
+                
+                
+                    
+                    docs.docker.com
+                
+            
+
+なお、どこかのバージョンでコマンドの再整理が行われたのですが、
+特に新旧対比させてもここでは意味がないので、新しいコマンド体系のみ触れたいと思います。
+詳しくは自分で調べてもらうか、以下なんか分かりやすいのではないでしょうか。
+
+
+
+
+            
+                docker container / image コマンド新旧比較 - Qiita
+                概要 2017年1月18日にリリースされた Docker v1.13 以降（今日現在の v17.03.0-ce ）は、 docker コマンドラインの命令体系が再編成されました。本記事では変更に至った …
+                
+                    
+                    qiita.com
+                
+            
+                
+            " property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20180206/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Docker 再入門2018 - コマンド編" name="twitter:title">
+    <meta content="今回はコマンド編です。
+コンテナ編から順に読むことをお勧めします。
+目次
+
+
+
+
+コンテナ編
+
+読むと Docker のコンテナ周りがざっくり分かる
+
+
+
+
+
+コマンド編 （いまここ）
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+docker コマンドを基準に Docker を掘り下げてみる
+docker-compose コマンドを基準に Docker を掘り下げてみる
+コンテナへの侵入、ログの見方など
+
+
+
+
+
+エコシステム編
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+docker コマンドを基準に Docker を掘り下げてみる
+前回は Docker コンテナにぼんやりイメージを持ってもらいつつ、
+その周辺の用語整理などを行いました。
+その際、 docker コマンドを多少触りましたが、
+今回は他にどんなコマンドがあるかを整理しながら、 Docker をもう少し掘り下げて見てみます。
+ちなみに公式ドキュメントはこちらです。
+
+
+
+
+            
+                docker
+                
+                
+                    
+                    docs.docker.com
+                
+            
+
+なお、どこかのバージョンでコマンドの再整理が行われたのですが、
+特に新旧対比させてもここでは意味がないので、新しいコマンド体系のみ触れたいと思います。
+詳しくは自分で調べてもらうか、以下なんか分かりやすいのではないでしょうか。
+
+
+
+
+            
+                docker container / image コマンド新旧比較 - Qiita
+                概要 2017年1月18日にリリースされた Docker v1.13 以降（今日現在の v17.03.0-ce ）は、 docker コマンドラインの命令体系が再編成されました。本記事では変更に至った …
+                
+                    
+                    qiita.com
+                
+            
+                
+            " name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Docker 再入門2018 - コマンド編</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2018-02-06 08:37:51 +0900 JST">2018/02/06</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>今回はコマンド編です。 コンテナ編から順に読むことをお勧めします。</p>
+          <h2 id="index">目次</h2>
+          <ol>
+            <li>
+              <strong><a href="/archives/20180205/">コンテナ編</a></strong>
+              <ul>
+                <li>読むと Docker のコンテナ周りがざっくり分かる</li>
+              </ul>
+            </li>
+            <li>
+              <strong><a href="/archives/20180206/">コマンド編</a> （いまここ）</strong>
+              <ul>
+                <li>読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる</li>
+                <li>docker コマンドを基準に Docker を掘り下げてみる</li>
+                <li>docker-compose コマンドを基準に Docker を掘り下げてみる</li>
+                <li>コンテナへの侵入、ログの見方など</li>
+              </ul>
+            </li>
+            <li>
+              <strong><a href="/archives/20180207/">エコシステム編</a></strong>
+              <ul>
+                <li>読むと DockerHub のサービスの活用方法がざっくり分かる</li>
+              </ul>
+            </li>
+            <li>
+              <strong><a href="/archives/20180208/">実践編</a></strong>
+              <ul>
+                <li>読むと Docker で環境構築する方法が分かる、怖くなくなる</li>
+              </ul>
+            </li>
+          </ol>
+          <h2 id="docker-コマンドを基準に-docker-を掘り下げてみる">docker コマンドを基準に Docker を掘り下げてみる</h2>
+          <p>前回は Docker コンテナにぼんやりイメージを持ってもらいつつ、 その周辺の用語整理などを行いました。</p>
+          <p>その際、 <code>docker</code> コマンドを多少触りましたが、 今回は他にどんなコマンドがあるかを整理しながら、 Docker をもう少し掘り下げて見てみます。</p>
+          <p>ちなみに公式ドキュメントはこちらです。 <a class="link-card" href="https://docs.docker.com/engine/reference/commandline/docker/#child-commands" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">docker</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/engine/reference/commandline/docker/#child-commands"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p><img alt="Docker 公式" src="resource01.jpg"></p>
+          <p>なお、どこかのバージョンでコマンドの再整理が行われたのですが、 特に新旧対比させてもここでは意味がないので、新しいコマンド体系のみ触れたいと思います。</p>
+          <p>詳しくは自分で調べてもらうか、以下なんか分かりやすいのではないでしょうか。 <a class="link-card" href="https://qiita.com/zembutsu/items/6e1ad18f0d548ce6c266" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">docker container / image コマンド新旧比較 - Qiita</span> <span class="link-card__desc">概要 2017年1月18日にリリースされた Docker v1.13 以降（今日現在の v17.03.0-ce ）は、 docker コマンドラインの命令体系が再編成されました。本記事では変更に至った …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://qiita.com/zembutsu/items/6e1ad18f0d548ce6c266"> qiita.com</span></span><span class="link-card__image"><img alt="docker container / image コマンド新旧比較 - Qiita" loading="lazy" src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-user-contents.imgix.net%2Fhttps%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-afbab5eb44e0b055cce1258705637a91.png%3Fixlib%3Drb-4.1.1%26w%3D1200%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLXByb2ZpbGUtaW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnFpaXRhLWltYWdlLXN0b3JlLnMzLmFtYXpvbmF3cy5jb20lMkYwJTJGMTMwMDIlMkZwcm9maWxlLWltYWdlcyUyRjE0NzM2ODI2MzE_aXhsaWI9cmItNC4xLjEmYXI9MSUzQTEmZml0PWNyb3AmbWFzaz1lbGxpcHNlJmJnPUZGRkZGRiZmbT1wbmczMiZzPWQ4MGNhOWYwYjJjM2FiOTkyZjZmYjg0ODFmYTJhNDc2%26blend-x%3D120%26blend-y%3D462%26blend-w%3D90%26blend-h%3D90%26blend-mode%3Dnormal%26mark64%3DaHR0cHM6Ly9xaWl0YS1vcmdhbml6YXRpb24taW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnMzLWFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb20lMkZxaWl0YS1vcmdhbml6YXRpb24taW1hZ2UlMkYxNmJlMjM1NTQ4MjZkOGE4NDRiNzQwMTg3MGM2OTNhOGE2YmUwOWI1JTJGb3JpZ2luYWwuanBnJTNGMTQ4MjgwNzAwNz9peGxpYj1yYi00LjEuMSZ3PTQ0Jmg9NDQmZml0PWNyb3AmbWFzaz1jb3JuZXJzJmNvcm5lci1yYWRpdXM9OCZiZz1GRkZGRkYmYm9yZGVyPTIlMkNGRkZGRkYmZm09cG5nMzImcz1iYmEwMWEzYTU3MmI3OTIwNTZiYWQxN2YyNWMyNDY4ZA%26mark-x%3D186%26mark-y%3D515%26mark-w%3D40%26mark-h%3D40%26s%3D2ed226bdaa6343548ff6d1f652d70ed2?ixlib=rb-4.1.1&amp;amp;w=1200&amp;amp;fm=jpg&amp;amp;mark64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjEuMSZ3PTk2MCZoPTMyNCZ0eHQ9ZG9ja2VyJTIwY29udGFpbmVyJTIwJTJGJTIwaW1hZ2UlMjAlRTMlODIlQjMlRTMlODMlOUUlRTMlODMlQjMlRTMlODMlODklRTYlOTYlQjAlRTYlOTclQTclRTYlQUYlOTQlRTglQkMlODMmdHh0LWFsaWduPWxlZnQlMkN0b3AmdHh0LWNvbG9yPSUyMzFFMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT01NiZ0eHQtcGFkPTAmcz1kODUzMDQxODRjMDFiZmQ1ODI4Yjk1MGVlYTY5YjYwMA&amp;amp;mark-x=120&amp;amp;mark-y=112&amp;amp;blend64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjEuMSZ3PTgzOCZoPTU4JnR4dD0lNDB6ZW1idXRzdSZ0eHQtY29sb3I9JTIzMUUyMTIxJnR4dC1mb250PUhpcmFnaW5vJTIwU2FucyUyMFc2JnR4dC1zaXplPTM2JnR4dC1wYWQ9MCZzPTAwMjUyZDFmNzU0YTZlYjI2YTFlZDc2NTY0NjMwNTlh&amp;amp;blend-x=242&amp;amp;blend-y=454&amp;amp;blend-w=838&amp;amp;blend-h=46&amp;amp;blend-fit=crop&amp;amp;blend-crop=left%2Cbottom&amp;amp;blend-mode=normal&amp;amp;txt64=44GV44GP44KJ44Kk44Oz44K_44O844ON44OD44OI5qCq5byP5Lya56S-&amp;amp;txt-x=242&amp;amp;txt-y=539&amp;amp;txt-width=838&amp;amp;txt-clip=end%2Cellipsis&amp;amp;txt-color=%231E2121&amp;amp;txt-font=Hiragino%20Sans%20W6&amp;amp;txt-size=28&amp;amp;s=0b1e61205f7b7c5fd19f978a932f71e4"></span></a></p>
+          <h3 id="コレクション系">コレクション系</h3>
+          <p>コレクション系というのは特に公式で呼ばれているわけではないのですが、 Docker で扱うものがコンテナ以外にも増えてきて、 既存のコマンド体系では支えきれなくなったため、 <strong>サブコマンドの部分にコレクション名を指定して、そこからさらにサブコマンドを増やしたもの</strong> を、 ここではコレクション系と言うことにします。</p>
+          <p>公式では Management Commands と呼ばれているんですかね？</p>
+          <ul>
+            <li>docker container</li>
+            <li>docker image</li>
+            <li>docker volume</li>
+            <li>docker network</li>
+          </ul>
+          <p><code>docker container</code> は Docker コンテナのコレクション系に対する操作、 <code>docker image</code> は Docker イメージのコレクション系操作だと想像つきます。 下の2つはまだ触れていませんので、これから触れていきたいと思います。</p>
+          <h4 id="docker-におけるボリュームについて">Docker におけるボリュームについて</h4>
+          <p>Docker は作って消すといった使い捨てで利用されるため、 <strong>データの永続化</strong> というのは常に課題となってきます。 （破棄するコンテナの中にのみデータを入れていたら、コンテナの削除時にデータも一緒に削除されます）</p>
+          <p>そこでボリュームを使ってデータを保存することを考えます。</p>
+          <p>公式はここ。 ( <a class="link-card" href="https://docs.docker.com/storage/volumes/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Volumes</span> <span class="link-card__desc">Learn how to create, manage, and use volumes instead of bind mounts for persisting data generated …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/storage/volumes/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )</p>
+          <p>Docker でボリュームを利用する方法は、 <strong>bind mounts</strong> という前回使った方法に近いものと <strong><code>docker volume</code> コマンドでボリュームを作る方法</strong> の2種類あります。</p>
+          <p>前者は前回 <code>docker run</code> で使った、 <code>-v</code> の部分がそれに近いです。 そもそも v は volume のことですね。 この方法では、コンテナ側と自分のPC側を繋げて穴を開けることで、そこを経由してデータのやりとりを行なっていました。</p>
+          <p>この前者の方法だけでは、コンテナが増えてきてコンテナ同士のデータのやりとりが発生してきたりすると、 非常に複雑になってきてしまいます。 そこで、後者の方法として Docker 専用のボリュームを扱えるように <code>docker volume</code> コマンドが用意されました。</p>
+          <p>実際に公式ドキュメントのように打ってみましょう。</p>
+          <pre><code>docker volume create my-vol
+</code></pre>
+          <p>ちなみに、これらのコレクション系のコマンドには、 <strong>共通で <code>ls</code> と <code>rm</code> サブコマンドが用意されている</strong> ので、 作ったものを確認したり、削除したりは簡単にできます。</p>
+          <p>今作ったものを確認してみます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker volume ls
+</span></span><span style="display:flex"><span>DRIVER              VOLUME NAME
+</span></span><span style="display:flex"><span>local               my-vol
+</span></span></code></pre>
+          </div>
+          <p>もしかして、すでに Docker を利用した開発環境を利用されている方は、 今作ったボリューム以外にも存在しているかもしれませんが、 少なくとも今作ったボリュームが存在しているはずです。</p>
+          <p>なお、実際にコマンドだけで、Docker のボリュームを利用しつつ Docker コンテナ同士を紐付けたりしていると、 おそらくコマンドも長くなってしまって、理解が追いつかないままコマンドをコピペするだけの記事になると思われるので、 今回は概念の理解に留めます。</p>
+          <p>ついでに消しておきます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker volume rm my-vol
+</span></span><span style="display:flex"><span>my-vol
+</span></span></code></pre>
+          </div>
+          <p>消えました。</p>
+          <h4 id="docker-におけるネットワークについて">Docker におけるネットワークについて</h4>
+          <p>ネットワークについても同様に後から追加されてきたものです。</p>
+          <p>コンテナが増えてくると、 <code>docker run</code> コマンドで <code>--link</code> オプションを使って、 Docker コンテナ同士を紐づけていくのは複雑になってきます。</p>
+          <p>このあたりは <code>docker volume</code> と同じで、<code>docker network</code> にて 専用のネットワークを作れるようにして管理しやすくした形です。</p>
+          <p><code>docker network</code> コマンドに、サブコマンドが色々ついているので、 ぜひともそのまま打って help などを見てみてください。</p>
+          <p>ちなみに公式はここです。 ( <a class="link-card" href="https://docs.docker.com/engine/userguide/networking/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Networking overview</span> <span class="link-card__desc">Learn how networking works from the container</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/engine/userguide/networking/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )</p>
+          <p>これも <code>create</code>, <code>ls</code>, <code>rm</code> と一通りできますが、 ネットワークの説明に大部分時間を割くことになり、本質的ではないので省略します。</p>
+          <p>ポイントは <strong>Docker コマンドで専用のネットワークを作ったり消したりすることが出来る</strong> 、 ということだけ今は押さえておけば良いです。</p>
+          <h3 id="コンテナ操作系">コンテナ操作系</h3>
+          <ul>
+            <li>docker run</li>
+            <li>docker start</li>
+            <li>docker stop</li>
+            <li>docker rm</li>
+            <li>docker exec</li>
+          </ul>
+          <p>まあ、この辺は前回大部分触ったし、紹介だけでいいかな。 ただ <code>exec</code> はちょっと別ものなので後ほど改めて触れます。</p>
+          <p>Docker コンテナの各種操作に利用するサブコマンドです。</p>
+          <p><code>docker run</code> について知りたいなら、 <code>docker help run</code> か <code>docker run --help</code> と入力すれば、 一言説明と、使えるオプションがずらーっと出てきます。</p>
+          <p>ただ、コンテナの操作をしたかったら、 <code>docker container</code> 以下にコマンドが揃っているので、 <code>docker run</code> でもいいですし、 <code>docker container run</code> でもいいです。</p>
+          <ul>
+            <li>docker container run</li>
+            <li>docker container start</li>
+            <li>docker container stop</li>
+            <li>docker container rm</li>
+          </ul>
+          <p>これでも OK です。</p>
+          <h3 id="コンテナ調査系">コンテナ調査系</h3>
+          <ul>
+            <li>docker logs (= docker container logs)</li>
+            <li>docker inspect (= docker container inspect)</li>
+          </ul>
+          <p>これもさわりだけ。</p>
+          <pre><code>docker logs -f [containername]
+</code></pre>
+          <p>これでコンテナ内で起きていることのログをチェックすることができます。</p>
+          <p><code>inspect</code> の方は、実はコレクション系すべてについているサブコマンドなのですが、 特にコンテナを調べるときは省略して <code>docker inspect</code> が使えます。</p>
+          <pre><code>docker inspect [containername]
+</code></pre>
+          <p>掲載すると長くなってしまうので省略しますが、 JSON 形式でコンテナ周りに関するあらゆる情報を確認することが可能です。</p>
+          <h3 id="イメージ操作系">イメージ操作系</h3>
+          <ul>
+            <li>docker images (= docker image ls)</li>
+            <li>docker pull (= docker image pull)</li>
+          </ul>
+          <p><code>docker images</code> は前回使いましたが、実際 <code>docker image ls</code> でもいいです。</p>
+          <p>また、 <code>docker run</code> の中で自動的に行われている Docker イメージの取得ですが、 このように <code>docker pull</code> または <code>docker image pull</code> のように明示的に行なってもよいです。</p>
+          <h3 id="その他">その他</h3>
+          <p><code>docker ps</code> は <code>docker container ls</code> と同一です。まだよく使われているようです。</p>
+          <h3 id="あとは必要なときに調べよう">あとは必要なときに調べよう</h3>
+          <p>Docker で扱えるコレクション系のものにどういうものがあるのか、 どういったサブコマンドがあるか、あたりが押さえられていれば、 とりあえずの利用には全く問題がないと思います。</p>
+          <h2 id="docker-compose-コマンドを基準に-docker-を掘り下げてみる">docker-compose コマンドを基準に Docker を掘り下げてみる</h2>
+          <p>次は、 Docker Compose ベースで考えていきます。 前回少しだけ触れたのですが、 <strong>Docker Compose のコマンドに出来て Docker 単体のコマンドに出来ないことは無いです。</strong></p>
+          <p>これから Docker Compose に触れていきますが、 頭の中で、これ Docker だったら <code>docker volume</code> コマンドを打っているのと同じだな、 みたいに考えるとすごくイメージしやすいと思います。</p>
+          <p>Docker コマンドが Docker コンテナに与える指示1つ1つだとすれば、 <strong>Docker Compose は指示書にまとめながら「まとめてこれやって」と指示を出すのに近いです。</strong></p>
+          <p>公式はこちら。 ( <a class="link-card" href="https://docs.docker.com/compose/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Docker Compose</span> <span class="link-card__desc">Learn how to use Docker Compose to define and run multi-container applications with this detailed …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/compose/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )</p>
+          <p><img alt="Docker Compose 公式" src="resource02.jpg"></p>
+          <p>もう一度言いますが、 <strong>Docker Compose のコマンドに出来て Docker 単体のコマンドに出来ないことは無いです。</strong></p>
+          <h3 id="試しに-wordpress-立ててみる">試しに WordPress 立ててみる</h3>
+          <p>公式にもリンクがありますが、 みなさん一番身近であろう WordPress を立ててみます。</p>
+          <p>“Get started with WordPress” のリンクを辿ってみます。 そちらに一通り方法が掲載されています。</p>
+          <p>手元に適当な作業用ディレクトリを作り、そこで <code>docker-compose.yml</code> というファイルを作ります。</p>
+          <p>この作業用ディレクトリがコンテナ名のプレフィックスになりますので、 今回の作業ディレクトリ名は、例えば <code>my_wordpress</code> とでもしておきます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-yaml" data-lang="yaml"><span style="display:flex"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">'3'</span>
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">db</span>:
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mysql:5.7</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">db_data:/var/lib/mysql</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex"><span>      <span style="color:#f92672">MYSQL_ROOT_PASSWORD</span>: <span style="color:#ae81ff">somewordpress</span>
+</span></span><span style="display:flex"><span>      <span style="color:#f92672">MYSQL_DATABASE</span>: <span style="color:#ae81ff">wordpress</span>
+</span></span><span style="display:flex"><span>      <span style="color:#f92672">MYSQL_USER</span>: <span style="color:#ae81ff">wordpress</span>
+</span></span><span style="display:flex"><span>      <span style="color:#f92672">MYSQL_PASSWORD</span>: <span style="color:#ae81ff">wordpress</span>
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">db</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">wordpress:latest</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex"><span>      - <span style="color:#e6db74">"8000:80"</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex"><span>      <span style="color:#f92672">WORDPRESS_DB_HOST</span>: <span style="color:#ae81ff">db:3306</span>
+</span></span><span style="display:flex"><span>      <span style="color:#f92672">WORDPRESS_DB_USER</span>: <span style="color:#ae81ff">wordpress</span>
+</span></span><span style="display:flex"><span>      <span style="color:#f92672">WORDPRESS_DB_PASSWORD</span>: <span style="color:#ae81ff">wordpress</span>
+</span></span><span style="display:flex"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">db_data</span>:
+</span></span></code></pre>
+          </div>
+          <p>この YAML ファイルの読み方を簡単に説明したいと思います。</p>
+          <p>なお、こちらのファイルの書き方については、 公式ドキュメントの <a class="link-card" href="https://docs.docker.com/compose/compose-file/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Compose file reference</span> <span class="link-card__desc">Find the latest recommended version of the Docker Compose file format for defining multi-container …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/compose/compose-file/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> を見ると早いと思います。</p>
+          <p>Docker が出て来た当初は、 Docker Compose のバージョンの1と2で大きく文法が異なりましたが、 （先ほど Docker コマンド周りで紹介した、ボリュームやネットワークをこちらに記述する必要が出て来たためです） 最近は落ち着いてきているので <strong>基本的に3以上を使いましょう。</strong> ちなみに今は最新が3.5のようですね。</p>
+          <h3 id="docker-イメージから-docker-コンテナを作るところ">Docker イメージから Docker コンテナを作るところ</h3>
+          <p>イメージからコンテナを作るところにフォーカスしてみます。 つまり services の中だけです。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-yaml" data-lang="yaml"><span style="display:flex"><span><span style="color:#f92672">db</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mysql:5.7</span>
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">image</span>: <span style="color:#ae81ff">wordpress:latest</span>
+</span></span></code></pre>
+          </div>
+          <p>これはそれぞれ、</p>
+          <pre><code>docker run mysql:5.7
+docker run wordpress:latest
+</code></pre>
+          <p>とコマンドを打っているのと同様です。</p>
+          <p>前の説明の通り、ユーザー名が省略された形ですので、 公式の DockerHub のイメージを参照しに行っていることが分かります。</p>
+          <p>まだ WordPress は見てなかったので見てみましょう。 ( <a class="link-card" href="https://hub.docker.com/_/wordpress/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">wordpress - Official Image | Docker Hub</span> <span class="link-card__desc">The WordPress rich content management system can utilize plugins, widgets, and themes.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/wordpress/"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )</p>
+          <p><img alt="DockerHub wordpress" src="resource03.jpg"></p>
+          <p>公式の Docker イメージを利用する際は、 いわゆる “穴の開け方” を書いてあったりしますので、 必要に応じて参照すると良いと思います。</p>
+          <h3 id="環境変数を利用したパラメータの設定方法">環境変数を利用したパラメータの設定方法</h3>
+          <p>そうそう、穴の開け方でもう1つ紹介してなかったのがありました。 それは <strong>環境変数を利用したパラメータの設定方法</strong> です。</p>
+          <pre><code>docker run --name some-wordpress -e WORDPRESS_DB_HOST=10.1.2.3:3306 （中略） wordpress
+</code></pre>
+          <p>このように、引数に <code>-e</code> をつけることで、コンテナ内に自由に環境変数を設定することができます。</p>
+          <p>この WordPress のイメージでは、 以下の環境変数を指定することであらかじめこちらの付けたい名前でデータベースを作ってくれます。</p>
+          <ul>
+            <li>WORDPRESS_DB_HOST</li>
+            <li>WORDPRESS_DB_USER</li>
+            <li>WORDPRESS_DB_PASSWORD</li>
+            <li>WORDPRESS_DB_NAME</li>
+          </ul>
+          <p>WordPress のイメージならば、だいたいこの辺りがよく使われるでしょうか。</p>
+          <p>環境変数は自由に設定できますが、 <strong>公式の wordpress の中で、上記の環境変数名を正しく指定すると、 それを優先してユーザー名やパスワードに利用してくれる作り</strong> になっており、 カスタマイズが非常にやりやすくなっています。</p>
+          <h3 id="複数コンテナを連携させることが前提となっている">複数コンテナを連携させることが前提となっている</h3>
+          <p>WordPress のコンテナはまさにそれです。</p>
+          <p>WordPress というアプリケーションを提供するコンテナと、 MySQL というデータベースを提供するコンテナを、 <strong>それぞれコンテナ同士を連携させて全体としてのサービスを提供するようになっています。</strong></p>
+          <p>また連携周りだけフォーカスしてみます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-yaml" data-lang="yaml"><span style="display:flex"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">db</span>:
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mysql:5.7</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">db_data:/var/lib/mysql</span>
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">db</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">wordpress:latest</span>
+</span></span><span style="display:flex"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">db_data</span>:
+</span></span></code></pre>
+          </div>
+          <p>ここから以下のことが分かります。</p>
+          <ol>
+            <li>db コンテナと wordpress コンテナが存在している</li>
+            <li>wordpress コンテナは db コンテナに依存している (<code>depends_on</code>)</li>
+            <li>db_data というボリュームがある</li>
+            <li>db_data ボリュームは db コンテナにて <code>/var/lib/mysql</code> に紐づけられている</li>
+          </ol>
+          <h3 id="docker-compose-を利用してコンテナ起動してみる">Docker Compose を利用してコンテナ起動してみる</h3>
+          <p>ポート番号だけ、何か他に動かしているものとかぶってないか注意してください。 もし 8000 番と被っていたら、適当に 8091 などと変更します。 うーん、ここでは 8091 に変えておきましょうか。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-yaml" data-lang="yaml"><span style="display:flex"><span><span style="color:#f92672">wordpress</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex"><span>    - <span style="color:#e6db74">"8091:80"</span>
+</span></span></code></pre>
+          </div>
+          <p>変更したらいよいよ起動してみます。</p>
+          <pre><code>docker-compose up -d
+</code></pre>
+          <p>オプションはだいぶ似てます。 <code>-d</code> は <code>docker run</code> のときと同様にバックグラウンドでの起動です。 無事起動したら、 http://localhost:8091 を見てみます。</p>
+          <p><img alt="dockerized wordpress" src="resource04.jpg"></p>
+          <p>言語設定できてないので言語選択からですが、 テキストファイル1つ書いただけで、2つの Docker コンテナと1つのボリュームを即時に立てることが出来ました！</p>
+          <h3 id="docker-compose-における最低限の操作">Docker Compose における最低限の操作</h3>
+          <ul>
+            <li>docker-compose up</li>
+            <li>docker-compose down</li>
+          </ul>
+          <p>起動と終了です。</p>
+          <h4 id="docker-compose-up">docker-compose up</h4>
+          <p>バックグラウンドで起動するときは、 <code>docker-compose up -d</code> です。 これで <code>docker run</code> 相当のことをしてくれます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker-compose up -d
+</span></span><span style="display:flex"><span>Creating network "mywordpress_default" with the default driver
+</span></span><span style="display:flex"><span>Creating mywordpress_db_1        ... done
+</span></span><span style="display:flex"><span>Creating mywordpress_wordpress_1 ... done
+</span></span></code></pre>
+          </div>
+          <h4 id="docker-compose-down">docker-compose down</h4>
+          <p>逆にコンテナの停止、削除まで行なってくれます。 なお、 <code>docker-compose down -v</code> のように <code>-v</code> をつけると、 ボリュームの削除まで行なってくれます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker-compose down -v
+</span></span><span style="display:flex"><span>Stopping mywordpress_wordpress_1 ... done
+</span></span><span style="display:flex"><span>Stopping mywordpress_db_1        ... done
+</span></span><span style="display:flex"><span>Removing mywordpress_wordpress_1 ... done
+</span></span><span style="display:flex"><span>Removing mywordpress_db_1        ... done
+</span></span><span style="display:flex"><span>Removing network mywordpress_default
+</span></span><span style="display:flex"><span>Removing volume mywordpress_db_data
+</span></span></code></pre>
+          </div>
+          <p><code>-v</code> をつけない <code>docker-compose down</code> だけだと、データが消えることはありません。 (ただし自分のPCがどうにかならない限りは・・・) ちゃんとボリュームに紐づけられているため、ボリュームを消さない限りは同じデータを常に参照します。</p>
+          <h3 id="docker-コマンドで色々見てみる">docker コマンドで色々見てみる</h3>
+          <p><code>docker-compose up -d</code> で立ち上げた状態で <code>docker</code> コマンドを使って見てみます。</p>
+          <p><code>docker container ls</code> でもいいのですが、 出力が横に長すぎるので <code>--format</code> オプションで表示コントロールします。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker container ls --format "table {{.Image}}\t{{.Status}}\t{{.Names}}"
+</span></span><span style="display:flex"><span>IMAGE                          STATUS              NAMES
+</span></span><span style="display:flex"><span>wordpress:latest               Up 3 minutes        mywordpress_wordpress_1
+</span></span><span style="display:flex"><span>mysql:5.7                      Up 3 minutes        mywordpress_db_1
+</span></span></code></pre>
+          </div>
+          <p>見ると、予想通り Docker コンテナが2つ立ち上がっているのが分かります。</p>
+          <p>名前は特につけていないので、ディレクトリ名が頭について、サフィックスとして連番がついています。 連番がつくのは、 Docker Compose 自体がスケーリングの機能を持っていて、 2つ3つとコンテナを増やすことが出来るからです。</p>
+          <p>今度はボリュームを見てみます。 <code>docker volume ls</code> です。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker volume ls
+</span></span><span style="display:flex"><span>DRIVER              VOLUME NAME
+</span></span><span style="display:flex"><span>local               mywordpress_db_data
+</span></span></code></pre>
+          </div>
+          <p>mywordpress_db_data という名前のボリュームが出来てました。 これは Docker のコマンドで <code>docker volume create mywordpress_db_data</code> と入力するのと同じです。</p>
+          <p>さらにログを見てみると、ネットワークも出来ていた形跡があるのでそちらも。 <code>docker network ls</code> です。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>% docker network ls
+</span></span><span style="display:flex"><span>NETWORK ID          NAME                    DRIVER              SCOPE
+</span></span><span style="display:flex"><span>0f4f994415be        mywordpress_default     bridge              local
+</span></span></code></pre>
+          </div>
+          <p>特に設定していないので、名前も mywordpress_default と自動で割り振られていました。</p>
+          <h3 id="docker-compose-は-docker-に比べて楽">Docker Compose は Docker に比べて楽</h3>
+          <p>Docker で1つ1つコマンドを作って実行して・・・とやっていると結構しんどいです。</p>
+          <p>Docker Compose では、やれることは同じですが、 コマンドで入力すべき内容を <code>docker-compose.yml</code> というファイルにまとめておき、 それを元にまとめて指示できるので、楽というか、めんどくさくない点がメリットです。</p>
+          <p>Docker Compose がなかったら、 <code>docker run</code> コマンドで穴を開けるためのオプション、 例えば <code>-e WORDPRESS_DB_PASSWORD=mypassword</code> とか <code>-p 8091:80</code> とか、 あるいは <code>-v $(pwd)/web:/var/www/html</code> などをずらずらと5行10行と書くことになっていたかもしれません。</p>
+          <p>Docker Compose は Docker に比べて楽です。</p>
+          <h2 id="コンテナへの侵入ログの見方など">コンテナへの侵入、ログの見方など</h2>
+          <p>さて、利用編ということで書いていますが、 あと何があれば過不足ないかというと、 <strong>「なぜか動かないんだけど、どこ見ていいか分からない・・・！」</strong> といったあたりではないでしょうか。</p>
+          <p>もしそれを提供してくれた方がいれば、 もうその方に直接聞いた方がいいのかもしれませんが、 それにしても <strong>自分でできる範囲で状況把握ができると良いですね。</strong></p>
+          <h3 id="コンテナで何かを実行する方法">コンテナで何かを実行する方法</h3>
+          <p>コンテナに入る方法というよりは、 コンテナに対して何かを追加で実行する方法と考えた方が良いです。</p>
+          <p>ポイントはこの辺りでしょうか。</p>
+          <ul>
+            <li><strong>コンテナが起動していないと入れない、実行できない</strong></li>
+            <li>新たに何かをコンテナ内で実行し、それを自分の端末とつなぐ</li>
+          </ul>
+          <p>Docker コンテナに対して任意のコマンドを実行できるコマンドが用意されています。</p>
+          <pre><code>docker exec -it mywordpress_wordpress_1 /bin/bash
+</code></pre>
+          <p><code>-it</code> は <code>docker run</code> のときと同様で、端末を繋いで穴を開けるためのオプションです。 そのままコンテナ名を指定して、さらに実行したい任意のコマンドを与えます。</p>
+          <p><code>/bin/bash</code> は実行するとシェル (bash) が起動して、 終了するまで待機状態になります。 なので、 <strong>コンテナに対して /bin/bash を実行して、その最中手元の端末と繋げることで、 実質的にコンテナの中に侵入していることになる</strong> 、というからくりです。</p>
+          <h3 id="実際にコンテナに入ってみる">実際にコンテナに入ってみる</h3>
+          <p>せっかくなので、 WordPress のアプリが動いているコンテナにそのまま入ってみましょうか。 ただ正確には、 Docker コンテナに対して追加で /bin/bash コマンドを実行しつつ、コンテナと自分との端末をつないでいる（<code>-it</code> オプション）だけです。</p>
+          <pre><code>docker exec -it mywordpress_wordpress_1 /bin/bash
+root@321ff1fdf395:/var/www/html#
+</code></pre>
+          <p>適当に <code>ls</code> とか <code>pwd</code> とか打ってみます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>root@321ff1fdf395:/var/www/html# ls
+</span></span><span style="display:flex"><span>index.php        wp-blog-header.php    wp-cron.php        wp-mail.php
+</span></span><span style="display:flex"><span>license.txt      wp-comments-post.php  wp-includes        wp-settings.php
+</span></span><span style="display:flex"><span>readme.html      wp-config-sample.php  wp-links-opml.php  wp-signup.php
+</span></span><span style="display:flex"><span>wp-activate.php  wp-config.php         wp-load.php        wp-trackback.php
+</span></span><span style="display:flex"><span>wp-admin         wp-content            wp-login.php       xmlrpc.php
+</span></span><span style="display:flex"><span>root@321ff1fdf395:/var/www/html# pwd
+</span></span><span style="display:flex"><span>/var/www/html
+</span></span><span style="display:flex"><span>root@321ff1fdf395:/var/www/html#
+</span></span></code></pre>
+          </div>
+          <p>中に入れましたね。</p>
+          <h3 id="コンテナ内に存在してないコマンドは実行できない">コンテナ内に存在してないコマンドは実行できない</h3>
+          <p><code>which /bin/bash</code> と <code>which /bin/zsh</code> をそれぞれ打ってみてください。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>root@321ff1fdf395:/var/www/html# which /bin/bash
+</span></span><span style="display:flex"><span>/bin/bash
+</span></span><span style="display:flex"><span>root@321ff1fdf395:/var/www/html# which /bin/zsh
+</span></span><span style="display:flex"><span>root@321ff1fdf395:/var/www/html#
+</span></span></code></pre>
+          </div>
+          <p>bash はありますが zsh は入ってませんので、実行したいコマンドに <code>/bin/zsh</code> を与えても正しく動作しません。</p>
+          <p>また、 Docker コンテナは作成時に最小限の機能しか持たせないことが多いので、 普段使っているコマンドが入っていないケースなども多くあるかと思います。 その場合は、どうせ使い捨てコンテナなのでその場でインストールしちゃったりしても良いでしょう。</p>
+          <h3 id="ログの見方">ログの見方</h3>
+          <p>もう駆け足です。</p>
+          <h4 id="docker-の場合">Docker の場合</h4>
+          <pre><code>docker logs -f [containername]
+</code></pre>
+          <p><code>-f</code> オプションをつけるとずっとで続けます。コマンドでいう <code>tail -f</code> みたいなのと同じ感じです。</p>
+          <p>コンテナの標準出力、標準エラー出力がそのままこちらに出ます。</p>
+          <h4 id="docker-compose-の場合">Docker Compose の場合</h4>
+          <pre><code>docker-compose logs -f
+</code></pre>
+          <p>この後にコンテナ名（ここでは冗長化されているのでサービスと呼ばれてますが）を指定しないと、 全部混ざって出て来ます。</p>
+          <pre><code>docker-compose logs -f [servicename]
+</code></pre>
+          <p>wordpress の例でいうと、コンテナ名は mywordpress_wordpress_1 ですが、 wordpress を指定するとフィルタリングしてそれだけログが出ます。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>Docker コマンドから Docker を見ると、 Docker で具体的にどういうことが出来るのかが見えてくると思います。</p>
+          <p>ここまで書いて「（あれ・・・全然終わらねえな・・・）」と思い始めている自分がいます。</p>
+          <p>まだ続きます。</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://docs.docker.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Home</span> <span class="link-card__desc">Docker Documentation is the official Docker library of resources, manuals, and guides to help you …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a class="link-card" href="https://hub.docker.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Docker Hub Container Image Library | App Containerization</span> <span class="link-card__desc">Welcome to the world&amp;#x27;s largest container registry built for developers and open source …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/"> hub.docker.com</span></span><span class="link-card__image"><img alt="Docker Hub Container Image Library | App Containerization" loading="lazy" src="https://dockerstatic.com/hub-ui/kzxxphbs.png"></span></a></li>
+            <li><a class="link-card" href="https://qiita.com/zembutsu/items/6e1ad18f0d548ce6c266" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">docker container / image コマンド新旧比較 - Qiita</span> <span class="link-card__desc">概要 2017年1月18日にリリースされた Docker v1.13 以降（今日現在の v17.03.0-ce ）は、 docker コマンドラインの命令体系が再編成されました。本記事では変更に至った …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://qiita.com/zembutsu/items/6e1ad18f0d548ce6c266"> qiita.com</span></span><span class="link-card__image"><img alt="docker container / image コマンド新旧比較 - Qiita" loading="lazy" src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-user-contents.imgix.net%2Fhttps%253A%252F%252Fcdn.qiita.com%252Fassets%252Fpublic%252Farticle-ogp-background-afbab5eb44e0b055cce1258705637a91.png%3Fixlib%3Drb-4.1.1%26w%3D1200%26blend64%3DaHR0cHM6Ly9xaWl0YS11c2VyLXByb2ZpbGUtaW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnFpaXRhLWltYWdlLXN0b3JlLnMzLmFtYXpvbmF3cy5jb20lMkYwJTJGMTMwMDIlMkZwcm9maWxlLWltYWdlcyUyRjE0NzM2ODI2MzE_aXhsaWI9cmItNC4xLjEmYXI9MSUzQTEmZml0PWNyb3AmbWFzaz1lbGxpcHNlJmJnPUZGRkZGRiZmbT1wbmczMiZzPWQ4MGNhOWYwYjJjM2FiOTkyZjZmYjg0ODFmYTJhNDc2%26blend-x%3D120%26blend-y%3D462%26blend-w%3D90%26blend-h%3D90%26blend-mode%3Dnormal%26mark64%3DaHR0cHM6Ly9xaWl0YS1vcmdhbml6YXRpb24taW1hZ2VzLmltZ2l4Lm5ldC9odHRwcyUzQSUyRiUyRnMzLWFwLW5vcnRoZWFzdC0xLmFtYXpvbmF3cy5jb20lMkZxaWl0YS1vcmdhbml6YXRpb24taW1hZ2UlMkYxNmJlMjM1NTQ4MjZkOGE4NDRiNzQwMTg3MGM2OTNhOGE2YmUwOWI1JTJGb3JpZ2luYWwuanBnJTNGMTQ4MjgwNzAwNz9peGxpYj1yYi00LjEuMSZ3PTQ0Jmg9NDQmZml0PWNyb3AmbWFzaz1jb3JuZXJzJmNvcm5lci1yYWRpdXM9OCZiZz1GRkZGRkYmYm9yZGVyPTIlMkNGRkZGRkYmZm09cG5nMzImcz1iYmEwMWEzYTU3MmI3OTIwNTZiYWQxN2YyNWMyNDY4ZA%26mark-x%3D186%26mark-y%3D515%26mark-w%3D40%26mark-h%3D40%26s%3D2ed226bdaa6343548ff6d1f652d70ed2?ixlib=rb-4.1.1&amp;amp;w=1200&amp;amp;fm=jpg&amp;amp;mark64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjEuMSZ3PTk2MCZoPTMyNCZ0eHQ9ZG9ja2VyJTIwY29udGFpbmVyJTIwJTJGJTIwaW1hZ2UlMjAlRTMlODIlQjMlRTMlODMlOUUlRTMlODMlQjMlRTMlODMlODklRTYlOTYlQjAlRTYlOTclQTclRTYlQUYlOTQlRTglQkMlODMmdHh0LWFsaWduPWxlZnQlMkN0b3AmdHh0LWNvbG9yPSUyMzFFMjEyMSZ0eHQtZm9udD1IaXJhZ2lubyUyMFNhbnMlMjBXNiZ0eHQtc2l6ZT01NiZ0eHQtcGFkPTAmcz1kODUzMDQxODRjMDFiZmQ1ODI4Yjk1MGVlYTY5YjYwMA&amp;amp;mark-x=120&amp;amp;mark-y=112&amp;amp;blend64=aHR0cHM6Ly9xaWl0YS11c2VyLWNvbnRlbnRzLmltZ2l4Lm5ldC9-dGV4dD9peGxpYj1yYi00LjEuMSZ3PTgzOCZoPTU4JnR4dD0lNDB6ZW1idXRzdSZ0eHQtY29sb3I9JTIzMUUyMTIxJnR4dC1mb250PUhpcmFnaW5vJTIwU2FucyUyMFc2JnR4dC1zaXplPTM2JnR4dC1wYWQ9MCZzPTAwMjUyZDFmNzU0YTZlYjI2YTFlZDc2NTY0NjMwNTlh&amp;amp;blend-x=242&amp;amp;blend-y=454&amp;amp;blend-w=838&amp;amp;blend-h=46&amp;amp;blend-fit=crop&amp;amp;blend-crop=left%2Cbottom&amp;amp;blend-mode=normal&amp;amp;txt64=44GV44GP44KJ44Kk44Oz44K_44O844ON44OD44OI5qCq5byP5Lya56S-&amp;amp;txt-x=242&amp;amp;txt-y=539&amp;amp;txt-width=838&amp;amp;txt-clip=end%2Cellipsis&amp;amp;txt-color=%231E2121&amp;amp;txt-font=Hiragino%20Sans%20W6&amp;amp;txt-size=28&amp;amp;s=0b1e61205f7b7c5fd19f978a932f71e4"></span></a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/docker/">#Docker</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Docker%20%e5%86%8d%e5%85%a5%e9%96%802018%20-%20%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e7%b7%a8%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20180206/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20180206%2f&amp;text=Docker%20%e5%86%8d%e5%85%a5%e9%96%802018%20-%20%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e7%b7%a8" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20180206/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

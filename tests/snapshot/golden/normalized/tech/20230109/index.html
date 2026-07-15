@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>3Dものづくり(6) - 突っ張り棒の設置台を作る・前編 | ばうあーろぐ</title>
+    <meta content="ここからは実践あるのみなので、自分ならではの問題をどんどん解消していくぞ！の巻" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20230109/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20230109" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="3Dものづくり(6) - 突っ張り棒の設置台を作る・前編" itemprop="name">
+    <meta content="ここからは実践あるのみなので、自分ならではの問題をどんどん解消していくぞ！の巻" itemprop="description">
+    <meta content="3Dものづくり(6) - 突っ張り棒の設置台を作る・前編" property="og:title">
+    <meta content="ここからは実践あるのみなので、自分ならではの問題をどんどん解消していくぞ！の巻" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20230109/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/tech/20230109/feature.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="3Dものづくり(6) - 突っ張り棒の設置台を作る・前編" name="twitter:title">
+    <meta content="ここからは実践あるのみなので、自分ならではの問題をどんどん解消していくぞ！の巻" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/tech/20230109/feature.jpg" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">3Dものづくり(6) - 突っ張り棒の設置台を作る・前編</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2023-01-09 09:30:00 +0900 JST">2023/01/09</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>2023年、あけましておめでとうございます。今年もよろしくお願いします。</p>
+          <ul>
+            <li><a href="/tech/20221001/">3Dものづくり始めました</a></li>
+            <li><a href="/tech/20221117/">3Dものづくり(2) - Fusion 360 をいじり倒す</a></li>
+            <li><a href="/tech/20221120/">3Dものづくり(3) - 検証用データを印刷してみた！</a></li>
+            <li><a href="/tech/20221203/">3Dものづくり(4) - カチッとはまる機構の検証</a></li>
+            <li><a href="/tech/20221216/">3Dものづくり(5) - 別の素材だったらどうなるの（透明レジン）</a></li>
+          </ul>
+          <h2 id="実践のターン">実践のターン！</h2>
+          <p>3Dものづくり、面白いですね・・・！ 不定期といいつつ、 <strong>謎の高頻度</strong> で続いてます。</p>
+          <p>残りは実践編として、活用できるものを1つ2つ作っていく予定（不定期）です。</p>
+          <p>検証はもう十分やってこれていて、どういうときにどう作ればいいのかは見えてきたので、 今回は <strong>誤差が全然許容できる現実の物体と組み合わせるパーツ</strong> を作ってみて、 <strong>実際の生活で活用する</strong> ところまでやってみようと思います。</p>
+          <p>実践のターン！</p>
+          <h3 id="突っ張り棒がずれる問題">突っ張り棒がずれる問題</h3>
+          <p>たぶん写真を見てもらったら一発でわかると思うので、こちらをご覧ください。</p>
+          <p><img alt="突っ張り棒がずれる" src="resource01.jpg"></p>
+          <p>突っ張り棒なんだから突っ張ればいいじゃん、という意見もあるかと思いますが、 この突っ張り棒、洗濯したものを一時的にハンガーにかける用のもので、 衣類って軽そうに見えて意外と重いんですよね。</p>
+          <p>そうすると、だんだんと服の重みで・・・</p>
+          <p><img alt="突っ張り棒がずれる" src="resource02.jpg"></p>
+          <p><img alt="突っ張り棒がずれる" src="resource03.jpg"></p>
+          <p>このように <strong>突っ張り棒がずれていってしまう</strong> んですよね。</p>
+          <p>これを昨年ずっとなんとかしたいと思ってました。</p>
+          <h3 id="突っ張り棒の設置台を作ることで問題解決したい">突っ張り棒の設置台を作ることで問題解決したい</h3>
+          <p>今回の <strong>問題は突っ張り棒の片方がずれること</strong> 、 それに対する <strong>解決方法が3Dプリンターで突っ張り棒の設置台を作ること</strong> です。</p>
+          <p>正直3Dプリンターを使わずとも、何かしら手でこねて乾燥などして固められるものがあれば、 今回の問題は同様に解決できそうな気もします。</p>
+          <p>ですが、今後精度が求められるパーツを作ることも見越して、最初の練習を兼ねて3Dプリンターで作ってみたいと思います。</p>
+          <h2 id="ノギスデジタルノギスを買ってみた">ノギス（デジタルノギス）を買ってみた</h2>
+          <p>今回は雑に定規で測ってしまえばどうとでもなりそうな気もしますが、 同様に現実の物体と組み合わせるパーツを作る際に、 どうやら <strong>ノギス</strong> という測定器を使うのが一般的なようです。</p>
+          <p>そこまで高くなかったので、 数値がデジタル表示される <strong>デジタルノギス</strong> の方を1台買ってみました。</p>
+          <p><img alt="デジタルノギス" src="resource04.jpg"></p>
+          <p>ばばーん！そこまでお高くはないです。 配送料とかを除くと 1,859 円でした。</p>
+          <h3 id="デジタルノギスでできることまとめ">デジタルノギスでできることまとめ</h3>
+          <ul>
+            <li>モノの厚さ、内側の距離を測る</li>
+            <li>モノとモノの間の距離を測る</li>
+            <li>段差などの厚みを測る</li>
+          </ul>
+          <p>あたりでしょうか？たぶん正式名称あるんでしょうけど、 わからないのでやってみながら見ていった方が良いでしょう。</p>
+          <h3 id="実測">実測</h3>
+          <p>測ります。</p>
+          <p><img alt="実測" src="resource05.jpg"></p>
+          <p>まずは高さ。 89.0mm で意外と距離ある。</p>
+          <p>突っ張り棒が 1mm ずれてても使い勝手に変わりはないので、多少ずれても問題なし。</p>
+          <p><img alt="実測" src="resource06.jpg"></p>
+          <p>突っ張り棒の直径、 18.1mm 。</p>
+          <p>これよりも小さくなると支えがはまらないので、余裕をもって作りたいところ。</p>
+          <p><img alt="実測" src="resource07.jpg"></p>
+          <p>直径が内側に向けて小さくなっていたので、一番小さなところも測定、 17.0mm 。</p>
+          <p><img alt="実測" src="resource08.jpg"></p>
+          <p>突っ張り棒の左右の出っ張り部分の厚み、 17.7mm 。</p>
+          <p><img alt="実測" src="resource09.jpg"></p>
+          <p>ちなみに段差の厚みはしっぽ部分にある <strong>デプスバー</strong> で測ります。</p>
+          <p><img alt="実測" src="resource10.jpg"></p>
+          <p>最後に設置場所になる土台の厚み、 11.4mm 。</p>
+          <p>突っ張り棒の出っ張り部分の厚みよりも、土台の厚みの方が小さいので、 こっちに合わせる形で作ることになりそう。</p>
+          <h3 id="実測した結果">実測した結果</h3>
+          <p>数値まとめ。</p>
+          <ul>
+            <li>高さ: 89.0mm</li>
+            <li>出っ張り棒・出っ張り部分の直径（一番大きい箇所）: 18.1mm</li>
+            <li>出っ張り棒・出っ張り部分の直径（一番小さい箇所）: 17.0mm</li>
+            <li>出っ張り棒・出っ張り部分の厚み: 17.7mm</li>
+            <li>土台の厚み: 11.4mm</li>
+          </ul>
+          <p>測ってみると意外に高さありますねえ。</p>
+          <p>これまでの検証で、あまり大きいとプリント時間が長くかかってしまうんですよね。</p>
+          <p>最低限の強度を保ちつつも、極力素材を使わない形が望ましそうです。</p>
+          <h2 id="数値をもとにモデリング">数値をもとにモデリング</h2>
+          <p>ここから先はダイジェストです。</p>
+          <p><img alt="モデリング" src="resource11.jpg"></p>
+          <p>タワーみたいなのを作って前後に Exclude!</p>
+          <p><img alt="モデリング" src="resource12.jpg"></p>
+          <p>中身できるだけすっかすかにするために、横方向からカットしつつ Exclude!</p>
+          <p><img alt="モデリング" src="resource13.jpg"></p>
+          <p>ここでパターンを使って、上方向に繰り返しちゃう。</p>
+          <p><img alt="モデリング" src="resource14.jpg"></p>
+          <p>と、こうなる。</p>
+          <p><img alt="モデリング" src="resource15.jpg"></p>
+          <p>内部に小さいタワーみたいな図形を作り、さらにくり抜く。</p>
+          <p>ついでにおまけとして、正面が全部平面なので、丸でくり抜く。</p>
+          <p><img alt="モデリング" src="resource16.jpg"></p>
+          <p>最後にコピーして反転！</p>
+          <p>できたー！ 🤗</p>
+          <h3 id="モデリングまとめ">モデリングまとめ</h3>
+          <ul>
+            <li>できるだけ素材を使わない ≒ プリントに時間をかけない</li>
+            <li>強度を保てるぎりぎりを狙う（目安として 2mm の厚みがあれば人力で壊せないはず）</li>
+            <li>基本的に突っ張るのを支えるだけなので、添える程度でずれなければ OK</li>
+            <li>鋭角は作らない（尖りそうな部分は角を落とす）</li>
+            <li>シンメトリーだとかっこよいかも？</li>
+          </ul>
+          <p>正直なところ、ちょっと横幅がせまくて倒れるかも？と思わなくもないけど、 <strong>ダメなら失敗踏まえてまた作り直せば良い</strong> ので、まずはこれで作ってみよう。</p>
+          <p>あとモデリングの先の話だけど、縦のまま3Dプリントするとサポート材が間に入ること間違いなしなので、 <strong>横に寝かせてからプリント</strong> した方がいいかもしれないね。</p>
+          <h2 id="後編に続く">後編に続く</h2>
+          <p>後編も不定期で書いていきます。不定期でね。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/fab/">#Fab</a> <a class="tag-link" href="/tags/fusion360/">#Fusion360</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=3D%e3%82%82%e3%81%ae%e3%81%a5%e3%81%8f%e3%82%8a%286%29%20-%20%e7%aa%81%e3%81%a3%e5%bc%b5%e3%82%8a%e6%a3%92%e3%81%ae%e8%a8%ad%e7%bd%ae%e5%8f%b0%e3%82%92%e4%bd%9c%e3%82%8b%e3%83%bb%e5%89%8d%e7%b7%a8%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20230109/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20230109%2f&amp;text=3D%e3%82%82%e3%81%ae%e3%81%a5%e3%81%8f%e3%82%8a%286%29%20-%20%e7%aa%81%e3%81%a3%e5%bc%b5%e3%82%8a%e6%a3%92%e3%81%ae%e8%a8%ad%e7%bd%ae%e5%8f%b0%e3%82%92%e4%bd%9c%e3%82%8b%e3%83%bb%e5%89%8d%e7%b7%a8" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20230109/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

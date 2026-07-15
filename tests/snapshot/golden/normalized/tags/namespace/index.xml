@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/namespace/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Namespace on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;例えば、&lt;/p&gt;\n&lt;pre&gt;&lt;code&gt;&amp;lt;html xmlns=&amp;quot;http://www.w3.org/1999/xhtml&amp;quot; xmlns:og=&amp;quot;http://ogp.me/ns#&amp;quot; xmlns:fb=&amp;quot;https://www.facebook.com/2008/fbml&amp;quot;&amp;gt;\n&lt;/code&gt;&lt;/pre&gt;\n&lt;p&gt;『こういうのを HTML に埋め込んでください』とか、&lt;/p&gt;\n&lt;pre&gt;&lt;code&gt;&amp;lt;meta property=&amp;quot;og:title&amp;quot; content=&amp;quot;ソーシャル用のタイトルがここに入る&amp;quot;&amp;gt;\n&amp;lt;meta property=&amp;quot;og:type&amp;quot; content=&amp;quot;article&amp;quot;&amp;gt;\n&lt;/code&gt;&lt;/pre&gt;\n&lt;p&gt;『この記述を入れておきましょう』とか、&lt;/p&gt;\n&lt;pre&gt;&lt;code&gt;&amp;lt;fb:like url=&amp;quot;***&amp;quot; layout=&amp;quot;button_count&amp;quot; width=&amp;quot;300&amp;quot;&amp;gt;いいね!&amp;lt;/fb:like&amp;gt;\n&lt;/code&gt;&lt;/pre&gt;\n&lt;p&gt;『このコードは古くて廃止されてるから使わないようにしましょう』とか・・・。&lt;/p&gt;\n&lt;p&gt;次から次へと新しい方法が出て来て、&lt;strong&gt;なんだかよくわからないけど、言われるがままに埋め込んでる&lt;/strong&gt;、という人もけっこういるのではないかなーと思ってたりしてます。&lt;/p&gt;\n&lt;p&gt;この辺を少し掘り下げて、理解を深めたいと思います。&lt;/p&gt;\n&lt;h2 id=\"opengraph-のケース\"&gt;OpenGraph のケース&lt;/h2&gt;\n&lt;p&gt;og なんとかで始まる埋め込みの記述と以前からの meta 要素とは、少し異なる点があります。&lt;/p&gt;\n&lt;pre&gt;&lt;code&gt;&amp;lt;meta name=&amp;quot;description&amp;quot; content=&amp;quot;ここにページの説明文が入る&amp;quot;&amp;gt;\n&amp;lt;meta property=&amp;quot;og:description&amp;quot; content=&amp;quot;ここにogpの説明文が入る&amp;quot;&amp;gt;\n&lt;/code&gt;&lt;/pre&gt;\n&lt;p&gt;&lt;strong&gt;『meta と property が違うのはなぜ？』&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;前から存在している、&lt;strong&gt;description&lt;/strong&gt; や &lt;strong&gt;keywords&lt;/strong&gt;, はたまた最近の &lt;strong&gt;viewport&lt;/strong&gt; なんかは、 &lt;strong&gt;meta 要素の name 属性&lt;/strong&gt;で記述されているのに対して、 ソーシャルメディアでよく使われる、&lt;strong&gt;og:title&lt;/strong&gt; や &lt;strong&gt;og:description&lt;/strong&gt;, はたまた Facebook で使われる &lt;strong&gt;fb:appid&lt;/strong&gt; あたりは、&lt;strong&gt;meta 要素の property 属性&lt;/strong&gt;で記述されています。&lt;/p&gt;\n&lt;p&gt;両者にどのような違いがあるのでしょうか？&lt;/p&gt;\n&lt;p&gt;OpenGraph に関する仕様は、\n\n\n&lt;a href=\"http://ogp.me/\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;Open Graph protocol&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;The Open Graph protocol enables any web page to become a rich object in a social graph.&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=http://ogp.me/\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n ogp.me\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image\"&gt;\n &lt;img src=\"https://ogp.me/logo.png\" alt=\"Open Graph protocol\" loading=\"lazy\" /&gt;\n &lt;/span&gt;&lt;/a&gt; に掲載されています。 こちらによると、&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20130311/",
+        "link": "https://girigiribauer.com/tech/20130311/",
+        "pubDate": "Mon, 11 Mar 2013 00:08:58 +0000",
+        "title": "HTMLの名前空間(namespace)について掘り下げてみる"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Mon, 11 Mar 2013 00:08:58 +0000",
+      "link": "https://girigiribauer.com/tags/namespace/",
+      "title": "Namespace on ばうあーろぐ"
+    }
+  }
+}

@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>本番DBの複製を Docker を用いてローカルに爆速で構築したい | ばうあーろぐ</title>
+    <meta content="手元に 本番環境のデータベースと同等のもの が欲しくなるとき、ありますよね？
+そんなとき、以下のようなことしちゃってませんか？
+
+本番環境がすでにあって、それを直接触って修正しちゃってる
+良くないと思いつつも、トラブルが起きてから本番環境へ直接対処しちゃってる
+だいぶ構成が異なるけど XAMPP / MAMP あたりを雑に使ってて、いざ本番に持って行ったらうまく動かない
+
+などなど・・・
+本番環境においてトラブルを極力減らすためにも、
+手元に本番環境と同等の環境を作るのは超大事 だと思います。
+手元にデータベースを用意して、快適に開発 or 制作していきましょう！
+実はコンテナベースですぐ作れる
+実は、 コンテナベース（Docker）でさくっと作れる んですよね。
+
+ですが意外と知らない人も多く、情報もそこまでまとまってないように感じたので、
+改めてまとめ直してみようと思います。
+ちなみに Docker に関しては、
+めっちゃ頑張って書いた分かりやすい（と自分では思っている・・・）記事があるんですけど、
+あんまり読んでもらえてないみたいでちょっと寂しさ・・・。
+Docker 知らない人は読むといいですよ。
+
+
+
+
+Docker 再入門2018 - コンテナ編
+
+
+
+Docker 再入門2018 - コマンド編
+
+
+
+Docker 再入門2018 - エコシステム編
+
+
+
+Docker 再入門2018 - 実践編
+
+以下の手順で進めていきます。
+
+下準備
+MySQL で空のデータベースコンテナを作る
+MySQL で空のデータベースコンテナにアクセスしてみる
+PostgreSQL でコンテナ作ったりアクセスしてみたり
+管理しやすさのため、 Docker Compose でコマンドを書き換える
+初期データの用意をする（本番環境から持ってくる）
+初期データを投入してみる
+
+上の Docker 記事で触れたような内容も一部重複して出てくるかもしれませんが、
+この記事だけさらっと読んでできるようにまとめておきたいと思います。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20200713/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20200713" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="本番DBの複製を Docker を用いてローカルに爆速で構築したい" itemprop="name">
+    <meta content="手元に 本番環境のデータベースと同等のもの が欲しくなるとき、ありますよね？
+そんなとき、以下のようなことしちゃってませんか？
+
+本番環境がすでにあって、それを直接触って修正しちゃってる
+良くないと思いつつも、トラブルが起きてから本番環境へ直接対処しちゃってる
+だいぶ構成が異なるけど XAMPP / MAMP あたりを雑に使ってて、いざ本番に持って行ったらうまく動かない
+
+などなど・・・
+本番環境においてトラブルを極力減らすためにも、
+手元に本番環境と同等の環境を作るのは超大事 だと思います。
+手元にデータベースを用意して、快適に開発 or 制作していきましょう！
+実はコンテナベースですぐ作れる
+実は、 コンテナベース（Docker）でさくっと作れる んですよね。
+
+ですが意外と知らない人も多く、情報もそこまでまとまってないように感じたので、
+改めてまとめ直してみようと思います。
+ちなみに Docker に関しては、
+めっちゃ頑張って書いた分かりやすい（と自分では思っている・・・）記事があるんですけど、
+あんまり読んでもらえてないみたいでちょっと寂しさ・・・。
+Docker 知らない人は読むといいですよ。
+
+
+
+
+Docker 再入門2018 - コンテナ編
+
+
+
+Docker 再入門2018 - コマンド編
+
+
+
+Docker 再入門2018 - エコシステム編
+
+
+
+Docker 再入門2018 - 実践編
+
+以下の手順で進めていきます。
+
+下準備
+MySQL で空のデータベースコンテナを作る
+MySQL で空のデータベースコンテナにアクセスしてみる
+PostgreSQL でコンテナ作ったりアクセスしてみたり
+管理しやすさのため、 Docker Compose でコマンドを書き換える
+初期データの用意をする（本番環境から持ってくる）
+初期データを投入してみる
+
+上の Docker 記事で触れたような内容も一部重複して出てくるかもしれませんが、
+この記事だけさらっと読んでできるようにまとめておきたいと思います。" itemprop="description">
+    <meta content="本番DBの複製を Docker を用いてローカルに爆速で構築したい" property="og:title">
+    <meta content="手元に 本番環境のデータベースと同等のもの が欲しくなるとき、ありますよね？
+そんなとき、以下のようなことしちゃってませんか？
+
+本番環境がすでにあって、それを直接触って修正しちゃってる
+良くないと思いつつも、トラブルが起きてから本番環境へ直接対処しちゃってる
+だいぶ構成が異なるけど XAMPP / MAMP あたりを雑に使ってて、いざ本番に持って行ったらうまく動かない
+
+などなど・・・
+本番環境においてトラブルを極力減らすためにも、
+手元に本番環境と同等の環境を作るのは超大事 だと思います。
+手元にデータベースを用意して、快適に開発 or 制作していきましょう！
+実はコンテナベースですぐ作れる
+実は、 コンテナベース（Docker）でさくっと作れる んですよね。
+
+ですが意外と知らない人も多く、情報もそこまでまとまってないように感じたので、
+改めてまとめ直してみようと思います。
+ちなみに Docker に関しては、
+めっちゃ頑張って書いた分かりやすい（と自分では思っている・・・）記事があるんですけど、
+あんまり読んでもらえてないみたいでちょっと寂しさ・・・。
+Docker 知らない人は読むといいですよ。
+
+
+
+
+Docker 再入門2018 - コンテナ編
+
+
+
+Docker 再入門2018 - コマンド編
+
+
+
+Docker 再入門2018 - エコシステム編
+
+
+
+Docker 再入門2018 - 実践編
+
+以下の手順で進めていきます。
+
+下準備
+MySQL で空のデータベースコンテナを作る
+MySQL で空のデータベースコンテナにアクセスしてみる
+PostgreSQL でコンテナ作ったりアクセスしてみたり
+管理しやすさのため、 Docker Compose でコマンドを書き換える
+初期データの用意をする（本番環境から持ってくる）
+初期データを投入してみる
+
+上の Docker 記事で触れたような内容も一部重複して出てくるかもしれませんが、
+この記事だけさらっと読んでできるようにまとめておきたいと思います。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20200713/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="本番DBの複製を Docker を用いてローカルに爆速で構築したい" name="twitter:title">
+    <meta content="手元に 本番環境のデータベースと同等のもの が欲しくなるとき、ありますよね？
+そんなとき、以下のようなことしちゃってませんか？
+
+本番環境がすでにあって、それを直接触って修正しちゃってる
+良くないと思いつつも、トラブルが起きてから本番環境へ直接対処しちゃってる
+だいぶ構成が異なるけど XAMPP / MAMP あたりを雑に使ってて、いざ本番に持って行ったらうまく動かない
+
+などなど・・・
+本番環境においてトラブルを極力減らすためにも、
+手元に本番環境と同等の環境を作るのは超大事 だと思います。
+手元にデータベースを用意して、快適に開発 or 制作していきましょう！
+実はコンテナベースですぐ作れる
+実は、 コンテナベース（Docker）でさくっと作れる んですよね。
+
+ですが意外と知らない人も多く、情報もそこまでまとまってないように感じたので、
+改めてまとめ直してみようと思います。
+ちなみに Docker に関しては、
+めっちゃ頑張って書いた分かりやすい（と自分では思っている・・・）記事があるんですけど、
+あんまり読んでもらえてないみたいでちょっと寂しさ・・・。
+Docker 知らない人は読むといいですよ。
+
+
+
+
+Docker 再入門2018 - コンテナ編
+
+
+
+Docker 再入門2018 - コマンド編
+
+
+
+Docker 再入門2018 - エコシステム編
+
+
+
+Docker 再入門2018 - 実践編
+
+以下の手順で進めていきます。
+
+下準備
+MySQL で空のデータベースコンテナを作る
+MySQL で空のデータベースコンテナにアクセスしてみる
+PostgreSQL でコンテナ作ったりアクセスしてみたり
+管理しやすさのため、 Docker Compose でコマンドを書き換える
+初期データの用意をする（本番環境から持ってくる）
+初期データを投入してみる
+
+上の Docker 記事で触れたような内容も一部重複して出てくるかもしれませんが、
+この記事だけさらっと読んでできるようにまとめておきたいと思います。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">本番DBの複製を Docker を用いてローカルに爆速で構築したい</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2020-07-13 11:00:00 +0900 JST">2020/07/13</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>手元に <strong>本番環境のデータベースと同等のもの</strong> が欲しくなるとき、ありますよね？</p>
+          <p>そんなとき、以下のようなことしちゃってませんか？</p>
+          <ul>
+            <li>本番環境がすでにあって、それを直接触って修正しちゃってる</li>
+            <li>良くないと思いつつも、トラブルが起きてから本番環境へ直接対処しちゃってる</li>
+            <li>だいぶ構成が異なるけど XAMPP / MAMP あたりを雑に使ってて、いざ本番に持って行ったらうまく動かない</li>
+          </ul>
+          <p>などなど・・・</p>
+          <p>本番環境においてトラブルを極力減らすためにも、 <strong>手元に本番環境と同等の環境を作るのは超大事</strong> だと思います。</p>
+          <p>手元にデータベースを用意して、快適に開発 or 制作していきましょう！</p>
+          <h2 id="実はコンテナベースですぐ作れる">実はコンテナベースですぐ作れる</h2>
+          <p>実は、 <strong>コンテナベース（Docker）でさくっと作れる</strong> んですよね。</p>
+          <p><img alt="コンテナたくさんの図" src="resource01.jpg"></p>
+          <p>ですが意外と知らない人も多く、情報もそこまでまとまってないように感じたので、 改めてまとめ直してみようと思います。</p>
+          <p>ちなみに Docker に関しては、 めっちゃ頑張って書いた分かりやすい（と自分では思っている・・・）記事があるんですけど、 <strong>あんまり読んでもらえてないみたいでちょっと寂しさ・・・。</strong> Docker 知らない人は読むといいですよ。</p>
+          <ul>
+            <li><a href="https://girigiribauer.com/tech/20180205/" rel="noopener noreferrer" target="_blank">Docker 再入門2018 - コンテナ編</a></li>
+            <li><a href="https://girigiribauer.com/tech/20180206/" rel="noopener noreferrer" target="_blank">Docker 再入門2018 - コマンド編</a></li>
+            <li><a href="https://girigiribauer.com/tech/20180207/" rel="noopener noreferrer" target="_blank">Docker 再入門2018 - エコシステム編</a></li>
+            <li><a href="https://girigiribauer.com/tech/20180208/" rel="noopener noreferrer" target="_blank">Docker 再入門2018 - 実践編</a></li>
+          </ul>
+          <p>以下の手順で進めていきます。</p>
+          <ol>
+            <li>下準備</li>
+            <li>MySQL で空のデータベースコンテナを作る</li>
+            <li>MySQL で空のデータベースコンテナにアクセスしてみる</li>
+            <li>PostgreSQL でコンテナ作ったりアクセスしてみたり</li>
+            <li>管理しやすさのため、 Docker Compose でコマンドを書き換える</li>
+            <li>初期データの用意をする（本番環境から持ってくる）</li>
+            <li>初期データを投入してみる</li>
+          </ol>
+          <p>上の Docker 記事で触れたような内容も一部重複して出てくるかもしれませんが、 この記事だけさらっと読んでできるようにまとめておきたいと思います。</p>
+          <p>ちなみに当方 MacOS なので、 MacOS ベースの説明になりますが、 適宜 Windows なり Linux なりで手順ごとに同一になる方法でやってもらえれば問題ないかと。</p>
+          <h2 id="下準備">下準備</h2>
+          <p>必要なものは以下の通りです。</p>
+          <ul>
+            <li>Docker (Docker Desktop)</li>
+          </ul>
+          <p>まず Docker インストールしましょう。</p>
+          <p><img alt="Docker Desktop" src="resource02.jpg"></p>
+          <p><a class="link-card" href="https://www.docker.com/products/docker-desktop" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Docker Desktop: The #1 Containerization Tool for Developers | Docker</span> <span class="link-card__desc">Docker Desktop is collaborative containerization software for developers. Get started and download …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.docker.com/products/docker-desktop"> www.docker.com</span></span><span class="link-card__image"><img alt="Docker Desktop: The #1 Containerization Tool for Developers | Docker" loading="lazy" src="https://www.docker.com/app/uploads/2023/06/meta-image-download-docker-desktop-1110x580.png"></span></a></p>
+          <p>以前まではどこかしらにアカウント作成してログインしてからでないと、 Docker for Mac や Docker for Windows がダウンロードできなかったのですが、 今は誰でもこちらからダウンロードできます。</p>
+          <h3 id="そもそも-docker-ってなんなの">そもそも Docker ってなんなの？</h3>
+          <p>頑張って書いたやつなので、 ぜひとも <a href="https://girigiribauer.com/tech/20180205/" rel="noopener noreferrer" target="_blank">こちら（Docker 再入門2018 - コンテナ編）</a> を読んでいただきたいところではありますが、 誤解を恐れず言ってしまえば、 <strong>超小さい Linux マシン</strong> と考えてしまっても差し支えないでしょう。</p>
+          <p>超小さい Linux マシンを、手元でどんどん起動しちゃいます。 そのための環境構築を今しています。</p>
+          <h3 id="インストールできたかどうかの確認">インストールできたかどうかの確認</h3>
+          <p>適当にターミナル（いわゆる黒い画面）を開いて、以下のように入力します。 （ <code>$</code> は入力待ちを表しています）</p>
+          <pre tabindex="0"><code>$ docker
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default "/Users/y/.docker")
+  -c, --context string     Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and default context set with "docker context use")
+  -D, --debug              Enable debug mode
+（中略）
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+（中略）
+
+Run 'docker COMMAND --help' for more information on a command.
+</code></pre>
+          <p>使い方の説明文がずらずら表示されていれば、 <strong>Docker のインストールが完了</strong> していると思ってもらって大丈夫です。</p>
+          <h3 id="おまけついでに-tmux-も導入しておくと吉">（おまけ）ついでに tmux も導入しておくと吉！</h3>
+          <p>必須じゃないですが、手元で Docker コンテナ立ち上げつつ、 別のターミナルで別の操作をする、みたいなのが少し出てきたりはするので、 <strong>tmux を導入</strong> しておくのをおすすめします！ もちろん無くても大丈夫！</p>
+          <p><a href="https://girigiribauer.com/tech/20200427/" rel="noopener noreferrer" target="_blank">ターミナル（黒い画面）を分割して使う tmux 超入門</a></p>
+          <p>これ導入するだけで、黒い画面が身近に感じられるかもしれません。</p>
+          <h2 id="mysql-で空のデータベースコンテナを作る">MySQL で空のデータベースコンテナを作る</h2>
+          <p>まず手元に空のデータベースコンテナを作ります。</p>
+          <p>これは、手元に <strong>MySQL をインストールしてローカルでサーバを起動することと同じ</strong> です。</p>
+          <p>Docker の良いところは、 <strong>環境をコンテナ内に閉じ込める</strong> ところにあるので、 <strong>Docker のインストール以外、手元に別のものをインストールする必要はありません。</strong></p>
+          <p>つまり、 MySQL や PostgreSQL をインストールして手元で使いたいのに、 MySQL や PostgreSQL 自体や、その付属ライブラリなどをローカルにインストールしなくて良いのです。 クリーンですね！</p>
+          <h3 id="mysql-の-docker-イメージのダウンロードコンテナ作成">MySQL の Docker イメージのダウンロード、コンテナ作成</h3>
+          <p>まずこちらをみましょう。</p>
+          <p><img alt="DockerHub MySQL" src="resource03.jpg"></p>
+          <p><a class="link-card" href="https://hub.docker.com/_/mysql" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">mysql - Official Image | Docker Hub</span> <span class="link-card__desc">MySQL is a widely used, open-source relational database management system (RDBMS).</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/mysql"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>実は、よく使うアプリケーションは事前に用意してくれてたりします。 こんな感じで使います。</p>
+          <pre tabindex="0"><code>docker run [Docker Hub の公式イメージ名]
+</code></pre>
+          <p>もちろん MySQL もみなさんよく使うやつなので、当然用意してくれてます。 それが今見てるページです。</p>
+          <p><strong>Docker Hub に用意されているイメージを手元に持ってきて、コンテナとして実行できます。</strong></p>
+          <p>すごい！</p>
+          <p>ちなみに、手元に Docker イメージがない状態から <code>docker run</code> をすると、 <strong>数MB単位の Docker イメージをダウンロード</strong> してから、その Docker イメージを元にコンテナを作ります。 （テザリング中の方はお気をつけください・・・）</p>
+          <p>具体的には、以下のコマンドを実行するだけで、手元で MySQL が動きます。</p>
+          <pre tabindex="0"><code>$ docker run --name mydb -d -e MYSQL_ROOT_PASSWORD=mypassword -it mysql
+（中略、適当にダウンロードが走る）
+9c9c5243a92c742e9f44717bf951968605be702197c5a770fc9a73fe6494bbf6
+$
+</code></pre>
+          <p>まんまコピペでも、 <strong>もうこれだけで MySQL が動いてます。</strong></p>
+          <p>すごい世の中だ・・・！</p>
+          <p>ざっくり説明です。</p>
+          <ul>
+            <li><code>--name=mydb</code> をつけると、後でその名前でコンテナ指定できる</li>
+            <li><code>-d</code> をつけると、バックグラウンドで起動する</li>
+            <li><code>-e</code> は環境変数の設定</li>
+            <li>MySQL コンテナは <code>MYSQL_ROOT_PASSWORD</code> などのパスワードに関する環境変数がないと動かない</li>
+            <li>今回の root パスワードは <code>mypassword</code> に設定</li>
+            <li><code>-it</code> は（ざっくりいうと）コンテナの中と外の表示をつなぐ</li>
+            <li>詳しくは <code>docker help run</code> でオプション見られる</li>
+          </ul>
+          <p>別のターミナルで、 <code>docker container ls</code> を入力してみると、 現在動いているコンテナが分かります。</p>
+          <pre tabindex="0"><code>% docker container ls
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                 NAMES
+e77ac7b274c8        mysql               "docker-entrypoint.s…"   7 seconds ago       Up 4 seconds        3306/tcp, 33060/tcp   mydb
+</code></pre>
+          <a href="resource04.mp4" target="_blank">
+  <video autoplay="" controls="" height="439" loop="" muted="" width="800">
+    <source src="resource04.mp4" type="video/mp4">
+  </video>
+</a>
+          <ul>
+            <li>コンテナ名は <code>mydb</code> で、 <code>--name</code> で指定しなかったらランダムで付けられる</li>
+            <li><code>docker container rm -f [コンテナ ID]</code> で削除できる</li>
+            <li>これ以上は本質から離れすぎちゃうので各自おぐぐりください</li>
+          </ul>
+          <h2 id="mysql-で空のデータベースコンテナにアクセスしてみる">MySQL で空のデータベースコンテナにアクセスしてみる</h2>
+          <p>さっきコンテナを以下で立ち上げました。</p>
+          <pre tabindex="0"><code>docker run --rm --name mydb -d -e MYSQL_ROOT_PASSWORD=mypassword -it mysql
+</code></pre>
+          <p>さらに続けて以下を入力すると、実際に MySQL に接続できちゃいます！</p>
+          <pre tabindex="0"><code>$ docker exec -it mydb mysql -uroot -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.20 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+</code></pre>
+          <p>やったー！</p>
+          <p>試しに <code>show databases</code> を入力してみます。</p>
+          <pre tabindex="0"><code>mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.02 sec)
+
+mysql>
+</code></pre>
+          <a href="resource05.mp4" target="_blank">
+  <video autoplay="" controls="" height="439" loop="" muted="" width="800">
+    <source src="resource05.mp4" type="video/mp4">
+  </video>
+</a>
+          <p>動いてますね！</p>
+          <p>こんな感じで手元に MySQL をインストールせずとも、 MySQL が動いちゃってることが分かります！</p>
+          <p>ちなみに <strong>Ctrl+D で終了</strong> です！</p>
+          <h3 id="他にも設定できちゃう">他にも設定できちゃう</h3>
+          <p>先の例では <code>MYSQL_ROOT_PASSWORD</code> の環境変数しか出てきてませんでしたが、 他にもあれこれ用意されています！</p>
+          <p><img alt="DockerHub MySQL Settings" src="resource06.jpg"></p>
+          <p><a class="link-card" href="https://hub.docker.com/_/mysql" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">mysql - Official Image | Docker Hub</span> <span class="link-card__desc">MySQL is a widely used, open-source relational database management system (RDBMS).</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/mysql"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>改めてこちらの Environment Variables を確認してみてください。</p>
+          <p>例えばよく使うのが・・・</p>
+          <ul>
+            <li><code>MYSQL_DATABASE</code> データベース名</li>
+            <li><code>MYSQL_USER</code> ユーザー名</li>
+            <li><code>MYSQL_PASSWORD</code> パスワード</li>
+            <li><code>MYSQL_HOST</code> ホスト名</li>
+          </ul>
+          <p>このあたりでしょうか？</p>
+          <p>これらの環境変数を設定しておくと、 <strong>データベース名やユーザー名などが、事前にこの通りの名前でセットアップされてる状態</strong> となります。</p>
+          <h2 id="postgresql-でコンテナ作ったりアクセスしてみたり">PostgreSQL でコンテナ作ったりアクセスしてみたり</h2>
+          <p>ここからは PostgreSQL のターンです。</p>
+          <p><img alt="DockerHub PostgreSQL" src="resource07.jpg"></p>
+          <p><a class="link-card" href="https://hub.docker.com/_/postgres" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">postgres - Official Image | Docker Hub</span> <span class="link-card__desc">The PostgreSQL object-relational database system provides reliability and data integrity.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/postgres"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>・・・といっても <strong>原理は先ほどと全く同じ</strong> で、 <strong>指定する Docker イメージが異なるだけ</strong> なので、 コマンドだけ紹介しちゃいます。</p>
+          <p>あっさっきのデータベースコンテナが存在してるかもなので、 名前だけは <code>mydb2</code> に変えておきましょうかね。</p>
+          <pre tabindex="0"><code>docker run --name mydb2 -d -e POSTGRES_PASSWORD=mypassword -it postgres
+</code></pre>
+          <a href="resource08.mp4" target="_blank">
+  <video autoplay="" controls="" height="439" loop="" muted="" width="800">
+    <source src="resource08.mp4" type="video/mp4">
+  </video>
+</a>
+          <p><code>docker run</code> で postgres の Docker イメージをダウンロードしつつ、コンテナ作成しています。</p>
+          <p>さっきと同じですね！</p>
+          <pre tabindex="0"><code>docker exec -it mydb2 psql -U postgres
+</code></pre>
+          <a href="resource09.mp4" target="_blank">
+  <video autoplay="" controls="" height="439" loop="" muted="" width="800">
+    <source src="resource09.mp4" type="video/mp4">
+  </video>
+</a>
+          <p><code>docker exec</code> で <code>psql</code> コマンドを実行して PostgreSQL のデータベースに接続し、 <code>\l</code> でデータベース一覧を表示しています。</p>
+          <p>こちらもさっきと同じです！</p>
+          <h2 id="管理しやすさのため-docker-compose-でコマンドを書き換える">管理しやすさのため、 Docker Compose でコマンドを書き換える</h2>
+          <p>ここまでで、手元に（ Docker 以外）何もインストールせずに、 MySQL や PostgreSQL の空のデータベースを作ったり接続したりができました。</p>
+          <p>わーすごい。</p>
+          <p>ただ、毎回コマンドを入力するのも辛いので、 <strong>設定ファイル</strong> に置き換えて、もっと <strong>シンプルなコマンドで呼べるように</strong> しておきましょう。</p>
+          <p>ここで出てくるのが <strong>Docker Compose</strong> です！</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-yml" data-lang="yml"><span style="display:flex"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">"3"</span>
+</span></span><span style="display:flex"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">mysql</span>:
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">image</span>: <span style="color:#e6db74">"mysql"</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">MYSQL_DATABASE=mydatabase</span>
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">MYSQL_USER=myuser</span>
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">MYSQL_PASSWORD=mypassword</span>
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">MYSQL_ROOT_PASSWORD=mypassword</span>
+</span></span></code></pre>
+          </div>
+          <p>上記のような <code>docker-compose.yml</code> ファイルを作りましょう。</p>
+          <p>細かな説明は今回省きますが、 <strong>概ねさっき入力したコマンドと等価です。</strong></p>
+          <p><code>docker-compose.yml</code> のあるディレクトリ上で <code>docker-compose up</code> を入力するだけで同様にイメージがダウンロードされ、コンテナが作成されます。 楽ちん！</p>
+          <a href="resource10.mp4" target="_blank">
+  <video autoplay="" controls="" height="439" loop="" muted="" width="800">
+    <source src="resource10.mp4" type="video/mp4">
+  </video>
+</a>
+          <p>さっきと少しだけルールが違う箇所として、以下あたりが挙げられます。</p>
+          <ul>
+            <li>Docker Compose で立ち上げたコンテナは、名前の先頭にディレクトリ名がつく</li>
+            <li>勝手にネットワークの設定や名前解決などを行ってくれる</li>
+          </ul>
+          <p>はい、ここまでで Docker Compose ベースで空のデータベースコンテナの立ち上げができるようになりました！</p>
+          <p>わーお手軽！</p>
+          <p>ちなみに終了するときは <code>docker-compose down</code> です。</p>
+          <h2 id="初期データの用意をする本番環境から持ってくる">初期データの用意をする（本番環境から持ってくる）</h2>
+          <p>空のデータベースを手元に作っただけだと、 本番環境のデータベースを模したことにはなりませんね。</p>
+          <p>本番環境と同じ、あるいはそれを類似したローカル用のデータが入っていないといけません。 そこで、本番環境から実際のデータを取ってくるとしましょう。 <strong>キーワードは dump （バックアップ）です。</strong></p>
+          <ul>
+            <li><code>mysqldump</code> MySQL のデータベースの dump を取るコマンド</li>
+            <li><code>pg_dump</code> PostgreSQL のデータベースの dump を取るコマンド</li>
+            <li>dump は単に手元に複製を作るだけなので（移動ではない）、本番用のデータベースには影響しない</li>
+          </ul>
+          <p>実際に本番環境で dump コマンドを入力するまでは、 色んなケース（レンタルサーバ、クラウドなど）が考えられるので、 一概にこの手順で、とは言い辛いです。</p>
+          <p>レンタルサーバであれば、 ひょっとすると GUI で dump ファイルを取得できる機能が用意されているかもしれませんね。</p>
+          <p>ここでは <strong>dump コマンド</strong> のみ、軽く紹介しておきます。</p>
+          <h3 id="mysql-の場合は-mysqldump">MySQL の場合は <code>mysqldump</code></h3>
+          <p>仮に root ユーザーで接続し、 root パスワードが <code>mypassword</code> 、データベース名が <code>mydatabase</code> としましょう。</p>
+          <p><code>mysqldump [options] db_name [tbl_name ...]</code> の形で dump できます。</p>
+          <p>ただ、このまま実行してしまうと、 <strong>標準出力にずらずら出てしまう</strong> だけなので、 ファイルに書き込み（リダイレクト）します。</p>
+          <pre tabindex="0"><code>$ mysqldump -u root -p mydatabase > mydumpfile.sql
+Enter password:
+$
+</code></pre>
+          <p>これで手元に <code>mydumpfile.sql</code> という dump ファイルができているはずです。 こんな感じのファイルです。</p>
+          <p><img alt="mydumpfile.sql" src="resource11.jpg"></p>
+          <p>もし対象が Docker コンテナだった場合は、少し手順が複雑になります。</p>
+          <pre tabindex="0"><code>$ docker exec [container_name] mysqldump -u root -p[password] mydatabase > mydumpfile.sql
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+$
+</code></pre>
+          <ul>
+            <li><code>-p</code> オプションの後にパスワード付きは本来よろしくないが、対話的に行うと余計な出力まで dump ファイルに含まれてしまう</li>
+            <li>同様の理由で <code>-it</code> オプションも外す</li>
+            <li>必要に応じて <code>history</code> コマンドでパスワードを含むコマンド履歴を削除しておくと良いかも</li>
+          </ul>
+          <p>コンテナで動いているものに対して、コマンド実行したいときには、 一定 <strong>コンテナ周りの知識を必要とします。</strong></p>
+          <p>きっと本番環境がコンテナベースで動いているケースだと、 それなりに詳しい人が関わっているはずなので、その方に聞くのもありかもしれません。 （ということで、話が複雑になるので、掘り下げるのはやめておきます・・・）</p>
+          <p>なお <code>mysqldump</code> コマンドについては、公式に詳しく掲載されています。</p>
+          <p><a class="link-card" href="https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">MySQL :: MySQL 5.7 Reference Manual :: 4.5.4 mysqldump — A Database Backup Program</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html"> dev.mysql.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <h3 id="postgresql-の場合は-pg_dump">PostgreSQL の場合は <code>pg_dump</code></h3>
+          <p>こちらも仮に root ユーザーで接続し、 root パスワードが <code>mypassword</code> 、データベース名が <code>mydatabase</code> としましょう。</p>
+          <p><code>pg_dump [dbname] &gt; [dumpfile]</code> の形で dump できます。</p>
+          <pre tabindex="0"><code>pg_dump -U postgres mydatabase > mydumpfile.sql
+</code></pre>
+          <p>一般的な dump の方法を軽く紹介はしてますが、 実際はどんな方法でも良いので <strong>手元に dump ファイルがある状態であれば OK</strong> です。</p>
+          <p>なお <code>pg_dump</code> コマンドについても、公式に詳しく掲載されています。</p>
+          <p><a class="link-card" href="https://www.postgresql.org/docs/12/backup-dump.html" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">25.1. SQL Dump</span> <span class="link-card__desc">25.1.&amp;nbsp;SQL Dump 25.1.1. Restoring the Dump 25.1.2. Using pg_dumpall 25.1.3. Handling Large …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.postgresql.org/docs/12/backup-dump.html"> www.postgresql.org</span></span><span class="link-card__image"><img alt="25.1. SQL Dump" loading="lazy" src="https://www.postgresql.org/media/img/about/press/elephant.png"></span></a></p>
+          <h2 id="初期データを投入してみる">初期データを投入してみる</h2>
+          <p>さて、今までは下ごしらえ、 <strong>ここからが本編</strong> です。 MySQL と PostgreSQL とで、だいたい手順が同じであることが分かってきたと思いますので、 ここから先は MySQL の方法のみ紹介していきますね。</p>
+          <p>必要な材料は以下です。</p>
+          <ul>
+            <li>Docker が動く環境</li>
+            <li><code>docker-compose.yml</code> が手元にあり、空のデータベースコンテナが動く</li>
+            <li>本番環境から持ってきた dump ファイル</li>
+          </ul>
+          <p>揃っているでしょうか？</p>
+          <p>今まで本番DBからデータ持ってくるけいのことをやったことない人は、 <strong>ぼーっと眺めて納得するだけでなくて、実際に手を動かすことを強くお勧め</strong> します。</p>
+          <h3 id="docker-composeyml-ファイルのアップデート">docker-compose.yml ファイルのアップデート</h3>
+          <p>さて、初期データを投入するために、少しだけ <code>docker-compose.yml</code> ファイルをアップデートします。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-yml" data-lang="yml"><span style="display:flex"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">"3"</span>
+</span></span><span style="display:flex"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">mysql</span>:
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">image</span>: <span style="color:#e6db74">"mysql"</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">MYSQL_DATABASE=mydatabase</span>
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">MYSQL_USER=myuser</span>
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">MYSQL_PASSWORD=mypassword</span>
+</span></span><span style="display:flex"><span>      - <span style="color:#ae81ff">MYSQL_ROOT_PASSWORD=mypassword</span>
+</span></span><span style="display:flex"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex"><span>      - <span style="color:#e6db74">"storage:/var/lib/mysql"</span>
+</span></span><span style="display:flex"><span>      - <span style="color:#e6db74">"./initdb/:/docker-entrypoint-initdb.d"</span>
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">storage</span>:
+</span></span></code></pre>
+          </div>
+          <p>最低限しか追加してませんが、ポイントは以下です。</p>
+          <ul>
+            <li>
+              データベースコンテナ内の <code>/docker-entrypoint-initdb.d</code> ディレクトリのパスを手元に <strong>マウント</strong> する
+              <ul>
+                <li>今回は手元に <code>initdb</code> というディレクトリを作ります</li>
+              </ul>
+            </li>
+            <li>
+              データベースコンテナの起動・終了で編集内容が戻らないよう、 <strong>データの永続化</strong>
+              <ul>
+                <li>データ本体がコンテナ内の <code>/var/lib/mysql</code> にあるので、 Docker のボリュームに紐付け</li>
+                <li>PostgreSQL の場合は <code>/var/lib/postgresql/data</code></li>
+              </ul>
+            </li>
+          </ul>
+          <p>ちなみに、 <code>docker-entrypoint-initdb.d</code> ってなんなの？って話ですが、 実は最初の方に見た Docker Hub の方にもちゃんと説明がされています。</p>
+          <p><strong>Initializing a fresh instance</strong> の項目です。</p>
+          <p><img alt="DockerHub MySQL Initializing a fresh instance" src="resource12.jpg"></p>
+          <p><a class="link-card" href="https://hub.docker.com/_/mysql" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">mysql - Official Image | Docker Hub</span> <span class="link-card__desc">MySQL is a widely used, open-source relational database management system (RDBMS).</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/mysql"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>大事なポイントだけ抜粋しますね。</p>
+          <blockquote>
+            <p>Furthermore, it will execute files with extensions .sh, .sql and .sql.gz that are found in /docker-entrypoint-initdb.d. Files will be executed in alphabetical order.</p>
+          </blockquote>
+          <ul>
+            <li><code>.sh</code>, <code>.sql</code>, <code>.sql.gz</code> の拡張子のファイルが <code>/docker-entrypoint-initdb.d/</code> 内にあれば（初回）実行される</li>
+            <li><strong>アルファベット順</strong> に実行される</li>
+          </ul>
+          <p>ファイルが1つしかなければ、そのまま放り込んでおけば良いですが、 順に実行、反映させたいのなら、アルファベット順になるように名前つけてあげれば OK です。</p>
+          <p>今回は、本番環境のデータベースをそのまま手元に持ってきたいだけなので、実行順はあまり考えなくても大丈夫です。</p>
+          <h3 id="初期データを読み込まれるように配置する">初期データを読み込まれるように配置する</h3>
+          <p>ちなみに dump したファイルは今回このような感じです。 （関係ないコメントは適宜省略してます）</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-sql" data-lang="sql"><span style="display:flex"><span><span style="color:#75715e">-- MySQL dump 10.13  Distrib 8.0.20, for Linux (x86_64)
+</span></span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><span style="color:#75715e">--
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">-- Table structure for table `posts`
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">--
+</span></span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">EXISTS</span> <span style="color:#f92672">`</span>posts<span style="color:#f92672">`</span>;
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>posts<span style="color:#f92672">`</span> (
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">`</span>id<span style="color:#f92672">`</span> int <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">`</span>title<span style="color:#f92672">`</span> varchar(<span style="color:#ae81ff">16</span>) <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex"><span>  <span style="color:#f92672">`</span>content<span style="color:#f92672">`</span> text
+</span></span><span style="display:flex"><span>) ENGINE<span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8mb4 <span style="color:#66d9ef">COLLATE</span><span style="color:#f92672">=</span>utf8mb4_0900_ai_ci;
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><span style="color:#75715e">--
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">-- Dumping data for table `posts`
+</span></span></span><span style="display:flex"><span><span style="color:#75715e">--
+</span></span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">LOCK</span> TABLES <span style="color:#f92672">`</span>posts<span style="color:#f92672">`</span> <span style="color:#66d9ef">WRITE</span>;
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">`</span>posts<span style="color:#f92672">`</span> <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">'foo'</span>,<span style="color:#e6db74">'foo foo foo'</span>),(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">'bar'</span>,<span style="color:#e6db74">'bar bar bar'</span>),(<span style="color:#ae81ff">3</span>,<span style="color:#e6db74">'baz'</span>,<span style="color:#e6db74">'baz baz baz'</span>);
+</span></span><span style="display:flex"><span>UNLOCK TABLES;
+</span></span><span style="display:flex"><span><span style="color:#75715e">-- Dump completed on 2020-07-11  8:01:34
+</span></span></span></code></pre>
+          </div>
+          <p>内容は雑ですが、 <code>posts</code> テーブルとそのデータ3件分（ <code>foo</code>, <code>bar</code>, <code>baz</code> ）が入っていることがわかると思います。</p>
+          <p>準備できたら、先ほど用意した dump ファイルを、 <code>docker-compose.yml</code> と同じ階層にある <code>initdb</code> ディレクトリの中に放り込みましょう。</p>
+          <p>もしさっき作った Docker Compose のデータベースが存在しているのなら、 <code>docker-compose down -v</code> で一度 <strong>ボリュームごと削除</strong> しておくと混乱しなくて良いかもです。</p>
+          <p>放り込んでから改めて <code>docker-compose up</code> をすると、初期データを読み込んだ状態でデータベースが立ち上がります！</p>
+          <a href="resource13.mp4" target="_blank">
+  <video autoplay="" controls="" height="439" loop="" muted="" width="800">
+    <source src="resource13.mp4" type="video/mp4">
+  </video>
+</a>
+          <p>データベース、立ち上がってますね。</p>
+          <p>その後、 <code>tmp_mysql_1</code> という名前で作られたデータベースコンテナに対して、 試しに接続してみて、 <code>show tables</code> で <strong>テーブルが作られていることを確認できました！</strong></p>
+          <p>やったー！</p>
+          <h2 id="まとめ">まとめ</h2>
+          <ul>
+            <li>手元に同一とみなせるデータベース環境を作り、手元できちんとテストするの超大事</li>
+            <li>Docker をはじめとしたコンテナ技術を有効に使おう</li>
+          </ul>
+          <p>この前本番環境を「こわいこわい」言いながら触りつつも、 かたくなに手元に環境を構築しない人たちをみかけて、 <strong>なんで手元にちゃんと環境作ってテストしないんだろう？</strong> と疑問に思ったのがこの記事を書くきっかけです。</p>
+          <p>もっと気軽に手元に同じ環境を作っていくといいですよね。</p>
+          <p>読んでて、 Docker 部分がよく分からないなあ・・・と思った方は、 繰り返しになりますが是非とも Docker の記事を順に読んでみてください。 おすすめします。</p>
+          <ul>
+            <li><a href="https://girigiribauer.com/tech/20180205/" rel="noopener noreferrer" target="_blank">Docker 再入門2018 - コンテナ編</a></li>
+            <li><a href="https://girigiribauer.com/tech/20180206/" rel="noopener noreferrer" target="_blank">Docker 再入門2018 - コマンド編</a></li>
+            <li><a href="https://girigiribauer.com/tech/20180207/" rel="noopener noreferrer" target="_blank">Docker 再入門2018 - エコシステム編</a></li>
+            <li><a href="https://girigiribauer.com/tech/20180208/" rel="noopener noreferrer" target="_blank">Docker 再入門2018 - 実践編</a></li>
+          </ul>
+          <h2 id="refs">参考 URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://www.docker.com/products/docker-desktop" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Docker Desktop: The #1 Containerization Tool for Developers | Docker</span> <span class="link-card__desc">Docker Desktop is collaborative containerization software for developers. Get started and download …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.docker.com/products/docker-desktop"> www.docker.com</span></span><span class="link-card__image"><img alt="Docker Desktop: The #1 Containerization Tool for Developers | Docker" loading="lazy" src="https://www.docker.com/app/uploads/2023/06/meta-image-download-docker-desktop-1110x580.png"></span></a></li>
+            <li><a class="link-card" href="https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">MySQL :: MySQL 5.7 Reference Manual :: 4.5.4 mysqldump — A Database Backup Program</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html"> dev.mysql.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a class="link-card" href="https://www.postgresql.org/docs/12/backup-dump.html" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">25.1. SQL Dump</span> <span class="link-card__desc">25.1.&amp;nbsp;SQL Dump 25.1.1. Restoring the Dump 25.1.2. Using pg_dumpall 25.1.3. Handling Large …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.postgresql.org/docs/12/backup-dump.html"> www.postgresql.org</span></span><span class="link-card__image"><img alt="25.1. SQL Dump" loading="lazy" src="https://www.postgresql.org/media/img/about/press/elephant.png"></span></a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/docker/">#Docker</a> <a class="tag-link" href="/tags/cli/">#CLI</a> <a class="tag-link" href="/tags/database/">#Database</a> <a class="tag-link" href="/tags/mysql/">#MySQL</a> <a class="tag-link" href="/tags/postgresql/">#PostgreSQL</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=%e6%9c%ac%e7%95%aaDB%e3%81%ae%e8%a4%87%e8%a3%bd%e3%82%92%20Docker%20%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%e3%83%ad%e3%83%bc%e3%82%ab%e3%83%ab%e3%81%ab%e7%88%86%e9%80%9f%e3%81%a7%e6%a7%8b%e7%af%89%e3%81%97%e3%81%9f%e3%81%84%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20200713/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20200713%2f&amp;text=%e6%9c%ac%e7%95%aaDB%e3%81%ae%e8%a4%87%e8%a3%bd%e3%82%92%20Docker%20%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%e3%83%ad%e3%83%bc%e3%82%ab%e3%83%ab%e3%81%ab%e7%88%86%e9%80%9f%e3%81%a7%e6%a7%8b%e7%af%89%e3%81%97%e3%81%9f%e3%81%84" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20200713/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>3Dものづくり(4) - カチッとはまる機構の検証 | ばうあーろぐ</title>
+    <meta content="カチッとはまりはしなかったものの、検証としては良い学びがあったの巻" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20221203/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20221203" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="3Dものづくり(4) - カチッとはまる機構の検証" itemprop="name">
+    <meta content="カチッとはまりはしなかったものの、検証としては良い学びがあったの巻" itemprop="description">
+    <meta content="3Dものづくり(4) - カチッとはまる機構の検証" property="og:title">
+    <meta content="カチッとはまりはしなかったものの、検証としては良い学びがあったの巻" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20221203/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/tech/20221203/feature.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="3Dものづくり(4) - カチッとはまる機構の検証" name="twitter:title">
+    <meta content="カチッとはまりはしなかったものの、検証としては良い学びがあったの巻" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/tech/20221203/feature.jpg" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">3Dものづくり(4) - カチッとはまる機構の検証</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2022-12-03 07:50:00 +0900 JST">2022/12/03</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>すごい、不定期と言いつつ続いてる。</p>
+          <ul>
+            <li><a href="/tech/20221001/">3Dものづくり始めました</a></li>
+            <li><a href="/tech/20221117/">3Dものづくり(2) - Fusion 360 をいじり倒す</a></li>
+            <li><a href="/tech/20221120/">3Dものづくり(3) - 検証用データを印刷してみた！</a></li>
+          </ul>
+          <h2 id="前回のまとめ">前回のまとめ</h2>
+          <ul>
+            <li>90度よりも小さい鋭角は再現しづらく、エッジが丸くなりがち</li>
+            <li>思った以上に3Dプリンターは印刷に時間がかかる</li>
+            <li>DMM の3Dプリントサービス使ったらどうなるのか試してみたい</li>
+          </ul>
+          <p>ということで、データをファブ施設に持っていって自分でプリントしたものの、 思った以上に時間がかかって厳しかったので、 今度は <strong>データ丸投げで完成品を送ってくれるサービス</strong> を利用したらどうなのか、 試してみました。</p>
+          <h2 id="dmm-の3dプリント出力サービス">DMM の3Dプリント出力サービス</h2>
+          <p><img alt="DMM 3Dプリント出力サービス" src="resource01.jpg"></p>
+          <p><a class="link-card" href="https://make.dmm.com/print/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">3Dプリントマルチサービス - DMM.make 3Dプリント</span> <span class="link-card__desc">3Dプリンターを用いた短納期・高品質・安価な3Dプリント出力複合サービス。ビジネス・個人・クリエイターの出力代行～販売をプロがサポート。1分価格Web見積。</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://make.dmm.com/print/"> make.dmm.com</span></span><span class="link-card__image"><img alt="3Dプリントマルチサービス - DMM.make 3Dプリント" loading="lazy" src="https://make.dmm.com/assets/ogp/dmmmake-3d-printing-biz-ogp.jpg"></span></a></p>
+          <p>公式の表記揺れが多少あって正式名称わからないのですが、3Dプリントサービスと呼ぶことにします。</p>
+          <p>データだけ送ると、向こうで3Dプリントを勝手にやってくれて送付までしてくれるというありがたいサービスです。なんか近未来感。</p>
+          <p><img alt="大まかな手順" src="resource02.jpg"></p>
+          <ul>
+            <li>データのアップロード</li>
+            <li>モデルのチェック</li>
+            <li>支払いして待つ</li>
+          </ul>
+          <p>みたいな手順でしょうか？</p>
+          <p>早速アップロードしてみます。</p>
+          <p><img alt="マイ3Dデータ" src="resource03.jpg"></p>
+          <p>アップロードすると、なんだか自動でデータに問題がないかのチェックが走ります。</p>
+          <p>ものの数十秒程度でモデルのチェックが終わり、サイズやお値段などを見ることができます。</p>
+          <p><img alt="前回印刷できなかった凹凸パーツ" src="resource04.jpg"></p>
+          <p>前回印刷できなかった凹凸パーツくん。</p>
+          <p>これだけで7〜8時間かかっちゃうって言われちゃあ、 さすがに検証も「うっ」と気が引けてしまうものですが、 全部リモートで勝手にやってくれるんだから楽ですね。</p>
+          <p>金額が見えてくる前に素材を選ぶことができるようです。</p>
+          <p><img alt="選べる素材一覧" src="resource05.jpg"></p>
+          <p>ナイロン、アクリル、レジン、など幅広い素材が用意されていて、 当然お値段も違います。</p>
+          <p>まあこの辺はちょっとモデルごとに選んでみないと、 金額感わからないですよね〜。</p>
+          <p><img alt="素材・ナイロンナチュラル" src="resource06.jpg"></p>
+          <p>素材・ナイロンナチュラルで選んでみると・・・</p>
+          <p><strong>4,864円！！</strong></p>
+          <p>（わっ思ってたよりもするけど、相場感が全然分からないから高いのか安いのか分からん・・・！）</p>
+          <p><img alt="素材・ナイロンナチュラル（磨き）" src="resource07.jpg"></p>
+          <p>素材・ナイロンナチュラル（磨き）に変更してみたら・・・</p>
+          <p><strong>7,538円！！！</strong></p>
+          <p>わーー！！</p>
+          <p>ちょっとしたパーツのお値段を考えてたから、思った以上に想像してた金額との落差が大きいです。</p>
+          <h2 id="ちょっと作戦を練る">ちょっと作戦を練る</h2>
+          <p>さすがに検証用途のためだけのパーツでこの金額はちょっと払いづらいので、 少し作戦を練りました。</p>
+          <ul>
+            <li>
+              前回までで強度は 2mm あれば十分確保できる
+              <ul>
+                <li>現在の凹の方の厚みは 5mm くらいある？過剰では？</li>
+              </ul>
+            </li>
+            <li>
+              凸の方の長さもそんなに長くなくて良いのでは？
+              <ul>
+                <li>10mm あれば十分検証には耐えられる</li>
+                <li>凸の方を短くすれば、必然的に凹の方も短くなる</li>
+              </ul>
+            </li>
+            <li>
+              パズルピースの検証から、エッジの問題さえなければサイズはピッタリ作っても問題なさそう
+              <ul>
+                <li>微妙なサイズ違いを4パターン作ったが、1つに絞って良さそう</li>
+              </ul>
+            </li>
+          </ul>
+          <p>ということで、サイズを見直してモデルを作り直し、材料費を削る（ケチる）ことで、 トータルのお値段を安くしようじゃないかという作戦に出ました。</p>
+          <h3 id="モデリング">モデリング</h3>
+          <p><img alt="上からのモデル" src="resource08.jpg"> <img alt="横からのモデル" src="resource09.jpg"></p>
+          <p>それぞれ上から、横から見たモデルです。</p>
+          <p>なんとなく見たら分かるかと思いますが、これで 10mm の凹凸になってます。</p>
+          <p>また、出っ張り部分を押し込む側は 2mm で結構硬くなっててあまり曲がらないと思うので、 出っ張り部分を極力小さくして、気持ち出っ張りがあるくらいに留めました。</p>
+          <h3 id="再見積もり">再見積もり</h3>
+          <p><img alt="新しいモデルで素材・ナイロンナチュラル" src="resource10.jpg"></p>
+          <p>お値段出してみたところ・・・</p>
+          <p><strong>1,342円・・・！全然違う・・・！</strong></p>
+          <p>これなら2つ頼んでもさっきの額よりも十分低い！</p>
+          <p>まあ世間で売ってる量産パーツの値段と比較したら、断然まだこっちのが高いんですけど、 それは企業の努力によって成し遂げられているものだと解釈しよう。そうしよう。</p>
+          <h3 id="支払いして待つ">支払いして待つ</h3>
+          <p>支払いしてそわそわしつつ待っていたところ、 先に作成前にメールが届きました。</p>
+          <p><img alt="人の目によるチェック" src="resource11.jpg"></p>
+          <blockquote>
+            <p>ご注文いただいた商品に関してですが、造形段階の最終確認を行った所、 厚みが薄い箇所が複数あり造形段階で破損する可能性がございますが問題ございませんでしょうか。 通常のナイロンのディティールの高さ/深さ/幅は0.5mm必要です。</p>
+          </blockquote>
+          <p>すごい・・・。 <strong>ここまで丁寧にプリント前に指摘したりしてくれるとは・・・！</strong></p>
+          <p>ちょっとこれは予想外でした。</p>
+          <p><img alt="具体的にどこがおかしいかの画像" src="resource12.jpg"></p>
+          <p>しかも添付ファイルの画像付きで。</p>
+          <p>やー、ここまで丁寧にサポートしてくれるのなら、 なんというかこのお値段は納得というか、なんか初心者にはありがたいですね。</p>
+          <p>とはいえ、通常であれば直すところを、今回はその辺含めて検証なので、 このままお願いすることにしました。</p>
+          <blockquote>
+            <p>今回検証を兼ねておりますので、 実際どの程度再現可能なのか見てみるのも目的だったりします。 そのため、うまく再現できなケースや 破損してしまったケースなど、 すべて許容できますのでこのままお願いしたく思います。</p>
+          </blockquote>
+          <p>（タイポってた）</p>
+          <h3 id="届くまでの時系列">届くまでの時系列</h3>
+          <ul>
+            <li>11/21 21:04 注文受付</li>
+            <li>11/22 11:48 仕上がり確認メール</li>
+            <li>11/22 12:24 破損了承で再度注文受付</li>
+            <li>11/22 12:30 注文完了</li>
+            <li>11/25 17:22 製作開始メール</li>
+            <li>11/28 12:33 発送準備完了メール</li>
+            <li>11/28 16:39 発送完了メール</li>
+            <li>11/29 17:24 配達（ただし不在）</li>
+          </ul>
+          <p>意外に早かったように思いますが、どうでしょう？</p>
+          <p>というか、同時にパズルピースも実は頼んでたりしたのですが、 こっちはまだ製作中っぽいです。</p>
+          <p>パズルピースのが先に来ると思ってたけど、 どうやら素材によって違いあるようです。 パズルピースの話はまた次回書きます。</p>
+          <h2 id="届いたもの">届いたもの</h2>
+          <p><img alt="届いた" src="resource13.jpg"></p>
+          <p><strong>届いたぞー！！！ 🎉</strong></p>
+          <p><img alt="包装" src="resource14.jpg"></p>
+          <p>ちゃんとクッションで包装されててお仕事が丁寧でございます。</p>
+          <p><img alt="凹凸パーツ" src="resource15.jpg"></p>
+          <p>わー！前回時間なくて作れなかった凹凸パーツが目の前に！</p>
+          <p>なんかこれだけでも嬉しいですね・・・！</p>
+          <p><img alt="出っ張りが小さい・・・？" src="resource16.jpg"></p>
+          <p>おおぉー、おおぉー？</p>
+          <p><img alt="出っ張りが小さい・・・？" src="resource17.jpg"></p>
+          <p>なんか</p>
+          <p>出っ張りが小さくないですかね・・・？</p>
+          <p>そうかあ、これは <strong>高さが足りなさすぎた</strong> せいで、積層を重ねることができず、 意図した出っ張りにすることができなかった、ということですね・・・。</p>
+          <p>まあしょうがない。悪いのは自分です。（了承済み）</p>
+          <p><img alt="凹部分" src="resource18.jpg"></p>
+          <p>凹部分はすごく綺麗にできてます。</p>
+          <p>出っ張りが弱かったのでカチッとまではいかないまでも、 <strong>スーッ、ピタッ</strong> くらいには上手くはまってくれるんじゃないでしょうか・・・！</p>
+          <p>さて、合体・・・！</p>
+          <p><img alt="はまらない凹凸" src="resource19.jpg"></p>
+          <p><strong>うおー！凹凸がはまらん・・・！！！</strong></p>
+          <p><strong>なるほどー！？！？</strong></p>
+          <p>これは笑いが止まらんですね・・・！！</p>
+          <p>なるほどはまらないかあ！！</p>
+          <h3 id="検証した気づき">検証した気づき</h3>
+          <p>・・・</p>
+          <p>ということで、見事にはまらなかったのですが、 色々試すうちに興味深いことが見えてきます。</p>
+          <p><img alt="縦ははまらないけど横ははまる" src="resource20.jpg"></p>
+          <p>縦ははまらないけど横ははまるんです。</p>
+          <p>このタイミングでなぜパズルがあんなにすーっと綺麗にはまったかの謎が解けてきました。</p>
+          <p>つまりはこういうことです。 （雑絵描いてみた）</p>
+          <p><img alt="xy軸方向は精度が出る、z軸方向は精度が出ない" src="resource21.jpg"></p>
+          <p>xy軸方向は精度が出る、z軸方向は精度が出ない、と文字に起こすと分かりづらいですね。</p>
+          <p>つまりはこの図のように、xy軸方向はヘッドやら土台やらが動いて素材の厚み踏まえてピッタリな位置に造形してくれるんですが、z軸方向については積層してる関係上、どうしても <strong>積層ピッチ（積層1つ分）の範囲でずれが起きてしまう</strong> んですね。</p>
+          <p>積層ピッチはだいたい 0.2mm くらいがいいんじゃない？と以前利用したファブスペースの方がおっしゃられていたので、おそらくこれも 0.2mm の範囲で誤差が起きていて、その分厚みが増してはまらなくなっているのではないかなと。</p>
+          <p>多分合ってる気がします。有識者の方が見てたら是非とも意見欲しいところです。</p>
+          <h3 id="分かったところでやすりで削る">分かったところでやすりで削る</h3>
+          <p>なぜそうなったのか？は見えてきましたが、 どうそれを解消するかはもうやすりで磨いて削るしかありません。</p>
+          <p><img alt="やすりで磨いて削る" src="resource22.jpg"></p>
+          <p>めちゃめちゃ磨いて粉出しまくりです。</p>
+          <p><img alt="だいぶ削る" src="resource23.jpg"></p>
+          <p>こんだけ削りました。</p>
+          <p>さすがに人力でやると平面のまま削っていくのは難しく、 もう歪みが出てきてしまってますね。</p>
+          <p>まあしょうがない。</p>
+          <p><img alt="削り終えてはまった凹凸パーツ" src="resource24.jpg"></p>
+          <p>最後に削りまくってようやく凹凸がはまったパーツの勇士をご覧ください。</p>
+          <h2 id="実際に-dmm-さんに依頼してみて分かったこと">実際に DMM さんに依頼してみて分かったこと</h2>
+          <ul>
+            <li>
+              すごく丁寧にやりとりしてくれるので、 <strong>初心者におすすめ</strong>
+              <ul>
+                <li><strong>印刷後におかしくなるそうな箇所を事前に指摘してくれる</strong></li>
+                <li>問題の起きにくい3Dモデルの作り方を肌感でつかむと良さげ</li>
+              </ul>
+            </li>
+            <li>
+              データのチェックなども踏まえるとお値段はまあ妥当？
+              <ul>
+                <li>量産パーツよりも高いのは当たり前</li>
+                <li>モデルを工夫して素材を使う量を減らすとお値段も安くなる</li>
+              </ul>
+            </li>
+            <li>印刷に時間のかかるものでも、 <strong>注文完了さえしてしまえばあとは待つだけ</strong></li>
+          </ul>
+          <p>こっちはこっちで体験としてはすごく良いですね。</p>
+          <p>ファブスペースに行って自ら印刷する場合と比べて、 <strong>頼んで放置すればいつの間にかできて届けてくれる</strong> ところはやはり一番のメリットです。</p>
+          <h2 id="凹凸パーツを作ってみて分かったこと">凹凸パーツを作ってみて分かったこと</h2>
+          <ul>
+            <li>
+              <strong>xy軸方向は精度高め、z軸方向は精度低め</strong>
+              <ul>
+                <li>積層ピッチの分 0.2mm くらいはz軸の誤差があるかも？と考えておく</li>
+              </ul>
+            </li>
+            <li>
+              印刷してから綺麗にやすりで削り取るのは至難の業
+              <ul>
+                <li>本来削るべきではない部分まで削ってしまった・・・</li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="次のステップ">次のステップ</h2>
+          <p>とりあえずもう1つのパズルピースを印刷依頼してるので、 そちらが届き次第残りを書きます。（結構かかってるけど、素材を変えたせいだろうか・・・？）</p>
+          <p>予告をしておきながら不定期で続きます。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/fab/">#Fab</a> <a class="tag-link" href="/tags/fusion360/">#Fusion360</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=3D%e3%82%82%e3%81%ae%e3%81%a5%e3%81%8f%e3%82%8a%284%29%20-%20%e3%82%ab%e3%83%81%e3%83%83%e3%81%a8%e3%81%af%e3%81%be%e3%82%8b%e6%a9%9f%e6%a7%8b%e3%81%ae%e6%a4%9c%e8%a8%bc%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20221203/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20221203%2f&amp;text=3D%e3%82%82%e3%81%ae%e3%81%a5%e3%81%8f%e3%82%8a%284%29%20-%20%e3%82%ab%e3%83%81%e3%83%83%e3%81%a8%e3%81%af%e3%81%be%e3%82%8b%e6%a9%9f%e6%a7%8b%e3%81%ae%e6%a4%9c%e8%a8%bc" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20221203/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

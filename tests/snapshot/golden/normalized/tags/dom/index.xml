@@ -1,0 +1,40 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/dom/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in DOM on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": [
+        {
+          "description": "&lt;p&gt;事前に注意書きとして残しておきますが、\nこの記事は料理に例えるなら &lt;strong&gt;カップ麺を作るときにこうするとすげー簡単に美味くなる！&lt;/strong&gt; 程度の、\n人によっては料理とすら言えないような内容です。&lt;/p&gt;\n&lt;p&gt;ただ、お腹が減っていて雑に飯食べたいときは誰しもあるでしょうし、\n同様に &lt;strong&gt;雑に作ってて、手間をかけずに DOM 要素の表示・非表示をふわっと切り替えたい&lt;/strong&gt; 、\nみたいなこともあると思います。&lt;/p&gt;\n&lt;p&gt;そんなときに知っていると有用な記事です。&lt;/p&gt;\n&lt;p&gt;興味ない方は読むのをやめて &lt;strong&gt;回らないお寿司&lt;/strong&gt; でも食べててください。&lt;/p&gt;\n&lt;h2 id=\"きっかけ\"&gt;きっかけ&lt;/h2&gt;\n&lt;p&gt;きっかけは名古屋で行われている &lt;strong&gt;『フロントエンドもくもく会』&lt;/strong&gt; に参加していたときのことです。&lt;/p&gt;\n&lt;p&gt;ちなみに運用ルールこんな感じの会です。&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;strong&gt;スクリーンを活用&lt;/strong&gt; して、誰かが必ず何かを写している状態をできるだけ保つ&lt;/li&gt;\n&lt;li&gt;写したものに対してどんどん質問していいし、逆に写した人が聞いても OK&lt;/li&gt;\n&lt;li&gt;&lt;strong&gt;ただし、必ず解決するとは限らない 🤗&lt;/strong&gt;&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;僕が写しているターンのときに、ふと疑問に思ったことを聞いたわけです。&lt;/p&gt;\n&lt;p&gt;それが &lt;strong&gt;その場で解消されず&lt;/strong&gt; に少し後になって自己解決したのですが、\n結局自己解決したあと、何もアクション取ることもなく、\n頭の片隅に残ったまま年を越そうとしていたので、\n今年の疑問、今年のうちに・・・と思ってネットの海に解き放っておこうと思った次第です。&lt;/p&gt;\n&lt;h2 id=\"dom-要素をふわっと出したり消したりするのは意外と面倒\"&gt;DOM 要素をふわっと出したり消したりするのは意外と面倒&lt;/h2&gt;\n&lt;p&gt;そう、面倒なんです。&lt;/p&gt;\n&lt;p&gt;解決方法を書く前に、何が問題だと思っているのかを共有します。&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;strong&gt;アニメーションで&lt;/strong&gt; 表示・非表示を &lt;strong&gt;気軽に切り替える方法&lt;/strong&gt; がない？&lt;/li&gt;\n&lt;li&gt;&lt;strong&gt;一瞬で&lt;/strong&gt; 表示・非表示を切り替えるだけなら &lt;strong&gt;簡単&lt;/strong&gt;\n&lt;ul&gt;\n&lt;li&gt;&lt;code&gt;display: none&lt;/code&gt; をつけたり消したりすれば OK&lt;/li&gt;\n&lt;li&gt;CSS だけでもやろうと思えばできる（起点は JavaScript 側で持ちたいが・・・）&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;ライブラリをガッツリ導入するような &lt;strong&gt;気軽じゃない方法&lt;/strong&gt; ならば存在する\n&lt;ul&gt;\n&lt;li&gt;表示し始めのタイミングでクラス付与、表示し終わりのタイミングでクラス付与&lt;/li&gt;\n&lt;li&gt;消え始めのタイミングでクラス付与、消え終わりのタイミングでクラス付与&lt;/li&gt;\n&lt;li&gt;消え終わりに &lt;code&gt;display: none&lt;/code&gt; をつけることができれば、まあできることはわかる&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;気軽にやるなら &lt;strong&gt;CSS Transitions&lt;/strong&gt; を使いたい、 &lt;strong&gt;間の変化は勝手にやってほしい&lt;/strong&gt;\n&lt;ul&gt;\n&lt;li&gt;例: &lt;code&gt;transition: opacity 1s ease-out&lt;/code&gt;&lt;/li&gt;\n&lt;li&gt;ある意味 &lt;strong&gt;宣言的&lt;/strong&gt; であるとも言える（変化のさせ方だけ記述して、変化中の数値は知らなくていい）&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;&lt;code&gt;display: none&lt;/code&gt; をつけた瞬間に &lt;strong&gt;DOM ツリーからいなくなる問題&lt;/strong&gt;\n&lt;ul&gt;\n&lt;li&gt;これの時間差コントロールを無理やりやってるのが上記ライブラリ群&lt;/li&gt;\n&lt;li&gt;CSS Transitions で変化時間を定義しつつ、終わるタイミングで JavaScript から &lt;code&gt;display: none&lt;/code&gt; を与えるのは &lt;strong&gt;2重管理になる&lt;/strong&gt; ？&lt;/li&gt;\n&lt;li&gt;&lt;code&gt;transitionend&lt;/code&gt; イベントを監視すればできるのはわかるが複雑になる&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;li&gt;CSS Animations で &lt;code&gt;display: none&lt;/code&gt; を含めると話が複雑になる\n&lt;ul&gt;\n&lt;li&gt;アニメーションの向きとか考慮する必要が出てくる？&lt;/li&gt;\n&lt;/ul&gt;\n&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;みたいな感じで表示・非表示を雑に切り替えたいという話を投げかけたのですが、\nその場では解消されず、もやもやしてたのでした。&lt;/p&gt;",
+          "guid": "https://girigiribauer.com/tech/20221219/",
+          "link": "https://girigiribauer.com/tech/20221219/",
+          "pubDate": "Mon, 19 Dec 2022 08:00:00 +0900",
+          "title": "DOM 要素の表示・非表示を雑に切り替える方法"
+        },
+        {
+          "description": "&lt;p&gt;（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 \n\n\n&lt;a href=\"https://www.itmedia.co.jp/enterprise/articles/2406/29/news057.html\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=https://www.itmedia.co.jp/enterprise/articles/2406/29/news057.html\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n www.itmedia.co.jp\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image\"&gt;\n &lt;img src=\"https://image.itmedia.co.jp/enterprise/articles/2406/29/cover_news057.jpg\" alt=\"JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��\" loading=\"lazy\" /&gt;\n &lt;/span&gt;&lt;/a&gt; （追記終わり）&lt;/p&gt;\n&lt;p&gt;意図せずシリーズ化してしまった、前回からの続き 3 回目です。&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;\n\n\n&lt;a href=\"https://girigiribauer.com/tech/20140131/\" &gt;jQuery から卒業するための第 1 歩を polyfills から学ぼう&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;\n\n\n&lt;a href=\"https://girigiribauer.com/tech/20140203/\" &gt;jQuery から卒業するための第 1 歩を polyfills から学ぼう – その 2&lt;/a&gt;&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"https://github.com/inexorabletash/polyfill\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=https://github.com/inexorabletash/polyfill\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n github.com\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image\"&gt;\n &lt;img src=\"https://opengraph.githubassets.com/045d80c166c41bc484eafd65c1396c31bc76a2bf974c82aaca23503001f61b3a/inexorabletash/polyfill\" alt=\"GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More\" loading=\"lazy\" /&gt;\n &lt;/span&gt;&lt;/a&gt; にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。&lt;/p&gt;\n&lt;h2 id=\"selectors-api-level-1\"&gt;Selectors API Level 1&lt;/h2&gt;\n&lt;p&gt;&lt;strong&gt;DOM ツリー&lt;/strong&gt;に関する polyfills です。&lt;/p&gt;",
+          "guid": "https://girigiribauer.com/tech/20140213/",
+          "link": "https://girigiribauer.com/tech/20140213/",
+          "pubDate": "Wed, 12 Feb 2014 15:00:46 +0000",
+          "title": "jQuery から卒業するための第1歩を polyfills から学ぼう – その3"
+        }
+      ],
+      "language": "ja-jp",
+      "lastBuildDate": "Sat, 29 Jun 2024 19:00:00 +0900",
+      "link": "https://girigiribauer.com/tags/dom/",
+      "title": "DOM on ばうあーろぐ"
+    }
+  }
+}

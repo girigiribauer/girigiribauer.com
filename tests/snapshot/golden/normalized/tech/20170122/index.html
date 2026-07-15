@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>tmux で自動起動するついでにセッション管理もする | ばうあーろぐ</title>
+    <meta content="tmux の自動起動周りに少し不満があって、
+zshrc に以下の記述を追加しました。
+# 初期に用意されているセッション
+# &quot;prefix -> (&quot; or &quot;prefix -> )&quot; でセッション切り替え
+TMUX_INITIAL_SESSIONS=(
+&quot;config&quot;
+&quot;works&quot;
+&quot;personal&quot;
+)
+
+# 初期セッションが存在していなかったらバックグラウンドで作る
+for tmux_session in ${TMUX_INITIAL_SESSIONS[@]}
+do
+  if ! $(tmux has-session -t ${tmux_session} 2> /dev/null)
+  then
+    tmux new-session -d -s ${tmux_session}
+  fi
+done
+
+# tmux が起動中でなければ attach する
+if [ -z &quot;$TMUX&quot; ]
+then
+  tmux attach-session -t &quot;${TMUX_INITIAL_SESSIONS[0]}&quot;
+else
+fi
+
+基本的に書いてある通りなのですが、
+自分であらかじめ用意したいセッションを変数（TMUX_INITIAL_SESSIONS）に入れておきます。
+別に他の名前でも良いです。
+TMUX_INITIAL_SESSIONS=(
+&quot;mysession1&quot;
+&quot;mysession2&quot;
+&quot;mysession3&quot;
+)
+
+シェルが立ち上がるたびに、そのセッションがなければバックグラウンドで作ります。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20170122/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20170122" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="tmux で自動起動するついでにセッション管理もする" itemprop="name">
+    <meta content="tmux の自動起動周りに少し不満があって、
+zshrc に以下の記述を追加しました。
+# 初期に用意されているセッション
+# &quot;prefix -> (&quot; or &quot;prefix -> )&quot; でセッション切り替え
+TMUX_INITIAL_SESSIONS=(
+&quot;config&quot;
+&quot;works&quot;
+&quot;personal&quot;
+)
+
+# 初期セッションが存在していなかったらバックグラウンドで作る
+for tmux_session in ${TMUX_INITIAL_SESSIONS[@]}
+do
+  if ! $(tmux has-session -t ${tmux_session} 2> /dev/null)
+  then
+    tmux new-session -d -s ${tmux_session}
+  fi
+done
+
+# tmux が起動中でなければ attach する
+if [ -z &quot;$TMUX&quot; ]
+then
+  tmux attach-session -t &quot;${TMUX_INITIAL_SESSIONS[0]}&quot;
+else
+fi
+
+基本的に書いてある通りなのですが、
+自分であらかじめ用意したいセッションを変数（TMUX_INITIAL_SESSIONS）に入れておきます。
+別に他の名前でも良いです。
+TMUX_INITIAL_SESSIONS=(
+&quot;mysession1&quot;
+&quot;mysession2&quot;
+&quot;mysession3&quot;
+)
+
+シェルが立ち上がるたびに、そのセッションがなければバックグラウンドで作ります。" itemprop="description">
+    <meta content="tmux で自動起動するついでにセッション管理もする" property="og:title">
+    <meta content="tmux の自動起動周りに少し不満があって、
+zshrc に以下の記述を追加しました。
+# 初期に用意されているセッション
+# &quot;prefix -> (&quot; or &quot;prefix -> )&quot; でセッション切り替え
+TMUX_INITIAL_SESSIONS=(
+&quot;config&quot;
+&quot;works&quot;
+&quot;personal&quot;
+)
+
+# 初期セッションが存在していなかったらバックグラウンドで作る
+for tmux_session in ${TMUX_INITIAL_SESSIONS[@]}
+do
+  if ! $(tmux has-session -t ${tmux_session} 2> /dev/null)
+  then
+    tmux new-session -d -s ${tmux_session}
+  fi
+done
+
+# tmux が起動中でなければ attach する
+if [ -z &quot;$TMUX&quot; ]
+then
+  tmux attach-session -t &quot;${TMUX_INITIAL_SESSIONS[0]}&quot;
+else
+fi
+
+基本的に書いてある通りなのですが、
+自分であらかじめ用意したいセッションを変数（TMUX_INITIAL_SESSIONS）に入れておきます。
+別に他の名前でも良いです。
+TMUX_INITIAL_SESSIONS=(
+&quot;mysession1&quot;
+&quot;mysession2&quot;
+&quot;mysession3&quot;
+)
+
+シェルが立ち上がるたびに、そのセッションがなければバックグラウンドで作ります。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20170122/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="tmux で自動起動するついでにセッション管理もする" name="twitter:title">
+    <meta content="tmux の自動起動周りに少し不満があって、
+zshrc に以下の記述を追加しました。
+# 初期に用意されているセッション
+# &quot;prefix -> (&quot; or &quot;prefix -> )&quot; でセッション切り替え
+TMUX_INITIAL_SESSIONS=(
+&quot;config&quot;
+&quot;works&quot;
+&quot;personal&quot;
+)
+
+# 初期セッションが存在していなかったらバックグラウンドで作る
+for tmux_session in ${TMUX_INITIAL_SESSIONS[@]}
+do
+  if ! $(tmux has-session -t ${tmux_session} 2> /dev/null)
+  then
+    tmux new-session -d -s ${tmux_session}
+  fi
+done
+
+# tmux が起動中でなければ attach する
+if [ -z &quot;$TMUX&quot; ]
+then
+  tmux attach-session -t &quot;${TMUX_INITIAL_SESSIONS[0]}&quot;
+else
+fi
+
+基本的に書いてある通りなのですが、
+自分であらかじめ用意したいセッションを変数（TMUX_INITIAL_SESSIONS）に入れておきます。
+別に他の名前でも良いです。
+TMUX_INITIAL_SESSIONS=(
+&quot;mysession1&quot;
+&quot;mysession2&quot;
+&quot;mysession3&quot;
+)
+
+シェルが立ち上がるたびに、そのセッションがなければバックグラウンドで作ります。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">tmux で自動起動するついでにセッション管理もする</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2017-01-22 18:11:19 +0900 JST">2017/01/22</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>tmux の自動起動周りに少し不満があって、 zshrc に以下の記述を追加しました。</p>
+          <pre><code># 初期に用意されているセッション
+# "prefix -> (" or "prefix -> )" でセッション切り替え
+TMUX_INITIAL_SESSIONS=(
+"config"
+"works"
+"personal"
+)
+
+# 初期セッションが存在していなかったらバックグラウンドで作る
+for tmux_session in ${TMUX_INITIAL_SESSIONS[@]}
+do
+  if ! $(tmux has-session -t ${tmux_session} 2> /dev/null)
+  then
+    tmux new-session -d -s ${tmux_session}
+  fi
+done
+
+# tmux が起動中でなければ attach する
+if [ -z "$TMUX" ]
+then
+  tmux attach-session -t "${TMUX_INITIAL_SESSIONS[0]}"
+else
+fi
+</code></pre>
+          <p>基本的に書いてある通りなのですが、 自分であらかじめ用意したいセッションを変数（TMUX_INITIAL_SESSIONS）に入れておきます。 別に他の名前でも良いです。</p>
+          <pre><code>TMUX_INITIAL_SESSIONS=(
+"mysession1"
+"mysession2"
+"mysession3"
+)
+</code></pre>
+          <p>シェルが立ち上がるたびに、そのセッションがなければバックグラウンドで作ります。</p>
+          <pre><code>if ! $(tmux has-session -t ${tmux_session} 2> /dev/null)
+then
+  tmux new-session -d -s ${tmux_session}
+fi
+</code></pre>
+          <p>これで常に TMUX_INITIAL_SESSIONS にある名前のセッションは存在していることになるので、 TMUX 変数に何らかセットされていない場合に限って attach すれば良いことになります。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/tmux/">#tmux</a> <a class="tag-link" href="/tags/cli/">#CLI</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=tmux%20%e3%81%a7%e8%87%aa%e5%8b%95%e8%b5%b7%e5%8b%95%e3%81%99%e3%82%8b%e3%81%a4%e3%81%84%e3%81%a7%e3%81%ab%e3%82%bb%e3%83%83%e3%82%b7%e3%83%a7%e3%83%b3%e7%ae%a1%e7%90%86%e3%82%82%e3%81%99%e3%82%8b%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20170122/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20170122%2f&amp;text=tmux%20%e3%81%a7%e8%87%aa%e5%8b%95%e8%b5%b7%e5%8b%95%e3%81%99%e3%82%8b%e3%81%a4%e3%81%84%e3%81%a7%e3%81%ab%e3%82%bb%e3%83%83%e3%82%b7%e3%83%a7%e3%83%b3%e7%ae%a1%e7%90%86%e3%82%82%e3%81%99%e3%82%8b" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20170122/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

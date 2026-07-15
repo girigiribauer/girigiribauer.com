@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Chef の サードパーティ Cookbook を利用して、yum のリポジトリを追加してみる | ばうあーろぐ</title>
+    <meta content="よーし、いろいろアプリケーションのインストールの自動化しちゃうぞー！ と思っていましたが、 先に試しておいた方が良さそうなものがあったので、そちらを先にやります。
+yum のリポジトリの追加
+RPM系Linuxディストリビューション、つまり CentOS だったり、 Fedora などの Linux のディストリビューションでは、 yum (Yellowdog Updater Modified) と呼ばれるパッケージ管理システムが採用されています。
+yum に限らずですが、ソースコードから毎回インストールするのはかなり骨の折れる作業だったりします。 （もちろんやったことない場合には、絶対経験しておくべき作業ではあると思うのですが。）
+この yum は、パッケージのインストールがコマンド 1行で出来るので非常に便利ではあるものの、そのまま使うと場合によってはちょっと古めのパッケージ（PHP5.3, MySQL5.1 など）がインストールされてしまいます。
+ゲストOS上で、sandbox モードになった状態で試しに PHP をインストールしてみます。
+※これは、ゲストOSに実際にログインして手作業でコマンド打ってます。
+[vagrant@vmclient1 ~]$ sudo yum install php
+（略）
+Dependencies Resolved
+
+================================================================================
+ Package            Arch        Version                      Repository    Size
+================================================================================
+Installing:
+ php                x86_64      5.3.3-22.el6                 base         1.1 M
+Installing for dependencies:
+ apr                x86_64      1.3.9-5.el6_2                base         123 k
+ apr-util           x86_64      1.3.9-3.el6_0.1              base          87 k
+ apr-util-ldap      x86_64      1.3.9-3.el6_0.1              base          15 k
+ httpd              x86_64      2.2.15-28.el6.centos         updates      821 k
+ httpd-tools        x86_64      2.2.15-28.el6.centos         updates       73 k
+ mailcap            noarch      2.1.31-2.el6                 base          27 k
+ php-cli            x86_64      5.3.3-22.el6                 base         2.2 M
+ php-common         x86_64      5.3.3-22.el6                 base         524 k
+
+Transaction Summary
+================================================================================
+Install       9 Package(s)
+
+Total download size: 4.9 M
+Installed size: 16 M
+Is this ok [y/N]: （y と入力）
+（略）
+Installed:
+  php.x86_64 0:5.3.3-22.el6
+
+Dependency Installed:
+  apr.x86_64 0:1.3.9-5.el6_2                       apr-util.x86_64 0:1.3.9-3.el6_0.1        apr-util-ldap.x86_64 0:1.3.9-3.el6_0.1        httpd.x86_64 0:2.2.15-28.el6.centos
+  httpd-tools.x86_64 0:2.2.15-28.el6.centos        mailcap.noarch 0:2.1.31-2.el6            php-cli.x86_64 0:5.3.3-22.el6                 php-common.x86_64 0:5.3.3-22.el6
+
+Complete!
+
+入りました。さてバージョンを表示してみます。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20130517/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20130517" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Chef の サードパーティ Cookbook を利用して、yum のリポジトリを追加してみる" itemprop="name">
+    <meta content="よーし、いろいろアプリケーションのインストールの自動化しちゃうぞー！ と思っていましたが、 先に試しておいた方が良さそうなものがあったので、そちらを先にやります。
+yum のリポジトリの追加
+RPM系Linuxディストリビューション、つまり CentOS だったり、 Fedora などの Linux のディストリビューションでは、 yum (Yellowdog Updater Modified) と呼ばれるパッケージ管理システムが採用されています。
+yum に限らずですが、ソースコードから毎回インストールするのはかなり骨の折れる作業だったりします。 （もちろんやったことない場合には、絶対経験しておくべき作業ではあると思うのですが。）
+この yum は、パッケージのインストールがコマンド 1行で出来るので非常に便利ではあるものの、そのまま使うと場合によってはちょっと古めのパッケージ（PHP5.3, MySQL5.1 など）がインストールされてしまいます。
+ゲストOS上で、sandbox モードになった状態で試しに PHP をインストールしてみます。
+※これは、ゲストOSに実際にログインして手作業でコマンド打ってます。
+[vagrant@vmclient1 ~]$ sudo yum install php
+（略）
+Dependencies Resolved
+
+================================================================================
+ Package            Arch        Version                      Repository    Size
+================================================================================
+Installing:
+ php                x86_64      5.3.3-22.el6                 base         1.1 M
+Installing for dependencies:
+ apr                x86_64      1.3.9-5.el6_2                base         123 k
+ apr-util           x86_64      1.3.9-3.el6_0.1              base          87 k
+ apr-util-ldap      x86_64      1.3.9-3.el6_0.1              base          15 k
+ httpd              x86_64      2.2.15-28.el6.centos         updates      821 k
+ httpd-tools        x86_64      2.2.15-28.el6.centos         updates       73 k
+ mailcap            noarch      2.1.31-2.el6                 base          27 k
+ php-cli            x86_64      5.3.3-22.el6                 base         2.2 M
+ php-common         x86_64      5.3.3-22.el6                 base         524 k
+
+Transaction Summary
+================================================================================
+Install       9 Package(s)
+
+Total download size: 4.9 M
+Installed size: 16 M
+Is this ok [y/N]: （y と入力）
+（略）
+Installed:
+  php.x86_64 0:5.3.3-22.el6
+
+Dependency Installed:
+  apr.x86_64 0:1.3.9-5.el6_2                       apr-util.x86_64 0:1.3.9-3.el6_0.1        apr-util-ldap.x86_64 0:1.3.9-3.el6_0.1        httpd.x86_64 0:2.2.15-28.el6.centos
+  httpd-tools.x86_64 0:2.2.15-28.el6.centos        mailcap.noarch 0:2.1.31-2.el6            php-cli.x86_64 0:5.3.3-22.el6                 php-common.x86_64 0:5.3.3-22.el6
+
+Complete!
+
+入りました。さてバージョンを表示してみます。" itemprop="description">
+    <meta content="Chef の サードパーティ Cookbook を利用して、yum のリポジトリを追加してみる" property="og:title">
+    <meta content="よーし、いろいろアプリケーションのインストールの自動化しちゃうぞー！ と思っていましたが、 先に試しておいた方が良さそうなものがあったので、そちらを先にやります。
+yum のリポジトリの追加
+RPM系Linuxディストリビューション、つまり CentOS だったり、 Fedora などの Linux のディストリビューションでは、 yum (Yellowdog Updater Modified) と呼ばれるパッケージ管理システムが採用されています。
+yum に限らずですが、ソースコードから毎回インストールするのはかなり骨の折れる作業だったりします。 （もちろんやったことない場合には、絶対経験しておくべき作業ではあると思うのですが。）
+この yum は、パッケージのインストールがコマンド 1行で出来るので非常に便利ではあるものの、そのまま使うと場合によってはちょっと古めのパッケージ（PHP5.3, MySQL5.1 など）がインストールされてしまいます。
+ゲストOS上で、sandbox モードになった状態で試しに PHP をインストールしてみます。
+※これは、ゲストOSに実際にログインして手作業でコマンド打ってます。
+[vagrant@vmclient1 ~]$ sudo yum install php
+（略）
+Dependencies Resolved
+
+================================================================================
+ Package            Arch        Version                      Repository    Size
+================================================================================
+Installing:
+ php                x86_64      5.3.3-22.el6                 base         1.1 M
+Installing for dependencies:
+ apr                x86_64      1.3.9-5.el6_2                base         123 k
+ apr-util           x86_64      1.3.9-3.el6_0.1              base          87 k
+ apr-util-ldap      x86_64      1.3.9-3.el6_0.1              base          15 k
+ httpd              x86_64      2.2.15-28.el6.centos         updates      821 k
+ httpd-tools        x86_64      2.2.15-28.el6.centos         updates       73 k
+ mailcap            noarch      2.1.31-2.el6                 base          27 k
+ php-cli            x86_64      5.3.3-22.el6                 base         2.2 M
+ php-common         x86_64      5.3.3-22.el6                 base         524 k
+
+Transaction Summary
+================================================================================
+Install       9 Package(s)
+
+Total download size: 4.9 M
+Installed size: 16 M
+Is this ok [y/N]: （y と入力）
+（略）
+Installed:
+  php.x86_64 0:5.3.3-22.el6
+
+Dependency Installed:
+  apr.x86_64 0:1.3.9-5.el6_2                       apr-util.x86_64 0:1.3.9-3.el6_0.1        apr-util-ldap.x86_64 0:1.3.9-3.el6_0.1        httpd.x86_64 0:2.2.15-28.el6.centos
+  httpd-tools.x86_64 0:2.2.15-28.el6.centos        mailcap.noarch 0:2.1.31-2.el6            php-cli.x86_64 0:5.3.3-22.el6                 php-common.x86_64 0:5.3.3-22.el6
+
+Complete!
+
+入りました。さてバージョンを表示してみます。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20130517/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Chef の サードパーティ Cookbook を利用して、yum のリポジトリを追加してみる" name="twitter:title">
+    <meta content="よーし、いろいろアプリケーションのインストールの自動化しちゃうぞー！ と思っていましたが、 先に試しておいた方が良さそうなものがあったので、そちらを先にやります。
+yum のリポジトリの追加
+RPM系Linuxディストリビューション、つまり CentOS だったり、 Fedora などの Linux のディストリビューションでは、 yum (Yellowdog Updater Modified) と呼ばれるパッケージ管理システムが採用されています。
+yum に限らずですが、ソースコードから毎回インストールするのはかなり骨の折れる作業だったりします。 （もちろんやったことない場合には、絶対経験しておくべき作業ではあると思うのですが。）
+この yum は、パッケージのインストールがコマンド 1行で出来るので非常に便利ではあるものの、そのまま使うと場合によってはちょっと古めのパッケージ（PHP5.3, MySQL5.1 など）がインストールされてしまいます。
+ゲストOS上で、sandbox モードになった状態で試しに PHP をインストールしてみます。
+※これは、ゲストOSに実際にログインして手作業でコマンド打ってます。
+[vagrant@vmclient1 ~]$ sudo yum install php
+（略）
+Dependencies Resolved
+
+================================================================================
+ Package            Arch        Version                      Repository    Size
+================================================================================
+Installing:
+ php                x86_64      5.3.3-22.el6                 base         1.1 M
+Installing for dependencies:
+ apr                x86_64      1.3.9-5.el6_2                base         123 k
+ apr-util           x86_64      1.3.9-3.el6_0.1              base          87 k
+ apr-util-ldap      x86_64      1.3.9-3.el6_0.1              base          15 k
+ httpd              x86_64      2.2.15-28.el6.centos         updates      821 k
+ httpd-tools        x86_64      2.2.15-28.el6.centos         updates       73 k
+ mailcap            noarch      2.1.31-2.el6                 base          27 k
+ php-cli            x86_64      5.3.3-22.el6                 base         2.2 M
+ php-common         x86_64      5.3.3-22.el6                 base         524 k
+
+Transaction Summary
+================================================================================
+Install       9 Package(s)
+
+Total download size: 4.9 M
+Installed size: 16 M
+Is this ok [y/N]: （y と入力）
+（略）
+Installed:
+  php.x86_64 0:5.3.3-22.el6
+
+Dependency Installed:
+  apr.x86_64 0:1.3.9-5.el6_2                       apr-util.x86_64 0:1.3.9-3.el6_0.1        apr-util-ldap.x86_64 0:1.3.9-3.el6_0.1        httpd.x86_64 0:2.2.15-28.el6.centos
+  httpd-tools.x86_64 0:2.2.15-28.el6.centos        mailcap.noarch 0:2.1.31-2.el6            php-cli.x86_64 0:5.3.3-22.el6                 php-common.x86_64 0:5.3.3-22.el6
+
+Complete!
+
+入りました。さてバージョンを表示してみます。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Chef の サードパーティ Cookbook を利用して、yum のリポジトリを追加してみる</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2013-05-17 08:05:27 +0000 +0000">2013/05/17</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>よーし、いろいろアプリケーションのインストールの自動化しちゃうぞー！ と思っていましたが、 先に試しておいた方が良さそうなものがあったので、そちらを先にやります。</p>
+          <h2 id="yum-のリポジトリの追加">yum のリポジトリの追加</h2>
+          <p>RPM系Linuxディストリビューション、つまり CentOS だったり、 Fedora などの Linux のディストリビューションでは、 <strong>yum (Yellowdog Updater Modified)</strong> と呼ばれるパッケージ管理システムが採用されています。</p>
+          <p>yum に限らずですが、ソースコードから毎回インストールするのはかなり骨の折れる作業だったりします。 （もちろんやったことない場合には、絶対経験しておくべき作業ではあると思うのですが。）</p>
+          <p>この yum は、パッケージのインストールがコマンド 1行で出来るので非常に便利ではあるものの、そのまま使うと場合によってはちょっと古めのパッケージ（PHP5.3, MySQL5.1 など）がインストールされてしまいます。</p>
+          <p>ゲストOS上で、sandbox モードになった状態で試しに PHP をインストールしてみます。</p>
+          <p>※これは、ゲストOSに実際にログインして手作業でコマンド打ってます。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ sudo yum install php
+（略）
+Dependencies Resolved
+
+================================================================================
+ Package            Arch        Version                      Repository    Size
+================================================================================
+Installing:
+ php                x86_64      5.3.3-22.el6                 base         1.1 M
+Installing for dependencies:
+ apr                x86_64      1.3.9-5.el6_2                base         123 k
+ apr-util           x86_64      1.3.9-3.el6_0.1              base          87 k
+ apr-util-ldap      x86_64      1.3.9-3.el6_0.1              base          15 k
+ httpd              x86_64      2.2.15-28.el6.centos         updates      821 k
+ httpd-tools        x86_64      2.2.15-28.el6.centos         updates       73 k
+ mailcap            noarch      2.1.31-2.el6                 base          27 k
+ php-cli            x86_64      5.3.3-22.el6                 base         2.2 M
+ php-common         x86_64      5.3.3-22.el6                 base         524 k
+
+Transaction Summary
+================================================================================
+Install       9 Package(s)
+
+Total download size: 4.9 M
+Installed size: 16 M
+Is this ok [y/N]: （y と入力）
+（略）
+Installed:
+  php.x86_64 0:5.3.3-22.el6
+
+Dependency Installed:
+  apr.x86_64 0:1.3.9-5.el6_2                       apr-util.x86_64 0:1.3.9-3.el6_0.1        apr-util-ldap.x86_64 0:1.3.9-3.el6_0.1        httpd.x86_64 0:2.2.15-28.el6.centos
+  httpd-tools.x86_64 0:2.2.15-28.el6.centos        mailcap.noarch 0:2.1.31-2.el6            php-cli.x86_64 0:5.3.3-22.el6                 php-common.x86_64 0:5.3.3-22.el6
+
+Complete!
+</code></pre>
+          <p>入りました。さてバージョンを表示してみます。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ php -v
+PHP 5.3.3 (cli) (built: Feb 22 2013 02:51:11)
+Copyright (c) 1997-2010 The PHP Group
+Zend Engine v2.3.0, Copyright (c) 1998-2010 Zend Technologies
+</code></pre>
+          <p><strong>5.3.3</strong> が入ったようです。</p>
+          <p>ちなみに現時点での最新が5.4.15 で、5.5.0 の RC1（リリース候補版、もうすぐ出るよー的な意味）も出ていますし、 5.3 は若干古くなっているバージョンと言ってもいいかもしれません。 （というと、古くねえよ！全然マシだろ！という声がどこかから上がってくるかもしれませんが・・・）</p>
+          <p>また、PHP の拡張モジュールも何が入っているのやらさっぱりです。</p>
+          <p>yum のリポジトリを追加することで、最新のパッケージを選択することが可能となるので、 <strong>RPMforge, EPEL, Remi</strong> あたりのリポジトリを追加して、最新のパッケージをインストールできるよう、Chef で色々設定してみます。</p>
+          <h2 id="手動でリポジトリ追加するのけっこうめんどい">手動でリポジトリ追加するのけっこうめんどい</h2>
+          <p>学生のころ、yum のリポジトリの追加を手動で何回かやったことがあるのですが、 これがちょっとめんどくさかった記憶があります。</p>
+          <p>確かに今まで出て来た方法でやれば、yum のリポジトリの追加は自動化できるのですが、 そろそろ先人の知恵をお借りしてもいいのではないかなと思います。</p>
+          <p><img alt="" src="resource01.jpg"></p>
+          <p>公式のコミュニティサイトでは、先人の知恵が詰まった Cookbook が多数公開されています。 <a href="http://community.opscode.com/cookbooks" rel="noopener noreferrer" target="_blank">http://community.opscode.com/cookbooks</a></p>
+          <p>この中に、yum というのももちろん公開されているので、どんなものかを一通り眺めつつ、サードパーティの Cookbook を使って yum のリポジトリの追加を行ってみようと思います。</p>
+          <h3 id="先にリポジトリの一覧を調べておく">先にリポジトリの一覧を調べておく</h3>
+          <p>一応、入ったかどうか確認するために、あらかじめ現在の yum のリポジトリ一覧を確認しておきましょう。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ yum repolist all
+（長いので略）
+base                                                                            CentOS-6 - Base                                                                         enabled: 6,381
+c6-media                                                                        CentOS-6 - Media                                                                        disabled
+centosplus                                                                      CentOS-6 - Plus                                                                         disabled
+contrib                                                                         CentOS-6 - Contrib                                                                      disabled
+debug                                                                           CentOS-6 - Debuginfo                                                                    disabled
+extras                                                                          CentOS-6 - Extras                                                                       enabled:    12
+updates                                                                         CentOS-6 - Updates                                                                      enabled:   676
+repolist: 7,069
+</code></pre>
+          <p>あとで比較に使おうと思います。</p>
+          <h2 id="vagrantfile-に-cookbook-を追加する">Vagrantfile に Cookbook を追加する</h2>
+          <p>Vagrant で使用する Cookbook は、~/Vagrant/cookbooks ディレクトリに入れていくルールにしてましたので、</p>
+          <pre><code>$ cd ~/Vagrant/cookbooks
+</code></pre>
+          <p>cookbooks ディレクトリへ移動して、</p>
+          <pre><code>$ git clone https://github.com/opscode-cookbooks/yum.git
+</code></pre>
+          <p>公開されている yum の Cookbook を git clone で持ってきます。</p>
+          <p>すると、自分で作った vmclient1, vmclient2 の他に、yum というディレクトリが出来ているはずなので、ざっと中を覗いてみます。</p>
+          <pre><code>$ cd yum/recipes
+</code></pre>
+          <p>自分で書いたように、通常は recipes/default.rb が呼ばれますので、こちらを見てみると・・・</p>
+          <p><strong>コメント文だけで中には特に何も書いてありませんでした。</strong></p>
+          <p>さてさて、Vagrant のドキュメントを見てみます。</p>
+          <p><img alt="" src="resource02.jpg"></p>
+          <p>‘apache’ っていう Cookbook が使いたかったら、<code>chef.add_recipe 'apache'</code> って書くと追加できるよ！とあります。</p>
+          <p>また、EPEL であれば ‘yum::epel’ 、remi であれば ‘yum::remi’ と入れることで Cookbook の指定が出来るようです。</p>
+          <p>つまり、<strong>default.rb</strong> には何も書いてないけど、<strong>epel.rb</strong> や <strong>remi.rb</strong> にレシピが書いてあるので、 この名前を指定することで<strong>ライブラリのように呼び出して使う</strong>ことができるようですね。</p>
+          <p>なるほど。</p>
+          <p>ではさっそく Vagrant に追記して、実行してみます。</p>
+          <h3 id="vagrantfile-への追記">Vagrantfile への追記</h3>
+          <p>Vagrantfile の必要なところだけ抜粋します。</p>
+          <pre><code>vmclient.vm.provision :chef_solo do |chef|
+  chef.cookbooks_path = "cookbooks"
+  chef.data_bags_path = "data_bags"
+  chef.add_recipe "yum::epel"
+  chef.add_recipe "yum::remi"
+  chef.add_recipe "vmclient1"
+end
+</code></pre>
+          <p>※どうやら最初にレシピ書いた段階では、<code>chef.run_list</code> と書いてましたが、<code>chef.add_recipe</code> の方で統一すべきのようです。</p>
+          <h3 id="cookbook-への追記">Cookbook への追記</h3>
+          <pre><code>package 'php' do
+  action  :install
+end
+</code></pre>
+          <p>ここに options ‘hogehoge’ と書くことで、コマンドラインにつけるオプションをそのまま書くことが出来るようですが、 Cookbook で yum のリポジトリを追加するだけでどう変化するのかを見るので、一旦何も指定せずにそのままインストールしてみます。</p>
+          <h3 id="vagrant-sandbox-rollback-で元に戻す">vagrant sandbox rollback で元に戻す</h3>
+          <p>そして、さっきゲストOSを色々いじってしまったので、 <code>vagrant sandbox rollback</code> で元に戻してから、仮想マシンを再起動します。</p>
+          <pre><code>$ vagrant sandbox rollback
+</code></pre>
+          <p>綺麗さっぱり元通りです。</p>
+          <h2 id="yum-のリポジトリ追加--php-のインストールのコンボ">yum のリポジトリ追加 → PHP のインストールのコンボ</h2>
+          <pre><code>$ vagrant reload
+</code></pre>
+          <p>さてどうなるでしょうか。</p>
+          <p>さすがにログ全部は長過ぎなんで、ポイントだけを順番に抜粋してみます。</p>
+          <pre><code>[2013-05-16T18:11:39+00:00] INFO: Setting the run_list to ["recipe[yum::epel]", "recipe[yum::remi]", "recipe[vmclient1]"] from JSON
+[2013-05-16T18:11:39+00:00] INFO: Run List is [recipe[yum::epel], recipe[yum::remi], recipe[vmclient1]]
+[2013-05-16T18:11:39+00:00] INFO: Run List expands to [yum::epel, yum::remi, vmclient1]
+</code></pre>
+          <p>3つのレシピが順に実行されていくのが分かります。</p>
+          <pre><code>[2013-05-16T18:12:35+00:00] WARN: Cloning resource attributes for yum_key[RPM-GPG-KEY-EPEL-6] from prior resource (CHEF-3694)
+[2013-05-16T18:12:35+00:00] WARN: Previous yum_key[RPM-GPG-KEY-EPEL-6]: /tmp/vagrant-chef-1/chef-solo-1/cookbooks/yum/recipes/epel.rb:22:in `from_file'
+[2013-05-16T18:12:35+00:00] WARN: Current  yum_key[RPM-GPG-KEY-EPEL-6]: /tmp/vagrant-chef-1/chef-solo-1/cookbooks/yum/providers/repository.rb:85:in `repo_config'
+</code></pre>
+          <p>途中でGPGキーに関する警告が色々出てるっぽいです。この辺今回はすっ飛ばしてやってますからねー。</p>
+          <pre><code>[2013-05-16T18:12:36+00:00] INFO: template[/etc/yum.repos.d/epel.repo] updated content
+[2013-05-16T18:12:36+00:00] INFO: template[/etc/yum.repos.d/epel.repo] mode changed to 644
+[2013-05-16T18:12:36+00:00] INFO: template[/etc/yum.repos.d/epel.repo] sending run action to execute[yum-makecache] (immediate)
+</code></pre>
+          <p>Template Resource を使って、 `/etc/yum.repos.d/epel.repo を色々書いてくれていますね。</p>
+          <pre><code>[2013-05-16T18:15:39+00:00] INFO: Processing yum_key[RPM-GPG-KEY-remi] action add (yum::remi line 22)
+</code></pre>
+          <p>remi リポジトリも同様でした。</p>
+          <pre><code>[2013-05-16T18:24:58+00:00] INFO: Processing package[php][/php] action install (vmclient1::default line 19)
+[2013-05-16T18:24:58+00:00] INFO: package[php][/php] installing php-5.4.15-1.el6.remi from remi repository
+</code></pre>
+          <p>さて、PHP のインストールがされているようですが、 どうやら <strong>PHP 5.4.15</strong> が入っているようですね！</p>
+          <p>こんな感じで一通りの自動化作業が終わったところで、実際に何がインストールされたか見てみましょう。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ php -v
+PHP 5.4.15 (cli) (built: May  9 2013 08:20:20)
+Copyright (c) 1997-2013 The PHP Group
+Zend Engine v2.4.0, Copyright (c) 1998-2013 Zend Technologies
+</code></pre>
+          <p>おおー、ちゃんと入っておりました。</p>
+          <p>ちなみに yum のリポジトリはどうでしょう？</p>
+          <pre><code>base                                                              CentOS-6 - Base                                                                                       enabled: 6,381
+c6-media                                                          CentOS-6 - Media                                                                                      disabled
+centosplus                                                        CentOS-6 - Plus                                                                                       disabled
+contrib                                                           CentOS-6 - Contrib                                                                                    disabled
+debug                                                             CentOS-6 - Debuginfo                                                                                  disabled
+epel                                                              Extra Packages for Enterprise Linux                                                                   enabled: 8,783
+extras                                                            CentOS-6 - Extras                                                                                     enabled:    12
+remi                                                              Les RPM de remi pour Enterprise Linux 6.4 - x86_64                                                    enabled: 1,015
+updates                                                           CentOS-6 - Updates                                                                                    enabled:   678
+repolist: 16,869
+</code></pre>
+          <p><strong>epel と remi が増えておりますね！</strong></p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>時間がないので今回はここまでですが、あとでサードパーティ Cookbook の中で何が行われていて、結果どういうファイルがどう変わったか？というのは、しっかりと見ておこうと思います。</p>
+          <p>中で何やってるのかよく分からないけど、順番通りにやったらなんかできましたーみたいなのをよく聞きますが、 そういう<strong>ブラックボックス的な使い方は非常に危険だと思う</strong>ので、 あくまで「普通にやったら 100 の労力かかるけど、それを 1 にしてくれるショートカットツール」みたいな、 <strong>めんどくさいところの時間短縮を行ってくれるツール、という位置づけで常に使うことを心がけていきたいです。</strong></p>
+          <p>（あ、前者の使い方って、実装者が「よくわかんないけど jQuery プラグインをポンと入れたら動いちゃったんでオッケーですー」って言ってるのと大差ないかもしれないですね・・・。）</p>
+          <h2 id="参考url">参考URL</h2>
+          <ul>
+            <li><a href="http://community.opscode.com/cookbooks" rel="noopener noreferrer" target="_blank">http://community.opscode.com/cookbooks</a></li>
+            <li><a class="link-card" href="https://github.com/opscode-cookbooks/yum" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - sous-chefs/yum: Development repository for the yum cookbook</span> <span class="link-card__desc">Development repository for the yum cookbook. Contribute to sous-chefs/yum development by creating an …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/opscode-cookbooks/yum"> github.com</span></span><span class="link-card__image"><img alt="GitHub - sous-chefs/yum: Development repository for the yum cookbook" loading="lazy" src="https://opengraph.githubassets.com/ef72f5e9b88900762c0e6207fb5ff55709206785eb0b7eed163c14d2be88296f/sous-chefs/yum"></span></a></li>
+            <li><a href="http://qiita.com/items/98a7cc5ac33225619e69" rel="noopener noreferrer" target="_blank">CentOS6 で remi から php や mysql をインストールするための yum の設定</a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/chef/">#Chef</a> <a class="tag-link" href="/tags/vagrant/">#Vagrant</a> <a class="tag-link" href="/tags/virtualization/">#virtualization</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Chef%20%e3%81%ae%20%e3%82%b5%e3%83%bc%e3%83%89%e3%83%91%e3%83%bc%e3%83%86%e3%82%a3%20Cookbook%20%e3%82%92%e5%88%a9%e7%94%a8%e3%81%97%e3%81%a6%e3%80%81yum%20%e3%81%ae%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa%e3%82%92%e8%bf%bd%e5%8a%a0%e3%81%97%e3%81%a6%e3%81%bf%e3%82%8b%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20130517/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20130517%2f&amp;text=Chef%20%e3%81%ae%20%e3%82%b5%e3%83%bc%e3%83%89%e3%83%91%e3%83%bc%e3%83%86%e3%82%a3%20Cookbook%20%e3%82%92%e5%88%a9%e7%94%a8%e3%81%97%e3%81%a6%e3%80%81yum%20%e3%81%ae%e3%83%aa%e3%83%9d%e3%82%b8%e3%83%88%e3%83%aa%e3%82%92%e8%bf%bd%e5%8a%a0%e3%81%97%e3%81%a6%e3%81%bf%e3%82%8b" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20130517/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

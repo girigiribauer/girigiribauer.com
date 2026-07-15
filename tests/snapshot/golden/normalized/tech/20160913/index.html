@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Git のユーザー名を複数使い分ける時は global の設定を消す | ばうあーろぐ</title>
+    <meta content="会社用のアカウントと個人用とで分けたいときなどに。
+正攻法じゃないけど、間違えずに済むので一応メモ。
+（以下いろいろ編集追記）
+これでしばらくやってみてほぼ困らなくなりましたのでオススメです。
+ライブラリはオープンに個人用アカウントで作っておき、
+それを会社用アカウントから利用するみたいなことも想定できるので、
+user.name, user.email を複数使い分けられるようにしておいて損はないと思います。
+global の .gitconfig の user.name をあえて空にする
+ホームディレクトリに置いてある .gitconfig 内の
+[user]
+	name = foobar
+	email = foobar@example.com
+
+みたいな記述を 思い切って削除してしまいます。
+そうすると、通常であればコミットする時に
+user.name と user.email がない、お前は誰だ！ と怒られます。
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email &quot;you@example.com&quot;
+  git config --global user.name &quot;Your Name&quot;
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+そのままではコミットできないのですが、
+user.name などをグローバルで一括指定する代わりに、
+プロジェクトごとの user.name などの設定を素早くできるようにすれば良いのです。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20160913/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20160913" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Git のユーザー名を複数使い分ける時は global の設定を消す" itemprop="name">
+    <meta content="会社用のアカウントと個人用とで分けたいときなどに。
+正攻法じゃないけど、間違えずに済むので一応メモ。
+（以下いろいろ編集追記）
+これでしばらくやってみてほぼ困らなくなりましたのでオススメです。
+ライブラリはオープンに個人用アカウントで作っておき、
+それを会社用アカウントから利用するみたいなことも想定できるので、
+user.name, user.email を複数使い分けられるようにしておいて損はないと思います。
+global の .gitconfig の user.name をあえて空にする
+ホームディレクトリに置いてある .gitconfig 内の
+[user]
+	name = foobar
+	email = foobar@example.com
+
+みたいな記述を 思い切って削除してしまいます。
+そうすると、通常であればコミットする時に
+user.name と user.email がない、お前は誰だ！ と怒られます。
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email &quot;you@example.com&quot;
+  git config --global user.name &quot;Your Name&quot;
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+そのままではコミットできないのですが、
+user.name などをグローバルで一括指定する代わりに、
+プロジェクトごとの user.name などの設定を素早くできるようにすれば良いのです。" itemprop="description">
+    <meta content="Git のユーザー名を複数使い分ける時は global の設定を消す" property="og:title">
+    <meta content="会社用のアカウントと個人用とで分けたいときなどに。
+正攻法じゃないけど、間違えずに済むので一応メモ。
+（以下いろいろ編集追記）
+これでしばらくやってみてほぼ困らなくなりましたのでオススメです。
+ライブラリはオープンに個人用アカウントで作っておき、
+それを会社用アカウントから利用するみたいなことも想定できるので、
+user.name, user.email を複数使い分けられるようにしておいて損はないと思います。
+global の .gitconfig の user.name をあえて空にする
+ホームディレクトリに置いてある .gitconfig 内の
+[user]
+	name = foobar
+	email = foobar@example.com
+
+みたいな記述を 思い切って削除してしまいます。
+そうすると、通常であればコミットする時に
+user.name と user.email がない、お前は誰だ！ と怒られます。
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email &quot;you@example.com&quot;
+  git config --global user.name &quot;Your Name&quot;
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+そのままではコミットできないのですが、
+user.name などをグローバルで一括指定する代わりに、
+プロジェクトごとの user.name などの設定を素早くできるようにすれば良いのです。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20160913/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Git のユーザー名を複数使い分ける時は global の設定を消す" name="twitter:title">
+    <meta content="会社用のアカウントと個人用とで分けたいときなどに。
+正攻法じゃないけど、間違えずに済むので一応メモ。
+（以下いろいろ編集追記）
+これでしばらくやってみてほぼ困らなくなりましたのでオススメです。
+ライブラリはオープンに個人用アカウントで作っておき、
+それを会社用アカウントから利用するみたいなことも想定できるので、
+user.name, user.email を複数使い分けられるようにしておいて損はないと思います。
+global の .gitconfig の user.name をあえて空にする
+ホームディレクトリに置いてある .gitconfig 内の
+[user]
+	name = foobar
+	email = foobar@example.com
+
+みたいな記述を 思い切って削除してしまいます。
+そうすると、通常であればコミットする時に
+user.name と user.email がない、お前は誰だ！ と怒られます。
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email &quot;you@example.com&quot;
+  git config --global user.name &quot;Your Name&quot;
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+そのままではコミットできないのですが、
+user.name などをグローバルで一括指定する代わりに、
+プロジェクトごとの user.name などの設定を素早くできるようにすれば良いのです。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Git のユーザー名を複数使い分ける時は global の設定を消す</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2016-09-13 14:05:35 +0900 JST">2016/09/13</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>会社用のアカウントと個人用とで分けたいときなどに。</p>
+          <p>正攻法じゃないけど、間違えずに済むので一応メモ。</p>
+          <p>（以下いろいろ編集追記）</p>
+          <p><strong>これでしばらくやってみてほぼ困らなくなりましたのでオススメです。</strong></p>
+          <p>ライブラリはオープンに個人用アカウントで作っておき、 それを会社用アカウントから利用するみたいなことも想定できるので、 user.name, user.email を複数使い分けられるようにしておいて損はないと思います。</p>
+          <h2 id="global-の-gitconfig-の-username-をあえて空にする">global の .gitconfig の user.name をあえて空にする</h2>
+          <p>ホームディレクトリに置いてある .gitconfig 内の</p>
+          <pre><code>[user]
+	name = foobar
+	email = foobar@example.com
+</code></pre>
+          <p>みたいな記述を <strong>思い切って削除してしまいます。</strong></p>
+          <p>そうすると、通常であればコミットする時に <strong>user.name と user.email がない、お前は誰だ！</strong> と怒られます。</p>
+          <pre><code>*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+</code></pre>
+          <p>そのままではコミットできないのですが、 user.name などをグローバルで一括指定する代わりに、 <strong>プロジェクトごとの user.name などの設定を素早くできるようにすれば良いのです。</strong></p>
+          <p>.bashrc や .zshrc あたりに</p>
+          <pre><code>function gituser-personal() {
+  git config user.name "girigiribauer"
+  git config user.email "girigiribauer@gmail.com"
+  git config --list
+}
+
+function gituser-company() {
+  git config user.name "foobar"
+  git config user.email "foobar@example.com"
+  git config --list
+}
+</code></pre>
+          <p>などといった、自分にとってわかりやすい名前で user.name を指定できる関数を用意しておきます。 今回は <strong>gituser-personal</strong> と <strong>gituser-company</strong> の2種類用意してみました。</p>
+          <p>あとはプロジェクトの初期（clone 直後とか init 直後とか）に実行してやれば プロジェクトごとの user.name, user.email が使えるようになりますし、 うっかり忘れていたとしてもコミット手前で名前を教えろという警告でストップし、 （なぜなら global の設定が空だから） <strong>警告をセーフティのように利用できる</strong> と思います。</p>
+          <p>僕は当初、 global の .gitconfig にメインで使う user.name の設定を書いたまま サブで使う場合のみ、 上記の関数を呼び出す方法を使っていたのですが、 ついつい忘れてしまいがちで push した後に気づくんですよね。 あえてグローバルに設定しないようにしたことで、 逆に設定間違えに気づくことが出来るようになりました。</p>
+          <p>複数アカウントをなんとかして同時に扱おうと頑張ってる方がいるのですが、 global の .gitconfig の設定を空にする方法、地味ですがオススメです。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/git/">#Git</a> <a class="tag-link" href="/tags/gitconfig/">#gitconfig</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Git%20%e3%81%ae%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e5%90%8d%e3%82%92%e8%a4%87%e6%95%b0%e4%bd%bf%e3%81%84%e5%88%86%e3%81%91%e3%82%8b%e6%99%82%e3%81%af%20global%20%e3%81%ae%e8%a8%ad%e5%ae%9a%e3%82%92%e6%b6%88%e3%81%99%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20160913/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20160913%2f&amp;text=Git%20%e3%81%ae%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e5%90%8d%e3%82%92%e8%a4%87%e6%95%b0%e4%bd%bf%e3%81%84%e5%88%86%e3%81%91%e3%82%8b%e6%99%82%e3%81%af%20global%20%e3%81%ae%e8%a8%ad%e5%ae%9a%e3%82%92%e6%b6%88%e3%81%99" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20160913/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/figma/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Figma on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;単に僕が今までその機能を知らずにずっと困っていて、つい最近それに気づいて &lt;strong&gt;全てが解決した&lt;/strong&gt; というだけの話です。&lt;/p&gt;\n&lt;h2 id=\"figma-design-は便利\"&gt;figma design は便利&lt;/h2&gt;\n&lt;p&gt;最近はとても仲良くできている実感があります。&lt;/p&gt;\n&lt;p&gt;ただ、仲良くなればなるほど、なぜここだけこうなっていないのだろう？と思う部分が逆に目立つようになってきました。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource01.png\" alt=\"Effects / Drop shadow の例\"&gt;&lt;/p&gt;\n&lt;p&gt;例えば Effects で Drop shadow を指定してみるとします。&lt;/p&gt;\n&lt;p&gt;この状態で、拡大縮小するとどうなるでしょう？&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource02.png\" alt=\"Effects / Drop shadow を拡大縮小すると Effects までは追従しない\"&gt;&lt;/p&gt;\n&lt;p&gt;そう。 &lt;strong&gt;Effects までは拡大縮小に追従してくれない&lt;/strong&gt; のです。 &amp;#x1f97a;&lt;/p&gt;\n&lt;p&gt;あるいは別の例。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource03.png\" alt=\"中央の文字を指定\"&gt;&lt;/p&gt;\n&lt;p&gt;円中央に文字を指定してみます。&lt;/p&gt;\n&lt;p&gt;なんでもいいんですが、とりあえず『ば』にします。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource04.png\" alt=\"Constraints を Scale にして、拡大縮小時に追従するように指定\"&gt;&lt;/p&gt;\n&lt;p&gt;Constraints （制約という意味）をそれぞれ Scale にして、拡大縮小時に追従するように指定してみます。&lt;/p&gt;\n&lt;p&gt;そこで拡大縮小してみると・・・？&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource05.png\" alt=\"追従してくれない絵\"&gt;&lt;/p&gt;\n&lt;p&gt;そう！フォントサイズのボックス自体は追従してくれるのですが、 &lt;strong&gt;文字自体は拡大縮小に対応してません。&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;これは文字の方に別途フォントサイズなる数値が存在しており、そちらまでは変わってないからなんですね。&lt;/p&gt;\n&lt;p&gt;じゃあどうするかというと・・・&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource06.png\" alt=\"別途アウトライン化して書き出す\"&gt;&lt;/p&gt;\n&lt;p&gt;よく使われるのが、別のレイヤーを用意して、そちらをアウトライン化しておく、という手が常套手段としてありますね。&lt;/p&gt;\n&lt;p&gt;ただ、ご存知の通り、文字情報ではなく、ただのシェイプデータの情報になってしまうので、当然文字の変更をするときは、残しておいたオリジナルの方を再び修正してアウトライン化するといった、なんだかもやっとする修正方法を取る必要が出てきます。 &amp;#x1f97a;&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource07.png\" alt=\"アウトライン化\"&gt;&lt;/p&gt;\n&lt;p&gt;うーん・・・。せっかく文字情報として保持できてるものを、わざわざバラさないといけないのはとてももやもやしますね。 😩&lt;/p&gt;\n&lt;h2 id=\"スケールツールなるものがあった\"&gt;スケールツール、なるものがあった！&lt;/h2&gt;\n&lt;p&gt;Photoshop などの Adobe からのキーボードショートカットの流れで、なんとなく &lt;code&gt;V&lt;/code&gt; キーを押すとニュートラルポジションに戻れる、みたいな感覚は元々持っていたのですが、これは本来 &lt;code&gt;Move&lt;/code&gt; ツールを呼び出すものなんですよね。&lt;/p&gt;\n&lt;p&gt;で、つい最近以下を読んで知ったのですが、なんと、この &lt;strong&gt;&lt;code&gt;Move&lt;/code&gt; ツールの下に &lt;code&gt;Scale&lt;/code&gt; ツールなるものが存在していた&lt;/strong&gt; のです・・・！&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20231226/",
+        "link": "https://girigiribauer.com/tech/20231226/",
+        "pubDate": "Tue, 26 Dec 2023 09:00:00 +0900",
+        "title": "figma でフォントサイズやエフェクトがリサイズ対応出来なかったのが悩みだった"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Tue, 26 Dec 2023 09:00:00 +0900",
+      "link": "https://girigiribauer.com/tags/figma/",
+      "title": "Figma on ばうあーろぐ"
+    }
+  }
+}

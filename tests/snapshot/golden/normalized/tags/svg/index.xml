@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/svg/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in SVG on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;表示スピードを速くするために、ベクターデータであるSVGを用いるのは、最近よく見られる手法だと思います。&lt;/p&gt;\n&lt;p&gt;ただ、特に古いIEなどでは、SVGはサポートが十分ではない側面があると思います。 そのデメリットを解消する方法の1つとして、&lt;strong&gt;アイコンフォント&lt;/strong&gt;という手法が挙げられます。&lt;/p&gt;\n&lt;p&gt;気になっていたので、このブログに導入しつつどんな感じか検証してみました。&lt;/p&gt;\n&lt;h2 id=\"アイコンフォントとは\"&gt;アイコンフォントとは&lt;/h2&gt;\n&lt;p&gt;ヘッダーのアイコンがそれになってます。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource01.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;拡大しても綺麗に表示されていますね！&lt;/p&gt;\n&lt;p&gt;こちらは、『Fontello – icon fonts generator』というのを利用させていただいて、 必要なアイコンのみを選択し、それをダウンロードして埋め込む形で導入しています。&lt;/p&gt;\n&lt;p&gt;&lt;img src=\"resource02.jpg\" alt=\"\"&gt;&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"https://fontello.com/\" target=\"_blank\"\n rel=\"noopener noreferrer\" &gt;Fontello – icon fonts generator&lt;/a&gt;&lt;/p&gt;\n&lt;p&gt;Webサービスを利用すれば、導入するだけならとてもシンプルです。 こちらをダウンロードすると、以下の形式のフォントデータが生成されます。&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;EOT形式（Embedded OpenType fonts）&lt;/li&gt;\n&lt;li&gt;WOFF形式（Web Open Font Format）&lt;/li&gt;\n&lt;li&gt;TTF形式（TrueType font）&lt;/li&gt;\n&lt;li&gt;SVG形式&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;&lt;strong&gt;EOT形式&lt;/strong&gt;は、主にIEでサポートされているフォント形式です。 &lt;strong&gt;WOFF形式&lt;/strong&gt;は、IE9+とそれ以外のモダンブラウザでサポートされています。 &lt;strong&gt;TTF形式&lt;/strong&gt;は、IE9+で条件付き、とそれ以外のモダンブラウザでサポートされています。 最後に&lt;strong&gt;SVG形式&lt;/strong&gt;は、フォントとしてもサポートされています。今現在では（古くなっているかもしれませんが）IEとFirefox以外で概ねサポートされています。&lt;/p&gt;\n&lt;p&gt;サポート具合の詳細に関しては、『Can I use』をご覧いただくと細かく分かるのではないかと思います。&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"http://caniuse.com/#search=font\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;Can I use... Support tables for HTML5, CSS3, etc&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;&amp;#34;Can I use&amp;#34; provides up-to-date browser support tables for support of front-end web technologies on …&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=http://caniuse.com/#search=font\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n caniuse.com\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image link-card__image--no-image\"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;\n&lt;p&gt;ダウンロードファイルの中には demo.html も含まれており、組み込み例が掲載されていますので、そちらを参考にすると実装も素早くできると思います。&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20130202/",
+        "link": "https://girigiribauer.com/tech/20130202/",
+        "pubDate": "Sat, 02 Feb 2013 04:43:25 +0000",
+        "title": "ベクターデータで軽量だと噂のアイコンフォントを導入してみた"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Sat, 02 Feb 2013 04:43:25 +0000",
+      "link": "https://girigiribauer.com/tags/svg/",
+      "title": "SVG on ばうあーろぐ"
+    }
+  }
+}

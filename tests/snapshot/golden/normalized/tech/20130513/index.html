@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Vagrant と Chef でユーザー作成の自動化をしてみる | ばうあーろぐ</title>
+    <meta content="だんだんと Chef いじりが楽しくなってきた girigiribauer です、こんにちは。
+この前**『入門 Chef Solo』**というKindle本（電子書籍）を購入して、休憩時などに少しずつ読み進めていたのですが、 ようやくざっと一通り目を通すことができました。
+今回以降、この辺も見ながらいろいろ試してみようと思います。
+レシピを書くとどんなことが設定できるの？
+
+
+
+前回までで、Vagrant と Chef を連携させて、 超シンプルなレシピを書いてみたわけですが、 今回はレシピを書くことで他にどんなことが出来ちゃうのかを、もう少し試してみようと思います！
+『入門 Chef Solo』に、この Cookbook はユーザーの設定やらグループの設定やらが一通り載っていて、 最初に全体像を見るのにいいよ！と書かれていたので、まずはこちらの 
+
+
+
+            
+                GitHub - treasure-data/chef-td-agent: Chef Cookbook for td-agent (Treasure Agent or Fluentd)
+                Chef Cookbook for td-agent (Treasure Agent or Fluentd) - treasure-data/chef-td-agent
+                
+                    
+                    github.com
+                
+            
+                
+             を参考にしてみます。
+
+ログデータの収集に使うツールと、それ専用のユーザーなりを設定してくれる Cookbook のようですね。
+recipes/default.rb を早速見てみます。
+#
+# Cookbook Name:: td-agent
+# Recipe:: default
+#
+# Copyright 2011, Treasure Data, Inc.
+#
+
+group 'td-agent' do
+  group_name 'td-agent'
+  gid        403
+  action     [:create]
+end
+
+user 'td-agent' do
+  comment  'td-agent'
+  uid      403
+  group    'td-agent'
+  home     '/var/run/td-agent'
+  shell    '/bin/false'
+  password nil
+  supports :manage_home => true
+  action   [:create, :manage]
+end
+
+directory '/etc/td-agent/' do
+  owner  'td-agent'
+  group  'td-agent'
+  mode   '0755'
+  action :create
+end
+（以下略）
+
+中身は Ruby のコードとはいえ、見ると何をやっているのかは何となく分かりそうな感じです。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20130513/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20130513" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Vagrant と Chef でユーザー作成の自動化をしてみる" itemprop="name">
+    <meta content="だんだんと Chef いじりが楽しくなってきた girigiribauer です、こんにちは。
+この前**『入門 Chef Solo』**というKindle本（電子書籍）を購入して、休憩時などに少しずつ読み進めていたのですが、 ようやくざっと一通り目を通すことができました。
+今回以降、この辺も見ながらいろいろ試してみようと思います。
+レシピを書くとどんなことが設定できるの？
+
+
+
+前回までで、Vagrant と Chef を連携させて、 超シンプルなレシピを書いてみたわけですが、 今回はレシピを書くことで他にどんなことが出来ちゃうのかを、もう少し試してみようと思います！
+『入門 Chef Solo』に、この Cookbook はユーザーの設定やらグループの設定やらが一通り載っていて、 最初に全体像を見るのにいいよ！と書かれていたので、まずはこちらの 
+
+
+
+            
+                GitHub - treasure-data/chef-td-agent: Chef Cookbook for td-agent (Treasure Agent or Fluentd)
+                Chef Cookbook for td-agent (Treasure Agent or Fluentd) - treasure-data/chef-td-agent
+                
+                    
+                    github.com
+                
+            
+                
+             を参考にしてみます。
+
+ログデータの収集に使うツールと、それ専用のユーザーなりを設定してくれる Cookbook のようですね。
+recipes/default.rb を早速見てみます。
+#
+# Cookbook Name:: td-agent
+# Recipe:: default
+#
+# Copyright 2011, Treasure Data, Inc.
+#
+
+group 'td-agent' do
+  group_name 'td-agent'
+  gid        403
+  action     [:create]
+end
+
+user 'td-agent' do
+  comment  'td-agent'
+  uid      403
+  group    'td-agent'
+  home     '/var/run/td-agent'
+  shell    '/bin/false'
+  password nil
+  supports :manage_home => true
+  action   [:create, :manage]
+end
+
+directory '/etc/td-agent/' do
+  owner  'td-agent'
+  group  'td-agent'
+  mode   '0755'
+  action :create
+end
+（以下略）
+
+中身は Ruby のコードとはいえ、見ると何をやっているのかは何となく分かりそうな感じです。" itemprop="description">
+    <meta content="Vagrant と Chef でユーザー作成の自動化をしてみる" property="og:title">
+    <meta content="だんだんと Chef いじりが楽しくなってきた girigiribauer です、こんにちは。
+この前**『入門 Chef Solo』**というKindle本（電子書籍）を購入して、休憩時などに少しずつ読み進めていたのですが、 ようやくざっと一通り目を通すことができました。
+今回以降、この辺も見ながらいろいろ試してみようと思います。
+レシピを書くとどんなことが設定できるの？
+
+
+
+前回までで、Vagrant と Chef を連携させて、 超シンプルなレシピを書いてみたわけですが、 今回はレシピを書くことで他にどんなことが出来ちゃうのかを、もう少し試してみようと思います！
+『入門 Chef Solo』に、この Cookbook はユーザーの設定やらグループの設定やらが一通り載っていて、 最初に全体像を見るのにいいよ！と書かれていたので、まずはこちらの 
+
+
+
+            
+                GitHub - treasure-data/chef-td-agent: Chef Cookbook for td-agent (Treasure Agent or Fluentd)
+                Chef Cookbook for td-agent (Treasure Agent or Fluentd) - treasure-data/chef-td-agent
+                
+                    
+                    github.com
+                
+            
+                
+             を参考にしてみます。
+
+ログデータの収集に使うツールと、それ専用のユーザーなりを設定してくれる Cookbook のようですね。
+recipes/default.rb を早速見てみます。
+#
+# Cookbook Name:: td-agent
+# Recipe:: default
+#
+# Copyright 2011, Treasure Data, Inc.
+#
+
+group 'td-agent' do
+  group_name 'td-agent'
+  gid        403
+  action     [:create]
+end
+
+user 'td-agent' do
+  comment  'td-agent'
+  uid      403
+  group    'td-agent'
+  home     '/var/run/td-agent'
+  shell    '/bin/false'
+  password nil
+  supports :manage_home => true
+  action   [:create, :manage]
+end
+
+directory '/etc/td-agent/' do
+  owner  'td-agent'
+  group  'td-agent'
+  mode   '0755'
+  action :create
+end
+（以下略）
+
+中身は Ruby のコードとはいえ、見ると何をやっているのかは何となく分かりそうな感じです。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20130513/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Vagrant と Chef でユーザー作成の自動化をしてみる" name="twitter:title">
+    <meta content="だんだんと Chef いじりが楽しくなってきた girigiribauer です、こんにちは。
+この前**『入門 Chef Solo』**というKindle本（電子書籍）を購入して、休憩時などに少しずつ読み進めていたのですが、 ようやくざっと一通り目を通すことができました。
+今回以降、この辺も見ながらいろいろ試してみようと思います。
+レシピを書くとどんなことが設定できるの？
+
+
+
+前回までで、Vagrant と Chef を連携させて、 超シンプルなレシピを書いてみたわけですが、 今回はレシピを書くことで他にどんなことが出来ちゃうのかを、もう少し試してみようと思います！
+『入門 Chef Solo』に、この Cookbook はユーザーの設定やらグループの設定やらが一通り載っていて、 最初に全体像を見るのにいいよ！と書かれていたので、まずはこちらの 
+
+
+
+            
+                GitHub - treasure-data/chef-td-agent: Chef Cookbook for td-agent (Treasure Agent or Fluentd)
+                Chef Cookbook for td-agent (Treasure Agent or Fluentd) - treasure-data/chef-td-agent
+                
+                    
+                    github.com
+                
+            
+                
+             を参考にしてみます。
+
+ログデータの収集に使うツールと、それ専用のユーザーなりを設定してくれる Cookbook のようですね。
+recipes/default.rb を早速見てみます。
+#
+# Cookbook Name:: td-agent
+# Recipe:: default
+#
+# Copyright 2011, Treasure Data, Inc.
+#
+
+group 'td-agent' do
+  group_name 'td-agent'
+  gid        403
+  action     [:create]
+end
+
+user 'td-agent' do
+  comment  'td-agent'
+  uid      403
+  group    'td-agent'
+  home     '/var/run/td-agent'
+  shell    '/bin/false'
+  password nil
+  supports :manage_home => true
+  action   [:create, :manage]
+end
+
+directory '/etc/td-agent/' do
+  owner  'td-agent'
+  group  'td-agent'
+  mode   '0755'
+  action :create
+end
+（以下略）
+
+中身は Ruby のコードとはいえ、見ると何をやっているのかは何となく分かりそうな感じです。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Vagrant と Chef でユーザー作成の自動化をしてみる</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2013-05-13 00:24:37 +0000 +0000">2013/05/13</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>だんだんと Chef いじりが楽しくなってきた girigiribauer です、こんにちは。</p>
+          <p>この前**『入門 Chef Solo』**というKindle本（電子書籍）を購入して、休憩時などに少しずつ読み進めていたのですが、 ようやくざっと一通り目を通すことができました。</p>
+          <p>今回以降、この辺も見ながらいろいろ試してみようと思います。</p>
+          <h2 id="レシピを書くとどんなことが設定できるの">レシピを書くとどんなことが設定できるの？</h2>
+          <p><a href="/archives/1013/">前回</a>までで、Vagrant と Chef を連携させて、 超シンプルなレシピを書いてみたわけですが、 今回はレシピを書くことで他にどんなことが出来ちゃうのかを、もう少し試してみようと思います！</p>
+          <p>『入門 Chef Solo』に、この Cookbook はユーザーの設定やらグループの設定やらが一通り載っていて、 最初に全体像を見るのにいいよ！と書かれていたので、まずはこちらの <a class="link-card" href="https://github.com/treasure-data/chef-td-agent" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - treasure-data/chef-td-agent: Chef Cookbook for td-agent (Treasure Agent or Fluentd)</span> <span class="link-card__desc">Chef Cookbook for td-agent (Treasure Agent or Fluentd) - treasure-data/chef-td-agent</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/treasure-data/chef-td-agent"> github.com</span></span><span class="link-card__image"><img alt="GitHub - treasure-data/chef-td-agent: Chef Cookbook for td-agent (Treasure Agent or Fluentd)" loading="lazy" src="https://opengraph.githubassets.com/99ef7a5f9259a109982f02bf4af974a7d1967cae5106b34823190b375ac955ac/treasure-data/chef-td-agent"></span></a>を参考にしてみます。</p>
+          <p><img alt="" src="resource01.jpg"></p>
+          <p>ログデータの収集に使うツールと、それ専用のユーザーなりを設定してくれる Cookbook のようですね。</p>
+          <p>recipes/default.rb を早速見てみます。</p>
+          <pre><code>#
+# Cookbook Name:: td-agent
+# Recipe:: default
+#
+# Copyright 2011, Treasure Data, Inc.
+#
+
+group 'td-agent' do
+  group_name 'td-agent'
+  gid        403
+  action     [:create]
+end
+
+user 'td-agent' do
+  comment  'td-agent'
+  uid      403
+  group    'td-agent'
+  home     '/var/run/td-agent'
+  shell    '/bin/false'
+  password nil
+  supports :manage_home => true
+  action   [:create, :manage]
+end
+
+directory '/etc/td-agent/' do
+  owner  'td-agent'
+  group  'td-agent'
+  mode   '0755'
+  action :create
+end
+（以下略）
+</code></pre>
+          <p>中身は Ruby のコードとはいえ、見ると何をやっているのかは何となく分かりそうな感じです。</p>
+          <ul>
+            <li>一番上のブロックで ‘td-agent’ という名前のグループを作る</li>
+            <li>gid（Linux などでグループに割り振られるID）は 403 にする</li>
+          </ul>
+          <p>続けて、</p>
+          <ul>
+            <li>‘td-agent’ という名前のユーザーを作る</li>
+            <li>uid（Linux などでユーザーに割り振られるID）は 403 にする</li>
+            <li>ホームディレクトリは ‘/var/run/td-agent’ にする</li>
+            <li>シェルは指定せず、パスワードもなし</li>
+            <li><code>supports :manage_home =&gt; true</code> が何を意味しているのかは後で調べます</li>
+          </ul>
+          <p>最後に、</p>
+          <ul>
+            <li>‘/etc/td-agent/’ という名前のディレクトリを作る</li>
+            <li>所有者は、’td-agent’、グループは ‘td-agent’ になるようにする</li>
+            <li>権限は ‘0755’（つまり所有者が読み書き実行、同一グループが読み＆実行、それ以外のユーザーも読み＆実行）</li>
+          </ul>
+          <p>というレシピのようです。</p>
+          <h3 id="これlinux-とかに詳しくないと出来ないの">これ、Linux とかに詳しくないと出来ないの？</h3>
+          <p>個人的には逆だと思っていて、 <strong>設定すべき項目が明らかになっている分、どういうポイントを調べればいいのかが明確になっています。</strong> そもそも知らなきゃ調べようもなかった設定に対して、ググるチャンスをもらえたと思って、 分からないところはどんどんググるべきだなーと思います。</p>
+          <p>例えば、シェルの指定が ‘/bin/false’ になっている箇所なんかは、 適当に <strong>linux /bin/false</strong> とかでググれば、ログインできないユーザーを作る方法であることが分かるので、 このレシピでは、ログインできないユーザーを作ろうとしていることが分かり、 ググったついでに実際の設定方法なども分かって勉強にもなりますね。</p>
+          <p>ってことで、分からないところはどんどんググって覚えていこうと思います。</p>
+          <h2 id="ユーザーの設定項目について">ユーザーの設定項目について</h2>
+          <p>これは公式を見た方が良さそうなので見てみます。 <a href="http://docs.opscode.com/resource_user.html" rel="noopener noreferrer" target="_blank">http://docs.opscode.com/resource_user.html</a></p>
+          <p>設定項目は、大きく分けて Actions と Attributes の2種類あるようなので、まず先に Attributes の方を見てみます。</p>
+          <p><img alt="" src="resource02.jpg"></p>
+          <p>あれ、読んでも何のことだかさっぱりだなーと思ったら、そのすぐ下に詳しく説明載ってました。</p>
+          <p><img alt="" src="resource03.jpg"></p>
+          <p>要するに、 key, value の対になるものを設定できて、設定できるのが <strong>:manage_home</strong>, <strong>:non_unique</strong> の2つ、 :manage_home は<strong>ホームディレクトリの作成有無</strong>、:non_unique は <strong>UID の重複を許すかどうか</strong>のようです。</p>
+          <p>なるほどなるほどー。</p>
+          <p>お次は、Actions の方を見てみます。</p>
+          <p><img alt="" src="resource04.jpg"></p>
+          <p><code>action [:create, :manage]</code> とあるので、該当ユーザーがなければユーザーを作り、 Attributes の通りに設定を合わせてくれるようです。 読む限りだと、create だけでも既存ユーザーに対しては設定を合わせてくれるみたいなんですが、 manage も必要なんでしょうかね？後で試してみましょうか。</p>
+          <h2 id="グループの設定項目について">グループの設定項目について</h2>
+          <p>グループはこちらですね。 <a href="http://docs.opscode.com/resource_group.html" rel="noopener noreferrer" target="_blank">http://docs.opscode.com/resource_group.html</a></p>
+          <p>こちらも Actions, Attributes を引用します。</p>
+          <p><img alt="" src="resource05.jpg"></p>
+          <p>レシピに書かれた内容だけだと、単に create で作って GID を設定しているだけですね。</p>
+          <p>ユーザーとグループの関係でちょっと気になるところが出て来たのですが、 ユーザーは複数のグループに属することが出来るはずなので、ユーザーの設定項目の group で、配列として指定してやればいいんでしょうか？</p>
+          <h2 id="ユーザーとグループのレシピを書く">ユーザーとグループのレシピを書く！</h2>
+          <p>この前 2台構成にしてましたが、一旦1台に戻してレシピを書きましょう。（インストールとか時間かかるので）</p>
+          <pre><code>group 'samplegroup' do
+  group_name 'samplegroup'
+  members    ['alice', 'bob', 'carol']
+  action     [:create]
+end
+
+user 'alice' do
+  shell    '/bin/zsh'
+  password 'alice'
+  supports :manage_home => true, :non_unique => false
+  action   [:create]
+end
+
+user 'bob' do
+  shell    '/bin/zsh'
+  password 'bob'
+  supports :manage_home => true, :non_unique => false
+  action   [:create]
+end
+
+user 'carol' do
+  shell    '/bin/zsh'
+  password 'carol'
+  supports :manage_home => true, :non_unique => false
+  action   [:create]
+end
+</code></pre>
+          <p>ささっと書いて試してみます！</p>
+          <h3 id="vagrant-up">vagrant up!!</h3>
+          <pre><code>$ vagrant up
+
+Expected process to exit with [0], but received '3'
+---- Begin output of gpasswd -M alice,bob,carol samplegroup ----
+STDOUT:
+STDERR: gpasswd: user 'alice' does not exist
+gpasswd: user 'bob' does not exist
+gpasswd: user 'carol' does not exist
+---- End output of gpasswd -M alice,bob,carol samplegroup ----
+Ran gpasswd -M alice,bob,carol samplegroup returned 3[0m
+</code></pre>
+          <p>なんかエラー出てますね。グループを作るときにそのユーザーがないと言われているようですね。</p>
+          <p>ちょっとユーザーとグループの作成の順番を変えてやってみます。</p>
+          <pre><code>[vmclient1] Running provisioner: chef_solo...
+Generating chef JSON and uploading...
+Running chef-solo...
+[2013-05-10T21:02:02+00:00] INFO: *** Chef 11.4.0 ***
+[2013-05-10T21:02:02+00:00] INFO: Setting the run_list to "recipe[vmclient1]" from JSON
+[2013-05-10T21:02:02+00:00] INFO: Run List is [recipe[vmclient1]]
+[2013-05-10T21:02:02+00:00] INFO: Run List expands to [vmclient1]
+[2013-05-10T21:02:02+00:00] INFO: Starting Chef Run for vmclient1
+[2013-05-10T21:02:02+00:00] INFO: Running start handlers
+[2013-05-10T21:02:02+00:00] INFO: Start handlers complete.
+[2013-05-10T21:02:02+00:00] INFO: Processing user[alice] action create (vmclient1::default line 3)
+[2013-05-10T21:02:02+00:00] INFO: user[alice] created
+[2013-05-10T21:02:02+00:00] INFO: Processing user[bob] action create (vmclient1::default line 10)
+[2013-05-10T21:02:02+00:00] INFO: user[bob] created
+[2013-05-10T21:02:02+00:00] INFO: Processing user[carol] action create (vmclient1::default line 17)
+[2013-05-10T21:02:02+00:00] INFO: user[carol] created
+[2013-05-10T21:02:02+00:00] INFO: Processing group[samplegroup] action create (vmclient1::default line 24)
+[2013-05-10T21:02:02+00:00] INFO: group[samplegroup] altered
+[2013-05-10T21:02:02+00:00] INFO: Chef Run complete in 0.145912047 seconds
+[2013-05-10T21:02:02+00:00] INFO: Running report handlers
+[2013-05-10T21:02:02+00:00] INFO: Report handlers complete
+</code></pre>
+          <p>お、<code>user[alice] created</code> と表示されているので、今度は上手く行ったようですかね？</p>
+          <p>早速 vagrant ssh で中を確認してみます。</p>
+          <pre><code>$ vagrant ssh vmclient1
+Welcome to your Vagrant-built virtual machine.
+[vagrant@vmclient1 ~]$
+</code></pre>
+          <p>んで、それぞれのユーザーに成り代わります。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ su alice
+パスワード: (ここで alice っていれた)
+su: パスワードが違います
+[vagrant@vmclient1 ~]$ su bob
+パスワード: (ここで bob っていれた)
+su: パスワードが違います
+[vagrant@vmclient1 ~]$ su carol
+パスワード: (ここで carol っていれた)
+su: パスワードが違います
+[vagrant@vmclient1 ~]$
+</code></pre>
+          <p>むむむ・・・。パスワードが有効でない？？</p>
+          <p>ついでに /etc/group もみてみます。</p>
+          <pre><code>samplegroup:x:503:alice,bob,carol
+</code></pre>
+          <p>グループを新規で作って、そこにユーザーを追加するのは出来ているようです。</p>
+          <h2 id="ユーザーの作成の見直し">ユーザーの作成の見直し</h2>
+          <p>どうやらパスワードが上手く登録できてないようなので、その辺りを見直してみます。</p>
+          <p><img alt="" src="resource04.jpg"></p>
+          <p>さっきのユーザーの Attributes を見直してみると、どうやら<strong>パスワードはハッシュ化</strong>されたものをここに入れる必要があるみたいです。</p>
+          <pre><code># Cookbook ユーザーとグループのテスト
+
+user 'alice' do
+  shell    '/bin/zsh'
+  password 'megckhCt3LluU'
+  supports :manage_home => true, :non_unique => false
+  action   [:create]
+end
+
+user 'bob' do
+  shell    '/bin/zsh'
+  password '8Q14e7OP5wroc'
+  supports :manage_home => true, :non_unique => false
+  action   [:create]
+end
+
+user 'carol' do
+  shell    '/bin/zsh'
+  password 'fcv1NMIRSDH/Y'
+  supports :manage_home => true, :non_unique => false
+  action   [:create]
+end
+
+group 'samplegroup' do
+  group_name 'samplegroup'
+  members    ['alice', 'bob', 'carol']
+  action     [:create]
+end
+</code></pre>
+          <p>一応まだテストなので、 <code>openssl passwd</code> でハッシュ化してみましたが、 この方法で安全かどうかまでは保証できないので、実戦配備するタイミングで同様の機会があれば、この辺見直したいと思います。 （＆安全な方法知ってたら教えてください・・・）</p>
+          <p>さて、<code>vagrant reload</code> で再起動です。</p>
+          <pre><code>[2013-05-11T15:54:57+00:00] INFO: *** Chef 11.4.0 ***
+[2013-05-11T15:54:58+00:00] INFO: Setting the run_list to "recipe[vmclient1]" from JSON
+[2013-05-11T15:54:58+00:00] INFO: Run List is [recipe[vmclient1]]
+[2013-05-11T15:54:58+00:00] INFO: Run List expands to [vmclient1]
+[2013-05-11T15:54:58+00:00] INFO: Starting Chef Run for vmclient1
+[2013-05-11T15:54:58+00:00] INFO: Running start handlers
+[2013-05-11T15:54:58+00:00] INFO: Start handlers complete.
+[2013-05-11T15:54:58+00:00] INFO: Processing user[alice] action create (vmclient1::default line 3)
+[2013-05-11T15:54:58+00:00] INFO: user[alice] altered
+[2013-05-11T15:54:58+00:00] INFO: Processing user[bob] action create (vmclient1::default line 10)
+[2013-05-11T15:54:58+00:00] INFO: user[bob] altered
+[2013-05-11T15:54:58+00:00] INFO: Processing user[carol] action create (vmclient1::default line 17)
+[2013-05-11T15:54:58+00:00] INFO: user[carol] altered
+[2013-05-11T15:54:58+00:00] INFO: Processing group[samplegroup] action create (vmclient1::default line 24)
+[2013-05-11T15:54:58+00:00] INFO: Chef Run complete in 0.099637811 seconds
+[2013-05-11T15:54:58+00:00] INFO: Running report handlers
+[2013-05-11T15:54:58+00:00] INFO: Report handlers complete
+</code></pre>
+          <p>さっきと違って、created じゃなくて altered になってますね。置き換えてくれたっぽいです。 （ちなみに sandbox は使ってないので、さっきの状態から再起動しただけです）</p>
+          <p>さて、ログインして見てみます。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ su alice
+パスワード: (ここで alice っていれた)
+su: /bin/zsh: そのようなファイルやディレクトリはありません
+[vagrant@vmclient1 ~]$ which zsh
+/usr/bin/which: no zsh in (/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/vagrant/bin)
+[vagrant@vmclient1 ~]$ which bash
+/bin/bash
+</code></pre>
+          <p>おおーっと、<strong>zsh がないですねww</strong> 寝ぼけてましたゴメンナサイゴメンナサイ。</p>
+          <p>シェルの設定は後回しにして、とりあえず存在してる bash に設定変更して、 もう一度 <code>vagrant relaod</code>, <code>vagrant ssh vmclient1</code> でログインして見てみます。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ su - alice
+パスワード: (ここで alice っていれた)
+[alice@vmclient1 ~]$ pwd
+/home/alice
+</code></pre>
+          <p><strong>きたーーーーー！！！</strong></p>
+          <pre><code>[alice@vmclient1 ~]$ su - bob
+Password: (ここで bob っていれた)
+[bob@vmclient1 ~]$ pwd
+/home/bob
+[bob@vmclient1 ~]$ su - carol
+Password: (ここで carol っていれた)
+[carol@vmclient1 ~]$ pwd
+/home/carol
+</code></pre>
+          <p><strong>きたきたきたーー！！ ユーザー3人分出来ておりました！！</strong></p>
+          <h2 id="ユーザーの変更があったときどうなるの">ユーザーの変更があったときどうなるの？</h2>
+          <p>さらに、<strong>ユーザーが居なくなったらどうなるのか気になった</strong>ので、試しに Cookbook の中から carol を消して実行してみます。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ su - carol
+パスワード:
+[carol@vmclient1 ~]$ pwd
+/home/carol
+</code></pre>
+          <p>うーむなるほど、Cookbook の記述を削除するだけでは、ユーザーは無くならないようですね。ここまでは予想通りです。</p>
+          <p>さて、さっきの Chef の公式の user のページ中に、<strong>:remove</strong> というアクションがあったので、 おそらく :create のところを、:remove にしてやれば、ユーザーが削除された状態に Chef が合わせてくれることでしょう。</p>
+          <p>やってみます。</p>
+          <pre><code># Cookbook ユーザーとグループのテスト
+
+user 'alice' do
+  shell    '/bin/bash'
+  password 'megckhCt3LluU'
+  supports :manage_home => true, :non_unique => false
+  action   [:create]
+end
+
+user 'bob' do
+  shell    '/bin/bash'
+  password '8Q14e7OP5wroc'
+  supports :manage_home => true, :non_unique => false
+  action   [:create]
+end
+
+user 'carol' do
+  shell    '/bin/bash'
+  password 'fcv1NMIRSDH/Y'
+  supports :manage_home => true, :non_unique => false
+  action   [:remove]
+end
+
+group 'samplegroup' do
+  group_name 'samplegroup'
+  members    ['alice', 'bob']
+  action     [:create]
+end
+</code></pre>
+          <p>設定などは一旦そのままで、action のところだけ :remove に変更してみました。</p>
+          <p>さて、どうなるでしょう。</p>
+          <pre><code>[2013-05-11T16:21:53+00:00] INFO: Processing user[carol] action remove (vmclient1::default line 17)
+[2013-05-11T16:21:53+00:00] INFO: user[carol] removed
+</code></pre>
+          <p>おお？ Chef のログからは削除がされているように見えますね。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ su - carol
+su: carol というユーザは存在しません
+</code></pre>
+          <p><strong>carol さん消えたーーー！</strong></p>
+          <p>なるほどなるほど、ということは Chef の Cookbook 内で、削除されたユーザーも含めて、こちらにまとめておいた方がいいんでしょうかね。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>ちょっと長くなってきちゃったので、一旦ここでまとめたいと思います。</p>
+          <ul>
+            <li><strong>Cookbook に記述することで、ユーザー作成、グループ作成が可能</strong></li>
+            <li><strong>パスワードはハッシュ化されたものを Cookbook 内に記述しておく</strong></li>
+            <li><strong>ユーザーの削除も可能</strong></li>
+          </ul>
+          <p>まだまだユーザー周りについては、試したいこと色々ありますよね。鍵認証にするとか、sudo 出来るようにするとか、この辺も追々試してみようと思います！</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://github.com/treasure-data/chef-td-agent" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - treasure-data/chef-td-agent: Chef Cookbook for td-agent (Treasure Agent or Fluentd)</span> <span class="link-card__desc">Chef Cookbook for td-agent (Treasure Agent or Fluentd) - treasure-data/chef-td-agent</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/treasure-data/chef-td-agent"> github.com</span></span><span class="link-card__image"><img alt="GitHub - treasure-data/chef-td-agent: Chef Cookbook for td-agent (Treasure Agent or Fluentd)" loading="lazy" src="https://opengraph.githubassets.com/99ef7a5f9259a109982f02bf4af974a7d1967cae5106b34823190b375ac955ac/treasure-data/chef-td-agent"></span></a></li>
+            <li><a href="http://docs.opscode.com/resource_user.html" rel="noopener noreferrer" target="_blank">http://docs.opscode.com/resource_user.html</a></li>
+            <li><a href="http://docs.opscode.com/resource_group.html" rel="noopener noreferrer" target="_blank">http://docs.opscode.com/resource_group.html</a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/chef/">#Chef</a> <a class="tag-link" href="/tags/vagrant/">#Vagrant</a> <a class="tag-link" href="/tags/virtualization/">#virtualization</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Vagrant%20%e3%81%a8%20Chef%20%e3%81%a7%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e4%bd%9c%e6%88%90%e3%81%ae%e8%87%aa%e5%8b%95%e5%8c%96%e3%82%92%e3%81%97%e3%81%a6%e3%81%bf%e3%82%8b%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20130513/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20130513%2f&amp;text=Vagrant%20%e3%81%a8%20Chef%20%e3%81%a7%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e4%bd%9c%e6%88%90%e3%81%ae%e8%87%aa%e5%8b%95%e5%8c%96%e3%82%92%e3%81%97%e3%81%a6%e3%81%bf%e3%82%8b" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20130513/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

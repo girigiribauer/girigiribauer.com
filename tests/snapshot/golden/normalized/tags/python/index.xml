@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/python/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Python on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;なんで今まで知らなかったし、という感じです。&lt;/p&gt;\n&lt;pre&gt;&lt;code&gt;pyenv global 2.7.13 3.6.0\n&lt;/code&gt;&lt;/pre&gt;\n&lt;p&gt;僕は anyenv を使って複数のバージョンを切り替えて使っているのですが、&lt;/p&gt;\n&lt;p&gt;pyenv であれば、 &lt;code&gt;pyenv install --list&lt;/code&gt; でインストール可能なバージョンを調べつつ、\n&lt;code&gt;pyenv install 2.7.13&lt;/code&gt; などのようにバージョンを指定してインストールし、\n実際にそのバージョンを表で使うときは &lt;code&gt;pyenv global 2.7.13&lt;/code&gt; などと入力して使ってました。&lt;/p&gt;\n&lt;p&gt;Python2 系と、 Python3 系の間には互換性がないため、\nそれぞれのアプリケーションで2から3にアップデートしたとかしてないとか、\n色々と対応がネックになるところです。&lt;/p&gt;\n&lt;p&gt;Python3 系が使いたい時は &lt;code&gt;pyenv install 3.6.0&lt;/code&gt; のように、\n表で使えるようにグローバルを切り替えて使っていたのですが、\nなんとこれ同時に指定できたのですね・・・。&lt;/p&gt;\n&lt;pre&gt;&lt;code&gt;$ pyenv global 2.7.13 3.6.0\n$ pyenv rehash\n$ python -V\nPython 2.7.13\n$ python3 -V\nPython 3.6.0\n&lt;/code&gt;&lt;/pre&gt;\n&lt;p&gt;あぁもっと早くに知っておきたかった・・・。&lt;/p&gt;\n&lt;p&gt;ちなみに PATH は ANYENV_ROOT から見て&lt;/p&gt;\n&lt;pre&gt;&lt;code&gt;PYENV_ROOT=&amp;quot;${ANYENV_ROOT}/envs/pyenv&amp;quot;\nPATH=&amp;quot;${PYENV_ROOT}/shims/&amp;quot;\n&lt;/code&gt;&lt;/pre&gt;\n&lt;p&gt;以下に python, python3 があります。\nbashrc や zshrc などの指定や、\nNeoVim とかに移るときに Python2 と Python3 の両方パスを通したいときなどに\nこの辺指定すると良いと思います。&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20170727/",
+        "link": "https://girigiribauer.com/tech/20170727/",
+        "pubDate": "Thu, 27 Jul 2017 17:45:52 +0900",
+        "title": "pyenv で python2 と python3 の両バージョンを指定できるのを最近まで知らなかった"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Thu, 27 Jul 2017 17:45:52 +0900",
+      "link": "https://girigiribauer.com/tags/python/",
+      "title": "Python on ばうあーろぐ"
+    }
+  }
+}

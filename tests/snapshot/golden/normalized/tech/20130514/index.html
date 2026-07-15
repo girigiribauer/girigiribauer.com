@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Chef の Data Bag を使ってユーザー作成の自動化をしてみる | ばうあーろぐ</title>
+    <meta content="Chef のユーザー管理を突き詰めてみるだけでも、色々と勉強になっていますね。
+前回までで、Chef の Cookbook にユーザー作成やグループ作成のレシピを記述することで、 ユーザー作成の自動化を試してみましたが、今回はもうちょっと複雑なことをやりたいので、 別の方法を試してみようと思います。
+『入門 Chef Solo』によると、
+
+システムに追加されるべきユーザーの各種データなどはノードの「属性」でもないし Resource の「属性」でもないデータと見ることができます。 こういったドメインモデル的なデータは Chef のデータ管理の仕組みである Data Bag を使うほうが扱いやすい。
+(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)
+
+とのことで、データを扱うための仕組みが存在するようです。
+また、
+
+Data Bag はクックブック単位ではなく、レポジトリ全体にグローバルなスコープのデータです。
+(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)
+
+ともありますね。
+ということで、今回は Data Bag の仕組みを使って、もうちょっと凝ったユーザー作成の自動化をやってみようと思います。
+まずは Data Bag を使ってみる
+この Data Bag、Cookbook とは別のところに書いて、Cookbook 側から読み込んで使う類のものらしいです。 対象ディレクトリの下に、種別のサブディレクトリを区切って、その中に JSON ファイルをデータごとに用意するようです。
+であれば、まずは自分で作った cookbooks ディレクトリと並列なところに、 data_bags というディレクトリでも作り、users というサブディレクトリを作っておきます。
+$ mkdir -p data_bags/users
+$ cd data_bags/users
+
+で、それぞれのユーザーごとに [ユーザー名].json のファイルを作ります。 ちなみにこの JSON ファイルは、あくまで任意のデータを扱うためのもので、あとで Cookbook 側から読み込むために用意するので、 前回設定した項目がこちらに用意できればオーケーですね。前回と同じことが出来るところまで設定しましょう。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20130514/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20130514" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Chef の Data Bag を使ってユーザー作成の自動化をしてみる" itemprop="name">
+    <meta content="Chef のユーザー管理を突き詰めてみるだけでも、色々と勉強になっていますね。
+前回までで、Chef の Cookbook にユーザー作成やグループ作成のレシピを記述することで、 ユーザー作成の自動化を試してみましたが、今回はもうちょっと複雑なことをやりたいので、 別の方法を試してみようと思います。
+『入門 Chef Solo』によると、
+
+システムに追加されるべきユーザーの各種データなどはノードの「属性」でもないし Resource の「属性」でもないデータと見ることができます。 こういったドメインモデル的なデータは Chef のデータ管理の仕組みである Data Bag を使うほうが扱いやすい。
+(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)
+
+とのことで、データを扱うための仕組みが存在するようです。
+また、
+
+Data Bag はクックブック単位ではなく、レポジトリ全体にグローバルなスコープのデータです。
+(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)
+
+ともありますね。
+ということで、今回は Data Bag の仕組みを使って、もうちょっと凝ったユーザー作成の自動化をやってみようと思います。
+まずは Data Bag を使ってみる
+この Data Bag、Cookbook とは別のところに書いて、Cookbook 側から読み込んで使う類のものらしいです。 対象ディレクトリの下に、種別のサブディレクトリを区切って、その中に JSON ファイルをデータごとに用意するようです。
+であれば、まずは自分で作った cookbooks ディレクトリと並列なところに、 data_bags というディレクトリでも作り、users というサブディレクトリを作っておきます。
+$ mkdir -p data_bags/users
+$ cd data_bags/users
+
+で、それぞれのユーザーごとに [ユーザー名].json のファイルを作ります。 ちなみにこの JSON ファイルは、あくまで任意のデータを扱うためのもので、あとで Cookbook 側から読み込むために用意するので、 前回設定した項目がこちらに用意できればオーケーですね。前回と同じことが出来るところまで設定しましょう。" itemprop="description">
+    <meta content="Chef の Data Bag を使ってユーザー作成の自動化をしてみる" property="og:title">
+    <meta content="Chef のユーザー管理を突き詰めてみるだけでも、色々と勉強になっていますね。
+前回までで、Chef の Cookbook にユーザー作成やグループ作成のレシピを記述することで、 ユーザー作成の自動化を試してみましたが、今回はもうちょっと複雑なことをやりたいので、 別の方法を試してみようと思います。
+『入門 Chef Solo』によると、
+
+システムに追加されるべきユーザーの各種データなどはノードの「属性」でもないし Resource の「属性」でもないデータと見ることができます。 こういったドメインモデル的なデータは Chef のデータ管理の仕組みである Data Bag を使うほうが扱いやすい。
+(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)
+
+とのことで、データを扱うための仕組みが存在するようです。
+また、
+
+Data Bag はクックブック単位ではなく、レポジトリ全体にグローバルなスコープのデータです。
+(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)
+
+ともありますね。
+ということで、今回は Data Bag の仕組みを使って、もうちょっと凝ったユーザー作成の自動化をやってみようと思います。
+まずは Data Bag を使ってみる
+この Data Bag、Cookbook とは別のところに書いて、Cookbook 側から読み込んで使う類のものらしいです。 対象ディレクトリの下に、種別のサブディレクトリを区切って、その中に JSON ファイルをデータごとに用意するようです。
+であれば、まずは自分で作った cookbooks ディレクトリと並列なところに、 data_bags というディレクトリでも作り、users というサブディレクトリを作っておきます。
+$ mkdir -p data_bags/users
+$ cd data_bags/users
+
+で、それぞれのユーザーごとに [ユーザー名].json のファイルを作ります。 ちなみにこの JSON ファイルは、あくまで任意のデータを扱うためのもので、あとで Cookbook 側から読み込むために用意するので、 前回設定した項目がこちらに用意できればオーケーですね。前回と同じことが出来るところまで設定しましょう。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20130514/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Chef の Data Bag を使ってユーザー作成の自動化をしてみる" name="twitter:title">
+    <meta content="Chef のユーザー管理を突き詰めてみるだけでも、色々と勉強になっていますね。
+前回までで、Chef の Cookbook にユーザー作成やグループ作成のレシピを記述することで、 ユーザー作成の自動化を試してみましたが、今回はもうちょっと複雑なことをやりたいので、 別の方法を試してみようと思います。
+『入門 Chef Solo』によると、
+
+システムに追加されるべきユーザーの各種データなどはノードの「属性」でもないし Resource の「属性」でもないデータと見ることができます。 こういったドメインモデル的なデータは Chef のデータ管理の仕組みである Data Bag を使うほうが扱いやすい。
+(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)
+
+とのことで、データを扱うための仕組みが存在するようです。
+また、
+
+Data Bag はクックブック単位ではなく、レポジトリ全体にグローバルなスコープのデータです。
+(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)
+
+ともありますね。
+ということで、今回は Data Bag の仕組みを使って、もうちょっと凝ったユーザー作成の自動化をやってみようと思います。
+まずは Data Bag を使ってみる
+この Data Bag、Cookbook とは別のところに書いて、Cookbook 側から読み込んで使う類のものらしいです。 対象ディレクトリの下に、種別のサブディレクトリを区切って、その中に JSON ファイルをデータごとに用意するようです。
+であれば、まずは自分で作った cookbooks ディレクトリと並列なところに、 data_bags というディレクトリでも作り、users というサブディレクトリを作っておきます。
+$ mkdir -p data_bags/users
+$ cd data_bags/users
+
+で、それぞれのユーザーごとに [ユーザー名].json のファイルを作ります。 ちなみにこの JSON ファイルは、あくまで任意のデータを扱うためのもので、あとで Cookbook 側から読み込むために用意するので、 前回設定した項目がこちらに用意できればオーケーですね。前回と同じことが出来るところまで設定しましょう。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Chef の Data Bag を使ってユーザー作成の自動化をしてみる</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2013-05-14 11:00:29 +0000 +0000">2013/05/14</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>Chef のユーザー管理を突き詰めてみるだけでも、色々と勉強になっていますね。</p>
+          <p>前回までで、Chef の Cookbook にユーザー作成やグループ作成のレシピを記述することで、 ユーザー作成の自動化を試してみましたが、今回はもうちょっと複雑なことをやりたいので、 別の方法を試してみようと思います。</p>
+          <p>『入門 Chef Solo』によると、</p>
+          <blockquote>
+            <p>システムに追加されるべきユーザーの各種データなどはノードの「属性」でもないし Resource の「属性」でもないデータと見ることができます。 こういったドメインモデル的なデータは Chef のデータ管理の仕組みである Data Bag を使うほうが扱いやすい。</p>
+            <p>(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)</p>
+          </blockquote>
+          <p>とのことで、データを扱うための仕組みが存在するようです。</p>
+          <p>また、</p>
+          <blockquote>
+            <p>Data Bag はクックブック単位ではなく、レポジトリ全体にグローバルなスコープのデータです。</p>
+            <p>(『入門 Chef Solo』 #19 Attribute と Data Bag より引用)</p>
+          </blockquote>
+          <p>ともありますね。</p>
+          <p>ということで、今回は Data Bag の仕組みを使って、もうちょっと凝ったユーザー作成の自動化をやってみようと思います。</p>
+          <h2 id="まずは-data-bag-を使ってみる">まずは Data Bag を使ってみる</h2>
+          <p>この Data Bag、Cookbook とは別のところに書いて、Cookbook 側から読み込んで使う類のものらしいです。 対象ディレクトリの下に、種別のサブディレクトリを区切って、その中に JSON ファイルをデータごとに用意するようです。</p>
+          <p>であれば、まずは自分で作った cookbooks ディレクトリと並列なところに、 data_bags というディレクトリでも作り、users というサブディレクトリを作っておきます。</p>
+          <pre><code>$ mkdir -p data_bags/users
+$ cd data_bags/users
+</code></pre>
+          <p>で、それぞれのユーザーごとに [ユーザー名].json のファイルを作ります。 ちなみにこの JSON ファイルは、あくまで任意のデータを扱うためのもので、あとで Cookbook 側から読み込むために用意するので、 前回設定した項目がこちらに用意できればオーケーですね。前回と同じことが出来るところまで設定しましょう。</p>
+          <pre><code>$ cat alice.json
+// alice
+{
+  "id": "alice",
+  "shell": "/bin/bash",
+  "password": "megckhCt3LluU"
+}
+</code></pre>
+          <p>そして、default.rb のレシピはこんな感じ。</p>
+          <pre><code># Cookbook ユーザーとグループのテスト
+
+data_ids = data_bag('users')
+data_ids.each do |id|
+  u = data_bag_item('users', id)
+  user u['id'] do
+    shell    u['shell']
+    password u['password']
+    supports :manage_home => true, :non_unique => false
+    action   [:create]
+  end
+end
+
+group 'samplegroup' do
+  group_name 'samplegroup'
+  members    ['alice', 'bob']
+  action     [:create]
+end
+</code></pre>
+          <p>Data Bag の機能を使っているところとしては、</p>
+          <ul>
+            <li><strong>data_bag(‘[サブディレクトリ名]’)</strong> で id 一覧が取得できる</li>
+            <li><strong>data_bag_item(‘[サブディレクトリ名]’, id)</strong> で指定した ID のオブジェクトを Data Bag から取り出し</li>
+          </ul>
+          <p>ですね。この辺は Ruby のスクリプトであることを意識すればそれほど難しいことではないかなーと思います。</p>
+          <p>また、書いてるときにちょっと気づいたのですが、 Ruby で色々書こうとするときに、<strong>変数名とかに配慮が必要</strong>ですね。</p>
+          <p>というのも、<code>user</code> とか <code>group</code> とか <code>directory</code> とか書くと、実際はメソッド呼び出しになっている部分の上書きになると思うので、 きっとこの辺の名前は使えません。</p>
+          <p>『入門 Chef Solo』にも、u とか使ってたのですが、これは user だとかぶってしまうからなのではないかなーと邪推してます。</p>
+          <h3 id="vagrantfile-の編集">Vagrantfile の編集</h3>
+          <p>Vagrant から、Cookbook のファイルは見えていますが、Data Bag のファイルはまだ見えてません。</p>
+          <p>Vagrant の公式のドキュメントの中の、Chef Solo のページにちゃんと書いてあるので見てみます。</p>
+          <p><a class="link-card" href="http://docs.vagrantup.com/v2/provisioning/chef_solo.html" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Vagrant | HashiCorp Developer</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://docs.vagrantup.com/v2/provisioning/chef_solo.html"> docs.vagrantup.com</span></span><span class="link-card__image"><img alt="Vagrant | HashiCorp Developer" loading="lazy" src="https://developer.hashicorp.com/og-image/vagrant.jpg"></span></a></p>
+          <p><img alt="" src="/img/2013/05/chef-user06.png"></p>
+          <p>Cookbook の場所の指定と同じように、Data Bag の場所も指定してやります。</p>
+          <p>今回は、cookbook ディレクトリと同列に data_bags ディレクトリを作ったので、以下のようになるはずです。</p>
+          <pre><code>vmclient.vm.provision :chef_solo do |chef|
+  chef.cookbooks_path = "cookbooks"
+  chef.data_bags_path = "data_bags"
+  chef.run_list = "recipe[vmclient1]"
+end
+</code></pre>
+          <h3 id="vagrant-up">vagrant up!</h3>
+          <p>さて、ここまで書けたら <code>vagrant up</code> なり <code>vagrant reload</code> なりで起動して確認してみます。 一度まっさらな状態にして確認してみるのもいいかもしれません。</p>
+          <pre><code>[vmclient1] -- /tmp/vagrant-chef-1/chef-solo-1/cookbooks
+[vmclient1] -- /tmp/vagrant-chef-1/chef-solo-2/data_bags
+</code></pre>
+          <p>お、Cookbook だけじゃなく、Data Bag も何らか作用していることがログから確認できますね。</p>
+          <p>さらにさらに、</p>
+          <pre><code>[2013-05-11T19:16:29+00:00] INFO: Processing user[alice] action create (vmclient1::default line 6)
+[2013-05-11T19:16:29+00:00] INFO: Processing user[bob] action create (vmclient1::default line 6)
+[2013-05-11T19:16:29+00:00] INFO: Processing user[carol] action create (vmclient1::default line 6)
+[2013-05-11T19:16:29+00:00] INFO: user[carol] created
+[2013-05-11T19:16:29+00:00] INFO: Processing group[samplegroup] action create (vmclient1::default line 14)
+[2013-05-11T19:16:29+00:00] INFO: Chef Run complete in 0.071730458 seconds
+[2013-05-11T19:16:29+00:00] INFO: Running report handlers
+[2013-05-11T19:16:29+00:00] INFO: Report handlers complete
+</code></pre>
+          <p>僕は前回のところから立て続けにやっているので、carol だけが削除されていない状態でした。</p>
+          <p>alice, bob はもう作られていたので、carol だけが作られているのが、<code>user[carol] created</code> というログから予想できます。</p>
+          <p>さて、ログインして見てみます。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ su - alice
+パスワード:
+[alice@vmclient1 ~]$ su - bob
+Password:
+[bob@vmclient1 ~]$ su - carol
+Password:
+[carol@vmclient1 ~]$
+</code></pre>
+          <p><strong>成功しました！</strong></p>
+          <p>前回までと同じく、パスワード認証ではありますが、それぞれ3人のユーザーを作ることが出来ていますね。</p>
+          <p>ただ、前回の検証時にもあったように、単にCookbook から記述を消すだけではユーザーの削除は行われないので、 <a href="http://tech.blog.piyo.org/2012/06/19/chef-data-bag%E6%B4%BB%E7%94%A8%E6%B3%95/" rel="noopener noreferrer" target="_blank">http://tech.blog.piyo.org/2012/06/19/chef-data-bag%E6%B4%BB%E7%94%A8%E6%B3%95/</a> にもあるように、ユーザーの有効/無効を Data Bag のパラメータとして管理する方法が良いのかもしれません。</p>
+          <h3 id="普通にパスワード認証で-ssh-までしてみる">普通にパスワード認証で SSH までしてみる</h3>
+          <p>ちょっと脇道それます。これまでは、ゲストOS内で <code>su - alice</code> などで確認をしてましたが、 実際仮想マシン作っているので、ちゃんとIPアドレスも割り振られていて、普通に SSH で入れるはずですよね。</p>
+          <p>ホストOS（つまり今触ってるPC）から、ゲストOSへ SSH で接続確認をしてみます。</p>
+          <p>まずは始めから用意されていて、<code>vagrant ssh vmclient1</code> とかでいつも SSH でログインしているであろう vagrant ユーザーで試します。</p>
+          <pre><code>$ ssh vagrant@192.168.100.11
+The authenticity of host '192.168.100.11 (192.168.100.11)' can't be established.
+RSA key fingerprint is xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.100.11' (RSA) to the list of known hosts.
+vagrant@192.168.100.11's password:
+Last login: Sat May 11 19:20:10 2013 from xxx.xxx.xxx.xxx
+Welcome to your Vagrant-built virtual machine.
+[vagrant@vmclient1 ~]$ logout
+</code></pre>
+          <p>はい、これは出来て当然ですね。 いつも ‘default’ というホスト名でログインしちゃってたので、IPアドレス直打ちだと最初に「初めて接続するけどいい？」って聞かれますが、問題ないので <strong>yes</strong> ですね。</p>
+          <p>お次は alice ユーザーです。</p>
+          <pre><code>$ ssh alice@192.168.100.11
+alice@192.168.100.11's password:
+Welcome to your Vagrant-built virtual machine.
+[alice@vmclient1 ~]$
+</code></pre>
+          <p>やったー、SSH で入れました！</p>
+          <h2 id="鍵認証したくてたまらない">鍵認証したくてたまらない</h2>
+          <p>今度は、パスワード認証以外の方法を自動化できるようにしていきたいなーと思います。</p>
+          <p>パスワードなしで鍵認証が出来るようにするには、この辺の設定が自動化出来ればいいんじゃないかと思います。</p>
+          <ul>
+            <li>手元に各ユーザーの鍵ファイルを作成</li>
+            <li>/home/[ユーザー名]/.ssh/authorized_keys へ公開鍵を登録する</li>
+            <li>パーミッションの変更 (0600)</li>
+            <li>/etc/ssh/sshd_config の設定項目編集</li>
+            <li>sshd サービスの再起動</li>
+          </ul>
+          <p>実際の運用フローを考えるのなら、秘密鍵は本人以外誰にも渡すべきではないものなので、 本人が作成した鍵のうち、公開鍵のみをサーバ運用担当に「これで登録しておいてー」と渡す感じになるのかなと思います。</p>
+          <p>今回は検証用なので、各ユーザーごとに秘密鍵・公開鍵を用意して、公開鍵のみをさっきの Data Bag の方に記載してみることにします。</p>
+          <h3 id="公開鍵認証の仕組みについて">公開鍵認証の仕組みについて</h3>
+          <p>これは完全に余談で、ググったらたくさん情報が載っているのですが、触れずに進めるのもアレなので さらっと鍵認証の仕組みについて触れておきます。</p>
+          <p><strong>鍵を作るとき</strong></p>
+          <ol>
+            <li>秘密鍵、公開鍵という2種類の鍵が存在（今から作る）</li>
+            <li>なんかの文字列に対して、<strong>暗号化だけできるのが公開鍵、それを元に戻せる（復号化）できるのが秘密鍵</strong></li>
+            <li>手元には、誰にも見せない秘密鍵を置いておく</li>
+            <li>接続対象のサーバには、公開鍵を置いておく</li>
+          </ol>
+          <p><strong>接続するとき</strong></p>
+          <ol>
+            <li>ユーザーがサーバに対して「接続したいですー」とアクセス</li>
+            <li>サーバ側は、持っている公開鍵でなんかの文字を暗号化してユーザーに返す</li>
+            <li>ユーザーは、持っている秘密鍵で復号化して、なんかの文字をサーバに再度送る</li>
+            <li><strong>秘密鍵でしか復号化できない＝秘密鍵をもってる正規のユーザー</strong> であることが確認できる</li>
+          </ol>
+          <p>という流れですね。</p>
+          <p>つまり今からやろうとしているのは、ホストOS上で鍵を作り、公開鍵のみを Data Bag に書き込み、ゲストOSの公開鍵として設定しようとしているわけです。</p>
+          <p>その後、ホストOSで一緒に作った秘密鍵を使って、ゲストOSに鍵認証で接続確認をする流れです。</p>
+          <h3 id="公開鍵と秘密鍵を用意する">公開鍵と秘密鍵を用意する</h3>
+          <p>alice だけだと複数人のときでも上手くいってる保証にならないので、2人分の alice と bob の鍵を用意しておきます。</p>
+          <p>検証用なので作る場所はどこでも良いのですが、ホームディレクトリに作った Vagrant ディレクトリの直下に、 alice, bob のディレクトリを作って、そこに入れておくことにします。</p>
+          <pre><code>$ mkdir alice
+$ mkdir bob
+$ cd alice
+</code></pre>
+          <p><code>ssh-keygen</code> というコマンドを用いるので、先に help を読み漁りましょう。</p>
+          <pre><code>SSH-KEYGEN(1)             BSD General Commands Manual            SSH-KEYGEN(1)
+
+NAME
+     ssh-keygen -- authentication key generation, management and conversion
+
+SYNOPSIS
+     ssh-keygen [-q] [-b bits] -t type [-N new_passphrase] [-C comment] [-f output_keyfile]
+
+(中略)
+
+     -t type
+             Specifies the type of key to create.  The possible values are ``rsa1'' for protocol version 1 and ``dsa'', ``ecdsa'' or ``rsa'' for protocol version
+             2.
+</code></pre>
+          <p>長いので使うところだけ抜粋します。</p>
+          <p><code>-t</code> オプションで鍵の種類を指定できて、<strong>rsa1, dsa, ecdsa, rsa</strong> の4種類が指定できるようです。 今回は rsa を使います。</p>
+          <p><code>ssh-keygen -t rsa</code> のコマンドを実行すると、後は対話的に進みます。</p>
+          <pre><code>$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+</code></pre>
+          <p>公開鍵・秘密鍵のセットを作りますよー、と。</p>
+          <pre><code>Enter file in which to save the key (/Users/[ユーザー名]/.ssh/id_rsa): /Users/[ユーザー名]/Vagrant/alice/id_rsa
+</code></pre>
+          <p>ファイルをどこに保存するか聞かれていますが、デフォルトのままだとホストOSのホームディレクトリ直下の .ssh 以下に入っちゃうので、 ここは Vagrant/alice になるようにします。</p>
+          <pre><code>Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+</code></pre>
+          <p>認証するときのパスフレーズですが、ここは空にしておきます。2回聞かれます。</p>
+          <pre><code>Your identification has been saved in /Users/[ユーザー名]/Vagrant/alice/id_rsa.
+Your public key has been saved in /Users/[ユーザー名]/Vagrant/alice/id_rsa.pub.
+The key fingerprint is:
+（略）
+The key's randomart image is:
+（略）
+</code></pre>
+          <p>なんかずらずらーと出ます。これで鍵は出来てます。（検証用なのでさらしても問題はないのですが、臆病なのでやめておきます・・・）</p>
+          <pre><code>$ ls
+id_rsa     id_rsa.pub
+</code></pre>
+          <p>id_rsa が秘密鍵で、id_rsa.pub の方が公開鍵ですね。</p>
+          <p>サーバに登録するのは公開鍵なので、公開鍵の中身を Data Bag の方へ “key” という項目を新たに設けて追加しておきます。</p>
+          <pre><code>$ cat data_bags/users/alice.json
+// alice
+{
+  "id": "alice",
+  "shell": "/bin/bash",
+  "password": "megckhCt3LluU",
+  "key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDE......（略）"
+}
+</code></pre>
+          <p>bob も同様に作ります。</p>
+          <pre><code>$ cat data_bags/users/bob.json
+// bob
+{
+  "id": "bob",
+  "shell": "/bin/bash",
+  "password": "8Q14e7OP5wroc",
+  "key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCg......（略）"
+}
+</code></pre>
+          <p>これで鍵ファイル自体の用意はできました。</p>
+          <h2 id="ユーザーの公開鍵における-cookbook-見直し">ユーザーの公開鍵における Cookbook 見直し</h2>
+          <p>Cookbook 内でディレクトリとファイルを作る必要があります。opscode からドキュメント探します。</p>
+          <p><a href="http://docs.opscode.com/resource_directory.html" rel="noopener noreferrer" target="_blank">http://docs.opscode.com/resource_directory.html</a> <a href="http://docs.opscode.com/resource_file.html" rel="noopener noreferrer" target="_blank">http://docs.opscode.com/resource_file.html</a></p>
+          <p>こちらを参考にして、各ユーザーごとのホームディレクトリに .ssh ディレクトリと、authorized_keys ファイルを権限など変えつつ 自動的に作るレシピを書きます。</p>
+          <pre><code># Cookbook ユーザーとグループのテスト
+
+data_ids = data_bag('users')
+data_ids.each do |id|
+  u = data_bag_item('users', id)
+  user u['id'] do
+    shell    u['shell']
+    password u['password']
+    supports :manage_home => true, :non_unique => false
+    action   [:create]
+  end
+
+  directory "/home/#{id}/.ssh" do
+    owner u['id']
+    group u['id']
+    mode 0700
+    action :create
+  end
+
+  file "/home/#{id}/.ssh/authorized_keys" do
+    owner u['id']
+    mode  0600
+    content u['key']
+    action :create_if_missing
+  end
+end
+
+group 'samplegroup' do
+  group_name 'samplegroup'
+  members    ['alice', 'bob']
+  action     [:create]
+end
+</code></pre>
+          <p>ディレクトリは、本人だけが読み書き実行 (0700)、ファイルについても、本人だけが読み書き (0600) という権限のものを作ります。</p>
+          <p>鍵認証の確認の前に、実際にディレクトリやファイルが出来ているかどうかだけでも確認しておきましょう。</p>
+          <pre><code>[vagrant@vmclient1 ~]$ su - alice
+パスワード:
+[alice@vmclient1 ~]$ ls -la
+total 28
+drwx------  3 alice alice 4096 May 11 21:49 .
+drwxr-xr-x. 7 root  root  4096 May 11 19:16 ..
+-rw-------  1 alice alice   23 May 11 21:45 .bash_history
+-rw-r--r--  1 alice alice   18 Feb 21 21:09 .bash_logout
+-rw-r--r--  1 alice alice  176 Feb 21 21:09 .bash_profile
+-rw-r--r--  1 alice alice  124 Feb 21 21:09 .bashrc
+drwx------  2 alice alice 4096 May 11 21:49 .ssh
+</code></pre>
+          <p>おおー、.ssh ディレクトリは出来ておりますね。</p>
+          <pre><code>[alice@vmclient1 ~]$ cd .ssh/
+[alice@vmclient1 .ssh]$ ls
+authorized_keys
+[alice@vmclient1 .ssh]$ cat authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDE...（略）[alice@vmclient1 .ssh]$
+</code></pre>
+          <p>authorized_keys というファイルも出来ていて、中身も反映されておりました。ここまではオーケーですね！</p>
+          <h2 id="template-を使って設定ファイルを配置する">Template を使って設定ファイルを配置する</h2>
+          <p>さあ、あと残っているのは『/etc/ssh/sshd_config の設定項目編集』と『sshd サービスの再起動』だけです。</p>
+          <p>※sshd サービスの再起動に関しては、パッケージのインストールを詳しくやるタイミングで併せてやった方がいいので、今回は仮想マシンの再起動で代用してしまおうと思います。</p>
+          <p>今まで Cookbook の中に user, group, file, directory, package という記述を色々書いてきましたが、 これらは Resource と呼ばれています。</p>
+          <p>今度はこういったサーバの設定ファイルを配置するための Resource である、<strong>template</strong> を使います。</p>
+          <h3 id="まずはテンプレートのファイルを用意する">まずはテンプレートのファイルを用意する</h3>
+          <p>レシピの方からテンプレートを指定するわけですが、先にテンプレートファイルを設置します。</p>
+          <p>Cookbook の中に recipes ディレクトリを作り、その中に default.rb というレシピファイルを作って今までいじってきましたが、 この recipes ディレクトリと並列に <strong>templates ディレクトリ</strong> を作ります。</p>
+          <pre><code>$ mkdir cookbooks/vmclient1/templates
+</code></pre>
+          <p><strong>※実はここ、置き場所間違ってますが後で説明します・・・</strong></p>
+          <p>その下に、sshd_config というファイルであれば、sshd_config.erb というファイルを作り、実際にゲストOSで使われている /etc/ssh/sshd_config というファイルの中身をごっそりもってきて、以下の必要最低限のところだけ修正します。</p>
+          <pre><code>$ cat cookbooks/vmclient1/templates/sshd_config.erb
+（長いので略）
+PubkeyAuthentication yes
+AuthorizedKeysFile     .ssh/authorized_keys
+（長いので略）
+</code></pre>
+          <p>公開鍵認証を有効にする設定のコメントアウトを外し、認証鍵ファイルの置き場所の設定もコメントアウトします。置き場所はさっきの通りですね。</p>
+          <p>これだけだと、変数とかの埋め込みがなくてテンプレート使ってる意味がないかもしれませんが、ここから先は erb の記法と同じく変数の埋め込みが可能です。（機会があれば後日行いたいと思います。）</p>
+          <blockquote>
+            <p>※あとで調べたら、変数使わずに単にファイルを設置するときは、Template じゃなくて、File を使えば良かったっぽいですね。。。 <a href="http://docs.opscode.com/resource_file.html" rel="noopener noreferrer" target="_blank">http://docs.opscode.com/resource_file.html</a></p>
+          </blockquote>
+          <h3 id="テンプレートをレシピから読み込む">テンプレートをレシピから読み込む</h3>
+          <p>レシピが徐々に長くなってきたので、追記部分のみ記載しておきます。</p>
+          <pre><code>template '/etc/ssh/sshd_config' do
+  owner 'root'
+  group 'root'
+  mode 0600
+end
+</code></pre>
+          <p>元々置いてあったファイルが上記の設定だったので、合わせて root:root, 0600 にしてあります。</p>
+          <p>さて、さっき作ったテンプレートファイルは、ファイル名を合わせておけばこれだけで動くとのことですが、 ホントにこれだけで問題ないのか試してみます。</p>
+          <h3 id="vagrant-up-vagrant-up">vagrant up! vagrant up!</h3>
+          <pre><code>[2013-05-11T22:35:06+00:00] FATAL: Chef::Exceptions::FileNotFound: template[/etc/ssh/sshd_config] (vmclient1::default line 28) had an error: Chef::Exceptions::FileNotFound: Cookbook 'vmclient1' (0.0.0) does not contain a file at any of these locations:
+  templates/centos-6.4/sshd_config.erb
+  templates/centos/sshd_config.erb
+  templates/default/sshd_config.erb
+</code></pre>
+          <p>なんかエラー出ました。これによると、テンプレートファイルが見つからなかったようです。</p>
+          <p>テンプレートファイルは、<strong>‘Linuxディストリビューション名’-‘バージョン’, ‘Linuxディストリビューション名’, ‘default’</strong> を それぞれ自動で探してくれるようになっているようです。<strong>素敵ですねー。</strong></p>
+          <p>ということで、**正しいパスは templates/default/sshd_config.erb でしたー。**移動させて再度試します。</p>
+          <pre><code>[2013-05-11T22:41:13+00:00] INFO: Processing template[/etc/ssh/sshd_config] action create (vmclient1::default line 28)
+[2013-05-11T22:41:13+00:00] INFO: template[/etc/ssh/sshd_config] backed up to /var/chef/backup/etc/ssh/sshd_config.chef-20130511224113
+[2013-05-11T22:41:13+00:00] INFO: template[/etc/ssh/sshd_config] updated content
+[2013-05-11T22:41:13+00:00] INFO: template[/etc/ssh/sshd_config] owner changed to 0
+[2013-05-11T22:41:13+00:00] INFO: template[/etc/ssh/sshd_config] group changed to 0
+[2013-05-11T22:41:13+00:00] INFO: template[/etc/ssh/sshd_config] mode changed to 600
+[2013-05-11T22:41:13+00:00] INFO: Chef Run complete in 0.121144117 seconds
+[2013-05-11T22:41:13+00:00] INFO: Running report handlers
+[2013-05-11T22:41:13+00:00] INFO: Report handlers complete
+</code></pre>
+          <p>ログを見る限りだと、上手いこと出来たっぽいですね！</p>
+          <p>さて、ログインして見てみましょう！</p>
+          <pre><code>[vagrant@vmclient1 ~]$ su
+パスワード:（vagrant といれた）
+[root@vmclient1 vagrant]# cat /etc/ssh/sshd_config
+（略）
+PubkeyAuthentication yes
+AuthorizedKeysFile     .ssh/authorized_keys
+（略）
+</code></pre>
+          <p><strong>おおー、ちゃんとテンプレートが反映されておりました！</strong></p>
+          <p>ということは、これで一通り SSH 周りの設定が完了したことになります。（sshd の再起動を除く）</p>
+          <p>最後に、再度 <code>vangrant reload</code> しておきます。sshd の再起動もそうなんですが、サービスの起動、再起動についてはまた後日やりたいと思います。</p>
+          <h2 id="鍵認証でログイン">鍵認証でログイン</h2>
+          <p>ここから先はホストOS上での作業です。</p>
+          <p><code>ssh</code> のオプションいろいろつけて、鍵ファイル指定するとかめんどくさいので、~/.ssh/config に alice, bob 用の設定を追加しておきましょう。</p>
+          <pre><code>$ vi ~/.ssh/config
+</code></pre>
+          <p>ここに Host default の設定項目があって、 vagrant ユーザーが接続するための設定がずらずら書いてあるのでこれを流用して、 alice ユーザー、bob ユーザーでログインできるようにしてみます。</p>
+          <pre><code>Host vmclient1_by_alice
+  HostName 192.168.100.11
+  User alice
+  Port 22
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile "/Users/[ユーザー名]/Vagrant/alice/id_rsa"
+  IdentitiesOnly yes
+  LogLevel FATAL
+
+Host vmclient1_by_bob
+  HostName 192.168.100.11
+  User bob
+  Port 22
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile "/Users/[ユーザー名]/Vagrant/bob/id_rsa"
+  IdentitiesOnly yes
+  LogLevel FATAL
+</code></pre>
+          <p>そして、<code>ssh</code> を実行してみます！</p>
+          <pre><code>$ ssh vmclient1_by_alice
+Welcome to your Vagrant-built virtual machine.
+[alice@vmclient1 ~]$
+</code></pre>
+          <p><strong>alice 鍵認証きたーーー！！</strong> ええ、もちろんパスワード入力しておりません。</p>
+          <p>さあ、bob はどうでしょう？</p>
+          <pre><code>$ ssh vmclient1_by_bob
+Welcome to your Vagrant-built virtual machine.
+[bob@vmclient1 ~]$
+</code></pre>
+          <p><strong>bob も鍵認証きたーーー！！</strong></p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>これで最低限の<strong>ユーザー管理の自動化</strong>が出来るようになったと言ってもいいのかもしれません。</p>
+          <p>また、汎用的に以下のことが少し出来るようになりました。</p>
+          <ul>
+            <li><strong>Cookbook からのファイル、ディレクトリの作成</strong></li>
+            <li><strong>Cookbook からのユーザーの作成、グループの作成</strong></li>
+            <li><strong>Data Bag によるデータ管理</strong></li>
+            <li><strong>Cookbook と Data Bag の連携</strong></li>
+            <li><strong>Cookbook からのテンプレートファイルの配置</strong></li>
+          </ul>
+          <p>次はアプリケーションのインストールを色々やってみて、 この辺がある程度慣れてくれば、レシピも比較的自由に書けるようになるのではないかなーと思います。 がんばります！</p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a href="http://docs.opscode.com/essentials_data_bags.html" rel="noopener noreferrer" target="_blank">http://docs.opscode.com/essentials_data_bags.html</a></li>
+            <li><a href="http://tech.blog.piyo.org/2012/06/19/chef-data-bag%E6%B4%BB%E7%94%A8%E6%B3%95/" rel="noopener noreferrer" target="_blank">http://tech.blog.piyo.org/2012/06/19/chef-data-bag%E6%B4%BB%E7%94%A8%E6%B3%95/</a></li>
+            <li><a href="http://ed.victavision.co.uk/blog/post/4-8-2012-chef-solo-encrypted-data-bags" rel="noopener noreferrer" target="_blank">http://ed.victavision.co.uk/blog/post/4-8-2012-chef-solo-encrypted-data-bags</a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/chef/">#Chef</a> <a class="tag-link" href="/tags/vagrant/">#Vagrant</a> <a class="tag-link" href="/tags/virtualization/">#virtualization</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Chef%20%e3%81%ae%20Data%20Bag%20%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e4%bd%9c%e6%88%90%e3%81%ae%e8%87%aa%e5%8b%95%e5%8c%96%e3%82%92%e3%81%97%e3%81%a6%e3%81%bf%e3%82%8b%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20130514/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20130514%2f&amp;text=Chef%20%e3%81%ae%20Data%20Bag%20%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e4%bd%9c%e6%88%90%e3%81%ae%e8%87%aa%e5%8b%95%e5%8c%96%e3%82%92%e3%81%97%e3%81%a6%e3%81%bf%e3%82%8b" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20130514/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

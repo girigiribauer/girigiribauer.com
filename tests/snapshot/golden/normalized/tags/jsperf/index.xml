@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/jsperf/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Jsperf on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 \n\n\n&lt;a href=\"https://www.itmedia.co.jp/enterprise/articles/2406/29/news057.html\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=https://www.itmedia.co.jp/enterprise/articles/2406/29/news057.html\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n www.itmedia.co.jp\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image\"&gt;\n &lt;img src=\"https://image.itmedia.co.jp/enterprise/articles/2406/29/cover_news057.jpg\" alt=\"JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��\" loading=\"lazy\" /&gt;\n &lt;/span&gt;&lt;/a&gt; （追記終わり）&lt;/p&gt;\n&lt;p&gt;前回からの続きです。 \n\n\n&lt;a href=\"https://girigiribauer.com/tech/20140131/\" &gt;jQuery から卒業するための第 1 歩を polyfills から学ぼう&lt;/a&gt;&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"https://github.com/inexorabletash/polyfill\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=https://github.com/inexorabletash/polyfill\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n github.com\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image\"&gt;\n &lt;img src=\"https://opengraph.githubassets.com/045d80c166c41bc484eafd65c1396c31bc76a2bf974c82aaca23503001f61b3a/inexorabletash/polyfill\" alt=\"GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More\" loading=\"lazy\" /&gt;\n &lt;/span&gt;&lt;/a&gt; にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。&lt;/p&gt;\n&lt;h2 id=\"xmlhttprequestxhr\"&gt;XMLHttpRequest（XHR）&lt;/h2&gt;\n&lt;p&gt;いわゆる Ajax の核となる API です。&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"http://ja.wikipedia.org/wiki/XMLHttpRequest\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;XMLHttpRequest - Wikipedia&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=http://ja.wikipedia.org/wiki/XMLHttpRequest\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n ja.wikipedia.org\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image link-card__image--no-image\"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;\n&lt;p&gt;例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20140203/",
+        "link": "https://girigiribauer.com/tech/20140203/",
+        "pubDate": "Sun, 02 Feb 2014 15:00:10 +0000",
+        "title": "jQuery から卒業するための第1歩を polyfills から学ぼう – その2"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Sat, 29 Jun 2024 19:00:00 +0900",
+      "link": "https://girigiribauer.com/tags/jsperf/",
+      "title": "Jsperf on ばうあーろぐ"
+    }
+  }
+}

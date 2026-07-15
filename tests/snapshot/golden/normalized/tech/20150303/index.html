@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Vagrant の使いどころ・考えどころ | ばうあーろぐ</title>
+    <meta content="Vagrant, Chef 周りの知見が溜まってきたのでそろそろまとめていきたいと思っているのですが、 まだまだ自分の中で分からない部分も多く、 かつ自分はインフラエンジニアではないので、 正直どこまで書いたらいいのか迷っています。
+また、chef-solo はなくなるから、これからは chef-zero だ、なんて言われても、 インフラに関する前提知識が薄いので、なかなかついていくことができません・・・。
+とはいえ、少なくとも使っていく中で自分なりの思想みたいなものははっきりしてきたので、 まずはそこから書いてみようと思います。
+Vagrant の用途を考える
+Vagrant が何なのかを知らない人に説明するとすれば、 仮想マシン（VM）をコマンドラインで統一的に扱えるインターフェースのようなものだと説明できると思います。
+決して仮想環境そのものではなく、仮想環境を提供してくれるものとセットで使います。 例えば VirtualBox や VMWare 、あるいはリモートですが AWS(Amazon Web Service) なんかも選択肢になり得ます。
+詳しくは 
+
+
+
+            
+                Vagrant | HashiCorp Developer
+                
+                
+                    
+                    www.vagrantup.com
+                
+            
+                
+             からインストール手順などを参考にして、実際に試されると良いかと思います。 （今回はこの辺り、一切触れません）
+Vagrant をどういう用途で使うかというと、おそらく大きく2種類に分かれると思います。（主観）
+
+ローカルの開発用としてローカルでのみ使い続ける
+本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用
+
+1.は開発寄りの人が一番思いつきやすい用途だと思います。 全く同一でもない限り、ローカルで開発したものをリモート環境へ持っていくと、 少なからず環境による差異が問題になってきます。
+2.は、運用寄り（インフラ寄り？）の人が一番思いつきやすい用途だと思います。 いくら Chef が便利だからといっても、本番環境にトライアンドエラーでレシピ適用して 問題がないケースはほとんどないと言っていいと思います。 この場合、手元の仮想マシンに対してレシピを適用して検証、問題なければ本番マシンに対して適用、 という流れが良いのではないかと考えています。
+僕なりの Vagrant, Chef の使い方
+ここからはポイントに絞ってまとめていきます。
+開発と運用とで Vagrantfile を分けた
+上記の用途の違いから、もし両方の用途が想定される場合は、 そもそも Vagrantfile を複数ディレクトリで分けて管理するとすっきりします。
+Vagrantfile 上には、複数の仮想マシンの定義が記述できるため、 まとめて書こうと思えば全然書けてしまうのですが、 目的が全然異なっているので、使うレシピも共通化しないケースが多くなってくると思います。 （例えば開発用であれば、本番環境ほどセキュリティに過敏にならなくても良い場合があります）" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20150303/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20150303" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Vagrant の使いどころ・考えどころ" itemprop="name">
+    <meta content="Vagrant, Chef 周りの知見が溜まってきたのでそろそろまとめていきたいと思っているのですが、 まだまだ自分の中で分からない部分も多く、 かつ自分はインフラエンジニアではないので、 正直どこまで書いたらいいのか迷っています。
+また、chef-solo はなくなるから、これからは chef-zero だ、なんて言われても、 インフラに関する前提知識が薄いので、なかなかついていくことができません・・・。
+とはいえ、少なくとも使っていく中で自分なりの思想みたいなものははっきりしてきたので、 まずはそこから書いてみようと思います。
+Vagrant の用途を考える
+Vagrant が何なのかを知らない人に説明するとすれば、 仮想マシン（VM）をコマンドラインで統一的に扱えるインターフェースのようなものだと説明できると思います。
+決して仮想環境そのものではなく、仮想環境を提供してくれるものとセットで使います。 例えば VirtualBox や VMWare 、あるいはリモートですが AWS(Amazon Web Service) なんかも選択肢になり得ます。
+詳しくは 
+
+
+
+            
+                Vagrant | HashiCorp Developer
+                
+                
+                    
+                    www.vagrantup.com
+                
+            
+                
+             からインストール手順などを参考にして、実際に試されると良いかと思います。 （今回はこの辺り、一切触れません）
+Vagrant をどういう用途で使うかというと、おそらく大きく2種類に分かれると思います。（主観）
+
+ローカルの開発用としてローカルでのみ使い続ける
+本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用
+
+1.は開発寄りの人が一番思いつきやすい用途だと思います。 全く同一でもない限り、ローカルで開発したものをリモート環境へ持っていくと、 少なからず環境による差異が問題になってきます。
+2.は、運用寄り（インフラ寄り？）の人が一番思いつきやすい用途だと思います。 いくら Chef が便利だからといっても、本番環境にトライアンドエラーでレシピ適用して 問題がないケースはほとんどないと言っていいと思います。 この場合、手元の仮想マシンに対してレシピを適用して検証、問題なければ本番マシンに対して適用、 という流れが良いのではないかと考えています。
+僕なりの Vagrant, Chef の使い方
+ここからはポイントに絞ってまとめていきます。
+開発と運用とで Vagrantfile を分けた
+上記の用途の違いから、もし両方の用途が想定される場合は、 そもそも Vagrantfile を複数ディレクトリで分けて管理するとすっきりします。
+Vagrantfile 上には、複数の仮想マシンの定義が記述できるため、 まとめて書こうと思えば全然書けてしまうのですが、 目的が全然異なっているので、使うレシピも共通化しないケースが多くなってくると思います。 （例えば開発用であれば、本番環境ほどセキュリティに過敏にならなくても良い場合があります）" itemprop="description">
+    <meta content="Vagrant の使いどころ・考えどころ" property="og:title">
+    <meta content="Vagrant, Chef 周りの知見が溜まってきたのでそろそろまとめていきたいと思っているのですが、 まだまだ自分の中で分からない部分も多く、 かつ自分はインフラエンジニアではないので、 正直どこまで書いたらいいのか迷っています。
+また、chef-solo はなくなるから、これからは chef-zero だ、なんて言われても、 インフラに関する前提知識が薄いので、なかなかついていくことができません・・・。
+とはいえ、少なくとも使っていく中で自分なりの思想みたいなものははっきりしてきたので、 まずはそこから書いてみようと思います。
+Vagrant の用途を考える
+Vagrant が何なのかを知らない人に説明するとすれば、 仮想マシン（VM）をコマンドラインで統一的に扱えるインターフェースのようなものだと説明できると思います。
+決して仮想環境そのものではなく、仮想環境を提供してくれるものとセットで使います。 例えば VirtualBox や VMWare 、あるいはリモートですが AWS(Amazon Web Service) なんかも選択肢になり得ます。
+詳しくは 
+
+
+
+            
+                Vagrant | HashiCorp Developer
+                
+                
+                    
+                    www.vagrantup.com
+                
+            
+                
+             からインストール手順などを参考にして、実際に試されると良いかと思います。 （今回はこの辺り、一切触れません）
+Vagrant をどういう用途で使うかというと、おそらく大きく2種類に分かれると思います。（主観）
+
+ローカルの開発用としてローカルでのみ使い続ける
+本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用
+
+1.は開発寄りの人が一番思いつきやすい用途だと思います。 全く同一でもない限り、ローカルで開発したものをリモート環境へ持っていくと、 少なからず環境による差異が問題になってきます。
+2.は、運用寄り（インフラ寄り？）の人が一番思いつきやすい用途だと思います。 いくら Chef が便利だからといっても、本番環境にトライアンドエラーでレシピ適用して 問題がないケースはほとんどないと言っていいと思います。 この場合、手元の仮想マシンに対してレシピを適用して検証、問題なければ本番マシンに対して適用、 という流れが良いのではないかと考えています。
+僕なりの Vagrant, Chef の使い方
+ここからはポイントに絞ってまとめていきます。
+開発と運用とで Vagrantfile を分けた
+上記の用途の違いから、もし両方の用途が想定される場合は、 そもそも Vagrantfile を複数ディレクトリで分けて管理するとすっきりします。
+Vagrantfile 上には、複数の仮想マシンの定義が記述できるため、 まとめて書こうと思えば全然書けてしまうのですが、 目的が全然異なっているので、使うレシピも共通化しないケースが多くなってくると思います。 （例えば開発用であれば、本番環境ほどセキュリティに過敏にならなくても良い場合があります）" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20150303/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Vagrant の使いどころ・考えどころ" name="twitter:title">
+    <meta content="Vagrant, Chef 周りの知見が溜まってきたのでそろそろまとめていきたいと思っているのですが、 まだまだ自分の中で分からない部分も多く、 かつ自分はインフラエンジニアではないので、 正直どこまで書いたらいいのか迷っています。
+また、chef-solo はなくなるから、これからは chef-zero だ、なんて言われても、 インフラに関する前提知識が薄いので、なかなかついていくことができません・・・。
+とはいえ、少なくとも使っていく中で自分なりの思想みたいなものははっきりしてきたので、 まずはそこから書いてみようと思います。
+Vagrant の用途を考える
+Vagrant が何なのかを知らない人に説明するとすれば、 仮想マシン（VM）をコマンドラインで統一的に扱えるインターフェースのようなものだと説明できると思います。
+決して仮想環境そのものではなく、仮想環境を提供してくれるものとセットで使います。 例えば VirtualBox や VMWare 、あるいはリモートですが AWS(Amazon Web Service) なんかも選択肢になり得ます。
+詳しくは 
+
+
+
+            
+                Vagrant | HashiCorp Developer
+                
+                
+                    
+                    www.vagrantup.com
+                
+            
+                
+             からインストール手順などを参考にして、実際に試されると良いかと思います。 （今回はこの辺り、一切触れません）
+Vagrant をどういう用途で使うかというと、おそらく大きく2種類に分かれると思います。（主観）
+
+ローカルの開発用としてローカルでのみ使い続ける
+本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用
+
+1.は開発寄りの人が一番思いつきやすい用途だと思います。 全く同一でもない限り、ローカルで開発したものをリモート環境へ持っていくと、 少なからず環境による差異が問題になってきます。
+2.は、運用寄り（インフラ寄り？）の人が一番思いつきやすい用途だと思います。 いくら Chef が便利だからといっても、本番環境にトライアンドエラーでレシピ適用して 問題がないケースはほとんどないと言っていいと思います。 この場合、手元の仮想マシンに対してレシピを適用して検証、問題なければ本番マシンに対して適用、 という流れが良いのではないかと考えています。
+僕なりの Vagrant, Chef の使い方
+ここからはポイントに絞ってまとめていきます。
+開発と運用とで Vagrantfile を分けた
+上記の用途の違いから、もし両方の用途が想定される場合は、 そもそも Vagrantfile を複数ディレクトリで分けて管理するとすっきりします。
+Vagrantfile 上には、複数の仮想マシンの定義が記述できるため、 まとめて書こうと思えば全然書けてしまうのですが、 目的が全然異なっているので、使うレシピも共通化しないケースが多くなってくると思います。 （例えば開発用であれば、本番環境ほどセキュリティに過敏にならなくても良い場合があります）" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Vagrant の使いどころ・考えどころ</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2015-03-03 10:17:52 +0000 +0000">2015/03/03</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>Vagrant, Chef 周りの知見が溜まってきたのでそろそろまとめていきたいと思っているのですが、 まだまだ自分の中で分からない部分も多く、 かつ自分はインフラエンジニアではないので、 正直どこまで書いたらいいのか迷っています。</p>
+          <p>また、chef-solo はなくなるから、これからは chef-zero だ、なんて言われても、 インフラに関する前提知識が薄いので、なかなかついていくことができません・・・。</p>
+          <p>とはいえ、少なくとも使っていく中で<strong>自分なりの思想</strong>みたいなものははっきりしてきたので、 まずはそこから書いてみようと思います。</p>
+          <h2 id="vagrant-の用途を考える">Vagrant の用途を考える</h2>
+          <p>Vagrant が何なのかを知らない人に説明するとすれば、 <strong>仮想マシン（VM）をコマンドラインで統一的に扱えるインターフェース</strong>のようなものだと説明できると思います。</p>
+          <p>決して仮想環境そのものではなく、仮想環境を提供してくれるものと<strong>セットで</strong>使います。 例えば VirtualBox や VMWare 、あるいはリモートですが AWS(Amazon Web Service) なんかも選択肢になり得ます。</p>
+          <p>詳しくは <a class="link-card" href="https://www.vagrantup.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Vagrant | HashiCorp Developer</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.vagrantup.com/"> www.vagrantup.com</span></span><span class="link-card__image"><img alt="Vagrant | HashiCorp Developer" loading="lazy" src="https://developer.hashicorp.com/og-image/vagrant.jpg"></span></a>からインストール手順などを参考にして、実際に試されると良いかと思います。 （今回はこの辺り、一切触れません）</p>
+          <p>Vagrant をどういう用途で使うかというと、おそらく大きく2種類に分かれると思います。（主観）</p>
+          <ol>
+            <li><strong>ローカルの開発用</strong>としてローカルでのみ使い続ける</li>
+            <li><strong>本番環境の検証用</strong>として、同じレシピを仮想マシン・リモート環境にそれぞれ適用</li>
+          </ol>
+          <p>1.は<strong>開発寄り</strong>の人が一番思いつきやすい用途だと思います。 全く同一でもない限り、ローカルで開発したものをリモート環境へ持っていくと、 少なからず環境による差異が問題になってきます。</p>
+          <p>2.は、<strong>運用寄り</strong>（インフラ寄り？）の人が一番思いつきやすい用途だと思います。 いくら Chef が便利だからといっても、本番環境にトライアンドエラーでレシピ適用して 問題がないケースはほとんどないと言っていいと思います。 この場合、手元の仮想マシンに対してレシピを適用して検証、問題なければ本番マシンに対して適用、 という流れが良いのではないかと考えています。</p>
+          <h2 id="僕なりの-vagrant-chef-の使い方">僕なりの Vagrant, Chef の使い方</h2>
+          <p>ここからはポイントに絞ってまとめていきます。</p>
+          <h3 id="開発と運用とで-vagrantfile-を分けた">開発と運用とで Vagrantfile を分けた</h3>
+          <p>上記の用途の違いから、もし両方の用途が想定される場合は、 そもそも <strong>Vagrantfile を複数ディレクトリで分けて管理</strong>するとすっきりします。</p>
+          <p>Vagrantfile 上には、複数の仮想マシンの定義が記述できるため、 まとめて書こうと思えば全然書けてしまうのですが、 目的が全然異なっているので、<strong>使うレシピも共通化しない</strong>ケースが多くなってくると思います。 （例えば開発用であれば、本番環境ほどセキュリティに過敏にならなくても良い場合があります）</p>
+          <p>Vagrantfile と同階層に cookbooks, site-cookbooks といった 適用するレシピのディレクトリを作って管理していますが、 レシピを共通化しないのであれば、あえて混ぜる理由もありません。</p>
+          <h3 id="ポート番号ip-アドレスの管理をしっかり行う">ポート番号、IP アドレスの管理をしっかり行う</h3>
+          <p>Vagrantfile が複数存在していると、今度は <strong>SSH で接続するためのポート番号や、 VM にアクセスするための IP アドレスが重複してくる可能性</strong>がどんどん高くなります。</p>
+          <p>開発想定の VM は何番から何番のポートを順に使い、IP アドレスはここから順に割り当てる、 運用想定の VM はこの番号から順に使う、といったように、 ポート番号、IP アドレスの管理をしっかり行うのが重要だと思います。</p>
+          <p>.ssh/config に、しっかり名前付きで記述しておき、 どの VM にもすぐにアクセスできるようにしておくと気持ちいいです。</p>
+          <pre><code>Host virtual_machine_name
+  HostName 127.0.0.1
+  User vagrant
+  Port 12345
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /path/to/insecure_private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+</code></pre>
+          <p>認証鍵のレシピがうまく適用できるようになったら、 この辺りの設定も、その認証鍵設定済みのユーザーで気軽にアクセスできるようになっていると なお気持ちいいです。 （この辺りの話はまた改めてまとめ直したいです・・・）</p>
+          <p>あっ、当たり前ですが、Vagrant で VM を複数管理するときは、 ポート番号を全部バラバラにしないといけません。（当たり前）</p>
+          <pre><code>vagrant ssh-config >> ~/.ssh/config
+</code></pre>
+          <p>上記コマンドで設定を勝手に吐き出して追記してくれる便利なコマンドが用意されていますが、 複数 VM を想定したものになっていない（と思われる）ため、 例えば apple_vm, banana_vm の設定を順に追記してのち、 banana_vm に SSH してたつもりが、ずっと apple_vm に SSH してたことになってた、 なんてことが起こるかもしれません。（体験談）</p>
+          <p>接続ではまらないためにも、<strong>VM にアクセスするためのポート番号と VM 作成時の IP アドレスは きちんと管理</strong>すると良いと思います。</p>
+          <h3 id="レシピの適用は-vagrant-provision-よりも-knife-コマンドで">レシピの適用は vagrant provision よりも knife コマンドで</h3>
+          <p>Vagrant はあくまで<strong>仮想マシン（VM）をコマンドラインで統一的に扱えるインターフェース</strong>なので、 仮想マシンの管理に徹した方がすっきりします。</p>
+          <p>以下は、Vagrant 1.6.5 で vagrant init したときの初期設定（コメント付き）を抜粋したものです。</p>
+          <pre><code>config.vm.provision "chef_solo" do |chef|
+  chef.cookbooks_path = "../my-recipes/cookbooks"
+  chef.roles_path = "../my-recipes/roles"
+  chef.data_bags_path = "../my-recipes/data_bags"
+  chef.add_recipe "mysql"
+  chef.add_role "web"
+
+  # You may also specify custom JSON attributes:
+  chef.json = { mysql_password: "foo" }
+end
+</code></pre>
+          <p>このような形で、レシピの変更があるたびに Vagrantfile を触るというのは、 なんというか本質的ではないので、あくまで Vagrantfile には以下の情報のみが書かれているのが望ましいのでは？と思っています。（もちろん追加で synced_folder とか）</p>
+          <ul>
+            <li>vm.hostname（名前）</li>
+            <li>vm.box = “chef/centos-6.6″（box ファイル用）</li>
+            <li>vm.network :forwarded_port, id: “ssh”, host: 12345, guest: 22（Vagrant 用ポート番号）</li>
+            <li>vm.network :forwarded_port, host: 8080, guest: 80（HTTP 用ポート番号）</li>
+            <li>vm.network :private_network, ip: “192.168.24.24”（IP アドレス）</li>
+          </ul>
+          <p>2つ目のところは自分が使いたい box ファイルを URL で指定すれば良いらしいですが、 以下に公開されているところを名前を指定するだけでも OK です。</p>
+          <p><a class="link-card" href="https://vagrantcloud.com/boxes/search" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">HashiCorp Cloud Platform</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://vagrantcloud.com/boxes/search"> vagrantcloud.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>ちょっと脱線しましたが、<strong>Vagrantfile 上には仮想マシンの定義のみをできるだけシンプルに管理しつつ、 レシピの適用は knife コマンドを用いて行った方がスムーズ</strong>だと思います。</p>
+          <p>こちらの方法のメリットとして、上記の運用想定の Vagrant 管理において、 ローカル環境、本番環境とで同一の knife コマンドでレシピの適用ができるため、 レシピの適用方法が、適用先の環境に依存することなくスムーズにレシピ適用できる点があると思います。</p>
+          <p>また、仮想マシンが起動中に Vagrantfile の設定変更を行ってしまうことで、 うまく再起動などができなくなるケースが出てきます。 （例えば Vagrant 自身が SSH で接続するポート番号を途中で変えてしまうなど） <strong>起動中に Vagrantfile はできるだけ触らない方が良い</strong>のではないかと思います。</p>
+          <p>ただ、vagrant provision でレシピを適用できるようにしておくと、 一通り GUI で扱えるようにしておいた場合に、 コマンドラインが苦手な人とも一緒に扱えるという利点が出てくる場合もあり得ます。</p>
+          <p>とはいえ、knife コマンドに慣れておいて損はないかなと、使ってみてそう思っています。 （この辺の掘り下げた話も追い追いで・・・）</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>時間もそこまで取れなかったので、とりあえず自分なりの思想的なところまでをまとめてみました。</p>
+          <p>実際まだまだ書ききれないことも多く、 例えば Vagrant のプラグインでこれ入れておくとこういうシーンで便利とか、 Web サーバにおいて、Vagrant 特有のはまりポイントと解決方法など、 過去に書いた記事の疑問点もだいぶ解消されてきたところもあるので、 改めてまとめ直したいと思います。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/chef/">#Chef</a> <a class="tag-link" href="/tags/ssh/">#SSH</a> <a class="tag-link" href="/tags/vagrant/">#Vagrant</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Vagrant%20%e3%81%ae%e4%bd%bf%e3%81%84%e3%81%a9%e3%81%93%e3%82%8d%e3%83%bb%e8%80%83%e3%81%88%e3%81%a9%e3%81%93%e3%82%8d%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20150303/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20150303%2f&amp;text=Vagrant%20%e3%81%ae%e4%bd%bf%e3%81%84%e3%81%a9%e3%81%93%e3%82%8d%e3%83%bb%e8%80%83%e3%81%88%e3%81%a9%e3%81%93%e3%82%8d" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20150303/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

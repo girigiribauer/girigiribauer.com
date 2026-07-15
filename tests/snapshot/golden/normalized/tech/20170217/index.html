@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Vim の Syntastic で sass-lint が上手く動かないときの debug の話 | ばうあーろぐ</title>
+    <meta content="一瞬はまったのでメモしておきます。
+~/.sass-lint.yml はホームディレクトリ外では無効でした
+まず問題の発端はここからです。
+僕は今のところ Vim 上で scss ファイルを編集するときに
+sass-lint を linter として利用しています。
+
+
+
+
+            
+                GitHub - sasstools/sass-lint: Pure Node.js Sass linting
+                Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …
+                
+                    
+                    github.com
+                
+            
+                
+            
+.sass-lint.yml が何も設定されていない状態だと、
+この中にあるルールの1つである property-sort-order が
+初期設定で alphabetical になっているため、
+scss ファイル内のプロパティがアルファベット順になっていない行で
+すべて警告が出ます。
+正直、うざいです・・・。
+ちなみに .sass-lint.yml のサンプルはこちらです。
+
+
+
+https://github.com/sasstools/sass-lint/blob/develop/docs/sass-lint.yml
+ルール一覧はこちら。それぞれ Markdown でまとめられてます。
+
+
+
+
+            
+                sass-lint/docs/rules at develop · sasstools/sass-lint
+                Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …
+                
+                    
+                    github.com
+                
+            
+                
+            " name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20170217/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20170217" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Vim の Syntastic で sass-lint が上手く動かないときの debug の話" itemprop="name">
+    <meta content="一瞬はまったのでメモしておきます。
+~/.sass-lint.yml はホームディレクトリ外では無効でした
+まず問題の発端はここからです。
+僕は今のところ Vim 上で scss ファイルを編集するときに
+sass-lint を linter として利用しています。
+
+
+
+
+            
+                GitHub - sasstools/sass-lint: Pure Node.js Sass linting
+                Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …
+                
+                    
+                    github.com
+                
+            
+                
+            
+.sass-lint.yml が何も設定されていない状態だと、
+この中にあるルールの1つである property-sort-order が
+初期設定で alphabetical になっているため、
+scss ファイル内のプロパティがアルファベット順になっていない行で
+すべて警告が出ます。
+正直、うざいです・・・。
+ちなみに .sass-lint.yml のサンプルはこちらです。
+
+
+
+https://github.com/sasstools/sass-lint/blob/develop/docs/sass-lint.yml
+ルール一覧はこちら。それぞれ Markdown でまとめられてます。
+
+
+
+
+            
+                sass-lint/docs/rules at develop · sasstools/sass-lint
+                Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …
+                
+                    
+                    github.com
+                
+            
+                
+            " itemprop="description">
+    <meta content="Vim の Syntastic で sass-lint が上手く動かないときの debug の話" property="og:title">
+    <meta content="一瞬はまったのでメモしておきます。
+~/.sass-lint.yml はホームディレクトリ外では無効でした
+まず問題の発端はここからです。
+僕は今のところ Vim 上で scss ファイルを編集するときに
+sass-lint を linter として利用しています。
+
+
+
+
+            
+                GitHub - sasstools/sass-lint: Pure Node.js Sass linting
+                Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …
+                
+                    
+                    github.com
+                
+            
+                
+            
+.sass-lint.yml が何も設定されていない状態だと、
+この中にあるルールの1つである property-sort-order が
+初期設定で alphabetical になっているため、
+scss ファイル内のプロパティがアルファベット順になっていない行で
+すべて警告が出ます。
+正直、うざいです・・・。
+ちなみに .sass-lint.yml のサンプルはこちらです。
+
+
+
+https://github.com/sasstools/sass-lint/blob/develop/docs/sass-lint.yml
+ルール一覧はこちら。それぞれ Markdown でまとめられてます。
+
+
+
+
+            
+                sass-lint/docs/rules at develop · sasstools/sass-lint
+                Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …
+                
+                    
+                    github.com
+                
+            
+                
+            " property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20170217/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Vim の Syntastic で sass-lint が上手く動かないときの debug の話" name="twitter:title">
+    <meta content="一瞬はまったのでメモしておきます。
+~/.sass-lint.yml はホームディレクトリ外では無効でした
+まず問題の発端はここからです。
+僕は今のところ Vim 上で scss ファイルを編集するときに
+sass-lint を linter として利用しています。
+
+
+
+
+            
+                GitHub - sasstools/sass-lint: Pure Node.js Sass linting
+                Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …
+                
+                    
+                    github.com
+                
+            
+                
+            
+.sass-lint.yml が何も設定されていない状態だと、
+この中にあるルールの1つである property-sort-order が
+初期設定で alphabetical になっているため、
+scss ファイル内のプロパティがアルファベット順になっていない行で
+すべて警告が出ます。
+正直、うざいです・・・。
+ちなみに .sass-lint.yml のサンプルはこちらです。
+
+
+
+https://github.com/sasstools/sass-lint/blob/develop/docs/sass-lint.yml
+ルール一覧はこちら。それぞれ Markdown でまとめられてます。
+
+
+
+
+            
+                sass-lint/docs/rules at develop · sasstools/sass-lint
+                Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …
+                
+                    
+                    github.com
+                
+            
+                
+            " name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Vim の Syntastic で sass-lint が上手く動かないときの debug の話</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2017-02-17 00:16:01 +0900 JST">2017/02/17</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>一瞬はまったのでメモしておきます。</p>
+          <h2 id="sass-lintyml-はホームディレクトリ外では無効でした">~/.sass-lint.yml はホームディレクトリ外では無効でした</h2>
+          <p>まず問題の発端はここからです。</p>
+          <p>僕は今のところ Vim 上で scss ファイルを編集するときに sass-lint を linter として利用しています。</p>
+          <p><a class="link-card" href="https://github.com/sasstools/sass-lint" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - sasstools/sass-lint: Pure Node.js Sass linting</span> <span class="link-card__desc">Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/sasstools/sass-lint"> github.com</span></span><span class="link-card__image"><img alt="GitHub - sasstools/sass-lint: Pure Node.js Sass linting" loading="lazy" src="https://opengraph.githubassets.com/43c62eba6c9879917877098d81ba3a961541ed86a5a727d861eed8cf63fde7cd/sasstools/sass-lint"></span></a></p>
+          <p>.sass-lint.yml が何も設定されていない状態だと、 この中にあるルールの1つである <strong>property-sort-order</strong> が 初期設定で <strong>alphabetical</strong> になっているため、 scss ファイル内のプロパティがアルファベット順になっていない行で すべて警告が出ます。</p>
+          <p>正直、うざいです・・・。</p>
+          <p>ちなみに .sass-lint.yml のサンプルはこちらです。</p>
+          <p><a href="https://github.com/sasstools/sass-lint/blob/develop/docs/sass-lint.yml" rel="noopener noreferrer" target="_blank">https://github.com/sasstools/sass-lint/blob/develop/docs/sass-lint.yml</a></p>
+          <p>ルール一覧はこちら。それぞれ Markdown でまとめられてます。</p>
+          <p><a class="link-card" href="https://github.com/sasstools/sass-lint/tree/develop/docs/rules" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">sass-lint/docs/rules at develop · sasstools/sass-lint</span> <span class="link-card__desc">Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/sasstools/sass-lint/tree/develop/docs/rules"> github.com</span></span><span class="link-card__image"><img alt="sass-lint/docs/rules at develop · sasstools/sass-lint" loading="lazy" src="https://opengraph.githubassets.com/43c62eba6c9879917877098d81ba3a961541ed86a5a727d861eed8cf63fde7cd/sasstools/sass-lint"></span></a></p>
+          <p>これらを参考にして、 lint が走ったときにうざくならないよう、 設定をそれぞれ吟味したうえで <strong>~/.sass-lint.yml</strong> を配置しました。</p>
+          <p>そして、ホームディレクトリのすぐ下にサンプル用 scss ファイルを置き、 実際にルールが有効 / 無効になっているか確認していきました。</p>
+          <p>これでいい感じになったなーという頃、実際に warning だらけになっていた対象ファイルで、 試しに保存して linter 走らせてみることに。</p>
+          <p>がっ。</p>
+          <p><strong>動かない・・・。なぜ・・・。</strong></p>
+          <p>そう、 <strong>~/.sass-lint.yml はホームディレクトリ外では無効</strong> なのでした。</p>
+          <p>.sass-lint.yml 内にファイル指定できるオプションもあるのですが、</p>
+          <pre><code>files:
+  include: '**/*.s+(c|a)ss'
+</code></pre>
+          <p>これを ‘*.scss’ にしても ‘/**/*.scss’ にしてもなんともなりません。</p>
+          <p>さてどうしたものか・・・。</p>
+          <p>そこで少し考え方を変えて、 lint を走らせる側の設定を見直すことに。</p>
+          <h2 id="vim-の-syntastic-はとても便利">Vim の Syntastic はとても便利</h2>
+          <p>まず現状利用している Syntastic について先にメモしておきます。</p>
+          <p>Vim で validation, lint を行うとなった場合に、 主要な選択肢の1つになっていると思いますが、 ファイルタイプに応じて様々な checker を指定できるようになっていて、 とても使いやすい syntax checker です。</p>
+          <p><a class="link-card" href="https://github.com/vim-syntastic/syntastic" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - vim-syntastic/syntastic: Syntax checking hacks for vim</span> <span class="link-card__desc">Syntax checking hacks for vim. Contribute to vim-syntastic/syntastic development by creating an …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/vim-syntastic/syntastic"> github.com</span></span><span class="link-card__image"><img alt="GitHub - vim-syntastic/syntastic: Syntax checking hacks for vim" loading="lazy" src="https://opengraph.githubassets.com/419ec27a4c03919db9de85b183723400f5182161842ebc9b7f028d76ab602f6d/vim-syntastic/syntastic"></span></a></p>
+          <p>まずは自分の使っているプラグインマネージャなどでインストールして、 <code>:h syntastic</code> を読むと良いと思います。</p>
+          <p>今回の話に沿った部分ですが、 scss のファイルタイプの設定になるので、 ftplugin/scss.vim 内に以下の設定を元々入れてあります。</p>
+          <pre><code>let g:syntastic_scss_checkers = ['sass_lint']
+</code></pre>
+          <p>これもヘルプに全部ある話ですが、</p>
+          <p><strong>syntastic_&lt;filetype&gt;_checkers</strong> という名前で指定してやると、 filetype ごとの設定が可能です。</p>
+          <p>ここではファイルタイプが scss なので、 <strong>syntastic_scss_checkers</strong> という名前になりますね。</p>
+          <p>さらに、 checker ごとの細かな設定も可能です。</p>
+          <pre><code>                                   *'syntastic_<filetype>_<checker>_<option>'*
+Checkers that use "makeprgBuild()" construct the corresponding command line
+like this: >
+    let makeprg = self.makeprgBuild({
+                \ "exe": self.getExec(),
+                \ "args": "-a -b -c",
+                \ "fname": shellescape(expand("%", 1)),
+                \ "post_args": "--more --args",
+                \ "tail": "2>/dev/null" })
+<
+The result is a command line of the form: >
+    <exe> <args> <fname> <post_args> <tail>
+<
+All fields above are optional, and can be overridden by setting global
+variables 'g:syntastic_<filetype>_<checker-name>_<option-name>' - even
+parameters not specified in the call to "makeprgBuild()". For example to
+override the arguments and the tail: >
+    let g:syntastic_c_pc_lint_args = "-w5 -Iz:/usr/include/linux"
+    let g:syntastic_c_pc_lint_tail = "2>/dev/null"
+<
+</code></pre>
+          <p>ヘルプにもあるように、 例えば filetype が c で checker が pc_lint 、さらに変更したいオプションが args であれば、 <strong>g:syntastic_c_pc_lint_args</strong> という名前になります。</p>
+          <p><strong>g:syntastic_&lt;filetype&gt;_&lt;checker-name&gt;_&lt;option-name&gt;</strong> というルールですね。</p>
+          <h2 id="vim-の-syntastic-の-debug-方法について">Vim の Syntastic の debug 方法について</h2>
+          <p>話は戻って sass-lint の設定の話です。</p>
+          <p><strong>lint の実行時に設定ファイルを指定するようなオプション</strong> があれば、 仮にホームディレクトリ外であっても、用意した設定ファイルを読み込んで利用できるはずです。</p>
+          <p>どれが該当するかというと、先ほどの <strong>args オプション</strong> がそれです。</p>
+          <p>また、具体的にどのオプションをつけるべきかは、 sass-lint の CLI の項目を見ると良いです。</p>
+          <p><a class="link-card" href="https://github.com/sasstools/sass-lint#cli" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - sasstools/sass-lint: Pure Node.js Sass linting</span> <span class="link-card__desc">Pure Node.js Sass linting. Contribute to sasstools/sass-lint development by creating an account on …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/sasstools/sass-lint#cli"> github.com</span></span><span class="link-card__image"><img alt="GitHub - sasstools/sass-lint: Pure Node.js Sass linting" loading="lazy" src="https://opengraph.githubassets.com/43c62eba6c9879917877098d81ba3a961541ed86a5a727d861eed8cf63fde7cd/sasstools/sass-lint"></span></a></p>
+          <p>だいたい予想済みだとは思いますが、 config ファイルなので -c オプションが用意されています。</p>
+          <p>つまり、記述はこうなるはずです。</p>
+          <pre><code>let g:syntastic_scss_sass_lint_args = '-c ~/.sass-lint.yml'
+</code></pre>
+          <p>さて、これでオプション指定もできたので実行してみます！</p>
+          <p>・・・。</p>
+          <p>・・・・・・。</p>
+          <p><strong>何も出ません。</strong></p>
+          <p>なぜ何も出なくなったのか調べるために、 ヘルプを色々と読み漁ってみます。</p>
+          <p>中に syntastic-config-debug なる項目が。</p>
+          <p>つまりこういう感じです。</p>
+          <pre><code>let g:syntastic_debug = 1
+let g:syntastic_debug_file = "~/syntastic.log"
+</code></pre>
+          <p>これを追記したうえで、 自分の用意したオプションの有り無しで差分を見てみることに。</p>
+          <pre><code>syntastic: 1.261645: （中略）'makeprg': 'sass-lint -c .sass-lint.yml -q -f compact index.scss', 'returns': [0, 1]}
+syntastic: 1.448422: （中略）'makeprg': 'sass-lint -v -q -f compact index.scss', 'returns': [0, 1]}
+</code></pre>
+          <p>おっと、自らが追加したオプションが増えていることは確認できましたが、 <strong>逆に -v オプションが消されてしまっておりますね。</strong></p>
+          <p>ちなみに sass-lint における -v (verbose) オプションは、 <strong>cli ではつけないとレポーティングされない、</strong> とあるので、これは必ずつけないといけません。</p>
+          <p>つまり、最終的な記述はこうなります。</p>
+          <pre><code>let g:syntastic_scss_checkers = ['sass_lint']
+let g:syntastic_scss_sass_lint_args = '-v -c ~/.sass-lint.yml'
+</code></pre>
+          <p>ここまでやって、自分の用意した .sass-lint.yml が読み込まれ、 warning だらけの lint からようやく解放されました。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>今回もですが、 <strong>マニュアルやヘルプをきちんと読むといいことあります。</strong></p>
+          <p>書いてくれた方のためにもちゃんと読む癖をつけましょう。</p>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/vim/">#Vim</a> <a class="tag-link" href="/tags/lint/">#lint</a> <a class="tag-link" href="/tags/css/">#CSS</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Vim%20%e3%81%ae%20Syntastic%20%e3%81%a7%20sass-lint%20%e3%81%8c%e4%b8%8a%e6%89%8b%e3%81%8f%e5%8b%95%e3%81%8b%e3%81%aa%e3%81%84%e3%81%a8%e3%81%8d%e3%81%ae%20debug%20%e3%81%ae%e8%a9%b1%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20170217/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20170217%2f&amp;text=Vim%20%e3%81%ae%20Syntastic%20%e3%81%a7%20sass-lint%20%e3%81%8c%e4%b8%8a%e6%89%8b%e3%81%8f%e5%8b%95%e3%81%8b%e3%81%aa%e3%81%84%e3%81%a8%e3%81%8d%e3%81%ae%20debug%20%e3%81%ae%e8%a9%b1" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20170217/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

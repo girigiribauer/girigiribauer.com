@@ -1,0 +1,31 @@
+{
+  "?xml": {
+    "@_encoding": "utf-8",
+    "@_standalone": "yes",
+    "@_version": "1.0"
+  },
+  "rss": {
+    "@_version": "2.0",
+    "@_xmlns:atom": "http://www.w3.org/2005/Atom",
+    "channel": {
+      "atom:link": {
+        "@_href": "https://girigiribauer.com/tags/homebrew/index.xml",
+        "@_rel": "self",
+        "@_type": "application/rss+xml"
+      },
+      "description": "Recent content in Homebrew on ばうあーろぐ",
+      "generator": "Hugo",
+      "item": {
+        "description": "&lt;p&gt;超楽だったのでメモっておきます。&lt;/p&gt;\n&lt;p&gt;こちらにドキュメントあります。（Golang のバイナリの場合ではないので少し異なりますが）&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"https://github.com/Homebrew/brew/blob/master/docs/Formula-Cookbook.md\" target=\"_blank\" rel=\"noopener noreferrer\"&gt;https://github.com/Homebrew/brew/blob/master/docs/Formula-Cookbook.md&lt;/a&gt;&lt;/p&gt;\n&lt;h2 id=\"homebrew-対応\"&gt;Homebrew 対応&lt;/h2&gt;\n&lt;p&gt;自作コマンド \n\n\n&lt;a href=\"https://github.com/girigiribauer/db-cli\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;`db` command line tools (Docker based) by Golang. Contribute to girigiribauer/db-cli development by …&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/db-cli\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n github.com\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image\"&gt;\n &lt;img src=\"https://opengraph.githubassets.com/2161b0d46b63b6a81ea1b6235d2848f2142777e4d143bf594e1eb62e24edfe13/girigiribauer/db-cli\" alt=\"GitHub - girigiribauer/db-cli: `db` command line tools (Docker based) by Golang\" loading=\"lazy\" /&gt;\n &lt;/span&gt;&lt;/a&gt; を公開している時に\nリリースバイナリまで GitHub に登録できて一息つけたーというタイミングで、\nふと &lt;code&gt;brew install db-cli&lt;/code&gt; でインストールできたらいいなあと思ったので\n調べてやってみたらさくっと1時間もかからずいけました。&lt;/p&gt;\n&lt;p&gt;自作コマンド用のリポジトリとは別に、&lt;/p&gt;\n&lt;p&gt;\n\n\n&lt;a href=\"https://github.com/girigiribauer/homebrew-db-cli\" class=\"link-card\" target=\"_blank\"\n rel=\"noopener noreferrer\"&gt;\n &lt;span class=\"link-card__main\"&gt;\n &lt;span class=\"link-card__title\"&gt;GitHub - girigiribauer/homebrew-db-cli: db-cli for Homebrew&lt;/span&gt;\n &lt;span class=\"link-card__desc\"&gt;db-cli for Homebrew. Contribute to girigiribauer/homebrew-db-cli development by creating an account …&lt;/span&gt;\n &lt;span class=\"link-card__url\"&gt;\n &lt;img src=\"https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/homebrew-db-cli\" alt=\"\"\n class=\"link-card__favicon\" /&gt;\n github.com\n &lt;/span&gt;\n &lt;/span&gt;&lt;span class=\"link-card__image\"&gt;\n &lt;img src=\"https://opengraph.githubassets.com/d63420585998ce9cfbd260f15a030a7aed6bc3c4490516fb72ba7ea5ca167549/girigiribauer/homebrew-db-cli\" alt=\"GitHub - girigiribauer/homebrew-db-cli: db-cli for Homebrew\" loading=\"lazy\" /&gt;\n &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;",
+        "guid": "https://girigiribauer.com/tech/20161004/",
+        "link": "https://girigiribauer.com/tech/20161004/",
+        "pubDate": "Tue, 04 Oct 2016 13:11:17 +0900",
+        "title": "Homebrew で Golang のバイナリを公開してみた"
+      },
+      "language": "ja-jp",
+      "lastBuildDate": "Tue, 04 Oct 2016 13:11:17 +0900",
+      "link": "https://girigiribauer.com/tags/homebrew/",
+      "title": "Homebrew on ばうあーろぐ"
+    }
+  }
+}

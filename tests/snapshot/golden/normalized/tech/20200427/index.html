@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>ターミナル（黒い画面）を分割して使う tmux 超入門 | ばうあーろぐ</title>
+    <meta content="tmux に関する記事はちょくちょく書くものの、
+tmux 導入そのものに関する記事はそういえば書いてなかったなーと。
+というのも、ちょうど直近で tmux を含む環境構築をする機会があって、
+「あーついでにチートシート用意してもいいなあ」と思って、手元にメモ残してたのでした。
+tmux のこれだけ読めば使える記事が手元に1つあってもいいかなって思ったので雑に書きます。
+ターミナルでやるタスクは多い、分割したい
+ターミナル（黒い画面）使ってますか？僕はたくさん使ってます。
+こんな感じで 分割して 使ってます！（最近さくっと動画キャプチャの術を憶えたので！）
+
+    
+        
+    
+
+ターミナルが行えるタスクというのはそれなりに多いと思いますが、
+ターミナルのつらいところってどの辺にあるでしょうか？
+
+毎回別のウィンドウを立ち上げるのつらい
+実行が終わるのを待つのがもったいない！
+なんかログが流れて行っちゃったけど、エラーのところコピペしてググりたかった・・・
+
+いずれもあるあるです。
+だったらターミナルを分割しよう！
+上を見ると一目瞭然なんですが、
+ターミナルを分割すると、 毎回別のウィンドウを立ち上げなくてすむ し、
+何か実行してる最中に 並行して別のコマンドを打って作業する こともできちゃいます。
+まだターミナルを複数立ち上げちゃってる人は、
+これを機会に設定しちゃいましょう！
+tmux とは何なのか、どういう位置付けなのか
+まずターミナルを分割してくれるツールのことを、 ターミナル・マルチプレクサ (Terminal multiplexer) といいます。
+どんな種類があるかというと・・・
+
+screen (or GNU screen)
+Byobu
+tmux
+
+この辺にずらずら紹介されてますね！
+
+
+
+
+            
+                Terminal multiplexer - Wikipedia
+                
+                
+                    
+                    en.wikipedia.org
+                
+            
+今回は最後の tmux （ティーマックス） を導入していきます！
+tmux でできること
+
+
+
+
+
+            
+                Home
+                tmux source code. Contribute to tmux/tmux development by creating an account on GitHub.
+                
+                    
+                    github.com
+                
+            
+                
+            " name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20200427/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20200427" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="ターミナル（黒い画面）を分割して使う tmux 超入門" itemprop="name">
+    <meta content="tmux に関する記事はちょくちょく書くものの、
+tmux 導入そのものに関する記事はそういえば書いてなかったなーと。
+というのも、ちょうど直近で tmux を含む環境構築をする機会があって、
+「あーついでにチートシート用意してもいいなあ」と思って、手元にメモ残してたのでした。
+tmux のこれだけ読めば使える記事が手元に1つあってもいいかなって思ったので雑に書きます。
+ターミナルでやるタスクは多い、分割したい
+ターミナル（黒い画面）使ってますか？僕はたくさん使ってます。
+こんな感じで 分割して 使ってます！（最近さくっと動画キャプチャの術を憶えたので！）
+
+    
+        
+    
+
+ターミナルが行えるタスクというのはそれなりに多いと思いますが、
+ターミナルのつらいところってどの辺にあるでしょうか？
+
+毎回別のウィンドウを立ち上げるのつらい
+実行が終わるのを待つのがもったいない！
+なんかログが流れて行っちゃったけど、エラーのところコピペしてググりたかった・・・
+
+いずれもあるあるです。
+だったらターミナルを分割しよう！
+上を見ると一目瞭然なんですが、
+ターミナルを分割すると、 毎回別のウィンドウを立ち上げなくてすむ し、
+何か実行してる最中に 並行して別のコマンドを打って作業する こともできちゃいます。
+まだターミナルを複数立ち上げちゃってる人は、
+これを機会に設定しちゃいましょう！
+tmux とは何なのか、どういう位置付けなのか
+まずターミナルを分割してくれるツールのことを、 ターミナル・マルチプレクサ (Terminal multiplexer) といいます。
+どんな種類があるかというと・・・
+
+screen (or GNU screen)
+Byobu
+tmux
+
+この辺にずらずら紹介されてますね！
+
+
+
+
+            
+                Terminal multiplexer - Wikipedia
+                
+                
+                    
+                    en.wikipedia.org
+                
+            
+今回は最後の tmux （ティーマックス） を導入していきます！
+tmux でできること
+
+
+
+
+
+            
+                Home
+                tmux source code. Contribute to tmux/tmux development by creating an account on GitHub.
+                
+                    
+                    github.com
+                
+            
+                
+            " itemprop="description">
+    <meta content="ターミナル（黒い画面）を分割して使う tmux 超入門" property="og:title">
+    <meta content="tmux に関する記事はちょくちょく書くものの、
+tmux 導入そのものに関する記事はそういえば書いてなかったなーと。
+というのも、ちょうど直近で tmux を含む環境構築をする機会があって、
+「あーついでにチートシート用意してもいいなあ」と思って、手元にメモ残してたのでした。
+tmux のこれだけ読めば使える記事が手元に1つあってもいいかなって思ったので雑に書きます。
+ターミナルでやるタスクは多い、分割したい
+ターミナル（黒い画面）使ってますか？僕はたくさん使ってます。
+こんな感じで 分割して 使ってます！（最近さくっと動画キャプチャの術を憶えたので！）
+
+    
+        
+    
+
+ターミナルが行えるタスクというのはそれなりに多いと思いますが、
+ターミナルのつらいところってどの辺にあるでしょうか？
+
+毎回別のウィンドウを立ち上げるのつらい
+実行が終わるのを待つのがもったいない！
+なんかログが流れて行っちゃったけど、エラーのところコピペしてググりたかった・・・
+
+いずれもあるあるです。
+だったらターミナルを分割しよう！
+上を見ると一目瞭然なんですが、
+ターミナルを分割すると、 毎回別のウィンドウを立ち上げなくてすむ し、
+何か実行してる最中に 並行して別のコマンドを打って作業する こともできちゃいます。
+まだターミナルを複数立ち上げちゃってる人は、
+これを機会に設定しちゃいましょう！
+tmux とは何なのか、どういう位置付けなのか
+まずターミナルを分割してくれるツールのことを、 ターミナル・マルチプレクサ (Terminal multiplexer) といいます。
+どんな種類があるかというと・・・
+
+screen (or GNU screen)
+Byobu
+tmux
+
+この辺にずらずら紹介されてますね！
+
+
+
+
+            
+                Terminal multiplexer - Wikipedia
+                
+                
+                    
+                    en.wikipedia.org
+                
+            
+今回は最後の tmux （ティーマックス） を導入していきます！
+tmux でできること
+
+
+
+
+
+            
+                Home
+                tmux source code. Contribute to tmux/tmux development by creating an account on GitHub.
+                
+                    
+                    github.com
+                
+            
+                
+            " property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20200427/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="ターミナル（黒い画面）を分割して使う tmux 超入門" name="twitter:title">
+    <meta content="tmux に関する記事はちょくちょく書くものの、
+tmux 導入そのものに関する記事はそういえば書いてなかったなーと。
+というのも、ちょうど直近で tmux を含む環境構築をする機会があって、
+「あーついでにチートシート用意してもいいなあ」と思って、手元にメモ残してたのでした。
+tmux のこれだけ読めば使える記事が手元に1つあってもいいかなって思ったので雑に書きます。
+ターミナルでやるタスクは多い、分割したい
+ターミナル（黒い画面）使ってますか？僕はたくさん使ってます。
+こんな感じで 分割して 使ってます！（最近さくっと動画キャプチャの術を憶えたので！）
+
+    
+        
+    
+
+ターミナルが行えるタスクというのはそれなりに多いと思いますが、
+ターミナルのつらいところってどの辺にあるでしょうか？
+
+毎回別のウィンドウを立ち上げるのつらい
+実行が終わるのを待つのがもったいない！
+なんかログが流れて行っちゃったけど、エラーのところコピペしてググりたかった・・・
+
+いずれもあるあるです。
+だったらターミナルを分割しよう！
+上を見ると一目瞭然なんですが、
+ターミナルを分割すると、 毎回別のウィンドウを立ち上げなくてすむ し、
+何か実行してる最中に 並行して別のコマンドを打って作業する こともできちゃいます。
+まだターミナルを複数立ち上げちゃってる人は、
+これを機会に設定しちゃいましょう！
+tmux とは何なのか、どういう位置付けなのか
+まずターミナルを分割してくれるツールのことを、 ターミナル・マルチプレクサ (Terminal multiplexer) といいます。
+どんな種類があるかというと・・・
+
+screen (or GNU screen)
+Byobu
+tmux
+
+この辺にずらずら紹介されてますね！
+
+
+
+
+            
+                Terminal multiplexer - Wikipedia
+                
+                
+                    
+                    en.wikipedia.org
+                
+            
+今回は最後の tmux （ティーマックス） を導入していきます！
+tmux でできること
+
+
+
+
+
+            
+                Home
+                tmux source code. Contribute to tmux/tmux development by creating an account on GitHub.
+                
+                    
+                    github.com
+                
+            
+                
+            " name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">ターミナル（黒い画面）を分割して使う tmux 超入門</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2020-04-27 08:00:00 +0900 JST">2020/04/27</time> <span>(Updated: 2020/05/05)</span></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>tmux に関する記事はちょくちょく書くものの、 tmux 導入そのものに関する記事はそういえば書いてなかったなーと。</p>
+          <p>というのも、ちょうど直近で tmux を含む環境構築をする機会があって、 「あーついでにチートシート用意してもいいなあ」と思って、手元にメモ残してたのでした。</p>
+          <p>tmux のこれだけ読めば使える記事が手元に1つあってもいいかなって思ったので雑に書きます。</p>
+          <h2 id="ターミナルでやるタスクは多い分割したい">ターミナルでやるタスクは多い、分割したい</h2>
+          <p>ターミナル（黒い画面）使ってますか？僕はたくさん使ってます。</p>
+          <p>こんな感じで <strong>分割して</strong> 使ってます！（最近さくっと動画キャプチャの術を憶えたので！）</p>
+          <a href="resource01.mp4" target="_blank">
+  <video autoplay="" controls="" height="467" loop="" muted="" width="811">
+    <source src="resource01.mp4" type="video/mp4">
+  </video>
+</a>
+          <p>ターミナルが行えるタスクというのはそれなりに多いと思いますが、 ターミナルのつらいところってどの辺にあるでしょうか？</p>
+          <ul>
+            <li><strong>毎回別のウィンドウを立ち上げるのつらい</strong></li>
+            <li><strong>実行が終わるのを待つのがもったいない！</strong></li>
+            <li><strong>なんかログが流れて行っちゃったけど、エラーのところコピペしてググりたかった・・・</strong></li>
+          </ul>
+          <p>いずれもあるあるです。</p>
+          <h3 id="だったらターミナルを分割しよう">だったらターミナルを分割しよう！</h3>
+          <p>上を見ると一目瞭然なんですが、 ターミナルを分割すると、 <strong>毎回別のウィンドウを立ち上げなくてすむ</strong> し、 何か実行してる最中に <strong>並行して別のコマンドを打って作業する</strong> こともできちゃいます。</p>
+          <p>まだターミナルを複数立ち上げちゃってる人は、 これを機会に設定しちゃいましょう！</p>
+          <h2 id="tmux-とは何なのかどういう位置付けなのか">tmux とは何なのか、どういう位置付けなのか</h2>
+          <p>まずターミナルを分割してくれるツールのことを、 <strong>ターミナル・マルチプレクサ (Terminal multiplexer)</strong> といいます。</p>
+          <p>どんな種類があるかというと・・・</p>
+          <ul>
+            <li>screen (or GNU screen)</li>
+            <li>Byobu</li>
+            <li><strong>tmux</strong></li>
+          </ul>
+          <p>この辺にずらずら紹介されてますね！</p>
+          <p><a class="link-card" href="https://en.wikipedia.org/wiki/Terminal_multiplexer" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Terminal multiplexer - Wikipedia</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://en.wikipedia.org/wiki/Terminal_multiplexer"> en.wikipedia.org</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>今回は最後の <strong>tmux （ティーマックス）</strong> を導入していきます！</p>
+          <h3 id="tmux-でできること">tmux でできること</h3>
+          <p><img alt="tmux" src="resource02.jpg"></p>
+          <p><a class="link-card" href="https://github.com/tmux/tmux/wiki" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Home</span> <span class="link-card__desc">tmux source code. Contribute to tmux/tmux development by creating an account on GitHub.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/tmux/tmux/wiki"> github.com</span></span><span class="link-card__image"><img alt="Home" loading="lazy" src="https://opengraph.githubassets.com/5f279940ae50a9a941abef8f98e4e3422e913fd23ed6d8dba475e74772566988/tmux/tmux"></span></a></p>
+          <p>（公式はここなのかな・・・？）</p>
+          <p>tmux でできること一覧です！</p>
+          <ul>
+            <li>視覚的な分割（全体の <strong>ウィンドウ</strong> に対して分割したものを <strong>ペイン</strong> という）</li>
+            <li>複数のウィンドウ切り替え（複数のウィンドウをまとめて <strong>セッション</strong> と呼ぶ）</li>
+            <li>複数セッションの管理</li>
+            <li>ペイン間、ウィンドウ間、セッション間の移動</li>
+          </ul>
+          <p>実際は tmux に限らず、大抵のターミナル・マルチプレクサでできることですね。</p>
+          <p>まだまだたくさんできることはありますが、 今回はペインとウィンドウだけが自由に作れる状態を作るまでがゴールとします。</p>
+          <h2 id="tmux-を最短で導入設定したい">tmux を最短で導入、設定したい！</h2>
+          <p>最短でペインとウィンドウが使えるようになるためには、 <strong>前半で導入・設定</strong> し、 <strong>後半で使い方を覚える</strong> 必要があります。</p>
+          <p>まず前半です。 以下の手順です。（Mac 想定）</p>
+          <ol>
+            <li>事前に好きなターミナルを用意する</li>
+            <li>tmux をインストール</li>
+            <li>ホームディレクトリに空の <code>.tmux.conf</code> を作る</li>
+            <li>Tmux Plugin Manager (tpm) をインストール</li>
+            <li>tmux の設定を <code>.tmux.conf</code> に書く</li>
+            <li>手動で <code>tmux</code> が立ち上がるか確認</li>
+            <li>最低限の起動設定を <code>.zshrc</code> or <code>.bashrc</code> あたりに書く</li>
+            <li>ターミナル再起動し、自動で立ち上がるか確認</li>
+          </ol>
+          <h3 id="1-事前に好きなターミナルを用意する">1. 事前に好きなターミナルを用意する</h3>
+          <p>最初から入ってるやつでも大丈夫ですが、 僕は iTerm2 ( <a class="link-card" href="https://www.iterm2.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">iTerm2 - macOS Terminal Replacement</span> <span class="link-card__desc">iTerm2 is a replacement for Terminal and the successor to iTerm</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.iterm2.com/"> www.iterm2.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> ) を使っています。</p>
+          <p>やってる設定は透明度、ウィンドウサイズ、フォントあたり？の最低限です。</p>
+          <h3 id="2-tmux-をインストール">2. tmux をインストール</h3>
+          <p>Homebrew に入ってる時代になりました。素敵。</p>
+          <pre tabindex="0"><code>$ brew install tmux
+</code></pre>
+          <h3 id="3-ホームディレクトリに空の-tmuxconf-を作る">3. ホームディレクトリに空の <code>.tmux.conf</code> を作る</h3>
+          <pre tabindex="0"><code>$ cd ~
+$ touch .tmux.conf
+</code></pre>
+          <p><code>ls -a</code> でドットファイル含めたファイルの一覧が確認できるので、 それで確認できたらオーケーですね。</p>
+          <h3 id="4-tmux-plugin-manager-tpm-をインストール">4. Tmux Plugin Manager (tpm) をインストール</h3>
+          <p>実は Tmux 、途中から <strong>プラグイン機構の考え方が導入</strong> されて、 今ではプラグインベースでみんながよく使う設定などが提供されてたりするのでした。</p>
+          <p>なので、自分でガリガリ設定書く前に、プラグインマネージャを優先して入れましょう。</p>
+          <p><img alt="tpm" src="resource03.jpg"></p>
+          <p>導入手順はここに書いてあります！</p>
+          <p><a class="link-card" href="https://github.com/tmux-plugins/tpm" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - tmux-plugins/tpm: Tmux Plugin Manager</span> <span class="link-card__desc">Tmux Plugin Manager. Contribute to tmux-plugins/tpm development by creating an account on GitHub.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/tmux-plugins/tpm"> github.com</span></span><span class="link-card__image"><img alt="GitHub - tmux-plugins/tpm: Tmux Plugin Manager" loading="lazy" src="https://opengraph.githubassets.com/1ea92cc8bf4725d863550685080413a039efaf911523dbc3a9b9a1bf430e9950/tmux-plugins/tpm"></span></a></p>
+          <p>ちなみに勘違いが起きやすいところなのですが、 <strong>tmux 自体にプラグイン機構があるわけではなく、 tpm を追加で導入することでプラグイン機構が使える</strong> ようになります。</p>
+          <p>つまり、 <strong>tpm のプラグインが入っていない状態でプラグインを導入することはできない</strong> ので、 tpm だけは手作業で入れましょうw</p>
+          <p>書いてあるように <code>~/.tmux/plugins/tpm</code> に tpm を入れましょう。 そうすれば、それ以外のプラグインが <code>~/.tmux/plugins/</code> 以下に勝手に入ってくれます。</p>
+          <h3 id="5-tmux-の設定を-tmuxconf-に書く">5. tmux の設定を <code>.tmux.conf</code> に書く</h3>
+          <p>設定項目は以下あたりかなと。</p>
+          <ul>
+            <li>
+              basic 基本的な設定
+              <ul>
+                <li>prefix キーの設定（変更したい場合のみ）</li>
+                <li>ウィンドウの切り替えをしやすくするための設定</li>
+              </ul>
+            </li>
+            <li>
+              mapping キーマッピング
+              <ul>
+                <li><code>.tmux.conf</code> を書き換えたときの再読み込み</li>
+              </ul>
+            </li>
+            <li>
+              plugins プラグイン読み込み
+              <ul>
+                <li>プラグイン一式を読み込む</li>
+              </ul>
+            </li>
+          </ul>
+          <p>以下日本語でコメント付きで書いていきます。</p>
+          <h4 id="前提キーバインドについて">（前提）キーバインドについて</h4>
+          <p>先に書き方を統一しておきます。</p>
+          <ul>
+            <li><code>Ctrl-j</code> … <code>Ctrl</code> キーと <code>j</code> キーの同時押し</li>
+            <li><code>&lt;prefix&gt; + r</code> … prefix キーを押してから、（一度離して） <code>r</code> キーを押す</li>
+          </ul>
+          <p>つまり、 <code>&lt;prefix&gt; + r</code> と書いてあったとき、 prefix キーが <code>Ctrl-j</code> だった場合、 <code>Ctrl</code> キーと <code>j</code> キーを同時押ししてから、 <code>r</code> キーを押すことを指します。</p>
+          <h4 id="basic-基本的な設定">basic 基本的な設定</h4>
+          <p><code>.tmux.conf</code> に丸々コピペしても一応動きます。</p>
+          <pre tabindex="0"><code># ---------------------------------------------------------------------------- #
+# basic
+# ---------------------------------------------------------------------------- #
+
+# prefix キーを Ctrl-b から Ctrl-j に変える
+# Ctrl-b は他（vi キーバインド）とかぶるので、かぶらないものに変えた方が良さげ
+# Ctrl-j なら影響少なそう、押しやすそう
+set-option -g prefix C-j
+unbind-key C-b
+
+# いろんなところで vi キーバインドが使えます
+# vi に馴染みがない人は外した方が良さげ
+# でもこれを機会にペイン移動だけでも hjkl 使ったらいいと思う！
+set-window-option -g mode-keys vi
+set-option -g @shell_mode 'vi'
+
+# キーボード側が左から 1,2... と並んでいるので、
+# キーボード位置に合わせてウィンドウに1から番号振ると分かりやすい
+# でないと 0 だけ右、次の1は左、みたいにややこしい
+set-option -g base-index 1
+set-option -g pane-base-index 1
+</code></pre>
+          <h4 id="mapping-キーマッピング">mapping キーマッピング</h4>
+          <pre tabindex="0"><code># ---------------------------------------------------------------------------- #
+# mapping
+# ---------------------------------------------------------------------------- #
+
+# <prefix> + r で勝手に .tmux.conf を読み込んでくれる
+# これだけはあった方が良いぞ！
+# from http://d.hatena.ne.jp/kiririmode/20120321/p1
+bind-key r source-file ~/.tmux.conf\; display-message "$HOME/.tmux.conf reloaded!"
+
+# tmux-yank でコピーの選択開始が動かなくなってた？みたいなので、
+# 手動で bind-key の設定しちゃう（後述）
+bind-key -T copy-mode-vi 'v' send-keys -X  begin-selection
+</code></pre>
+          <h4 id="plugins-プラグイン読み込み">plugins プラグイン読み込み</h4>
+          <p>ちょっと多めです。</p>
+          <p>上にも書きましたが、 tpm だけは手動で入れなきゃ動かないです。 <strong>tpm プラグインが入っていない状態でプラグインを導入することはできない</strong> ですw</p>
+          <pre tabindex="0"><code># ---------------------------------------------------------------------------- #
+# plugins
+# ---------------------------------------------------------------------------- #
+
+# プラグインを管理するためのプラグイン
+# 手動で読み込む必要あり！
+# <prefix> + i で指定されているプラグインをインストール
+# <prefix> + u でアップデート
+set-option -g @plugin "tmux-plugins/tpm"
+
+# セッションを保持してくれるプラグイン
+# https://github.com/tmux-plugins/tmux-resurrect
+# <prefix> + Ctrl-s でセッション保存
+# <prefix> + Ctrl-r で復元（リストア）
+set-option -g @plugin "tmux-plugins/tmux-resurrect"
+
+# さらに勝手にセッション保持してくれるプラグイン
+# https://github.com/tmux-plugins/tmux-continuum
+# @continuum-save-interval を指定することで、保持する間隔を指定できる
+set-option -g @plugin "tmux-plugins/tmux-continuum"
+set -g @continuum-save-interval 10
+
+# ファイルツリーが見られるやつ
+# https://github.com/tmux-plugins/tmux-sidebar
+# <prefix> + <Tab> で表示
+# もう一度 <prefix> + <Tab> を押すか、そのペインに移動してから q で閉じる
+set-option -g @plugin "tmux-plugins/tmux-sidebar"
+
+# vi のキーバインドでペイン移動できちゃうやつ
+# https://github.com/tmux-plugins/tmux-pain-control
+# 結局 tmux のペイン移動を覚える必要があるので、 vi に合わせておくと脳のコスト下がる
+set-option -g @plugin "tmux-plugins/tmux-pain-control"
+
+# 黒い画面からのコピペ
+# https://github.com/tmux-plugins/tmux-yank
+# <prefix> + y で画面まるまるヤンク（コピー）できる
+# 実際は画面全体じゃなく部分的にコピーすることが大半なので、
+# <prefix> + [ でコピーモードに切り替えてから、 v を押して選択し y でコピー
+set-option -g @plugin 'tmux-plugins/tmux-yank'
+
+# プラグイン実行
+run-shell "~/.tmux/plugins/tpm/tpm"
+</code></pre>
+          <p>いやー、この辺全部設定を <code>.tmux.conf</code> に書いていた時代と比べたら、 だいぶ楽になりましたねー。</p>
+          <p>少し抜粋しましたが、全文はこちらです。</p>
+          <p><a class="link-card" href="https://github.com/girigiribauer/dotfiles/blob/master/.tmux.conf" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">dotfiles/.tmux.conf at master · girigiribauer/dotfiles</span> <span class="link-card__desc">dotfiles for myself. Contribute to girigiribauer/dotfiles development by creating an account on …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/girigiribauer/dotfiles/blob/master/.tmux.conf"> github.com</span></span><span class="link-card__image"><img alt="dotfiles/.tmux.conf at master · girigiribauer/dotfiles" loading="lazy" src="https://opengraph.githubassets.com/2cb2f722e17a35479842f958024b32199bc2bba87f1f443470134735b757c452/girigiribauer/dotfiles"></span></a></p>
+          <p>カラー指定とかステータスラインとかはまあ無くても動きますし、 上記参考にしながら、入れたい人だけカスタマイズしたらいいんじゃないでしょうか。 ちなみに僕は黄色と黒の TwentyFour カラーです。（どうでもいい）</p>
+          <h3 id="6-手動で-tmux-が立ち上がるか確認">6. 手動で <code>tmux</code> が立ち上がるか確認</h3>
+          <p><strong>tmux は勝手に立ち上がりません。</strong></p>
+          <p>ターミナルを立ち上げたあと、以下を実行してみます。</p>
+          <pre tabindex="0"><code>$ tmux new -s works
+</code></pre>
+          <p>こうすると、セッション名が <code>works</code> の tmux のセッションが立ち上がります。</p>
+          <p>立ち上がったところだけ確認して、 <code>Ctrl-d</code> あたりで一旦閉じておきます。 （ちなみに <code>Ctrl-d</code> はただの exit コマンドです。 <code>exit</code> って入力しても同じです。）</p>
+          <h3 id="7-最低限の起動設定を-zshrc-or-bashrc-あたりに書く">7. 最低限の起動設定を <code>.zshrc</code> or <code>.bashrc</code> あたりに書く</h3>
+          <p>最初にも触れたように、複数セッションを使いこなすことは当初想定してません。</p>
+          <p>なので、セッション名は <code>works</code> と固定にしたうえで、 それが <strong>常に毎回自動で立ち上がるための設定</strong> をします。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-zsh" data-lang="zsh"><span style="display:flex"><span><span style="color:#75715e"># セッションなかったら作る</span>
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">if</span> ! <span style="color:#66d9ef">$(</span>tmux has-session -t works 2> /dev/null<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex"><span>  tmux new -s works
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span><span style="color:#75715e"># tmux からの起動じゃなかったら tmux attach</span>
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">"</span>$TMUX<span style="color:#e6db74">"</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex"><span>  tmux attach -t works
+</span></span><span style="display:flex"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre>
+          </div>
+          <p>tmux から立ち上がると、環境変数に <code>$TMUX</code> というのが追加されているので、 それをもって tmux から立ち上げた起動したのか、外から立ち上げたのかを判断します。</p>
+          <h3 id="8-ターミナル再起動し自動で立ち上がるか確認">8. ターミナル再起動し、自動で立ち上がるか確認</h3>
+          <p>あとはターミナルを一旦すべて閉じて、改めて立ち上げ直してみてください。</p>
+          <p>tmux が自動で立ち上がっていたら、前半の設定完了です！</p>
+          <p>導入の最後に、プラグインを一式入れておくと良いです。 <code>&lt;prefix&gt; + i</code> です！</p>
+          <h2 id="tmux-使い方チートシート">tmux 使い方チートシート</h2>
+          <p><strong>前半で導入・設定</strong> し、 <strong>後半で使い方を覚える</strong> 必要があります。 と書きましたが、まだ前半が終わっただけで、今からが後半です。</p>
+          <p>ここを頑張って使いながら手に馴染ませていくのです・・・！</p>
+          <h3 id="ウィンドウ--ペイン操作">ウィンドウ / ペイン操作</h3>
+          <p>この範囲のキーバインドを憶えさえすれば、 ウィンドウ、ペインに関する最低限の操作はばっちり！</p>
+          <h4 id="新たにウィンドウを作る">新たにウィンドウを作る</h4>
+          <pre tabindex="0"><code><prefix> + c
+</code></pre>
+          <p>Create の <code>c</code> って覚える！</p>
+          <h4 id="ペイン左右分割">ペイン左右分割</h4>
+          <pre tabindex="0"><code><prefix> + %
+</code></pre>
+          <p>とにかくペイン分割したい！って思ったら、 見た目が分割してそうな <code>%</code> を押す！</p>
+          <h4 id="ペイン上下分割">ペイン上下分割</h4>
+          <pre tabindex="0"><code><prefix> + "
+</code></pre>
+          <p>さらに上下分割したかったら、ダブルっぽいキーである <code>"</code> を押す！</p>
+          <h4 id="ペイン上下左右移動">ペイン上下左右移動</h4>
+          <p>vi キーバインドの hjkl に合わせるの、超おすすめです！</p>
+          <p>すでに上で設定がされているなら・・・</p>
+          <pre tabindex="0"><code><prefix> + k // 上移動
+<prefix> + l // 右移動
+<prefix> + j // 下移動
+<prefix> + h // 左移動
+</code></pre>
+          <h4 id="サイズ変更">サイズ変更</h4>
+          <p>今いるペインが基準になります。先に移動しておいてください。</p>
+          <pre tabindex="0"><code><prefix> + KKK... // 上に広げる
+<prefix> + LLL... // 右に広げる
+<prefix> + JJJ... // 下に広げる
+<prefix> + HHH... // 左に広げる
+</code></pre>
+          <p>ちなみに <code>KKK...</code> というのは、 <code>Shift</code> と <code>k</code> を同時押ししながら <code>k</code> を連打するのを指してます。</p>
+          <p>広げたい分だけ広げてください。</p>
+          <h4 id="どのペインにいるか分からない">どのペインにいるか分からない</h4>
+          <pre tabindex="0"><code><prefix> + q
+</code></pre>
+          <p>たまにあります。 どこにフォーカス当たってるのか分からなくなったときは Question の <code>q</code> で！</p>
+          <h4 id="ペインを閉じる">ペインを閉じる</h4>
+          <pre tabindex="0"><code>Ctrl-d
+</code></pre>
+          <p>これは普通に閉じればオーケーです。</p>
+          <h4 id="ウィンドウの切り替え">ウィンドウの切り替え</h4>
+          <pre tabindex="0"><code><prefix> + [number]
+</code></pre>
+          <p>上で設定がされているのなら、1から順にウィンドウが増えているはずです！</p>
+          <h3 id="その他お役立ち操作">その他お役立ち操作</h3>
+          <h4 id="tmuxconf-の設定反映">.tmux.conf の設定反映</h4>
+          <pre tabindex="0"><code><prefix> + r
+</code></pre>
+          <p>上で設定したやつです！ <code>.tmux.conf</code> を Reload してくれるので <code>r</code> で！</p>
+          <h4 id="プラグイン管理">プラグイン管理</h4>
+          <pre tabindex="0"><code><prefix> + i // インストール
+<prefix> + u // アップデート
+</code></pre>
+          <p>それぞれ Install の <code>i</code> 、 Update の <code>u</code> です！</p>
+          <h4 id="画面からのコピー">画面からのコピー</h4>
+          <p><strong>ここが一番憶えにくいかもです・・・！</strong></p>
+          <p>ただ、ターミナル画面で出力されたエラーを、 ブラウザ上にコピペしてググったりとか、 <strong>結構な頻度でターミナルからのコピーは発生する</strong> ので、 使いながら徐々に憶えた方が良さげです。</p>
+          <ol>
+            <li>コピーモードに切り替え</li>
+            <li>選択したい箇所が移るように移動</li>
+            <li>選択開始</li>
+            <li>選択終了してコピー！</li>
+          </ol>
+          <pre tabindex="0"><code><prefix> + [ // コピーモード
+Ctrl-b // 画面表示をさかのぼる
+Ctrl-f // 逆に進める
+q // コピーモードの終了
+</code></pre>
+          <p><code>&lt;prefix&gt; + [</code> でコピーモードに移行して、 <code>q</code> で終了します。</p>
+          <p>これだけでも、一瞬ウィンドウに表示されてたけど、 あれなんだったんだろう・・・？って見にいくのに使えますね！</p>
+          <p>さらに、コピーモード中に <code>Ctrl-b</code> や <code>Ctrl-f</code> で Back したり Forward したりできます。 もちろん Back / Forward の <code>b</code> / <code>f</code> ですね！</p>
+          <p>さらにここからコピーの流れです。</p>
+          <pre tabindex="0"><code>// コピーモード中に・・・
+v // 今のカーソル位置から選択開始
+hjkl // hjkl で移動
+y // コピー！
+</code></pre>
+          <p><strong>ここから追記（2020/05/05）</strong> アップデート前後でなぜか <code>v</code> キーにてコピーの選択開始が動かなくなってたので、 独自に bind-key 設定して追加してます！</p>
+          <p>上の mapping あたりの設定にも出てきてますが、改めてメモ。</p>
+          <pre tabindex="0"><code>bind-key -T copy-mode-vi 'v' send-keys -X  begin-selection
+</code></pre>
+          <p><strong>ここまで追記（2020/05/05）</strong></p>
+          <p>ちょっとここだけ分かりづらいので、またまた動画で。</p>
+          <a href="resource04.mp4" target="_blank">
+  <video autoplay="" controls="" height="467" loop="" muted="" width="811">
+    <source src="resource04.mp4" type="video/mp4">
+  </video>
+</a>
+          <p>もうお分かりだと思いますが、選択中は概ね vi のキーバインドが使えるので、 <code>0</code> で行頭、 <code>$</code> で行末に行けちゃったりします。 つまり行ごとコピーも簡単です。</p>
+          <p>（そもそも行コピーは <code>v</code> で開始じゃなく <code>V</code> と入力すると、 これも vi と同じく行単位のコピーになります）</p>
+          <h3 id="セッション操作">セッション操作</h3>
+          <p>ウィンドウ、ペインよりは優先度下がりますが、 一応書き残しておきます。</p>
+          <p>セッション1つで構わないよって人は全部スルーして OK ！</p>
+          <h4 id="セッション一覧を見るコマンド">セッション一覧を見る（コマンド）</h4>
+          <p>これは tmux 立ち上がってないときでも使えます。 普通にコマンドとして入力します。</p>
+          <pre tabindex="0"><code>tmux ls
+</code></pre>
+          <h4 id="セッション一覧を見るキーバインド">セッション一覧を見る（キーバインド）</h4>
+          <p>こっちは立ち上がっているときの話です。</p>
+          <pre tabindex="0"><code><prefix> + :ls
+</code></pre>
+          <h4 id="tmux-起動中に別のセッションを作る">tmux 起動中に別のセッションを作る</h4>
+          <pre tabindex="0"><code><prefix> + :new -s works2
+</code></pre>
+          <p>作ったら自動的にセッション切り替わります。</p>
+          <h4 id="tmux-起動中に別のセッションに切り替える">tmux 起動中に別のセッションに切り替える</h4>
+          <pre tabindex="0"><code><prefix> + :attach -t works
+</code></pre>
+          <p>オプションの <code>-s</code> と <code>-t</code> が若干分かりづらいのですが、 新規で作るときのセッション名は Session の <code>s</code> 、 既存のセッションは Target の <code>t</code> と覚えると良いのかも？です。 （そもそも揃えて欲しい感はありますが・・・）</p>
+          <h4 id="セッションを閉じる">セッションを閉じる</h4>
+          <pre tabindex="0"><code>tmux kill-session -t works2
+</code></pre>
+          <p>自分自身のセッションを指定すると tmux が終了するので注意が必要です。</p>
+          <h2 id="中々キーバインドが憶えられない">中々キーバインドが憶えられない・・・</h2>
+          <p><strong>使って覚えろ！手に馴染ませろ！</strong></p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>これで <strong>最低限の tmux の導入</strong> ができたんじゃないでしょうか！</p>
+          <p>こういった仮想のターミナルをいくつも手元で管理できるようになると、 人類がマルチタスクにまた一歩近づけると思います。</p>
+          <p>何かの作業中に割り込みタスクが入った場合、 今のものを閉じるのではなく、別のウィンドウを立ち上げる、 あるいは別のセッションを立ち上げるなどすれば、 <strong>割り込みタスクを片付けたあとに、元々のタスクに戻るのもスムーズ</strong> です！</p>
+          <p>知らなくても作業自体には差し支えがないため、 意外と知らない人も多いようです。 「えっもっと早く教えてくれたら良かったのにー」って人を何度も見かけてきてますので、 良かったら周りの人にも、「こういう黒い画面を分割できるやつがあるよ！」って記事ごと教えてあげてください！ （そのために書きました）</p>
+          <h2 id="refs">参考 URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://github.com/tmux/tmux/wiki/Getting-Started" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Getting Started</span> <span class="link-card__desc">tmux source code. Contribute to tmux/tmux development by creating an account on GitHub.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/tmux/tmux/wiki/Getting-Started"> github.com</span></span><span class="link-card__image"><img alt="Getting Started" loading="lazy" src="https://opengraph.githubassets.com/5f279940ae50a9a941abef8f98e4e3422e913fd23ed6d8dba475e74772566988/tmux/tmux"></span></a></li>
+            <li><a class="link-card" href="https://github.com/tmux-plugins/tpm" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">GitHub - tmux-plugins/tpm: Tmux Plugin Manager</span> <span class="link-card__desc">Tmux Plugin Manager. Contribute to tmux-plugins/tpm development by creating an account on GitHub.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://github.com/tmux-plugins/tpm"> github.com</span></span><span class="link-card__image"><img alt="GitHub - tmux-plugins/tpm: Tmux Plugin Manager" loading="lazy" src="https://opengraph.githubassets.com/1ea92cc8bf4725d863550685080413a039efaf911523dbc3a9b9a1bf430e9950/tmux-plugins/tpm"></span></a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/tmux/">#tmux</a> <a class="tag-link" href="/tags/cli/">#CLI</a> <a class="tag-link" href="/tags/shellscript/">#ShellScript</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=%e3%82%bf%e3%83%bc%e3%83%9f%e3%83%8a%e3%83%ab%ef%bc%88%e9%bb%92%e3%81%84%e7%94%bb%e9%9d%a2%ef%bc%89%e3%82%92%e5%88%86%e5%89%b2%e3%81%97%e3%81%a6%e4%bd%bf%e3%81%86%20tmux%20%e8%b6%85%e5%85%a5%e9%96%80%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20200427/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20200427%2f&amp;text=%e3%82%bf%e3%83%bc%e3%83%9f%e3%83%8a%e3%83%ab%ef%bc%88%e9%bb%92%e3%81%84%e7%94%bb%e9%9d%a2%ef%bc%89%e3%82%92%e5%88%86%e5%89%b2%e3%81%97%e3%81%a6%e4%bd%bf%e3%81%86%20tmux%20%e8%b6%85%e5%85%a5%e9%96%80" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20200427/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>

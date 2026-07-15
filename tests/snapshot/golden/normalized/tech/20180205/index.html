@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>Docker 再入門2018 - コンテナ編 | ばうあーろぐ</title>
+    <meta content="最近、Git, Docker あたりはほぼ必須のスキルセットになってきているかと思います。
+前者の Git に関しては、
+実際に数値を見たわけではないのですが、肌感覚としてデザイナーの方にもある程度広まってきていて、
+幅広く使われてきているなあという印象を持っています。
+反面、後者の Docker に関しては、
+いまいち概念が理解できずにいたり、
+あるいは、 言われた通りにコマンド打って使ってはいるものの、
+実際自分が何をやっているのか理解できていない など、
+あまりまだ浸透していない印象を受けます。
+現状で 徐々にデジタルディバイドが広がっている感じ を持ったので、
+2018年にもなった今、改めて自分の知識の棚卸しも兼ねて、
+Docker を始めるならこんなところを知っておくべき、押さえておくべき、
+といったことをまとめ直してみようと思います。
+（あっ、あと最近ブログ書いてなかったので・・・）
+あともう1点書く理由としては、 Docker 周りのアップデートがだいぶ落ち着いてきており、
+このタイミングなら記事を書いても、それほど鮮度が急に落ちることはないだろうと思った点があります。
+学び直すなら今がちょうど良いかもしれません。
+Let’s Docker!
+目次
+だいぶ長くなりそうなので（これを公開してる時点で全部書き終わってるはずですが）、
+いくつかの記事に分けてあります。
+
+
+
+
+コンテナ編 （いまここ）
+
+読むと Docker のコンテナ周りがざっくり分かる
+実際にシンプルな Docker コンテナを作ってみる
+用語の整理など
+
+
+
+
+
+コマンド編
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+
+
+
+
+
+エコシステム編
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+下準備
+Docker がインストールされてなくては何ともなりません。
+まずはインストールしましょう。
+Docker のインストール
+（正直この項目は省略してもいいんじゃないかと思いましたが、一応書いておきます・・・）
+読むだけじゃなく手を動かしましょう。" name="description">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://girigiribauer.com/tech/20180205/" rel="canonical">
+    <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20180205" rel="site.standard.document">
+    <meta content="Hugo 0.164.0" name="generator">
+    <meta content="#ffffff" name="theme-color">
+    <link href="/favicon.ico" rel="icon">
+    <meta content="Docker 再入門2018 - コンテナ編" itemprop="name">
+    <meta content="最近、Git, Docker あたりはほぼ必須のスキルセットになってきているかと思います。
+前者の Git に関しては、
+実際に数値を見たわけではないのですが、肌感覚としてデザイナーの方にもある程度広まってきていて、
+幅広く使われてきているなあという印象を持っています。
+反面、後者の Docker に関しては、
+いまいち概念が理解できずにいたり、
+あるいは、 言われた通りにコマンド打って使ってはいるものの、
+実際自分が何をやっているのか理解できていない など、
+あまりまだ浸透していない印象を受けます。
+現状で 徐々にデジタルディバイドが広がっている感じ を持ったので、
+2018年にもなった今、改めて自分の知識の棚卸しも兼ねて、
+Docker を始めるならこんなところを知っておくべき、押さえておくべき、
+といったことをまとめ直してみようと思います。
+（あっ、あと最近ブログ書いてなかったので・・・）
+あともう1点書く理由としては、 Docker 周りのアップデートがだいぶ落ち着いてきており、
+このタイミングなら記事を書いても、それほど鮮度が急に落ちることはないだろうと思った点があります。
+学び直すなら今がちょうど良いかもしれません。
+Let’s Docker!
+目次
+だいぶ長くなりそうなので（これを公開してる時点で全部書き終わってるはずですが）、
+いくつかの記事に分けてあります。
+
+
+
+
+コンテナ編 （いまここ）
+
+読むと Docker のコンテナ周りがざっくり分かる
+実際にシンプルな Docker コンテナを作ってみる
+用語の整理など
+
+
+
+
+
+コマンド編
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+
+
+
+
+
+エコシステム編
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+下準備
+Docker がインストールされてなくては何ともなりません。
+まずはインストールしましょう。
+Docker のインストール
+（正直この項目は省略してもいいんじゃないかと思いましたが、一応書いておきます・・・）
+読むだけじゃなく手を動かしましょう。" itemprop="description">
+    <meta content="Docker 再入門2018 - コンテナ編" property="og:title">
+    <meta content="最近、Git, Docker あたりはほぼ必須のスキルセットになってきているかと思います。
+前者の Git に関しては、
+実際に数値を見たわけではないのですが、肌感覚としてデザイナーの方にもある程度広まってきていて、
+幅広く使われてきているなあという印象を持っています。
+反面、後者の Docker に関しては、
+いまいち概念が理解できずにいたり、
+あるいは、 言われた通りにコマンド打って使ってはいるものの、
+実際自分が何をやっているのか理解できていない など、
+あまりまだ浸透していない印象を受けます。
+現状で 徐々にデジタルディバイドが広がっている感じ を持ったので、
+2018年にもなった今、改めて自分の知識の棚卸しも兼ねて、
+Docker を始めるならこんなところを知っておくべき、押さえておくべき、
+といったことをまとめ直してみようと思います。
+（あっ、あと最近ブログ書いてなかったので・・・）
+あともう1点書く理由としては、 Docker 周りのアップデートがだいぶ落ち着いてきており、
+このタイミングなら記事を書いても、それほど鮮度が急に落ちることはないだろうと思った点があります。
+学び直すなら今がちょうど良いかもしれません。
+Let’s Docker!
+目次
+だいぶ長くなりそうなので（これを公開してる時点で全部書き終わってるはずですが）、
+いくつかの記事に分けてあります。
+
+
+
+
+コンテナ編 （いまここ）
+
+読むと Docker のコンテナ周りがざっくり分かる
+実際にシンプルな Docker コンテナを作ってみる
+用語の整理など
+
+
+
+
+
+コマンド編
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+
+
+
+
+
+エコシステム編
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+下準備
+Docker がインストールされてなくては何ともなりません。
+まずはインストールしましょう。
+Docker のインストール
+（正直この項目は省略してもいいんじゃないかと思いましたが、一応書いておきます・・・）
+読むだけじゃなく手を動かしましょう。" property="og:description">
+    <meta content="article" property="og:type">
+    <meta content="https://girigiribauer.com/tech/20180205/" property="og:url">
+    <meta content="ばうあーろぐ" property="og:site_name">
+    <meta content="https://girigiribauer.com/img/ogimage.png" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Docker 再入門2018 - コンテナ編" name="twitter:title">
+    <meta content="最近、Git, Docker あたりはほぼ必須のスキルセットになってきているかと思います。
+前者の Git に関しては、
+実際に数値を見たわけではないのですが、肌感覚としてデザイナーの方にもある程度広まってきていて、
+幅広く使われてきているなあという印象を持っています。
+反面、後者の Docker に関しては、
+いまいち概念が理解できずにいたり、
+あるいは、 言われた通りにコマンド打って使ってはいるものの、
+実際自分が何をやっているのか理解できていない など、
+あまりまだ浸透していない印象を受けます。
+現状で 徐々にデジタルディバイドが広がっている感じ を持ったので、
+2018年にもなった今、改めて自分の知識の棚卸しも兼ねて、
+Docker を始めるならこんなところを知っておくべき、押さえておくべき、
+といったことをまとめ直してみようと思います。
+（あっ、あと最近ブログ書いてなかったので・・・）
+あともう1点書く理由としては、 Docker 周りのアップデートがだいぶ落ち着いてきており、
+このタイミングなら記事を書いても、それほど鮮度が急に落ちることはないだろうと思った点があります。
+学び直すなら今がちょうど良いかもしれません。
+Let’s Docker!
+目次
+だいぶ長くなりそうなので（これを公開してる時点で全部書き終わってるはずですが）、
+いくつかの記事に分けてあります。
+
+
+
+
+コンテナ編 （いまここ）
+
+読むと Docker のコンテナ周りがざっくり分かる
+実際にシンプルな Docker コンテナを作ってみる
+用語の整理など
+
+
+
+
+
+コマンド編
+
+読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる
+
+
+
+
+
+エコシステム編
+
+読むと DockerHub のサービスの活用方法がざっくり分かる
+
+
+
+
+
+実践編
+
+読むと Docker で環境構築する方法が分かる、怖くなくなる
+
+
+
+下準備
+Docker がインストールされてなくては何ともなりません。
+まずはインストールしましょう。
+Docker のインストール
+（正直この項目は省略してもいいんじゃないかと思いましたが、一応書いておきます・・・）
+読むだけじゃなく手を動かしましょう。" name="twitter:description">
+    <meta content="@girigiribauer" name="twitter:site">
+    <meta content="@girigiribauer" name="twitter:creator">
+    <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
+    <script data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b" defer="" src="https://analytics.girigiribauer.com/script.js"></script>
+  </head>
+  <body>
+    <header class="container site-header">
+      <a class="site-title" href="/">ばうあーろぐ</a>
+      <div class="theme-toggle-wrap"></div>
+    </header>
+    <main class="container">
+      <article class="article-container">
+        <header class="article-header">
+          <h1 class="page-title">Docker 再入門2018 - コンテナ編</h1>
+          <div class="article-meta article-meta-flex"><time datetime="2018-02-05 11:52:41 +0900 JST">2018/02/05</time></div>
+        </header>
+        <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
+        <div class="content">
+          <p>最近、Git, Docker あたりはほぼ必須のスキルセットになってきているかと思います。</p>
+          <p>前者の Git に関しては、 実際に数値を見たわけではないのですが、肌感覚としてデザイナーの方にもある程度広まってきていて、 幅広く使われてきているなあという印象を持っています。</p>
+          <p>反面、後者の Docker に関しては、 いまいち概念が理解できずにいたり、 あるいは、 <strong>言われた通りにコマンド打って使ってはいるものの、 実際自分が何をやっているのか理解できていない</strong> など、 あまりまだ浸透していない印象を受けます。</p>
+          <p>現状で <strong>徐々にデジタルディバイドが広がっている感じ</strong> を持ったので、 2018年にもなった今、改めて自分の知識の棚卸しも兼ねて、 <strong>Docker を始めるならこんなところを知っておくべき、押さえておくべき、</strong> といったことをまとめ直してみようと思います。</p>
+          <p>（あっ、あと最近ブログ書いてなかったので・・・）</p>
+          <p>あともう1点書く理由としては、 Docker 周りのアップデートがだいぶ落ち着いてきており、 このタイミングなら記事を書いても、それほど鮮度が急に落ちることはないだろうと思った点があります。</p>
+          <p>学び直すなら今がちょうど良いかもしれません。</p>
+          <p><strong>Let’s Docker!</strong></p>
+          <h2 id="index">目次</h2>
+          <p>だいぶ長くなりそうなので（これを公開してる時点で全部書き終わってるはずですが）、 いくつかの記事に分けてあります。</p>
+          <ol>
+            <li>
+              <strong><a href="/archives/20180205/">コンテナ編</a> （いまここ）</strong>
+              <ul>
+                <li>読むと Docker のコンテナ周りがざっくり分かる</li>
+                <li>実際にシンプルな Docker コンテナを作ってみる</li>
+                <li>用語の整理など</li>
+              </ul>
+            </li>
+            <li>
+              <strong><a href="/archives/20180206/">コマンド編</a></strong>
+              <ul>
+                <li>読むと Docker コマンドを中心に Docker の全体像がなんとなく分かる</li>
+              </ul>
+            </li>
+            <li>
+              <strong><a href="/archives/20180207/">エコシステム編</a></strong>
+              <ul>
+                <li>読むと DockerHub のサービスの活用方法がざっくり分かる</li>
+              </ul>
+            </li>
+            <li>
+              <strong><a href="/archives/20180208/">実践編</a></strong>
+              <ul>
+                <li>読むと Docker で環境構築する方法が分かる、怖くなくなる</li>
+              </ul>
+            </li>
+          </ol>
+          <h2 id="下準備">下準備</h2>
+          <p>Docker がインストールされてなくては何ともなりません。 まずはインストールしましょう。</p>
+          <h3 id="docker-のインストール">Docker のインストール</h3>
+          <p>（正直この項目は省略してもいいんじゃないかと思いましたが、一応書いておきます・・・）</p>
+          <p><strong>読むだけじゃなく手を動かしましょう。</strong></p>
+          <p>何年か立って、Windows や Mac でも Docker が利用しやすくなりました。 それぞれインストーラが用意されているので、 Docker のインストール自体は非常に簡単です。</p>
+          <p>※なお、ここから先は2018年1月末時点のものです。 後から見ると画面などが古くなっている可能性があります。</p>
+          <p>公式はこちら。 ( <a class="link-card" href="https://www.docker.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Docker: Accelerated Container Application Development</span> <span class="link-card__desc">Docker is a platform designed to help developers build, share, and run container applications. We …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://www.docker.com/"> www.docker.com</span></span><span class="link-card__image"><img alt="Docker: Accelerated Container Application Development" loading="lazy" src="https://www.docker.com/app/uploads/2023/06/meta-image-homepage-1110x580.png"></span></a>)</p>
+          <p><img alt="Docker 公式" src="resource01.jpg"></p>
+          <p>公式からドキュメントのページへ行くと、 最初の項目が Docker のインストールについて書かれています。</p>
+          <p>こちらです。 ( <a class="link-card" href="https://docs.docker.com/install/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Get Docker</span> <span class="link-card__desc">Download and install Docker on the platform of your choice, including Mac, Linux, or Windows.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/install/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )</p>
+          <p>順に読んで行くとそれぞれ Windows, Mac 用のインストールページへのリンクがあります。</p>
+          <p><img alt="Docker Supported platforms" src="resource02.jpg"></p>
+          <p>それぞれのページで Stable （安定板）と書かれたものをダウンロードして、 そのままインストールを進めてください。</p>
+          <p>なお、気をつけないといけないのが、 <strong>Windows 版については 64 ビットの Windows 10 Pro 以上でないと、 Docker は動作しません。</strong> もってない Windows ユーザーの人は大人しく買うか、さもなくば Mac or Linux に乗り換えるなどしましょう。</p>
+          <p>そもそも、 <strong>本来 Docker というのは Linux の上で動作するものです。</strong> Windows の上で動いているのを奇跡だと思ってありがたく使いましょう。</p>
+          <p>一通りインストールが済んで、黒い画面を開いて <code>docker</code> と打ったら、 <code>Usage: docker COMMAND</code> の行に続いてサブコマンドがずらずら・・・と表示されたら、 インストールは完了です。</p>
+          <p>あるいは各種プラットフォームのステータスバーなどにクジラのアイコンがあるので、 そちらに “Docker is running” と書いてあれば動作しています。</p>
+          <p>コマンドに慣れるためにも <code>docker</code> と打って確認してみましょう。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>Usage:  docker COMMAND
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>A self-sufficient runtime for containers
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Options:
+</span></span><span style="display:flex"><span>      --config string      Location of client config files (default "/Users/[username]/.docker")
+</span></span><span style="display:flex"><span>  -D, --debug              Enable debug mode
+</span></span><span style="display:flex"><span>  -H, --host list          Daemon socket(s) to connect to
+</span></span><span style="display:flex"><span>  -l, --log-level string   Set the logging level ("debug"|"info"|"warn"|"error"|"fatal") (default "info")
+</span></span><span style="display:flex"><span>      --tls                Use TLS; implied by --tlsverify
+</span></span><span style="display:flex"><span>      --tlscacert string   Trust certs signed only by this CA (default "/Users/[username]/.docker/ca.pem")
+</span></span><span style="display:flex"><span>      --tlscert string     Path to TLS certificate file (default "/Users/[username]/.docker/cert.pem")
+</span></span><span style="display:flex"><span>      --tlskey string      Path to TLS key file (default "/Users/[username]/.docker/key.pem")
+</span></span><span style="display:flex"><span>      --tlsverify          Use TLS and verify the remote
+</span></span><span style="display:flex"><span>  -v, --version            Print version information and quit
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Management Commands:
+</span></span><span style="display:flex"><span>  checkpoint  Manage checkpoints
+</span></span><span style="display:flex"><span>  config      Manage Docker configs
+</span></span><span style="display:flex"><span>  container   Manage containers
+</span></span><span style="display:flex"><span>  （以下略）
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Commands:
+</span></span><span style="display:flex"><span>  attach      Attach local standard input, output, and error streams to a running container
+</span></span><span style="display:flex"><span>  build       Build an image from a Dockerfile
+</span></span><span style="display:flex"><span>  commit      Create a new image from a container's changes
+</span></span><span style="display:flex"><span>  （以下略）
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Run 'docker COMMAND --help' for more information on a command.
+</span></span></code></pre>
+          </div>
+          <p>最近のコマンドは <strong>多機能でサブコマンド化</strong> されています。 （namespace が docker で、各コマンドは独立してると考えることも出来そうです） <code>git commit [filename]</code> と同様に、 Docker では <code>docker run foobar</code> などのように続きます。</p>
+          <h2 id="どういうところで使われているか">どういうところで使われているか？</h2>
+          <p>用語の整理の前に、現状どういうところで使われているかを見ていこうと思います。</p>
+          <p>どの例が分かりやすいですかね・・・。 なるべくシンプルにすぐ見た目確認できそうなやつだと、 <strong>nginx</strong> あたりでしょうか。 さすがに説明不要かと思いますが、 Web サーバです。</p>
+          <h3 id="nginx-をコマンド1行で動かす">nginx をコマンド1行で動かす</h3>
+          <p>良くあるサービス、データベース、プログラミング言語環境などは、 やはりみんなが使うため、すでに公式で用意されています。 DockerHub というサイトです。</p>
+          <p>こちら。 ( <a class="link-card" href="https://hub.docker.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Docker Hub Container Image Library | App Containerization</span> <span class="link-card__desc">Welcome to the world&amp;#x27;s largest container registry built for developers and open source …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/"> hub.docker.com</span></span><span class="link-card__image"><img alt="Docker Hub Container Image Library | App Containerization" loading="lazy" src="https://dockerstatic.com/hub-ui/kzxxphbs.png"></span></a>)</p>
+          <p><img alt="DockerHub" src="resource03.jpg"></p>
+          <p>ここから <code>nginx</code> を検索すると、nginx official というリストが上あたりに表示されているかと思います。 それを選びます。</p>
+          <p><a class="link-card" href="https://hub.docker.com/_/nginx/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">nginx - Official Image | Docker Hub</span> <span class="link-card__desc">Official build of Nginx.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/nginx/"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p>URL を見ると、アンダーバーが間にありますが、ここは本来ユーザー名が入るところです。 DockerHub へは登録すれば誰でも Docker 用のリポジトリを作ることが出来て、 <code>[username]/[repositoryname]</code> の形で管理されます。</p>
+          <p>一方でみんなが良く使うものは公式で用意されているので、 ユーザー名は存在せず、 <code>[repositoryname]</code> だけで呼び出すことが可能です。</p>
+          <p>Docker を起動して nginx の空ページを表示してみます。 まだ Docker 良くわかってない人も、ここでは一旦考えずにコピペしましょう。 ちなみにコマンドを実行する場所はどこでも良いですが、 作業が自由にできるパスで行うことをお勧めします。</p>
+          <pre><code>docker run --name sample1 -p 8090:80 -d nginx
+</code></pre>
+          <p>他と被ってなさそうなポート番号を適当に選びましたが、 <code>-p [自分のPC側ポート]:[Docker側ポート]</code> の順に書けばいいので、被っていれば適当に変えましょう。 8090 の場合は <a href="http://localhost:8090" rel="noopener noreferrer" target="_blank">http://localhost:8090</a> にアクセスすると、以下の空ページが表示されるはずです。</p>
+          <p><img alt="Welcome to nginx!" src="resource04.jpg"></p>
+          <p>・・・コマンド1つで Web サーバが立てられてしまいました。すごい！</p>
+          <h3 id="docker-コンテナの性質">Docker コンテナの性質</h3>
+          <p>他の操作を行う前に、 Docker コンテナの性質について一通り。</p>
+          <ol>
+            <li>コンテナには自分で名前をつけることができます（<code>--name sample1</code> のところ）</li>
+            <li><strong>同じ名前のコンテナは作れません</strong> （消さないと作れない）</li>
+            <li>コンテナは <strong>Created（作成した状態）</strong> 、<strong>Up（起動している最中）</strong> 、<strong>Exit（終了した状態）</strong> などの状態を持ちます</li>
+            <li><code>docker run</code> は Created から Up までを一気に行なっています</li>
+            <li><strong>コンテナは終了した状態でないと削除できません</strong></li>
+            <li>コンテナは閉じた世界です</li>
+            <li>コンテナの世界から自分のPC側へ、 <strong>必要に応じて穴を開けることが可能です</strong></li>
+          </ol>
+          <p>これらの Docker コンテナの性質を踏まえて、先ほどのコマンドを振り返ってみます。</p>
+          <pre><code>docker run --name sample1 -p 8090:80 -d nginx
+</code></pre>
+          <ul>
+            <li><code>--name sample1</code> というオプションは、あとでこの名前を指定してコンテナを削除するためです。</li>
+            <li><code>-p 8090:80</code> というオプションは、 Docker コンテナの世界では80番で nginx が起動しているのを、自分のPC側の世界で8090番に紐づけて、穴を開けることで表示確認しています。</li>
+          </ul>
+          <p>おまけですが、 <code>-d</code> はコマンド入力したあとに nginx がバックグラウンドで動作するオプションです。 これを入れないと nginx が動作している最中は操作がこちらに戻りません。 （試してみると良いですが、停止させたいときは Ctrl-C です）</p>
+          <h3 id="nginx-のコンテナにもっと穴を開ける">nginx のコンテナにもっと穴を開ける</h3>
+          <p>まず作りっぱなしのコンテナを停止させて削除しましょう。</p>
+          <pre><code>docker stop sample1
+docker rm sample1
+</code></pre>
+          <p>これで <code>sample1</code> という名前のコンテナは無くなったのでまた作れます。</p>
+          <p>作る前に、今度は自分の HTML ファイルを表示してみたいですよね。 さらに穴を開けてみることにします。</p>
+          <p>今いるディレクトリ上で、名前は何でもいいですが、 <code>web</code> という名前のディレクトリを作ります。 さらに、 <code>web/index.html</code> というファイルを作り、中身を “hello docker!” とでもしておきます。 以下コピペすれば出来るようになってます。 （あ、Windows の人は該当コマンドがあるかどうか分からないので GUI で作るかお調べください・・・）</p>
+          <pre><code>mkdir web
+echo hello docker! > web/index.html
+</code></pre>
+          <p>nginx のコンテナに穴を開けるにはどうすれば良いでしょうか？ その答えは DockerHub の nginx のページにあります。</p>
+          <p><a class="link-card" href="https://hub.docker.com/_/nginx/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">nginx - Official Image | Docker Hub</span> <span class="link-card__desc">Official build of Nginx.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/nginx/"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></p>
+          <p><img alt="How to use this image" src="resource05.jpg"></p>
+          <p><strong>How to use this image</strong> という見出しがありますが、要は使い方です。</p>
+          <p>コンテナ側の世界では、 <code>/usr/share/nginx/html</code> というパスの中が、 いわゆる Web サーバのドキュメントルートとなっています。ここに HTML ファイルが置かれれば表示できます。 ファイルパスに関する穴を開けるのは、 <code>-v</code> オプションを使います。</p>
+          <pre><code>docker run --name sample1 -p 8090:80 -v $PWD/web:/usr/share/nginx/html -d nginx
+</code></pre>
+          <p>キャプチャは貼りませんが、 <a href="http://localhost:8090" rel="noopener noreferrer" target="_blank">http://localhost:8090</a> にアクセスして “hello docker!” と表示されていれば成功です。</p>
+          <p><code>-v [自分のPC側ファイルパス]:[Docker側ファイルパス]</code> の部分がファイルパスに関する穴を開けたオプションです。 手前側の $PWD というのは、自分のいるディレクトリを指します。直接スラッシュから全部入れてもいいですが、相対パスでは動きません。</p>
+          <h3 id="web-サーバだけじゃない-docker-コンテナ">Web サーバだけじゃない Docker コンテナ</h3>
+          <p>ここまでで終わってしまうと、Docker ≒ Web サーバ？と勘違いされてしまいそうなので、 別の例も挙げておきます。</p>
+          <p>そうですね、プログラミング言語で <strong>Ruby</strong> あたりどうでしょう？ ( <a class="link-card" href="https://hub.docker.com/_/ruby/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">ruby - Official Image | Docker Hub</span> <span class="link-card__desc">Ruby is a dynamic, reflective, object-oriented, general-purpose, open-source programming language.</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/_/ruby/"> hub.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a> )</p>
+          <p>以下をそのままコピペしましょう。</p>
+          <pre><code>docker run -it --rm --name sample2 ruby:latest ruby -e 'p 1+2'
+</code></pre>
+          <p>最後の <code>ruby -e 'p 1+2'</code> の部分は、 Ruby そのものの話で Docker とは関係ないです。 <code>1+2</code> をざっくり表示しているだけのワンライナー（1行）プログラムです。</p>
+          <p>先ほどと異なるオプションだけ触れておきます。</p>
+          <ul>
+            <li><code>-it</code> は先ほどの例で例えるなら、 <strong>端末（黒い画面）に穴を開けて繋げている</strong> ようなものです。 Docker 側で起きた出力結果を自分のPC側の端末に返してもらうためのものです。</li>
+            <li><code>--rm</code> は終了したら即コンテナを削除するオプションです。 <code>docker run</code> で作成、実行まで一気に行なっているのと逆ですね。</li>
+          </ul>
+          <p><strong>通常、処理がすべて終われば Docker コンテナは停止します。</strong></p>
+          <p>ここ、地味に大事なところなんですが、普通は Docker コンテナって停止するものなんですよね。</p>
+          <p>先ほどの Web サーバの例は、サービスとして常に起動している必要があるため、 コンテナの中で終了させないようずっと止めているだけで、Docker コンテナの使われ方としては、 本来こちらの方が標準的というか、自然の姿なのかもしれません。</p>
+          <p>一旦サンプルとしてはここまでにしておきます。</p>
+          <h3 id="触ってみてのまとめ">触ってみてのまとめ</h3>
+          <p>さわりだけですが、使ってもらって実感されたように、 Docker はインストールしたものの、 nginx や Ruby はインストールしてません。 つまり、 <strong>自分のPC環境を汚さずにその環境を利用することが出来ます。</strong></p>
+          <p>すごいですね。</p>
+          <p>ちなみに、 Ruby ってそれなりにインストール時間かかるんですよ。</p>
+          <p>ちなみに、理解してないのにここまで手を動かさずに来ちゃった人は、 <strong>今からでも戻って実際に手を動かしましょう。</strong></p>
+          <h2 id="docker-の特徴をざっくりと">Docker の特徴をざっくりと</h2>
+          <p>現時点で見てきた部分の範囲で、ざっくり特徴を挙げてみます。</p>
+          <h3 id="コンテナは使い捨て">コンテナは使い捨て</h3>
+          <p>作成、実行中、終了、削除で使い捨てです。</p>
+          <h3 id="必要に応じてコンテナと自分のpcとの間に穴を開けて使う">必要に応じてコンテナと自分のPCとの間に穴を開けて使う</h3>
+          <p>ポート番号をつないだり、ファイルパスを繋いだり、端末を繋いだりします。</p>
+          <h3 id="コンテナは閉じた環境">コンテナは閉じた環境</h3>
+          <p>自分のPCとは隔離された状態なので、自分の環境を汚しません。</p>
+          <h3 id="docker-コンテナはインターフェース">Docker コンテナはインターフェース？</h3>
+          <p>Web サーバ（nginx）と、プログラミング言語（Ruby）とが、 同じコンテナとして扱えてしまいました。</p>
+          <p>そういう意味で、Docker コンテナは外部環境を隔離して扱う、 インターフェースとしてみなすことが出来るかもしれません。</p>
+          <h3 id="開発環境の配布にも使える">開発環境の配布にも使える</h3>
+          <p>使えそうというか、実際使っているところはすでに多くあります。</p>
+          <p>開発環境を用意するというのは、本来専門書の最初の1～2章を割いて大きく説明するところなのですが、 Docker を利用することで、自分のPCに何がインストールされているかとは無関係に、 同一の環境を用意することが出来ます。</p>
+          <h2 id="用語の整理">用語の整理</h2>
+          <p>Docker コンテナに対するなんとなくのイメージが出来たところで、 そろそろ用語の整理をしたいと思います。</p>
+          <p>なお、イメージすることを優先するため、正確性を欠くところも出てくるかと思います。 ぜひとも公式ドキュメントも併せてお読みください。</p>
+          <h3 id="docker-イメージ">Docker イメージ</h3>
+          <p>誤解を恐れずに言うと <strong>Docker コンテナを作るときの雛形</strong> に相当するものです。 先に Docker イメージを作っておくことで、 それを元にした Docker コンテナは意外とさくさく素早く作れます。</p>
+          <p>また、コンテナの機能が複雑になればなるほど、元となる Docker イメージのファイルは重くなります。</p>
+          <h4 id="実はさきほど利用しています">実はさきほど利用しています</h4>
+          <p>先ほど <code>docker run</code> した時に、手元に Docker イメージがない場合はダウンロードして作っています。</p>
+          <p>試しに <code>docker images</code> と入力してみましょう。 少なくとも先ほど <code>docker run</code> で作った元となっている nginx, ruby のイメージが出来ているはずです。 （なお、 docker のサブコマンドについては次回以降でもう少し触れます）</p>
+          <p>・・・今は Docker コンテナの雛形だと覚えておけば良いと思います。 実際にこの後作っていくうちに、だんだんとイメージできるようになると思います。</p>
+          <h3 id="dockerize">Dockerize</h3>
+          <p>一般的に <strong>環境を Docker に閉じ込めることを Dockerize</strong> と言います。</p>
+          <p>なお、 dockerize という名前のプロダクトもあるようです。</p>
+          <h3 id="docker-compose">Docker Compose</h3>
+          <p>これは Docker コンテナの起動、停止などのショートカット版と捉えてもらって良いと思います。</p>
+          <p>Docker をインストールすれば <code>docker-compose</code> コマンドも一緒にインストールされています。 試しに <code>docker-compose</code> と打ってみます。</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none" tabindex="0"><code class="language-txt" data-lang="txt"><span style="display:flex"><span>Define and run multi-container applications with Docker.
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Usage:
+</span></span><span style="display:flex"><span>  docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
+</span></span><span style="display:flex"><span>  docker-compose -h|--help
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Options:
+</span></span><span style="display:flex"><span>  -f, --file FILE             Specify an alternate compose file (default: docker-compose.yml)
+</span></span><span style="display:flex"><span>  -p, --project-name NAME     Specify an alternate project name (default: directory name)
+</span></span><span style="display:flex"><span>  --verbose                   Show more output
+</span></span><span style="display:flex"><span>  --no-ansi                   Do not print ANSI control characters
+</span></span><span style="display:flex"><span>  -v, --version               Print version and exit
+</span></span><span style="display:flex"><span>  -H, --host HOST             Daemon socket to connect to
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>  --tls                       Use TLS; implied by --tlsverify
+</span></span><span style="display:flex"><span>  --tlscacert CA_PATH         Trust certs signed only by this CA
+</span></span><span style="display:flex"><span>  --tlscert CLIENT_CERT_PATH  Path to TLS certificate file
+</span></span><span style="display:flex"><span>  --tlskey TLS_KEY_PATH       Path to TLS key file
+</span></span><span style="display:flex"><span>  --tlsverify                 Use TLS and verify the remote
+</span></span><span style="display:flex"><span>  --skip-hostname-check       Don't check the daemon's hostname against the name specified
+</span></span><span style="display:flex"><span>                              in the client certificate (for example if your docker host
+</span></span><span style="display:flex"><span>                              is an IP address)
+</span></span><span style="display:flex"><span>  --project-directory PATH    Specify an alternate working directory
+</span></span><span style="display:flex"><span>                              (default: the path of the Compose file)
+</span></span><span style="display:flex"><span>
+</span></span><span style="display:flex"><span>Commands:
+</span></span><span style="display:flex"><span>  build              Build or rebuild services
+</span></span><span style="display:flex"><span>  bundle             Generate a Docker bundle from the Compose file
+</span></span><span style="display:flex"><span>  config             Validate and view the Compose file
+</span></span><span style="display:flex"><span>  （以下略）
+</span></span></code></pre>
+          </div>
+          <p>先ほど紹介したものはとてもシンプルな例だったので、 コンテナ1つで事足りるものでしたが、 実際はそれで収まらないことがほとんどです。</p>
+          <p>コンテナが2つ3つになって、開けたい穴も5箇所、10箇所と増えていくと、 何行にも渡ってコマンドを書くことになってしまいます。 人間さすがにそれはしんどいので、 Docker Compose などを利用して管理しやすい形にします。</p>
+          <p>詳しい話はコンテナ間の連携の話まで置いておきますが、 これだけは理解しておくと良いかと思います。</p>
+          <p><strong>Docker Compose のコマンドに出来て Docker 単体のコマンドに出来ないことは無いです。</strong> そういった意味で Docker コマンドのショートカット版と思ってもらって良いかと思います。</p>
+          <h3 id="kubernetes-k8s">kubernetes, k8s</h3>
+          <p>なんか突然 Docker 関係ないようなワードですが、これも Docker 関連のワードです。</p>
+          <p>ちなみに、どうやらクベルネテスという読み方で落ち着いたご様子・・・。 <a href="http://yomikata.org/word/kubernetes" rel="noopener noreferrer" target="_blank">http://yomikata.org/word/kubernetes</a> （くーばーねてす、じゃなかったのか・・・）</p>
+          <p>Docker コンテナをデプロイしたり、必要に応じて増やしたりと、 増えてきた Docker コンテナを交通整理する（オーケストレーション）ための仕組みです。</p>
+          <p>少なくとも最初の方では使うことはないでしょう。</p>
+          <h3 id="docker-swarm-swarm-mode">Docker Swarm (Swarm mode)</h3>
+          <p>これも役割としては kubernetes と同様で、 元々 Docker と同梱されていたオーケストレーションツールです。</p>
+          <p>現在では kubernetes と docker swarm の両方が選べるようになっているようですね。 詳しくはおググりください。</p>
+          <h3 id="dockerfile">Dockerfile</h3>
+          <p>Docker イメージを作るための設計図です。</p>
+          <p>つまり、 Docker コンテナを作るには、</p>
+          <ol>
+            <li>Dockerfile から Docker イメージを作る</li>
+            <li>Docker イメージから Docker コンテナを作る</li>
+          </ol>
+          <p>という2段階の作業が必要でした。</p>
+          <p>ただ、先ほどのような DockerHub には、 <strong>すでに Dockerfile から Docker イメージが作られていて、タグ付きで公開されています。</strong></p>
+          <p><a href="https://hub.docker.com/r/_/nginx/" rel="noopener noreferrer" target="_blank">https://hub.docker.com/r/_/nginx/</a></p>
+          <p><img alt="DockerHub nginx tags" src="resource06.jpg"></p>
+          <p>ちなみに、タグは何も指定しないと <code>latest</code> になります。</p>
+          <p>つまり、</p>
+          <pre><code>docker run -it --rm --name sample2 ruby:latest ruby -e 'p 1+2'
+</code></pre>
+          <p>これと、</p>
+          <pre><code>docker run -it --rm --name sample2 ruby ruby -e 'p 1+2'
+</code></pre>
+          <p>これは同一です。</p>
+          <h3 id="dockerhub">DockerHub</h3>
+          <p><a class="link-card" href="https://hub.docker.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Docker Hub Container Image Library | App Containerization</span> <span class="link-card__desc">Welcome to the world&amp;#x27;s largest container registry built for developers and open source …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/"> hub.docker.com</span></span><span class="link-card__image"><img alt="Docker Hub Container Image Library | App Containerization" loading="lazy" src="https://dockerstatic.com/hub-ui/kzxxphbs.png"></span></a></p>
+          <p>公式の Docker イメージが公開されています。 Docker に関する Web サービスです。</p>
+          <p>Apache やら MySQL やら、よく使われるものは大抵公開されています。</p>
+          <p>イメージを引っ張ってくるだけなら、ログイン不要で使えます。</p>
+          <p>なお、悪意を持った人が Docker イメージを公開している可能性もゼロではないため、 何も考えなしにホイホイ Docker イメージを持ってきて利用するのはよろしくないかと思います。</p>
+          <h2 id="まとめ">まとめ</h2>
+          <p>Docker コンテナ周りの仕組みは何となく分かった感じでしょうか。 コンテナだけ見れば、それほど難しいものではありませんね。</p>
+          <p>ここから Docker コンテナを軸にして色々分からないところに踏み込んでいきます。</p>
+          <p>もちろんまだ続きます。</p>
+          <p><a href="/archives/20180206/">コマンド編</a></p>
+          <h2 id="ref">参考URL</h2>
+          <ul>
+            <li><a class="link-card" href="https://docs.docker.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Home</span> <span class="link-card__desc">Docker Documentation is the official Docker library of resources, manuals, and guides to help you …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://docs.docker.com/"> docs.docker.com</span></span><span class="link-card__image link-card__image--no-image"></span></a></li>
+            <li><a class="link-card" href="https://hub.docker.com/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">Docker Hub Container Image Library | App Containerization</span> <span class="link-card__desc">Welcome to the world&amp;#x27;s largest container registry built for developers and open source …</span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=https://hub.docker.com/"> hub.docker.com</span></span><span class="link-card__image"><img alt="Docker Hub Container Image Library | App Containerization" loading="lazy" src="https://dockerstatic.com/hub-ui/kzxxphbs.png"></span></a></li>
+          </ul>
+        </div>
+        <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/docker/">#Docker</a></div>
+        <hr class="full-width-hr">
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Docker%20%e5%86%8d%e5%85%a5%e9%96%802018%20-%20%e3%82%b3%e3%83%b3%e3%83%86%e3%83%8a%e7%b7%a8%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20180205/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20180205%2f&amp;text=Docker%20%e5%86%8d%e5%85%a5%e9%96%802018%20-%20%e3%82%b3%e3%83%b3%e3%83%86%e3%83%8a%e7%b7%a8" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20180205/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+      </article>
+    </main>
+    <footer class="container site-footer">
+      <div class="footer-links"><a class="footer-link" href="/tech">Tech</a> <a class="footer-link" href="/biz">Biz</a> <a class="footer-link" href="/misc">Misc</a> <a class="footer-link" href="/tags">Tags</a></div>
+      <ul class="disclaimer-list">
+        <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+        <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+      </ul>
+      <p>© 2026 girigiribauer</p>
+    </footer>
+  </body>
+</html>
