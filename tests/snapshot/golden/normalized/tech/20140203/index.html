@@ -5,153 +5,116 @@
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <title>jQuery から卒業するための第1歩を polyfills から学ぼう – その2 | ばうあーろぐ</title>
     <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
+  
+    JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+    Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+    
+      
+      www.itmedia.co.jp
+    
+  
+    
+   （追記終わり）
+前回からの続きです。 jQuery から卒業するための第 1 歩を polyfills から学ぼう
 
-
-
-            
-                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
-                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
-                
-                    
-                    www.itmedia.co.jp
-                
-            
-                
-             （追記終わり）
-前回からの続きです。 
-
-
-jQuery から卒業するための第 1 歩を polyfills から学ぼう
-
-
-
-
-            
-                GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
-                JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
-                
-                    
-                    github.com
-                
-            
-                
-             にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
+  
+    GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
+    JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
+    
+      
+      github.com
+    
+  
+    
+   にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
 XMLHttpRequest（XHR）
 いわゆる Ajax の核となる API です。
 
-
-
-
-            
-                XMLHttpRequest - Wikipedia
-                
-                
-                    
-                    ja.wikipedia.org
-                
-            
+  
+    XMLHttpRequest - Wikipedia
+    
+    
+      
+      ja.wikipedia.org
+    
+  
 例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。" name="description">
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://girigiribauer.com/tech/20140203/" rel="canonical">
     <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20140203" rel="site.standard.document">
-    <meta content="Hugo 0.164.0" name="generator">
     <meta content="#ffffff" name="theme-color">
     <link href="/favicon.ico" rel="icon">
     <meta content="jQuery から卒業するための第1歩を polyfills から学ぼう – その2" itemprop="name">
     <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
+  
+    JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+    Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+    
+      
+      www.itmedia.co.jp
+    
+  
+    
+   （追記終わり）
+前回からの続きです。 jQuery から卒業するための第 1 歩を polyfills から学ぼう
 
-
-
-            
-                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
-                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
-                
-                    
-                    www.itmedia.co.jp
-                
-            
-                
-             （追記終わり）
-前回からの続きです。 
-
-
-jQuery から卒業するための第 1 歩を polyfills から学ぼう
-
-
-
-
-            
-                GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
-                JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
-                
-                    
-                    github.com
-                
-            
-                
-             にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
+  
+    GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
+    JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
+    
+      
+      github.com
+    
+  
+    
+   にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
 XMLHttpRequest（XHR）
 いわゆる Ajax の核となる API です。
 
-
-
-
-            
-                XMLHttpRequest - Wikipedia
-                
-                
-                    
-                    ja.wikipedia.org
-                
-            
+  
+    XMLHttpRequest - Wikipedia
+    
+    
+      
+      ja.wikipedia.org
+    
+  
 例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。" itemprop="description">
     <meta content="jQuery から卒業するための第1歩を polyfills から学ぼう – その2" property="og:title">
     <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
+  
+    JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+    Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+    
+      
+      www.itmedia.co.jp
+    
+  
+    
+   （追記終わり）
+前回からの続きです。 jQuery から卒業するための第 1 歩を polyfills から学ぼう
 
-
-
-            
-                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
-                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
-                
-                    
-                    www.itmedia.co.jp
-                
-            
-                
-             （追記終わり）
-前回からの続きです。 
-
-
-jQuery から卒業するための第 1 歩を polyfills から学ぼう
-
-
-
-
-            
-                GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
-                JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
-                
-                    
-                    github.com
-                
-            
-                
-             にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
+  
+    GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
+    JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
+    
+      
+      github.com
+    
+  
+    
+   にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
 XMLHttpRequest（XHR）
 いわゆる Ajax の核となる API です。
 
-
-
-
-            
-                XMLHttpRequest - Wikipedia
-                
-                
-                    
-                    ja.wikipedia.org
-                
-            
+  
+    XMLHttpRequest - Wikipedia
+    
+    
+      
+      ja.wikipedia.org
+    
+  
 例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。" property="og:description">
     <meta content="article" property="og:type">
     <meta content="https://girigiribauer.com/tech/20140203/" property="og:url">
@@ -160,51 +123,39 @@ XMLHttpRequest（XHR）
     <meta content="summary_large_image" name="twitter:card">
     <meta content="jQuery から卒業するための第1歩を polyfills から学ぼう – その2" name="twitter:title">
     <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
+  
+    JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+    Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+    
+      
+      www.itmedia.co.jp
+    
+  
+    
+   （追記終わり）
+前回からの続きです。 jQuery から卒業するための第 1 歩を polyfills から学ぼう
 
-
-
-            
-                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
-                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
-                
-                    
-                    www.itmedia.co.jp
-                
-            
-                
-             （追記終わり）
-前回からの続きです。 
-
-
-jQuery から卒業するための第 1 歩を polyfills から学ぼう
-
-
-
-
-            
-                GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
-                JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
-                
-                    
-                    github.com
-                
-            
-                
-             にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
+  
+    GitHub - inexorabletash/polyfill: JavaScript Polyfills, Shims and More
+    JavaScript Polyfills, Shims and More. Contribute to inexorabletash/polyfill development by creating …
+    
+      
+      github.com
+    
+  
+    
+   にある web.js をソースコードリーディングしています。 また、es5.js は予め読み込まれている前提となります。
 XMLHttpRequest（XHR）
 いわゆる Ajax の核となる API です。
 
-
-
-
-            
-                XMLHttpRequest - Wikipedia
-                
-                
-                    
-                    ja.wikipedia.org
-                
-            
+  
+    XMLHttpRequest - Wikipedia
+    
+    
+      
+      ja.wikipedia.org
+    
+  
 例えば、jQuery を用いてファイルを非同期で取得する場合、 以下のように書いた経験があるかもしれません。" name="twitter:description">
     <meta content="@girigiribauer" name="twitter:site">
     <meta content="@girigiribauer" name="twitter:creator">
@@ -214,13 +165,13 @@ XMLHttpRequest（XHR）
   <body>
     <header class="container site-header">
       <a class="site-title" href="/">ばうあーろぐ</a>
-      <div class="theme-toggle-wrap"></div>
+      <div class="header-actions"></div>
     </header>
     <main class="container">
       <article class="article-container">
         <header class="article-header">
           <h1 class="page-title">jQuery から卒業するための第1歩を polyfills から学ぼう – その2</h1>
-          <div class="article-meta article-meta-flex"><time datetime="2014-02-02 15:00:10 +0000 +0000">2014/02/02</time> <span>(Updated: 2024/06/29)</span></div>
+          <div class="article-meta article-meta-flex"><time datetime="2014-02-02T15:00:10Z">2014/02/02</time> <span>(Updated: 2024/06/29)</span></div>
         </header>
         <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
         <div class="content">
@@ -498,11 +449,11 @@ XMLHttpRequest（XHR）
           <p>ソースコードを読むこと自体は、そんなに時間のかかる行為ではないんですが、それをブログに説明として分かりやすく載せるとなると、意外に時間かかっちゃうものですね。</p>
           <p>たぶんその 4、その 5 あたりまで行っちゃうかもしれません。</p>
           <p>お次は DOM 周りの polyfills です。イベントもいけたらいいな。</p>
-          <p>追記： <a href="/tech/20140213/">続き書きました。</a></p>
+          <p>追記：<a href="/tech/20140213/">続き書きました。</a></p>
         </div>
         <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/ajax/">#ajax</a> <a class="tag-link" href="/tags/javascript/">#JavaScript</a> <a class="tag-link" href="/tags/jquery/">#jQuery</a> <a class="tag-link" href="/tags/jsperf/">#jsperf</a> <a class="tag-link" href="/tags/polyfills/">#polyfills</a></div>
         <hr class="full-width-hr">
-        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86%20%e2%80%93%20%e3%81%9d%e3%81%ae2%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20140203/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20140203%2f&amp;text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86%20%e2%80%93%20%e3%81%9d%e3%81%ae2" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20140203/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86%20%e2%80%93%20%e3%81%9d%e3%81%ae2%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20140203/" rel="noopener noreferrer" target="_blank">Bluesky</a> <a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20140203%2f&amp;text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86%20%e2%80%93%20%e3%81%9d%e3%81%ae2" rel="noopener noreferrer" target="_blank">X (Twitter)</a> <a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20140203/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
       </article>
     </main>
     <footer class="container site-footer">

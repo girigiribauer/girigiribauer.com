@@ -5,19 +5,16 @@
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <title>jQuery から卒業するための第1歩を polyfills から学ぼう | ばうあーろぐ</title>
     <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
-
-
-
-            
-                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
-                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
-                
-                    
-                    www.itmedia.co.jp
-                
-            
-                
-             （追記終わり）
+  
+    JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+    Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+    
+      
+      www.itmedia.co.jp
+    
+  
+    
+   （追記終わり）
 jQuery というライブラリは非常に便利な JavaScript ライブラリであります。
 jQuery 便利！
 いやー、便利ですよね。便利すぎて、JavaScript を書いて HTML 要素を何かしようと思ったときに、無条件で使用してしまうケースもけっこう多いのではないでしょうか。
@@ -34,40 +31,33 @@ IE8 未満をばっさり切った 2.x 系だと、圧縮したもので 82KB �
 ファイルサイズの問題うんぬんもあるのですが、それに加えて同時リクエスト数の問題もあります。例えば画像ファイルなどであれば、例えば 6 ファイルなどを同時にリクエストすることが出来ますが、スクリプトのファイルだと、実行順などの問題もあるので、スクリプトファイルを読み込んでいる最中は他スクリプトがストップしてしまうので、あれこれとプラグイン用のファイルを読み込んでいると、いつまでたっても全体の処理が終わらないことになります。
 そのあたりの説明は、以下に詳しく載ってます。
 
-
-
-
-            
-                PageSpeed Insights でのモバイル分析 &amp;nbsp;|&amp;nbsp; Google for Developers
-                
-                
-                    
-                    developers.google.com
-                
-            
-                
-            " name="description">
+  
+    PageSpeed Insights でのモバイル分析 &amp;nbsp;|&amp;nbsp; Google for Developers
+    
+    
+      
+      developers.google.com
+    
+  
+    
+  " name="description">
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://girigiribauer.com/tech/20140131/" rel="canonical">
     <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20140131" rel="site.standard.document">
-    <meta content="Hugo 0.164.0" name="generator">
     <meta content="#ffffff" name="theme-color">
     <link href="/favicon.ico" rel="icon">
     <meta content="jQuery から卒業するための第1歩を polyfills から学ぼう" itemprop="name">
     <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
-
-
-
-            
-                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
-                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
-                
-                    
-                    www.itmedia.co.jp
-                
-            
-                
-             （追記終わり）
+  
+    JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+    Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+    
+      
+      www.itmedia.co.jp
+    
+  
+    
+   （追記終わり）
 jQuery というライブラリは非常に便利な JavaScript ライブラリであります。
 jQuery 便利！
 いやー、便利ですよね。便利すぎて、JavaScript を書いて HTML 要素を何かしようと思ったときに、無条件で使用してしまうケースもけっこう多いのではないでしょうか。
@@ -84,34 +74,28 @@ IE8 未満をばっさり切った 2.x 系だと、圧縮したもので 82KB �
 ファイルサイズの問題うんぬんもあるのですが、それに加えて同時リクエスト数の問題もあります。例えば画像ファイルなどであれば、例えば 6 ファイルなどを同時にリクエストすることが出来ますが、スクリプトのファイルだと、実行順などの問題もあるので、スクリプトファイルを読み込んでいる最中は他スクリプトがストップしてしまうので、あれこれとプラグイン用のファイルを読み込んでいると、いつまでたっても全体の処理が終わらないことになります。
 そのあたりの説明は、以下に詳しく載ってます。
 
-
-
-
-            
-                PageSpeed Insights でのモバイル分析 &amp;nbsp;|&amp;nbsp; Google for Developers
-                
-                
-                    
-                    developers.google.com
-                
-            
-                
-            " itemprop="description">
+  
+    PageSpeed Insights でのモバイル分析 &amp;nbsp;|&amp;nbsp; Google for Developers
+    
+    
+      
+      developers.google.com
+    
+  
+    
+  " itemprop="description">
     <meta content="jQuery から卒業するための第1歩を polyfills から学ぼう" property="og:title">
     <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
-
-
-
-            
-                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
-                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
-                
-                    
-                    www.itmedia.co.jp
-                
-            
-                
-             （追記終わり）
+  
+    JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+    Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+    
+      
+      www.itmedia.co.jp
+    
+  
+    
+   （追記終わり）
 jQuery というライブラリは非常に便利な JavaScript ライブラリであります。
 jQuery 便利！
 いやー、便利ですよね。便利すぎて、JavaScript を書いて HTML 要素を何かしようと思ったときに、無条件で使用してしまうケースもけっこう多いのではないでしょうか。
@@ -128,19 +112,16 @@ IE8 未満をばっさり切った 2.x 系だと、圧縮したもので 82KB �
 ファイルサイズの問題うんぬんもあるのですが、それに加えて同時リクエスト数の問題もあります。例えば画像ファイルなどであれば、例えば 6 ファイルなどを同時にリクエストすることが出来ますが、スクリプトのファイルだと、実行順などの問題もあるので、スクリプトファイルを読み込んでいる最中は他スクリプトがストップしてしまうので、あれこれとプラグイン用のファイルを読み込んでいると、いつまでたっても全体の処理が終わらないことになります。
 そのあたりの説明は、以下に詳しく載ってます。
 
-
-
-
-            
-                PageSpeed Insights でのモバイル分析 &amp;nbsp;|&amp;nbsp; Google for Developers
-                
-                
-                    
-                    developers.google.com
-                
-            
-                
-            " property="og:description">
+  
+    PageSpeed Insights でのモバイル分析 &amp;nbsp;|&amp;nbsp; Google for Developers
+    
+    
+      
+      developers.google.com
+    
+  
+    
+  " property="og:description">
     <meta content="article" property="og:type">
     <meta content="https://girigiribauer.com/tech/20140131/" property="og:url">
     <meta content="ばうあーろぐ" property="og:site_name">
@@ -148,19 +129,16 @@ IE8 未満をばっさり切った 2.x 系だと、圧縮したもので 82KB �
     <meta content="summary_large_image" name="twitter:card">
     <meta content="jQuery から卒業するための第1歩を polyfills から学ぼう" name="twitter:title">
     <meta content="（2024 年追記）古い記事なので誰も見てないと思いますが、現在 polyfills を使うのは危険なのでやめましょう。もはや機能が足りなくて困るケースはないようなので、使う意味もないかと思います。 
-
-
-
-            
-                JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
-                Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
-                
-                    
-                    www.itmedia.co.jp
-                
-            
-                
-             （追記終わり）
+  
+    JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����@10���ȏ��Web�T�C�g�ɉe��
+    Sansec��JavaScript�̃��C�u�����uPolyfill.io�v�Ƀ}���E�F�A�����������Ɠ`�����B���̃}���E�F�A��10���ȏ��Web …
+    
+      
+      www.itmedia.co.jp
+    
+  
+    
+   （追記終わり）
 jQuery というライブラリは非常に便利な JavaScript ライブラリであります。
 jQuery 便利！
 いやー、便利ですよね。便利すぎて、JavaScript を書いて HTML 要素を何かしようと思ったときに、無条件で使用してしまうケースもけっこう多いのではないでしょうか。
@@ -177,19 +155,16 @@ IE8 未満をばっさり切った 2.x 系だと、圧縮したもので 82KB �
 ファイルサイズの問題うんぬんもあるのですが、それに加えて同時リクエスト数の問題もあります。例えば画像ファイルなどであれば、例えば 6 ファイルなどを同時にリクエストすることが出来ますが、スクリプトのファイルだと、実行順などの問題もあるので、スクリプトファイルを読み込んでいる最中は他スクリプトがストップしてしまうので、あれこれとプラグイン用のファイルを読み込んでいると、いつまでたっても全体の処理が終わらないことになります。
 そのあたりの説明は、以下に詳しく載ってます。
 
-
-
-
-            
-                PageSpeed Insights でのモバイル分析 &amp;nbsp;|&amp;nbsp; Google for Developers
-                
-                
-                    
-                    developers.google.com
-                
-            
-                
-            " name="twitter:description">
+  
+    PageSpeed Insights でのモバイル分析 &amp;nbsp;|&amp;nbsp; Google for Developers
+    
+    
+      
+      developers.google.com
+    
+  
+    
+  " name="twitter:description">
     <meta content="@girigiribauer" name="twitter:site">
     <meta content="@girigiribauer" name="twitter:creator">
     <meta content="https://girigiribauer.com/img/ogimage.png" name="twitter:image">
@@ -198,13 +173,13 @@ IE8 未満をばっさり切った 2.x 系だと、圧縮したもので 82KB �
   <body>
     <header class="container site-header">
       <a class="site-title" href="/">ばうあーろぐ</a>
-      <div class="theme-toggle-wrap"></div>
+      <div class="header-actions"></div>
     </header>
     <main class="container">
       <article class="article-container">
         <header class="article-header">
           <h1 class="page-title">jQuery から卒業するための第1歩を polyfills から学ぼう</h1>
-          <div class="article-meta article-meta-flex"><time datetime="2014-01-30 15:00:53 +0000 +0000">2014/01/30</time> <span>(Updated: 2024/06/29)</span></div>
+          <div class="article-meta article-meta-flex"><time datetime="2014-01-30T15:00:53Z">2014/01/30</time> <span>(Updated: 2024/06/29)</span></div>
         </header>
         <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
         <div class="content">
@@ -296,7 +271,7 @@ IE8 未満をばっさり切った 2.x 系だと、圧縮したもので 82KB �
         </div>
         <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/javascript/">#JavaScript</a> <a class="tag-link" href="/tags/jquery/">#jQuery</a> <a class="tag-link" href="/tags/polyfills/">#polyfills</a></div>
         <hr class="full-width-hr">
-        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20140131/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20140131%2f&amp;text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20140131/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20140131/" rel="noopener noreferrer" target="_blank">Bluesky</a> <a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20140131%2f&amp;text=jQuery%20%e3%81%8b%e3%82%89%e5%8d%92%e6%a5%ad%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e7%ac%ac1%e6%ad%a9%e3%82%92%20polyfills%20%e3%81%8b%e3%82%89%e5%ad%a6%e3%81%bc%e3%81%86" rel="noopener noreferrer" target="_blank">X (Twitter)</a> <a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20140131/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
       </article>
     </main>
     <footer class="container site-footer">

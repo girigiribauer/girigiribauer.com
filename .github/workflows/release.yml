@@ -60,7 +60,7 @@ jobs:
       - name: Hugo セットアップ（standard.site レコード同期用）
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.154.5'
+          hugo-version: '0.164.0'
           extended: true
 
       - name: 記事一覧 JSON を生成

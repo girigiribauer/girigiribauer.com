@@ -1,0 +1,41 @@
+{{ define "main" }}
+
+{{ with where .Site.RegularPages "Section" "products" }}
+<section class="section-mb">
+  <h2 class="section-title">Products</h2>
+  <div class="products-list">
+    {{ range . }}
+    {{ $product := . }}
+    <a href="{{ .RelPermalink }}" class="product-item product-link">
+      <div class="product-icon">
+        {{ with .Resources.GetMatch .Params.image }}
+        <img src="{{ .RelPermalink }}" alt="{{ $product.Title }}" class="product-img">
+        {{ else }}
+        {{ substr $product.Title 0 1 }}
+        {{ end }}
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">{{ .Title }}</h3>
+        <p class="product-desc">{{ .Params.description }}</p>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+<section class="section-mb">
+  <h2 class="section-title">Latest Posts</h2>
+  <div class="blog-list">
+    {{ range first 5 (where .Site.RegularPages "Section" "tech").ByDate.Reverse }}
+    {{ partial "article-item.html" (dict "page" . "dateFormat" "2006/01/02") }}
+    {{ end }}
+  </div>
+
+  <div class="view-all-container">
+    <a href="/tech" class="view-all-btn">View
+      All Posts</a>
+  </div>
+</section>
+
+{{ end }}

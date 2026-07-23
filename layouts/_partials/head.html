@@ -1,0 +1,78 @@
+{{- /* 見出し・説明・OGP画像は3系統(schema.org / OpenGraph / Twitter)で使い回すため一度だけ算出する。 */ -}}
+{{- $siteTitle := .Site.Title -}}
+
+{{- $pageTitle := printf "%s | %s" .Title $siteTitle -}}
+{{- if eq .Section "products" }}{{ $pageTitle = .Title }}
+{{- else if .IsHome }}{{ $pageTitle = $siteTitle }}{{ end -}}
+
+{{- $title := .Title -}}
+{{- $description := .Description | default .Summary -}}
+{{- if .IsHome -}}
+  {{- $title = $siteTitle -}}
+  {{- $description = .Site.Params.description -}}
+{{- end -}}
+
+{{- /* OGP画像は 記事固有 → バンドル内 feature 画像 → サイト既定 の順に採用する。 */ -}}
+{{- $image := "" -}}
+{{- $feature := .Resources.GetMatch "feature.{jpg,jpeg,png,gif}" -}}
+{{- if eq .Section "products" -}}
+  {{- $image = printf "/images/ogp/%s.png" .File.ContentBaseName | absURL -}}
+{{- else if .Params.images -}}
+  {{- $image = index .Params.images 0 | absURL -}}
+{{- else if $feature -}}
+  {{- $image = $feature.RelPermalink | absURL -}}
+{{- else if .Site.Params.images -}}
+  {{- $image = index .Site.Params.images 0 | absURL -}}
+{{- end -}}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ $pageTitle }}</title>
+<meta name="description" content="{{ $description }}">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{ with .Site.Params.standardSiteDid }}
+{{- if $.IsHome }}
+<link rel="site.standard.publication" href="at://{{ . }}/site.standard.publication/self">
+{{- else if and $.IsPage (in (slice "tech" "biz" "misc" "products") $.Section) }}
+{{- $rkey := replaceRE "/" "-" (strings.Trim $.RelPermalink "/") }}
+<link rel="site.standard.document" href="at://{{ . }}/site.standard.document/{{ $rkey }}">
+{{- end }}
+{{- end }}
+
+{{ with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
+{{- end }}
+
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="/favicon.ico">
+
+<meta itemprop="name" content="{{ $title }}">
+<meta itemprop="description" content="{{ $description }}">
+
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ $siteTitle }}">
+{{- with $image }}
+<meta property="og:image" content="{{ . }}">
+{{- end }}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{- with .Site.Params.twitter }}
+<meta name="twitter:site" content="{{ . }}">
+<meta name="twitter:creator" content="{{ . }}">
+{{- end }}
+{{- with $image }}
+<meta name="twitter:image" content="{{ . }}">
+{{- end }}
+
+<script defer src="https://analytics.girigiribauer.com/script.js"
+  data-website-id="45e46bec-2d98-427e-aa94-1d8a6851958b"></script>

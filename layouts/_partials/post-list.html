@@ -1,0 +1,22 @@
+{{- /* セクション一覧とタグ別一覧で共通のページネーション付き記事リスト。 */ -}}
+<h1 class="page-title">{{ .Title | default "Blog" }}</h1>
+
+<div class="blog-list">
+  {{ range .Paginator.Pages }}
+  {{ partial "article-item.html" (dict "page" . "dateFormat" "2 Jan 2006") }}
+  {{ end }}
+</div>
+
+{{ if gt .Paginator.TotalPages 1 }}
+<div class="pagination">
+  {{ if .Paginator.HasPrev }}
+  <a href="{{ .Paginator.Prev.URL }}" class="pagination__link">&larr; Previous</a>
+  {{ end }}
+
+  <span class="pagination__status">Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}</span>
+
+  {{ if .Paginator.HasNext }}
+  <a href="{{ .Paginator.Next.URL }}" class="pagination__link">Next &rarr;</a>
+  {{ end }}
+</div>
+{{ end }}

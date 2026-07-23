@@ -1,8 +1,10 @@
 baseURL = "https://girigiribauer.com/"
-languageCode = "ja-jp"
+locale = "ja-jp"
 title = "ばうあーろぐ"
 enableRobotsTXT = true
 enableEmoji = true
+# generator メタは出力しない（Hugoはトップページに自動注入するため設定でも止める）
+disableHugoGeneratorInject = true
 
 # Preserve legacy URL structure
 [permalinks]

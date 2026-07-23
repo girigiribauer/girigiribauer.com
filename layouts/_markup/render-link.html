@@ -1,0 +1,42 @@
+{{- /* 裸のリモートURLは data/linkcards.json のOGPキャッシュがあればリンクカードにする。 */ -}}
+{{- $link := .Destination -}}
+{{- $text := .Text -}}
+{{- $isRemote := findRE "^https?://" $link -}}
+{{- $isBare := eq $text $link -}}
+
+{{- $title := "" -}}
+{{- $desc := "" -}}
+{{- $image := "" -}}
+{{- if and $isRemote $isBare -}}
+  {{- if isset hugo.Data "linkcards" -}}
+    {{- with index hugo.Data.linkcards $link -}}
+      {{- $title = .title -}}
+      {{- $desc = .desc -}}
+      {{- $image = .image -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $title -}}
+<a href="{{ $link | safeURL }}" class="link-card" target="_blank" rel="noopener noreferrer">
+  <span class="link-card__main">
+    <span class="link-card__title">{{ $title }}</span>
+    <span class="link-card__desc">{{ $desc | truncate 100 }}</span>
+    <span class="link-card__url">
+      <img src="https://www.google.com/s2/favicons?domain={{ $link | safeURL }}" alt="" class="link-card__favicon" />
+      {{ $link | replaceRE "^https?://([^/]+).*" "$1" }}
+    </span>
+  </span>
+  {{- if $image -}}
+  <span class="link-card__image">
+    <img src="{{ $image }}" alt="{{ $title }}" loading="lazy" />
+  </span>
+  {{- else -}}
+  <span class="link-card__image link-card__image--no-image"></span>
+  {{- end -}}
+</a>
+{{- else if and $isRemote $isBare -}}
+<a href="{{ $link | safeURL }}" target="_blank" rel="noopener noreferrer">{{ $text | safeHTML }}</a>
+{{- else -}}
+<a href="{{ $link | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isRemote }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ $text | safeHTML }}</a>
+{{- end -}}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  {{ partial "head.html" . }}
+</head>
+
+<body>
+  <header class="container site-header">
+    <a href="/" class="site-title">{{ .Site.Title }}</a>
+    <div class="header-actions">{{ partial "rss-link.html" . }}</div>
+  </header>
+
+  <main class="container">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="container site-footer">
+    <div class="footer-links">
+      <a href="/tech" class="footer-link">Tech</a>
+      <a href="/biz" class="footer-link">Biz</a>
+      <a href="/misc" class="footer-link">Misc</a>
+      <a href="/tags" class="footer-link">Tags</a>
+    </div>
+
+    <ul class="disclaimer-list">
+      <li class="disclaimer-item">このブログは個人の見解であり、所属する組織、団体等の公式見解ではありません</li>
+      <li>自分がひっかかった技術的なことをメモってインターネット上に解き放ち、忘れた頃に自分含む誰かがググったときの助けになれば、というポリシーでブログを書いています</li>
+    </ul>
+
+    <p>&copy; {{ now.Year }} {{ .Site.Params.author }}</p>
+  </footer>
+</body>
+
+</html>

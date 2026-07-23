@@ -5,42 +5,33 @@
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <title>Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた | ばうあーろぐ</title>
     <meta content="2013年に書いていた、『Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話』（
-
-
-
-            
-                https://girigiribauer.com/tech/20130726/
-                
-                
-                    
-                    girigiribauer.com
-                
-            ）という記事の続きです。
+  
+    https://girigiribauer.com/tech/20130726/
+    
+    
+      
+      girigiribauer.com
+    
+  ）という記事の続きです。
 2013年の段階では、まだまだ考え方みたいなものがまとまりきっておらず、Vagrant が用いる接続ポート番号を変えるという方向で色々考えていたのですが、今振り返ってみるとそもそも根本の考え方を見直すべきでした。
 
 Vagrant の使いどころ・考えどころ
 ざっと『Vagrant の使いどころ・考えどころ』（
-
-
-
-            
-                https://girigiribauer.com/tech/20150303/
-                
-                
-                    
-                    girigiribauer.com
-                
-            ）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。
+  
+    https://girigiribauer.com/tech/20150303/
+    
+    
+      
+      girigiribauer.com
+    
+  ）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。
 
 ローカルの開発用としてローカルでのみ使い続ける
 本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用
 
 SSH の接続ポート番号を変えるという大きな理由はセキュリティにあると思います。 デフォルトの22番ポートで使っていると外部からのアタックに弱いため、ポート番号を変えたい、そのためのレシピを書きたい、という点が根本にあると思います。
 つまり、2.の**『本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用』**ってのがやりたいわけです。
-もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。
-
-
-Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。
+もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。
 同じレシピをローカル、リモートに適用する
 本番環境の検証用として利用したいという用途で、 同じレシピをローカル、リモートの両方に適用したいということであれば、json ファイルに設定をくくり出してやれば OK です。
 ローカルは Vagrant で動いていますが、リモートはそうではないので、両方で同じレシピ適用方法が可能な knife コマンドを使いましょうー。
@@ -73,47 +64,37 @@ Vagrant で SSH の接続ポート番号を変えると、けっこう複雑に�
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://girigiribauer.com/tech/20150401/" rel="canonical">
     <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20150401" rel="site.standard.document">
-    <meta content="Hugo 0.164.0" name="generator">
     <meta content="#ffffff" name="theme-color">
     <link href="/favicon.ico" rel="icon">
     <meta content="Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた" itemprop="name">
     <meta content="2013年に書いていた、『Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話』（
-
-
-
-            
-                https://girigiribauer.com/tech/20130726/
-                
-                
-                    
-                    girigiribauer.com
-                
-            ）という記事の続きです。
+  
+    https://girigiribauer.com/tech/20130726/
+    
+    
+      
+      girigiribauer.com
+    
+  ）という記事の続きです。
 2013年の段階では、まだまだ考え方みたいなものがまとまりきっておらず、Vagrant が用いる接続ポート番号を変えるという方向で色々考えていたのですが、今振り返ってみるとそもそも根本の考え方を見直すべきでした。
 
 Vagrant の使いどころ・考えどころ
 ざっと『Vagrant の使いどころ・考えどころ』（
-
-
-
-            
-                https://girigiribauer.com/tech/20150303/
-                
-                
-                    
-                    girigiribauer.com
-                
-            ）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。
+  
+    https://girigiribauer.com/tech/20150303/
+    
+    
+      
+      girigiribauer.com
+    
+  ）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。
 
 ローカルの開発用としてローカルでのみ使い続ける
 本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用
 
 SSH の接続ポート番号を変えるという大きな理由はセキュリティにあると思います。 デフォルトの22番ポートで使っていると外部からのアタックに弱いため、ポート番号を変えたい、そのためのレシピを書きたい、という点が根本にあると思います。
 つまり、2.の**『本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用』**ってのがやりたいわけです。
-もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。
-
-
-Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。
+もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。
 同じレシピをローカル、リモートに適用する
 本番環境の検証用として利用したいという用途で、 同じレシピをローカル、リモートの両方に適用したいということであれば、json ファイルに設定をくくり出してやれば OK です。
 ローカルは Vagrant で動いていますが、リモートはそうではないので、両方で同じレシピ適用方法が可能な knife コマンドを使いましょうー。
@@ -145,42 +126,33 @@ Vagrant で SSH の接続ポート番号を変えると、けっこう複雑に�
 あとは knife コマンドにて、" itemprop="description">
     <meta content="Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた" property="og:title">
     <meta content="2013年に書いていた、『Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話』（
-
-
-
-            
-                https://girigiribauer.com/tech/20130726/
-                
-                
-                    
-                    girigiribauer.com
-                
-            ）という記事の続きです。
+  
+    https://girigiribauer.com/tech/20130726/
+    
+    
+      
+      girigiribauer.com
+    
+  ）という記事の続きです。
 2013年の段階では、まだまだ考え方みたいなものがまとまりきっておらず、Vagrant が用いる接続ポート番号を変えるという方向で色々考えていたのですが、今振り返ってみるとそもそも根本の考え方を見直すべきでした。
 
 Vagrant の使いどころ・考えどころ
 ざっと『Vagrant の使いどころ・考えどころ』（
-
-
-
-            
-                https://girigiribauer.com/tech/20150303/
-                
-                
-                    
-                    girigiribauer.com
-                
-            ）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。
+  
+    https://girigiribauer.com/tech/20150303/
+    
+    
+      
+      girigiribauer.com
+    
+  ）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。
 
 ローカルの開発用としてローカルでのみ使い続ける
 本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用
 
 SSH の接続ポート番号を変えるという大きな理由はセキュリティにあると思います。 デフォルトの22番ポートで使っていると外部からのアタックに弱いため、ポート番号を変えたい、そのためのレシピを書きたい、という点が根本にあると思います。
 つまり、2.の**『本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用』**ってのがやりたいわけです。
-もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。
-
-
-Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。
+もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。
 同じレシピをローカル、リモートに適用する
 本番環境の検証用として利用したいという用途で、 同じレシピをローカル、リモートの両方に適用したいということであれば、json ファイルに設定をくくり出してやれば OK です。
 ローカルは Vagrant で動いていますが、リモートはそうではないので、両方で同じレシピ適用方法が可能な knife コマンドを使いましょうー。
@@ -217,42 +189,33 @@ Vagrant で SSH の接続ポート番号を変えると、けっこう複雑に�
     <meta content="summary_large_image" name="twitter:card">
     <meta content="Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた" name="twitter:title">
     <meta content="2013年に書いていた、『Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話』（
-
-
-
-            
-                https://girigiribauer.com/tech/20130726/
-                
-                
-                    
-                    girigiribauer.com
-                
-            ）という記事の続きです。
+  
+    https://girigiribauer.com/tech/20130726/
+    
+    
+      
+      girigiribauer.com
+    
+  ）という記事の続きです。
 2013年の段階では、まだまだ考え方みたいなものがまとまりきっておらず、Vagrant が用いる接続ポート番号を変えるという方向で色々考えていたのですが、今振り返ってみるとそもそも根本の考え方を見直すべきでした。
 
 Vagrant の使いどころ・考えどころ
 ざっと『Vagrant の使いどころ・考えどころ』（
-
-
-
-            
-                https://girigiribauer.com/tech/20150303/
-                
-                
-                    
-                    girigiribauer.com
-                
-            ）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。
+  
+    https://girigiribauer.com/tech/20150303/
+    
+    
+      
+      girigiribauer.com
+    
+  ）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。
 
 ローカルの開発用としてローカルでのみ使い続ける
 本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用
 
 SSH の接続ポート番号を変えるという大きな理由はセキュリティにあると思います。 デフォルトの22番ポートで使っていると外部からのアタックに弱いため、ポート番号を変えたい、そのためのレシピを書きたい、という点が根本にあると思います。
 つまり、2.の**『本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用』**ってのがやりたいわけです。
-もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。
-
-
-Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。
+もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。
 同じレシピをローカル、リモートに適用する
 本番環境の検証用として利用したいという用途で、 同じレシピをローカル、リモートの両方に適用したいということであれば、json ファイルに設定をくくり出してやれば OK です。
 ローカルは Vagrant で動いていますが、リモートはそうではないので、両方で同じレシピ適用方法が可能な knife コマンドを使いましょうー。
@@ -290,28 +253,28 @@ Vagrant で SSH の接続ポート番号を変えると、けっこう複雑に�
   <body>
     <header class="container site-header">
       <a class="site-title" href="/">ばうあーろぐ</a>
-      <div class="theme-toggle-wrap"></div>
+      <div class="header-actions"></div>
     </header>
     <main class="container">
       <article class="article-container">
         <header class="article-header">
           <h1 class="page-title">Vagrant で SSH の接続ポート番号を変える、という発想がそもそも間違ってた</h1>
-          <div class="article-meta article-meta-flex"><time datetime="2015-04-01 10:28:44 +0000 +0000">2015/04/01</time></div>
+          <div class="article-meta article-meta-flex"><time datetime="2015-04-01T10:28:44Z">2015/04/01</time></div>
         </header>
         <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
         <div class="content">
-          <p>2013年に書いていた、『Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話』（ <a class="link-card" href="http://girigiribauer.com/archives/1127/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">https://girigiribauer.com/tech/20130726/</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://girigiribauer.com/archives/1127/"> girigiribauer.com</span></span><span class="link-card__image link-card__image--no-image"></span></a>）という記事の続きです。</p>
+          <p>2013年に書いていた、『Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話』（<a class="link-card" href="http://girigiribauer.com/archives/1127/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">https://girigiribauer.com/tech/20130726/</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://girigiribauer.com/archives/1127/"> girigiribauer.com</span></span><span class="link-card__image link-card__image--no-image"></span></a>）という記事の続きです。</p>
           <p>2013年の段階では、まだまだ考え方みたいなものがまとまりきっておらず、Vagrant が用いる接続ポート番号を変えるという方向で色々考えていたのですが、今振り返ってみるとそもそも根本の考え方を見直すべきでした。</p>
           <hr>
           <h2 id="vagrant-の使いどころ考えどころ">Vagrant の使いどころ・考えどころ</h2>
-          <p>ざっと『Vagrant の使いどころ・考えどころ』（ <a class="link-card" href="http://girigiribauer.com/archives/1729/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">https://girigiribauer.com/tech/20150303/</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://girigiribauer.com/archives/1729/"> girigiribauer.com</span></span><span class="link-card__image link-card__image--no-image"></span></a>）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。</p>
+          <p>ざっと『Vagrant の使いどころ・考えどころ』（<a class="link-card" href="http://girigiribauer.com/archives/1729/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">https://girigiribauer.com/tech/20150303/</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://girigiribauer.com/archives/1729/"> girigiribauer.com</span></span><span class="link-card__image link-card__image--no-image"></span></a>）に書いたのですが、Vagrant を用いる用途としては大きく2種類あると考えています。</p>
           <ol>
             <li><strong>ローカルの開発用</strong>としてローカルでのみ使い続ける</li>
             <li><strong>本番環境の検証用</strong>として、同じレシピを仮想マシン・リモート環境にそれぞれ適用</li>
           </ol>
           <p>SSH の接続ポート番号を変えるという大きな理由は<strong>セキュリティ</strong>にあると思います。 デフォルトの22番ポートで使っていると外部からのアタックに弱いため、ポート番号を変えたい、そのためのレシピを書きたい、という点が根本にあると思います。</p>
           <p>つまり、2.の**『本番環境の検証用として、同じレシピを仮想マシン・リモート環境にそれぞれ適用』**ってのがやりたいわけです。</p>
-          <p>もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。 <a href="http://girigiribauer.com/archives/1127/" rel="noopener noreferrer" target="_blank">Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話</a> にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。</p>
+          <p>もし1.が目的だったのなら、わざわざポート番号を変える必要はありません。<a href="http://girigiribauer.com/archives/1127/" rel="noopener noreferrer" target="_blank">Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話</a> にもあるように、ホスト OS が 2424 番、ゲスト OS が 22 番で接続している最中に、**ゲスト OS を 22 番をレシピで別ポートに変更してしまうと接続が切れてしまいます。ローカルで動作しているのならわざわざ変える必要はありません。**何が面倒なのかは、詳しくはそちらの記事をご覧ください。</p>
           <h2 id="同じレシピをローカルリモートに適用する">同じレシピをローカル、リモートに適用する</h2>
           <p>本番環境の検証用として利用したいという用途で、 同じレシピをローカル、リモートの両方に適用したいということであれば、<strong>json ファイルに設定をくくり出してやれば OK</strong> です。</p>
           <p>ローカルは Vagrant で動いていますが、リモートはそうではないので、両方で同じレシピ適用方法が可能な <strong>knife コマンド</strong>を使いましょうー。</p>
@@ -399,7 +362,7 @@ knife solo cook localhost
         </div>
         <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/chef/">#Chef</a> <a class="tag-link" href="/tags/ssh/">#SSH</a> <a class="tag-link" href="/tags/vagrant/">#Vagrant</a></div>
         <hr class="full-width-hr">
-        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Vagrant%20%e3%81%a7%20SSH%20%e3%81%ae%e6%8e%a5%e7%b6%9a%e3%83%9d%e3%83%bc%e3%83%88%e7%95%aa%e5%8f%b7%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b%e3%80%81%e3%81%a8%e3%81%84%e3%81%86%e7%99%ba%e6%83%b3%e3%81%8c%e3%81%9d%e3%82%82%e3%81%9d%e3%82%82%e9%96%93%e9%81%95%e3%81%a3%e3%81%a6%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20150401/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20150401%2f&amp;text=Vagrant%20%e3%81%a7%20SSH%20%e3%81%ae%e6%8e%a5%e7%b6%9a%e3%83%9d%e3%83%bc%e3%83%88%e7%95%aa%e5%8f%b7%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b%e3%80%81%e3%81%a8%e3%81%84%e3%81%86%e7%99%ba%e6%83%b3%e3%81%8c%e3%81%9d%e3%82%82%e3%81%9d%e3%82%82%e9%96%93%e9%81%95%e3%81%a3%e3%81%a6%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20150401/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Vagrant%20%e3%81%a7%20SSH%20%e3%81%ae%e6%8e%a5%e7%b6%9a%e3%83%9d%e3%83%bc%e3%83%88%e7%95%aa%e5%8f%b7%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b%e3%80%81%e3%81%a8%e3%81%84%e3%81%86%e7%99%ba%e6%83%b3%e3%81%8c%e3%81%9d%e3%82%82%e3%81%9d%e3%82%82%e9%96%93%e9%81%95%e3%81%a3%e3%81%a6%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20150401/" rel="noopener noreferrer" target="_blank">Bluesky</a> <a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20150401%2f&amp;text=Vagrant%20%e3%81%a7%20SSH%20%e3%81%ae%e6%8e%a5%e7%b6%9a%e3%83%9d%e3%83%bc%e3%83%88%e7%95%aa%e5%8f%b7%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b%e3%80%81%e3%81%a8%e3%81%84%e3%81%86%e7%99%ba%e6%83%b3%e3%81%8c%e3%81%9d%e3%82%82%e3%81%9d%e3%82%82%e9%96%93%e9%81%95%e3%81%a3%e3%81%a6%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a> <a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20150401/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
       </article>
     </main>
     <footer class="container site-footer">

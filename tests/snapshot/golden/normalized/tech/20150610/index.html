@@ -13,25 +13,19 @@ Vagrant を利用してローカルに同じ環境を作る（空のVM）
 ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用
 
 本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。
-多くのサードパーティ製レシピは、
-
-
-Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
+多くのサードパーティ製レシピは、Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
 レシピは大きく分けて2種類あり、attributes として json ファイルに値を書いていくスタイルのものと、もともと Chef に用意されている file, template のような、レシピ内に Chef の resources として記述するスタイルのものがあります。以下の記事にもわかりやすく紹介されてます。
 
-
-
-
-            
-                さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
-                
-                
-                    
-                    tsuchikazu.net
-                
-            
-                
-            
+  
+    さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
+    
+    
+      
+      tsuchikazu.net
+    
+  
+    
+  
 例えば、今回レシピを適用したいマシンを仮に alpha としておいて、nodes/alphalocal.json と nodes/alphaproduction.json の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）
 {
   &quot;name&quot;: &quot;alphalocal&quot;,
@@ -75,7 +69,6 @@ Chef Supermarket に登録してあるのですが、読み方や使い方が分
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://girigiribauer.com/tech/20150610/" rel="canonical">
     <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20150610" rel="site.standard.document">
-    <meta content="Hugo 0.164.0" name="generator">
     <meta content="#ffffff" name="theme-color">
     <link href="/favicon.ico" rel="icon">
     <meta content="Chef を本番投入してみた" itemprop="name">
@@ -88,25 +81,19 @@ Vagrant を利用してローカルに同じ環境を作る（空のVM）
 ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用
 
 本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。
-多くのサードパーティ製レシピは、
-
-
-Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
+多くのサードパーティ製レシピは、Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
 レシピは大きく分けて2種類あり、attributes として json ファイルに値を書いていくスタイルのものと、もともと Chef に用意されている file, template のような、レシピ内に Chef の resources として記述するスタイルのものがあります。以下の記事にもわかりやすく紹介されてます。
 
-
-
-
-            
-                さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
-                
-                
-                    
-                    tsuchikazu.net
-                
-            
-                
-            
+  
+    さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
+    
+    
+      
+      tsuchikazu.net
+    
+  
+    
+  
 例えば、今回レシピを適用したいマシンを仮に alpha としておいて、nodes/alphalocal.json と nodes/alphaproduction.json の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）
 {
   &quot;name&quot;: &quot;alphalocal&quot;,
@@ -157,25 +144,19 @@ Vagrant を利用してローカルに同じ環境を作る（空のVM）
 ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用
 
 本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。
-多くのサードパーティ製レシピは、
-
-
-Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
+多くのサードパーティ製レシピは、Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
 レシピは大きく分けて2種類あり、attributes として json ファイルに値を書いていくスタイルのものと、もともと Chef に用意されている file, template のような、レシピ内に Chef の resources として記述するスタイルのものがあります。以下の記事にもわかりやすく紹介されてます。
 
-
-
-
-            
-                さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
-                
-                
-                    
-                    tsuchikazu.net
-                
-            
-                
-            
+  
+    さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
+    
+    
+      
+      tsuchikazu.net
+    
+  
+    
+  
 例えば、今回レシピを適用したいマシンを仮に alpha としておいて、nodes/alphalocal.json と nodes/alphaproduction.json の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）
 {
   &quot;name&quot;: &quot;alphalocal&quot;,
@@ -231,25 +212,19 @@ Vagrant を利用してローカルに同じ環境を作る（空のVM）
 ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用
 
 本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。
-多くのサードパーティ製レシピは、
-
-
-Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
+多くのサードパーティ製レシピは、Chef Supermarket に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。
 レシピは大きく分けて2種類あり、attributes として json ファイルに値を書いていくスタイルのものと、もともと Chef に用意されている file, template のような、レシピ内に Chef の resources として記述するスタイルのものがあります。以下の記事にもわかりやすく紹介されてます。
 
-
-
-
-            
-                さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
-                
-                
-                    
-                    tsuchikazu.net
-                
-            
-                
-            
+  
+    さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog
+    
+    
+      
+      tsuchikazu.net
+    
+  
+    
+  
 例えば、今回レシピを適用したいマシンを仮に alpha としておいて、nodes/alphalocal.json と nodes/alphaproduction.json の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）
 {
   &quot;name&quot;: &quot;alphalocal&quot;,
@@ -298,13 +273,13 @@ Chef Supermarket に登録してあるのですが、読み方や使い方が分
   <body>
     <header class="container site-header">
       <a class="site-title" href="/">ばうあーろぐ</a>
-      <div class="theme-toggle-wrap"></div>
+      <div class="header-actions"></div>
     </header>
     <main class="container">
       <article class="article-container">
         <header class="article-header">
           <h1 class="page-title">Chef を本番投入してみた</h1>
-          <div class="article-meta article-meta-flex"><time datetime="2015-06-09 23:39:55 +0000 +0000">2015/06/09</time></div>
+          <div class="article-meta article-meta-flex"><time datetime="2015-06-09T23:39:55Z">2015/06/09</time></div>
         </header>
         <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
         <div class="content">
@@ -317,7 +292,7 @@ Chef Supermarket に登録してあるのですが、読み方や使い方が分
             <li>ローカル環境へのプロビジョニングが問題なければ、同じレシピを本番にも適用</li>
           </ol>
           <p>本当は Serverspec なども試していきたいですが、そちらは今後やっていければと思います・・・。</p>
-          <p>多くのサードパーティ製レシピは、 <a href="https://supermarket.chef.io/" rel="noopener noreferrer" target="_blank">Chef Supermarket</a> に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。</p>
+          <p>多くのサードパーティ製レシピは、<a href="https://supermarket.chef.io/" rel="noopener noreferrer" target="_blank">Chef Supermarket</a> に登録してあるのですが、読み方や使い方が分かっていないと意味をなさないケースも多かったです。</p>
           <p>レシピは大きく分けて2種類あり、<strong>attributes として json ファイルに値を書いていくスタイル</strong>のものと、もともと Chef に用意されている file, template のような、<strong>レシピ内に Chef の resources として記述するスタイル</strong>のものがあります。以下の記事にもわかりやすく紹介されてます。</p>
           <p><a class="link-card" href="http://tsuchikazu.net/vps_chef_solo/" rel="noopener noreferrer" target="_blank"><span class="link-card__main"><span class="link-card__title">さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog</span> <span class="link-card__desc"></span> <span class="link-card__url"><img alt="" class="link-card__favicon" src="https://www.google.com/s2/favicons?domain=http://tsuchikazu.net/vps_chef_solo/"> tsuchikazu.net</span></span><span class="link-card__image"><img alt="さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog" loading="lazy" src="https://tsuchikazu.net/og-images/vps_chef_solo.png"></span></a></p>
           <p>例えば、今回レシピを適用したいマシンを仮に alpha としておいて、<code>nodes/alphalocal.json</code> と <code>nodes/alphaproduction.json</code> の2ファイル用意し、それぞれ設定を括り出しておきたいところを記述しておきます。 以下は nodes/alphalocal.json のサンプルです。（実際はもうちょい複雑ですが）</p>
@@ -385,7 +360,7 @@ Chef Supermarket に登録してあるのですが、読み方や使い方が分
         </div>
         <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/chef/">#Chef</a> <a class="tag-link" href="/tags/vagrant/">#Vagrant</a></div>
         <hr class="full-width-hr">
-        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Chef%20%e3%82%92%e6%9c%ac%e7%95%aa%e6%8a%95%e5%85%a5%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20150610/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20150610%2f&amp;text=Chef%20%e3%82%92%e6%9c%ac%e7%95%aa%e6%8a%95%e5%85%a5%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20150610/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=Chef%20%e3%82%92%e6%9c%ac%e7%95%aa%e6%8a%95%e5%85%a5%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20150610/" rel="noopener noreferrer" target="_blank">Bluesky</a> <a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20150610%2f&amp;text=Chef%20%e3%82%92%e6%9c%ac%e7%95%aa%e6%8a%95%e5%85%a5%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a> <a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20150610/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
       </article>
     </main>
     <footer class="container site-footer">

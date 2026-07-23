@@ -8,7 +8,7 @@
 
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
-import { HARNESS_DIR, buildSite, walkFiles, sha256File } from './lib/util.mjs';
+import { HARNESS_DIR, buildSite, walkFiles, sha256File, inputFingerprint } from './lib/util.mjs';
 import { normalizerFor } from './lib/normalize.mjs';
 
 const GOLDEN = path.join(HARNESS_DIR, 'golden');
@@ -101,6 +101,19 @@ const total = missing.length + extra.length + textDiffs.length + assetDiffs.leng
 const label = args.dir ? `dir:${args.dir}` : `hugo ${args.minify ? '--minify' : '(no minify)'}`;
 console.log(`比較対象: ${label}${args.only ? `  [--only ${args.only}]` : ''}`);
 console.log(`golden: text ${goldenTextFiles.length} / assets ${Object.keys(manifest).length}`);
+
+// ビルド入力がgolden取得時から変わっていれば、差分の原因はテンプレではない可能性が高い
+const meta = JSON.parse(readFileSync(path.join(GOLDEN, 'meta.json'), 'utf-8'));
+if (meta.inputs) {
+  const now = inputFingerprint();
+  const drifted = Object.keys({ ...meta.inputs, ...now }).filter((k) => meta.inputs[k] !== now[k]);
+  if (drifted.length) {
+    console.log('');
+    console.log('⚠ ビルド入力が golden 取得時から変化しています:');
+    for (const k of drifted) console.log(`    ${k}`);
+    console.log('  以下の差分はテンプレートではなく入力変更が原因かもしれません。');
+  }
+}
 console.log('');
 
 const show = (title, items, fmt = (x) => x) => {

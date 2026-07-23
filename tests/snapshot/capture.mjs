@@ -9,7 +9,7 @@
 
 import { rmSync, mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
-import { HARNESS_DIR, buildSite, walkFiles, sha256File, hugoVersion } from './lib/util.mjs';
+import { HARNESS_DIR, buildSite, walkFiles, sha256File, hugoVersion, inputFingerprint } from './lib/util.mjs';
 import { normalizerFor } from './lib/normalize.mjs';
 
 const GOLDEN = path.join(HARNESS_DIR, 'golden');
@@ -78,6 +78,7 @@ const meta = {
   fileCount: files.length,
   textCount,
   assetCount,
+  inputs: inputFingerprint(),
 };
 writeFileSync(path.join(GOLDEN, 'meta.json'), JSON.stringify(meta, null, 2) + '\n');
 

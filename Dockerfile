@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Hugo Extended
-ARG HUGO_VERSION=0.154.5
+ARG HUGO_VERSION=0.164.0
 # Detect architecture and download appropriate binary
 RUN ARCH=$(dpkg --print-architecture) && \
     case "$ARCH" in \

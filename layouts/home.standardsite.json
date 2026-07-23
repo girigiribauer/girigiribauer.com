@@ -1,4 +1,4 @@
-{{- /* standard.site reconcile スクリプト用の記事一覧。tech/biz/misc の記事だけを出力する。 */ -}}
+{{- /* standard.site reconcile スクリプト用の記事一覧。tech/biz/misc/products の記事だけを出力する。 */ -}}
 {{- $sections := slice "tech" "biz" "misc" "products" -}}
 {{- $list := slice -}}
 {{- range (where .Site.RegularPages "Section" "in" $sections) -}}

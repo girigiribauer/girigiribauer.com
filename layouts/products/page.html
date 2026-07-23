@@ -1,0 +1,37 @@
+{{ define "main" }}
+<article class="product-container">
+
+  <header class="product-header-clean">
+    {{ $mainLink := "" }}
+    {{ with .Params.links }}{{ $mainLink = (index . 0).url }}{{ end }}
+
+    {{ if $mainLink }}
+    <a href="{{ $mainLink }}" target="_blank" rel="noopener noreferrer" class="header-top-row header-link-wrapper">
+      {{ partial "product-header-inner.html" . }}
+    </a>
+    {{ else }}
+    <div class="header-top-row">
+      {{ partial "product-header-inner.html" . }}
+    </div>
+    {{ end }}
+
+    <div class="header-body">
+      <p class="product-desc">{{ .Params.description }}</p>
+    </div>
+  </header>
+
+  <div class="content">
+    {{ .Content }}
+
+    <div class="product-footer-links">
+      {{ range .Params.links }}
+      <div class="product-footer-link-item">
+        <span class="link-label">{{ .name }}:</span>
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .url }}</a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+
+</article>
+{{ end }}

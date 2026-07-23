@@ -1,0 +1,12 @@
+{{- /* 一覧の記事1件。日付書式は呼び出し側で変わるため dateFormat を受け取る。 */ -}}
+{{- $p := .page -}}
+{{- $dateFormat := .dateFormat -}}
+<article class="article-item">
+  <a href="{{ $p.RelPermalink }}" class="article-link">
+    <h3 class="article-title">{{ $p.Title }}</h3>
+  </a>
+  <div class="article-meta">
+    <time datetime="{{ $p.Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ $p.Date.Format $dateFormat }}</time>
+  </div>
+  <p class="article-description">{{ $p.Description | default ($p.Summary | plainify) | truncate 100 }}</p>
+</article>

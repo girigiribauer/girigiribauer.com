@@ -36,7 +36,6 @@ NeoVim とかに移るときに Python2 と Python3 の両方パスを通した�
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://girigiribauer.com/tech/20170727/" rel="canonical">
     <link href="at://did:plc:tsvcmd72oxp47wtixs4qllyi/site.standard.document/tech-20170727" rel="site.standard.document">
-    <meta content="Hugo 0.164.0" name="generator">
     <meta content="#ffffff" name="theme-color">
     <link href="/favicon.ico" rel="icon">
     <meta content="pyenv で python2 と python3 の両バージョンを指定できるのを最近まで知らなかった" itemprop="name">
@@ -142,13 +141,13 @@ NeoVim とかに移るときに Python2 と Python3 の両方パスを通した�
   <body>
     <header class="container site-header">
       <a class="site-title" href="/">ばうあーろぐ</a>
-      <div class="theme-toggle-wrap"></div>
+      <div class="header-actions"></div>
     </header>
     <main class="container">
       <article class="article-container">
         <header class="article-header">
           <h1 class="page-title">pyenv で python2 と python3 の両バージョンを指定できるのを最近まで知らなかった</h1>
-          <div class="article-meta article-meta-flex"><time datetime="2017-07-27 17:45:52 +0900 JST">2017/07/27</time></div>
+          <div class="article-meta article-meta-flex"><time datetime="2017-07-27T17:45:52+09:00">2017/07/27</time></div>
         </header>
         <div class="alert-box"><strong>この記事は書かれてから1年以上が経過しており、最新の情報とは異なる可能性があります</strong></div>
         <div class="content">
@@ -179,7 +178,7 @@ PATH="${PYENV_ROOT}/shims/"
         </div>
         <div class="tags-container"><span class="tag-label">Tags:</span> <a class="tag-link" href="/tags/anyenv/">#anyenv</a> <a class="tag-link" href="/tags/python/">#Python</a></div>
         <hr class="full-width-hr">
-        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=pyenv%20%e3%81%a7%20python2%20%e3%81%a8%20python3%20%e3%81%ae%e4%b8%a1%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%ae%e3%82%92%e6%9c%80%e8%bf%91%e3%81%be%e3%81%a7%e7%9f%a5%e3%82%89%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20170727/" rel="noopener noreferrer" target="_blank">Bluesky</a><a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20170727%2f&amp;text=pyenv%20%e3%81%a7%20python2%20%e3%81%a8%20python3%20%e3%81%ae%e4%b8%a1%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%ae%e3%82%92%e6%9c%80%e8%bf%91%e3%81%be%e3%81%a7%e7%9f%a5%e3%82%89%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a><a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20170727/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
+        <div class="social-share"><a class="social-btn bluesky" href="https://bsky.app/intent/compose?text=pyenv%20%e3%81%a7%20python2%20%e3%81%a8%20python3%20%e3%81%ae%e4%b8%a1%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%ae%e3%82%92%e6%9c%80%e8%bf%91%e3%81%be%e3%81%a7%e7%9f%a5%e3%82%89%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f%20-%20%e3%81%b0%e3%81%86%e3%81%82%e3%83%bc%e3%82%8d%e3%81%90%20https://girigiribauer.com/tech/20170727/" rel="noopener noreferrer" target="_blank">Bluesky</a> <a class="social-btn twitter" href="https://twitter.com/share?url=https%3a%2f%2fgirigiribauer.com%2ftech%2f20170727%2f&amp;text=pyenv%20%e3%81%a7%20python2%20%e3%81%a8%20python3%20%e3%81%ae%e4%b8%a1%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%ae%e3%82%92%e6%9c%80%e8%bf%91%e3%81%be%e3%81%a7%e7%9f%a5%e3%82%89%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f" rel="noopener noreferrer" target="_blank">X (Twitter)</a> <a class="social-btn hatena" href="http://b.hatena.ne.jp/entry/https://girigiribauer.com/tech/20170727/" rel="noopener noreferrer" target="_blank">Hatena</a></div>
       </article>
     </main>
     <footer class="container site-footer">

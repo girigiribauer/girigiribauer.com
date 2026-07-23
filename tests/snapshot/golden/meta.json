@@ -1,8 +1,12 @@
 {
-  "createdAt": "2026-07-15T02:33:44.174Z",
+  "createdAt": "2026-07-22T15:46:03.849Z",
   "source": "hugo --buildFuture --minify",
   "hugoVersion": "hugo v0.164.0+extended+withdeploy darwin/amd64 BuildDate=2026-07-06T16:39:30Z VendorInfo=Homebrew",
   "fileCount": 1237,
   "textCount": 686,
-  "assetCount": 551
+  "assetCount": 551,
+  "inputs": {
+    "config.toml": "6ef5887b520a81f1c1c37ab32fbdf833590af6222b5ce4e05662154290a4b63e",
+    "data/linkcards.json": "14c4b24387575d7305c744144f1a1aaaae76d06a7ee683f7ec5939c28e2872e0"
+  }
 }

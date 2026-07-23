@@ -1,0 +1,11 @@
+{{- /* 製品ヘッダの中身。外側が <a> か <div> かで分岐するため、中身だけを切り出す。 */ -}}
+{{- $icon := .Params.image -}}
+{{- with .Resources.GetMatch .Params.image }}{{ $icon = .RelPermalink }}{{ end -}}
+<div class="header-icon">
+  {{ if $icon }}
+  <img src="{{ $icon }}" alt="{{ .Title }}">
+  {{ else }}
+  <span class="placeholder-icon">{{ substr .Title 0 1 }}</span>
+  {{ end }}
+</div>
+<h1 class="product-title">{{ .Title }}</h1>

@@ -1,0 +1,7 @@
+{{- if and .Section (ne .Section "posts") (ne .Kind "404") -}}
+  {{- if where .OutputFormats "Name" "RSS" -}}
+  <a href="/{{ .Section }}/index.xml" class="rss-link" title="RSS Feed for {{ .Section }}">{{ partial "rss-icon.html" }}</a>
+  {{- end -}}
+{{- else if .IsHome -}}
+  <a href="/index.xml" class="rss-link" title="RSS Feed">{{ partial "rss-icon.html" }}</a>
+{{- end -}}
