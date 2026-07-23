@@ -1,2 +1,6 @@
 node_modules/
 .build/
+
+# 出力スナップショット。記事を書けば当然ずれるので保存しない。
+# テンプレ等を触る「直前」に capture.mjs で取り、触った後に compare.mjs で突き合わせる。
+golden/

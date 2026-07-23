@@ -102,8 +102,19 @@ const label = args.dir ? `dir:${args.dir}` : `hugo ${args.minify ? '--minify' : 
 console.log(`比較対象: ${label}${args.only ? `  [--only ${args.only}]` : ''}`);
 console.log(`golden: text ${goldenTextFiles.length} / assets ${Object.keys(manifest).length}`);
 
-// ビルド入力がgolden取得時から変わっていれば、差分の原因はテンプレではない可能性が高い
 const meta = JSON.parse(readFileSync(path.join(GOLDEN, 'meta.json'), 'utf-8'));
+
+// goldenがいつの状態かを常に見せる。古い正解に対して緑でも意味がない。
+if (meta.createdAt) {
+  const mins = Math.round((Date.now() - Date.parse(meta.createdAt)) / 60000);
+  const age = mins < 60 ? `${mins}分前` : mins < 1440 ? `${Math.round(mins / 60)}時間前` : `${Math.round(mins / 1440)}日前`;
+  console.log(`golden取得: ${age}${meta.head ? ` (HEAD ${meta.head})` : ''}`);
+}
+if (meta.dirtyAtCapture?.length) {
+  console.log(`  ※ 取得時に未コミット変更あり: ${meta.dirtyAtCapture.slice(0, 3).join(', ')}${meta.dirtyAtCapture.length > 3 ? ' 他' : ''}`);
+}
+
+// ビルド入力がgolden取得時から変わっていれば、差分の原因はテンプレではない可能性が高い
 if (meta.inputs) {
   const now = inputFingerprint();
   const drifted = Object.keys({ ...meta.inputs, ...now }).filter((k) => meta.inputs[k] !== now[k]);

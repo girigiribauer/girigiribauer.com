@@ -9,7 +9,9 @@
 
 import { rmSync, mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
-import { HARNESS_DIR, buildSite, walkFiles, sha256File, hugoVersion, inputFingerprint } from './lib/util.mjs';
+import {
+  HARNESS_DIR, buildSite, walkFiles, sha256File, hugoVersion, inputFingerprint, captureContext,
+} from './lib/util.mjs';
 import { normalizerFor } from './lib/normalize.mjs';
 
 const GOLDEN = path.join(HARNESS_DIR, 'golden');
@@ -79,8 +81,15 @@ const meta = {
   textCount,
   assetCount,
   inputs: inputFingerprint(),
+  ...captureContext(),
 };
 writeFileSync(path.join(GOLDEN, 'meta.json'), JSON.stringify(meta, null, 2) + '\n');
 
 console.log(`captured: ${files.length} files (text ${textCount}, assets ${assetCount})`);
 console.log(`  -> ${path.relative(process.cwd(), GOLDEN)}`);
+if (meta.dirtyAtCapture.length) {
+  console.log('');
+  console.log('⚠ 取得時点で以下に未コミットの変更がありました:');
+  for (const p of meta.dirtyAtCapture.slice(0, 10)) console.log(`    ${p}`);
+  console.log('  変更「前」の状態を正解にするつもりなら、取り直してください。');
+}
