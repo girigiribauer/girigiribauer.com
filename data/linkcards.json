@@ -2222,5 +2222,40 @@
     "title": "ばうあーらぼ",
     "desc": "",
     "image": ""
+  },
+  "https://ghostty.org/": {
+    "title": "Ghostty",
+    "desc": "Ghostty is a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration.",
+    "image": "https://ghostty.org/social-share-card.jpg"
+  },
+  "https://developer.apple.com/documentation/foundation/nsusernotification": {
+    "title": "NSUserNotification | Apple Developer Documentation",
+    "desc": "A notification that can be scheduled for display in the notification center.",
+    "image": "https://developer.apple.com/tutorials/developer-og.jpg"
+  },
+  "https://developer.apple.com/documentation/usernotifications": {
+    "title": "User Notifications | Apple Developer Documentation",
+    "desc": "Push user-facing notifications to the user’s device from a server, or generate them locally from your app.",
+    "image": "https://developer.apple.com/tutorials/developer-og.jpg"
+  },
+  "https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/bgnotify": {
+    "title": "ohmyzsh/plugins/bgnotify at master · ohmyzsh/ohmyzsh",
+    "desc": "🙃   A delightful community-driven (with 2,500+ contributors) framework for managing your zsh configuration. Includes 300+ optional plugins (rails, git, macOS, hub, docker, homebrew, node, php, pyth...",
+    "image": "https://repository-images.githubusercontent.com/291137/fb009080-6110-11e9-82c2-b21ca7831f5c"
+  },
+  "https://github.com/julienXX/terminal-notifier": {
+    "title": "GitHub - julienXX/terminal-notifier: Send User Notifications on macOS from the command-line.",
+    "desc": "Send User Notifications on macOS from the command-line. - julienXX/terminal-notifier",
+    "image": "https://opengraph.githubassets.com/8c360310d141f9f81f16db549b81c4bb274ed49060209673bb64bb0c42d055ec/julienXX/terminal-notifier"
+  },
+  "https://bsky.app/profile/did:plc:tsvcmd72oxp47wtixs4qllyi/post/3lenjkgizt22q?ref_src=embed": {
+    "title": "girigiribauer (@girigiribauer.com)",
+    "desc": "alacritty に特に不満はなかったけど、一旦 ghostty をしばらく使ってみますかあ\nまあ新年だし",
+    "image": "https://cdn.bsky.app/img/avatar_thumbnail/plain/did:plc:tsvcmd72oxp47wtixs4qllyi/bafkreibtwbwwadrkha2o2msow3uqvs75xqqwsqrefurjfpnjd7dgs3catu"
+  },
+  "https://bsky.app/profile/did:plc:tsvcmd72oxp47wtixs4qllyi/post/3lhbajj2o2s2t?ref_src=embed": {
+    "title": "girigiribauer (@girigiribauer.com)",
+    "desc": "Ghostty でたまに処理が返ってこない問題のやつ、少し原因絞り込めてきましたね\nターミナルのフォーカスがない状態、かつ処理が概ね5秒以上かかるものだと、 `sleep 5` とかでも処理が返ってこなくなりますね",
+    "image": "https://cdn.bsky.app/img/avatar_thumbnail/plain/did:plc:tsvcmd72oxp47wtixs4qllyi/bafkreibtwbwwadrkha2o2msow3uqvs75xqqwsqrefurjfpnjd7dgs3catu"
   }
 }
