@@ -7,7 +7,7 @@ fi
 
 # リンクカード用のOGPキャッシュを更新
 if [ -f "scripts/fetch-linkcards.mjs" ]; then
-    node scripts/fetch-linkcards.mjs
+    node --watch-path=./content scripts/fetch-linkcards.mjs &
 fi
 
 hugo server --buildDrafts --buildFuture --port 2424 &
