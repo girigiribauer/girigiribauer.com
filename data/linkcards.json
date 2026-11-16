@@ -2257,5 +2257,15 @@
     "title": "girigiribauer (@girigiribauer.com)",
     "desc": "Ghostty でたまに処理が返ってこない問題のやつ、少し原因絞り込めてきましたね\nターミナルのフォーカスがない状態、かつ処理が概ね5秒以上かかるものだと、 `sleep 5` とかでも処理が返ってこなくなりますね",
     "image": "https://cdn.bsky.app/img/avatar_thumbnail/plain/did:plc:tsvcmd72oxp47wtixs4qllyi/bafkreibtwbwwadrkha2o2msow3uqvs75xqqwsqrefurjfpnjd7dgs3catu"
+  },
+  "https://bsky.app/profile/girigiribauer.com/feed/silentviews": {
+    "title": "Silent Views by @girigiribauer.com",
+    "desc": "誰も喋ってない、綺麗な写真だけが流れていく、静かなフィードです\n人、文字、イラスト、近すぎるものなど、複数の軽量なフィルターで弾いた結果、なぜか綺麗な景色ばかりが残る不思議な空間になりました\n\nBeautiful photos drift by. No one says a word.\nSimple filters weed out people, text, illustrations, close-ups... and somehow, only beautiful scenery remains.\n\n#silentviews #silentview",
+    "image": "https://cdn.bsky.app/img/avatar/plain/did:plc:tsvcmd72oxp47wtixs4qllyi/bafkreigkxqq3zndptshmcmeyxk4igoeocfn5xoq5whxc2bhryv73vh2ojq"
+  },
+  "https://github.com/openai/CLIP": {
+    "title": "GitHub - openai/CLIP: CLIP (Contrastive Language-Image Pretraining),  Predict the most relevant text snippet given an image",
+    "desc": "CLIP (Contrastive Language-Image Pretraining),  Predict the most relevant text snippet given an image - openai/CLIP",
+    "image": "https://repository-images.githubusercontent.com/321960447/9b77a200-4fd1-11eb-9506-ffa2f50df680"
   }
 }
